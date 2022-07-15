@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         multiDexEnabled true
-        applicationId "com.example.containertracker"
+        applicationId "com.gov.sidesa"
         minSdk 21
         targetSdk 31
         versionCode 1
