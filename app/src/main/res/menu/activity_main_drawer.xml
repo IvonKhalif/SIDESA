@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/barcode_scanner"
+            android:title="@string/scanner_title" />
+        <item
+            android:id="@+id/nav_container"
+            android:icon="@drawable/container"
+            android:title="@string/menu_container" />
+
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/history"
+            android:title="@string/menu_history" />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/analytics"
+            android:title="@string/menu_report" />
+    </group>
+</menu>
