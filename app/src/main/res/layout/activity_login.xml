@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.login.LoginActivity">
+
+        <com.gov.sidesa.ui.widget.InputTextViewWidget
+            android:id="@+id/input_user_ktp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_component"
+            android:layout_marginTop="32dp"
+            android:layout_marginRight="@dimen/margin_component"
+            android:theme="@style/InputBase"
+            app:hint="@string/login_ktp_number_hint"
+            app:label="@string/login_ktp_number_label"
+            app:inputType="textEmailAddress"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.gov.sidesa.ui.widget.InputTextViewWidget
+            android:id="@+id/input_user_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_component"
+            android:layout_marginRight="@dimen/margin_component"
+            android:theme="@style/InputBase"
+            app:hint="@string/login_password_hint"
+            app:label="@string/login_password_label"
+            app:inputType="textPassword"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_user_ktp"
+            app:layout_goneMarginTop="0dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_login"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_container"
+            android:background="@drawable/selector_button_corner_radius_4dp"
+            android:text="Masuk"
+            android:textAppearance="@style/Button"
+            android:textColor="@color/white_FFFFFF"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_user_password" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

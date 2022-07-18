@@ -26,10 +26,13 @@
 
     <!--INPUT FIELD-->
     <declare-styleable name="InputTextViewWidget">
-        <attr name="inputTextViewHint" format="string" />
-        <attr name="inputTextViewLabel" format="string|reference" />
-        <attr name="inputTextViewMandatoryLabel" format="boolean" />
-        <attr name="inputTextViewInputType">
+        <attr name="hint" format="string" />
+        <attr name="label" format="string|reference" />
+        <attr name="textMessage" format="string|reference" />
+        <attr name="showMandatoryLabel" format="boolean" />
+        <attr name="isShowHidePassword" format="boolean" />
+        <attr name="maxLength" format="integer" />
+        <attr name="inputType">
             <!-- Just plain old text.  Corresponds to
                  {@link android.text.InputType#TYPE_CLASS_TEXT} |
                  {@link android.text.InputType#TYPE_TEXT_VARIATION_NORMAL}. -->
@@ -52,8 +55,5 @@
              {@link android.text.InputType#TYPE_TEXT_VARIATION_PASSWORD}. -->
             <flag name="textPassword" value="4" />
         </attr>
-        <attr name="inputTextViewInfoAllCaps" format="boolean" />
-        <attr name="inputTextViewIsShowHidePassword" format="boolean" />
-        <attr name="maxLength" format="integer" />
     </declare-styleable>
 </resources>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Container Tracker</string>
+    <string name="app_name">SIDESA</string>
 
     <!--  General  -->
     <string name="general_action_ok">Ok</string>
@@ -13,8 +13,10 @@
     <string name="general_action_select">Select</string>
 
     <!--  Login  -->
-    <string name="login_user_name_label">Username</string>
+    <string name="login_ktp_number_label">No. KTP</string>
+    <string name="login_ktp_number_hint">Cth: 1234567890123456</string>
     <string name="login_password_label">Password</string>
+    <string name="login_password_hint">Masukkan Password</string>
     <string name="login_button_login_label">Sign In</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -80,5 +82,14 @@
 
     <!--  Container  -->
     <string name="container_qr_title">QR Container</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
 </resources>
