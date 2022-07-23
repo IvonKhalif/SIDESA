@@ -46,6 +46,54 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/custom_ktp_biodata" />
 
+            <include
+                android:id="@+id/custom_ktp_general"
+                layout="@layout/custom_ktp_general"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/custom_ktp_address" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/image_ktp"
+                android:layout_width="0dp"
+                android:layout_height="240dp"
+                android:layout_margin="20dp"
+                android:adjustViewBounds="true"
+                android:background="@color/white_929292"
+                android:maxWidth="380dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/custom_ktp_general" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_edit_ktp"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ubah Foto"
+                android:textAllCaps="false"
+                android:textColor="@color/white_929292"
+                app:icon="@drawable/ic_edit"
+                app:iconGravity="start"
+                app:iconTint="@color/white_929292"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/image_ktp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_save"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="Simpan Perubahan"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/button_edit_ktp" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>

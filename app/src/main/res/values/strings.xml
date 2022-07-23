@@ -107,4 +107,14 @@
         <item>O</item>
     </string-array>
 
+    <!--RELIGION-->
+    <string-array name="religion">
+        <item>Islam</item>
+        <item>Protestan</item>
+        <item>Katolik</item>
+        <item>Hindu</item>
+        <item>Buddha</item>
+        <item>Khonghucu</item>
+    </string-array>
+
 </resources>
