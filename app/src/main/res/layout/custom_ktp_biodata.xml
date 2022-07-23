@@ -2,16 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <include
-        android:id="@+id/custom_toolbar"
-        layout="@layout/custom_toolbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:layout_height="wrap_content"
+    android:paddingBottom="20dp">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text_description"
@@ -22,7 +14,7 @@
         android:textColor="@color/black_302C2C"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/custom_toolbar" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/input_layout_ktp_name"
@@ -64,14 +56,13 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/input_layout_ktp_dob"
-        style="@style/InputLayoutStyleDropDown"
+        style="@style/InputLayoutStyleOutline"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:hint="Tanggal Lahir"
-        app:endIconDrawable="@drawable/ic_calendar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/input_layout_ktp_place"
         app:layout_constraintTop_toBottomOf="@id/input_layout_ktp_name">
@@ -79,7 +70,10 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/input_ktp_dob"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:drawableEnd="@drawable/ic_calendar"
+            android:focusable="false" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -96,10 +90,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/input_layout_ktp_place">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/input_ktp_gender"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="none" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -116,10 +111,11 @@
         app:layout_constraintStart_toEndOf="@id/input_layout_ktp_gender"
         app:layout_constraintTop_toBottomOf="@id/input_layout_ktp_dob">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/input_ktp_blood_type"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="none" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
