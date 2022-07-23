@@ -15,8 +15,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textColorHint="@color/grey_AAAAAA"
-            app:layout_constraintStart_toStartOf="parent"
+            app:errorIconDrawable="@null"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
