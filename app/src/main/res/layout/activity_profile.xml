@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8FFF5"
+    tools:context=".ui.profile.ProfileActivity">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar_profile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/green_2B7608"
+        app:contentInsetStartWithNavigation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_arrow_left"
+        app:title="Akun"
+        app:titleCentered="true"
+        app:titleTextColor="@color/white" />
+
+    <View
+        android:id="@+id/extended_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:background="@color/green_2B7608"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_profile" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/container_profile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/extended_toolbar"
+        app:layout_constraintEnd_toEndOf="@id/extended_toolbar"
+        app:layout_constraintStart_toStartOf="@id/extended_toolbar"
+        app:layout_constraintTop_toBottomOf="@id/extended_toolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/image_user"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/ic_person"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_nik"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textColor="@color/black_302C2C"
+                app:layout_constraintBottom_toTopOf="@id/text_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/image_user"
+                app:layout_constraintTop_toTopOf="@id/image_user"
+                tools:text="3603663630782881" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textColor="@color/gray_AAAAAA"
+                app:layout_constraintBottom_toBottomOf="@id/image_user"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/image_user"
+                app:layout_constraintTop_toBottomOf="@id/text_nik"
+                tools:text="Test Nama" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/label_data"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Data Kamu"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/container_profile" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text_data_ktp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/shape_white"
+        android:drawableStart="@drawable/ic_docs"
+        android:drawableEnd="@drawable/ic_arrow_right"
+        android:drawablePadding="20dp"
+        android:elevation="4dp"
+        android:padding="20dp"
+        android:shadowColor="@color/gray_ADABAB"
+        android:text="Berdasarkan KTP"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label_data" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text_data_kk"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/shape_white"
+        android:drawableStart="@drawable/ic_docs"
+        android:drawableEnd="@drawable/ic_arrow_right"
+        android:drawablePadding="20dp"
+        android:elevation="4dp"
+        android:padding="20dp"
+        android:shadowColor="@color/gray_ADABAB"
+        android:text="Berdasarkan Kartu Keluarga"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_data_ktp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text_data_family"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/shape_white"
+        android:drawableStart="@drawable/ic_docs"
+        android:drawableEnd="@drawable/ic_arrow_right"
+        android:drawablePadding="20dp"
+        android:elevation="4dp"
+        android:padding="20dp"
+        android:shadowColor="@color/gray_ADABAB"
+        android:text="Data Keluarga"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_data_kk" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text_data_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/shape_white"
+        android:drawableStart="@drawable/ic_docs"
+        android:drawableEnd="@drawable/ic_arrow_right"
+        android:drawablePadding="20dp"
+        android:elevation="4dp"
+        android:padding="20dp"
+        android:shadowColor="@color/gray_ADABAB"
+        android:text="Alamat Email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_data_family" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_save"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:layout_margin="16sp"
+        android:backgroundTint="@android:color/transparent"
+        android:text="Logout"
+        android:textAllCaps="false"
+        android:textColor="@color/green_2B7608"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

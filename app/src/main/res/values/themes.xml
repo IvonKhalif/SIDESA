@@ -14,6 +14,22 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="InputLayoutStyleOutline" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/gray_D1D1D1</item>
+        <item name="hintTextColor">@color/white_929292</item>
+        <item name="expandedHintEnabled">true</item>
+        <item name="hintAnimationEnabled">true</item>
+        <item name="hintEnabled">true</item>
+    </style>
+
+    <style name="InputLayoutStyleDropDown" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxStrokeColor">@color/gray_D1D1D1</item>
+        <item name="hintTextColor">@color/white_929292</item>
+        <item name="expandedHintEnabled">true</item>
+        <item name="hintAnimationEnabled">true</item>
+        <item name="hintEnabled">true</item>
+    </style>
+
     <style name="InputBase">
         <item name="colorControlNormal">@color/smoke_E0E0E0</item>
         <item name="colorControlActivated">#2196F3</item>

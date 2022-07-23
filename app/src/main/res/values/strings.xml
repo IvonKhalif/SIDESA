@@ -93,4 +93,28 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
+    <!--GENDER-->
+    <string-array name="gender">
+        <item>Laki-Laki</item>
+        <item>Perempuan</item>
+    </string-array>
+
+    <!--BLOOD TYPE-->
+    <string-array name="blood_type">
+        <item>A</item>
+        <item>B</item>
+        <item>A/B</item>
+        <item>O</item>
+    </string-array>
+
+    <!--RELIGION-->
+    <string-array name="religion">
+        <item>Islam</item>
+        <item>Protestan</item>
+        <item>Katolik</item>
+        <item>Hindu</item>
+        <item>Buddha</item>
+        <item>Khonghucu</item>
+    </string-array>
+
 </resources>
