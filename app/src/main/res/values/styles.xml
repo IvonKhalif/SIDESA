@@ -56,8 +56,8 @@
     </style>
 
     <style name="Button">
-        <item name="android:fontFamily">@font/firasans_medium</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:fontFamily">@font/inter_medium</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="Small">
