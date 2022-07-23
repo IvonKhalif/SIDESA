@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">SIDESA</string>
+    <string name="app_name">DIGIPDESA</string>
 
     <!--  General  -->
     <string name="general_action_ok">Ok</string>
     <string name="general_action_yes">Yes</string>
     <string name="general_action_no">No</string>
-    <string name="general_action_save">Save</string>
+    <string name="general_action_save">Simpan</string>
     <string name="general_action_cancel">Cancel</string>
     <string name="general_action_submit">Submit</string>
     <string name="general_action_search">Search</string>
@@ -14,17 +14,18 @@
 
     <!--  Login  -->
     <string name="login_ktp_number_label">No. KTP</string>
-    <string name="login_ktp_number_hint">Cth: 1234567890123456</string>
+    <string name="login_ktp_number_hint">Masukkan Nomor KTP</string>
     <string name="login_password_label">Password</string>
     <string name="login_password_hint">Masukkan Password</string>
-    <string name="login_button_login_label">Sign In</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
+    <string name="login_re_password_hint">Ulangi Password</string>
+    <string name="login_button_login_label">Login</string>
+    <string name="login_ktp_number_error_16_digit">Nomor KTP harus 16 digit</string>
     <string name="action_settings">Settings</string>
+
+    <!--  Password  -->
+    <string name="input_password_forgot_password_label">Lupa password</string>
+    <string name="input_password_has_account_header">Selanjutnya masukkan password untuk login ke aplikasi DIGIPDESA</string>
+    <string name="input_password_has_account_footer">Jika Kamu tidak pernah merasa Login pada aplikasi DIGIPDESA, maka Kamu harus ke kelurahan yang sesuai dengan KTP Kamu untuk mereset password pada akun Kamu.</string>
 
     <!--  Logout  -->
     <string name="logout_headline">Logout</string>

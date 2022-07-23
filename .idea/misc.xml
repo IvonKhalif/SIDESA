@@ -87,9 +87,14 @@
         <entry key="..\:/Users/HP/StudioProjects/ContainerTracker/app/src/main/res/menu/activity_main_drawer.xml" value="0.5" />
         <entry key="..\:/Users/HP/StudioProjects/ContainerTracker/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.221025641025641" />
         <entry key="..\:/Users/HP/StudioProjects/ContainerTracker/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.221025641025641" />
+        <entry key="..\:/Users/HP/StudioProjects/SIDESA/app/src/main/res/drawable/background_button_disabled.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/HP/StudioProjects/SIDESA/app/src/main/res/drawable/background_button_enabled.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/HP/StudioProjects/SIDESA/app/src/main/res/drawable/ic_visibility_off.xml" value="0.12314814814814815" />
+        <entry key="..\:/Users/HP/StudioProjects/SIDESA/app/src/main/res/drawable/ic_visibility_on.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/HP/StudioProjects/SIDESA/app/src/main/res/drawable/selector_button_corner_radius_4dp.xml" value="0.14722222222222223" />
         <entry key="..\:/Users/HP/StudioProjects/SIDESA/app/src/main/res/layout/activity_dashboard.xml" value="0.14402173913043478" />
-        <entry key="..\:/Users/HP/StudioProjects/SIDESA/app/src/main/res/layout/activity_login.xml" value="0.14402173913043478" />
+        <entry key="..\:/Users/HP/StudioProjects/SIDESA/app/src/main/res/layout/activity_login.xml" value="0.21" />
+        <entry key="..\:/Users/HP/StudioProjects/SIDESA/app/src/main/res/layout/activity_password.xml" value="0.2" />
         <entry key="..\:/Users/HP/StudioProjects/SIDESA/app/src/main/res/layout/input_text_view.xml" value="0.20925925925925926" />
         <entry key="..\:/Users/HP/StudioProjects/SIDESA/app/src/main/res/menu/activity_main_drawer.xml" value="0.15374149659863945" />
       </map>

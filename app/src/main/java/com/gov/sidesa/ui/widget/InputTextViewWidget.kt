@@ -13,6 +13,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
+import com.google.android.material.textfield.TextInputLayout
 import com.gov.sidesa.R
 import com.gov.sidesa.databinding.InputTextViewBinding
 import com.gov.sidesa.utils.Asterisk
@@ -25,11 +26,12 @@ class InputTextViewWidget @JvmOverloads constructor(
     var binding: InputTextViewBinding
     var isPasswordVisible = true
 
-    fun title(): TextView = binding.textTitle
 
     open fun value(): EditText = binding.inputValue
 
-    fun message(): TextView = binding.textMessage
+    open fun inputLayout(): TextInputLayout = binding.inputLayout
+
+    fun message(): CharSequence? = binding.inputLayout.helperText
 
     init {
         val layoutInflater = LayoutInflater.from(context)
@@ -83,16 +85,9 @@ class InputTextViewWidget @JvmOverloads constructor(
         }
 
         value().filters = inputFilter.toTypedArray()
-        value().hint = hint
-        title().text = label
+        binding.inputLayout.hint = hint
         value().compoundDrawablePadding = 24
         setInputType(inputTypeFlag, isShowHidePassword)
-
-        if (isMandatoryLabel) {
-            binding.mandatoryCaption.visibility = View.VISIBLE
-        } else {
-            binding.mandatoryCaption.visibility = View.GONE
-        }
 
     }
 
