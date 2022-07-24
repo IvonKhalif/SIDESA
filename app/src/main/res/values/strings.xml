@@ -2,6 +2,7 @@
     <string name="app_name">DIGIPDESA</string>
 
     <!--  General  -->
+    <string name="general_image_content_description">This is an image</string>
     <string name="general_action_ok">Ok</string>
     <string name="general_action_yes">Yes</string>
     <string name="general_action_no">No</string>
@@ -85,9 +86,11 @@
     <string name="so_number_serch_hint">Search Sales Order Number</string>
     <string name="so_number_empty_state_label">No sales order number data</string>
 
-    <!--  Container  -->
-    <string name="container_qr_title">QR Container</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <!--  Dashboard  -->
+    <string name="dashboard_welcome_label">Selamat Datang</string>
+    <string name="dashboard_intro_label">DIGIPDESA merupakan aplikasi untuk memudahkan Kamu mengajukan surat secara digital</string>
+    <string name="dashboard_register_button_label">Registrasi Data Sekarang</string>
+
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>

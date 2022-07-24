@@ -9,6 +9,7 @@
         tools:context=".ui.DashboardActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container_intro"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/green_069D82"
@@ -17,8 +18,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <Button
-                android:id="@+id/btnAccount"
-                style="@style/ButtonBorderless.Vanilla.StrokePrimary"
+                android:id="@+id/button_account"
                 android:layout_width="0dp"
                 android:layout_height="35dp"
                 android:layout_marginTop="@dimen/margin_container"
@@ -26,13 +26,59 @@
                 android:text="@string/general_action_account"
                 android:drawableStart="@drawable/ic_round_account_circle_16dp"
                 android:drawablePadding="8dp"
+                android:background="@drawable/bg_button_white_stroke"
                 app:layout_constrainedWidth="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_default="wrap"
                 app:layout_constraintWidth_max="85dp" />
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_welcome"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_container"
+                android:layout_marginTop="@dimen/margin_container"
+                android:layout_marginEnd="@dimen/margin_container"
+                android:fontFamily="@font/inter_medium"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/dashboard_welcome_label"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/button_account" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_intro"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_container"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="@dimen/margin_container"
+                android:layout_marginBottom="@dimen/icon_default"
+                android:fontFamily="@font/inter_medium"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/dashboard_intro_label"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_welcome" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <include
+            android:id="@+id/button_register_now"
+            layout="@layout/custom_button_register_now"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/icon_default"
+            android:layout_marginEnd="@dimen/margin_container"
+            android:layout_marginStart="@dimen/margin_container"
+            app:layout_constraintTop_toBottomOf="@id/container_intro"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
