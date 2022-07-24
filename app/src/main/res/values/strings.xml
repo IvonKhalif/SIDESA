@@ -12,6 +12,7 @@
     <string name="general_action_export">Export</string>
     <string name="general_action_select">Select</string>
     <string name="general_action_send">Kirim</string>
+    <string name="general_action_account">Akun</string>
 
     <!--  Login  -->
     <string name="login_ktp_number_label">No. KTP</string>
