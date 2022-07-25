@@ -14,6 +14,7 @@
     <string name="general_action_select">Select</string>
     <string name="general_action_send">Kirim</string>
     <string name="general_action_account">Akun</string>
+    <string name="general_action_see_all">Lihat Semua</string>
 
     <!--  Login  -->
     <string name="login_ktp_number_label">No. KTP</string>
@@ -28,6 +29,7 @@
     <!--  Password  -->
     <string name="input_password_forgot_password_label">Lupa password</string>
     <string name="input_password_has_account_header">Selanjutnya masukkan password untuk login ke aplikasi DIGIPDESA</string>
+    <string name="input_password_has_not_account_header">Ini pertama kali Kamu login di aplikasi DIGIPDESA, buat password untuk mengamankan akun Kamu.</string>
     <string name="input_password_has_account_footer">Jika Kamu tidak pernah merasa Login pada aplikasi DIGIPDESA, maka Kamu harus ke kelurahan yang sesuai dengan KTP Kamu untuk mereset password pada akun Kamu.</string>
     <string name="input_password_error_7_digit">Password minimal 7 digit</string>
     <string name="input_password_error_not_match">Password berbeda</string>
@@ -90,6 +92,13 @@
     <string name="dashboard_welcome_label">Selamat Datang</string>
     <string name="dashboard_intro_label">DIGIPDESA merupakan aplikasi untuk memudahkan Kamu mengajukan surat secara digital</string>
     <string name="dashboard_register_button_label">Registrasi Data Sekarang</string>
+    <string name="dashboard_select_letter_button_label">Pilih Jenis Surat</string>
+    <string name="dashboard_select_letter_caption">Surat apa yang ingin Kamu ajukan hari ini?</string>
+    <string name="dashboard_need_approval_caption">Butuh Persetujuan</string>
+    <string name="dashboard_submission_list_caption">Daftar Pengajuan</string>
+
+    <!--  List Approval  -->
+
 
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

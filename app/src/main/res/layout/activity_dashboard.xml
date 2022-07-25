@@ -68,17 +68,219 @@
                 app:layout_constraintTop_toBottomOf="@id/text_welcome" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <include
+        <androidx.cardview.widget.CardView
             android:id="@+id/button_register_now"
-            layout="@layout/custom_button_register_now"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:elevation="4dp"
+            android:layout_marginTop="@dimen/icon_default"
+            android:layout_marginStart="@dimen/margin_container"
+            android:layout_marginEnd="@dimen/margin_container"
+            app:layout_constraintTop_toBottomOf="@id/container_intro"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/image_register"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_container"
+                    android:layout_marginEnd="8dp"
+                    android:contentDescription="@string/general_image_content_description"
+                    android:src="@drawable/ic_round_app_registration"
+                    app:layout_constraintBottom_toBottomOf="@id/text_register_now"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/text_register_now" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_register_now"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_container"
+                    android:layout_marginTop="@dimen/icon_default"
+                    android:layout_marginBottom="@dimen/icon_default"
+                    android:fontFamily="@font/inter_medium"
+                    android:lineSpacingExtra="2sp"
+                    android:text="@string/dashboard_register_button_label"
+                    android:textColor="@color/black_302C2C"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/image_register"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/icon_chevron"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_container"
+                    android:layout_marginEnd="@dimen/margin_container"
+                    android:contentDescription="@string/general_image_content_description"
+                    android:src="@drawable/ic_chevron_right_16dp"
+                    app:layout_constraintBottom_toBottomOf="@id/text_register_now"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/text_register_now" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_create_letter_caption"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_container"
+            android:layout_marginEnd="@dimen/margin_container"
+            android:fontFamily="@font/inter_medium"
+            android:lineSpacingExtra="2sp"
+            android:text="@string/dashboard_select_letter_caption"
+            android:textColor="@color/black_302C2C"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@id/button_choose_letter"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/button_choose_letter"
+            app:layout_constraintBottom_toBottomOf="@id/button_choose_letter"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_choose_letter"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/icon_default"
             android:layout_marginEnd="@dimen/margin_container"
-            android:layout_marginStart="@dimen/margin_container"
-            app:layout_constraintTop_toBottomOf="@id/container_intro"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            android:background="@drawable/selector_button_corner_radius_6dp"
+            android:text="@string/dashboard_select_letter_button_label"
+            android:textAppearance="@style/Button"
+            android:textColor="@color/white_FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/text_create_letter_caption"
+            app:layout_constraintTop_toBottomOf="@id/button_register_now" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container_need_approval"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/icon_default"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button_choose_letter">
+
+            <View
+                android:id="@+id/divider_need_approval"
+                android:layout_width="0dp"
+                android:layout_height="3dp"
+                android:background="@color/grey_ECECEC"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_need_approval_caption"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_container"
+                android:layout_marginTop="@dimen/margin_container"
+                android:fontFamily="@font/inter_medium"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/dashboard_need_approval_caption"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider_need_approval" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/button_see_all_need_approval"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_container"
+                android:layout_marginEnd="@dimen/margin_container"
+                android:fontFamily="@font/inter_medium"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/general_action_see_all"
+                android:textColor="@color/primary_4FBD1C"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider_need_approval" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_need_approval"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_container"
+                android:overScrollMode="never"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_need_approval_caption"
+                tools:itemCount="2"
+                tools:listitem="@layout/item_need_approval" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container_submission"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/icon_default"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/container_need_approval">
+
+            <View
+                android:id="@+id/divider_submission"
+                android:layout_width="0dp"
+                android:layout_height="3dp"
+                android:background="@color/grey_ECECEC"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_submission_caption"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_container"
+                android:layout_marginTop="@dimen/margin_container"
+                android:fontFamily="@font/inter_medium"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/dashboard_submission_list_caption"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider_submission" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/button_see_all_submission"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_container"
+                android:layout_marginEnd="@dimen/margin_container"
+                android:fontFamily="@font/inter_medium"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/general_action_see_all"
+                android:textColor="@color/primary_4FBD1C"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider_submission" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_submission"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_container"
+                android:overScrollMode="never"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/button_see_all_submission"
+                tools:itemCount="2"
+                tools:listitem="@layout/item_submission" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
