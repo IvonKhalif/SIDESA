@@ -39,6 +39,9 @@ class PasswordActivity : BaseActivity() {
             if (accountHasRegistered()) {
                 buttonForgotPassword.isVisible = true
                 inputRePassword.isVisible = false
+            } else {
+                textInputPasswordHeader.text = getString(R.string.input_password_has_not_account_header)
+                textInputPasswordFooter.isVisible = false
             }
 
             inputPassword.value().doOnTextChanged { text, start, before, count ->

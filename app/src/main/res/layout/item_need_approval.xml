@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_container"
+        android:layout_marginEnd="@dimen/margin_container"
+        android:layout_marginBottom="@dimen/margin_component"
+        android:layout_marginTop="@dimen/margin_component"
+        android:background="@color/white"
+        android:elevation="4dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/container_intro">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/image_status_approval"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_container"
+                android:layout_marginTop="@dimen/margin_container"
+                android:contentDescription="@string/general_image_content_description"
+                android:src="@drawable/background_waiting_approval"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_letter_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_container"
+                android:layout_marginTop="@dimen/margin_component"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/inter_medium"
+                android:lineSpacingExtra="2sp"
+                android:textColor="@color/black_302C2C"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@id/icon_chevron"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/image_status_approval"
+                tools:text="@string/dashboard_register_button_label" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_letter_number"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_container"
+                android:layout_marginTop="@dimen/margin_component"
+                android:layout_marginEnd="@dimen/margin_container"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/inter_medium"
+                android:lineSpacingExtra="2sp"
+                android:textColor="@color/gray_AAAAAA"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/icon_chevron"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_letter_title"
+                tools:text="@string/dashboard_register_button_label" />
+
+            <ImageView
+                android:id="@+id/icon_chevron"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_container"
+                android:contentDescription="@string/general_image_content_description"
+                android:src="@drawable/ic_chevron_right_16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
