@@ -2,13 +2,9 @@ package com.gov.sidesa.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
-import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseActivity
 import com.gov.sidesa.databinding.ActivityDashboardBinding
-import com.gov.sidesa.ui.profile.edit.EditProfileActivity
+import com.gov.sidesa.ui.profile.edit.EditProfileKTPActivity
 
 class DashboardActivity : BaseActivity() {
     private lateinit var binding: ActivityDashboardBinding
@@ -24,7 +20,7 @@ class DashboardActivity : BaseActivity() {
     private fun mainView() {
         with(binding) {
             buttonAccount.setOnClickListener {
-                startActivity(Intent(this@DashboardActivity, EditProfileActivity::class.java))
+                startActivity(Intent(this@DashboardActivity, EditProfileKTPActivity::class.java))
 
             }
         }

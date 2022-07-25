@@ -96,13 +96,51 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:hint="Golongan Darah"
+        android:hint="Kecamatan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/input_layout_ktp_kelurahan">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/input_ktp_blood_type"
+            android:id="@+id/input_ktp_kecamatan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/input_layout_ktp_city"
+        style="@style/InputLayoutStyleDropDown"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:hint="Kabupaten/Kota"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_layout_ktp_kecamatan">
+
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/input_ktp_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/input_layout_ktp_province"
+        style="@style/InputLayoutStyleDropDown"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:hint="Provinsi"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_layout_ktp_city">
+
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/input_ktp_province"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none" />
