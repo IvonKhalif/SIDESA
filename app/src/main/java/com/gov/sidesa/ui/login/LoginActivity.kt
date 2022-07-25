@@ -9,10 +9,16 @@ import com.gov.sidesa.base.BaseActivity
 import com.gov.sidesa.databinding.ActivityLoginBinding
 import com.gov.sidesa.ui.DashboardActivity
 import com.gov.sidesa.ui.login.password.PasswordActivity
+import com.gov.sidesa.utils.constants.UserExtrasConstant.EXTRA_STATUS_NIK
+import com.gov.sidesa.utils.constants.UserExtrasConstant.EXTRA_USER_NIK
+import com.gov.sidesa.utils.enums.StatusResponseEnum
+import com.gov.sidesa.utils.extension.observeNonNull
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : BaseActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+    private val viewModel: LoginViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,12 +31,14 @@ class LoginActivity : BaseActivity() {
     private fun mainView() {
         binding.apply {
             buttonLogin.setOnClickListener {
-                startActivity(Intent(this@LoginActivity, PasswordActivity::class.java))
+                viewModel.validateNIK(inputUserKtp.value().text.toString())
             }
 
             inputUserKtp.value().doOnTextChanged { text, start, before, count ->
                 if (!text.isNullOrBlank() && text.length < 16) {
-                    inputUserKtp.inputLayout().error = getString(R.string.login_ktp_number_error_16_digit)
+                    inputUserKtp.inputLayout().error =
+                        getString(R.string.login_ktp_number_error_16_digit)
+                    buttonLogin.isEnabled = false
                 } else {
                     buttonLogin.isEnabled = true
                     inputUserKtp.inputLayout().error = null
@@ -38,5 +46,21 @@ class LoginActivity : BaseActivity() {
                 }
             }
         }
+
+        initObserver()
+    }
+
+    private fun initObserver() {
+        viewModel.apply {
+            statusNIKLiveData.observeNonNull(this@LoginActivity, ::handleStatusNIK)
+        }
+    }
+
+    private fun handleStatusNIK(status: String) {
+        val intent = Intent(this, PasswordActivity::class.java)
+        intent.putExtra(EXTRA_STATUS_NIK, status)
+        intent.putExtra(EXTRA_USER_NIK, binding.inputUserKtp.value().text.toString())
+        startActivity(intent)
+        finish()
     }
 }

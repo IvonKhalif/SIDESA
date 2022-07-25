@@ -19,7 +19,7 @@ import com.gov.sidesa.databinding.InputTextViewBinding
 import com.gov.sidesa.utils.Asterisk
 import com.jakewharton.rxbinding4.widget.afterTextChangeEvents
 
-class InputTextViewWidget @JvmOverloads constructor(
+open class InputTextViewWidget @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
 ) : LinearLayout(context, attrs) {
 
@@ -28,6 +28,7 @@ class InputTextViewWidget @JvmOverloads constructor(
 
 
     open fun value(): EditText = binding.inputValue
+    open fun text(): String = binding.inputValue.text.toString()
 
     open fun inputLayout(): TextInputLayout = binding.inputLayout
 

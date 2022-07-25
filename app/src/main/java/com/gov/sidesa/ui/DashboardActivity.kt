@@ -1,12 +1,32 @@
 package com.gov.sidesa.ui
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.gov.sidesa.R
+import com.gov.sidesa.base.BaseActivity
+import com.gov.sidesa.databinding.ActivityDashboardBinding
+import com.gov.sidesa.ui.profile.edit.EditProfileActivity
 
-class DashboardActivity : AppCompatActivity() {
+class DashboardActivity : BaseActivity() {
+    private lateinit var binding: ActivityDashboardBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dashboard)
+        binding = ActivityDashboardBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        mainView()
+    }
+
+    private fun mainView() {
+        with(binding) {
+            buttonAccount.setOnClickListener {
+                startActivity(Intent(this@DashboardActivity, EditProfileActivity::class.java))
+
+            }
+        }
     }
 }
