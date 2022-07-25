@@ -22,6 +22,9 @@
         android:theme="@style/Theme.ContainerTracker"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.profile.edit.EditProfileFamilyActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.profile.detail.DetailProfileFamilyActivity"
             android:exported="false" />
         <activity
