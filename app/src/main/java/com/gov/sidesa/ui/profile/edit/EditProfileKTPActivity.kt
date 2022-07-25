@@ -10,7 +10,7 @@ import com.gov.sidesa.databinding.ActivityEditProfileBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
-class EditProfileActivity : AppCompatActivity() {
+class EditProfileKTPActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityEditProfileBinding
     private val bindingBiodataKtp by lazy { binding.customKtpBiodata }
