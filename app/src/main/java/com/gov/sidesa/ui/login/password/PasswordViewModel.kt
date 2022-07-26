@@ -14,22 +14,24 @@ import kotlinx.coroutines.launch
 class PasswordViewModel(
     private val loginUseCase: LoginUseCase,
     private val createPasswordUseCase: CreatePasswordUseCase
-): BaseViewModel() {
+) : BaseViewModel() {
 
     val userLiveData = PostLiveData<User?>()
     val statusCreatePassword = PostLiveData<String?>()
 
     fun login(username: String, password: String) {
         viewModelScope.launch {
+            showLoadingWidget()
             when (val response = loginUseCase(username, password)) {
                 is NetworkResponse.Success -> {
                     if (response.body.data == null) {
-                        genericErrorLiveData.value = GenericErrorResponse(message = response.body.desc)
+                        genericErrorLiveData.value =
+                            GenericErrorResponse(message = response.body.desc)
                     }
                     response.body.data?.let {
-                        hideLoadingWidget()
                         userLiveData.post(it)
                     }
+                    hideLoadingWidget()
                 }
                 is NetworkResponse.ServerError -> {
                     genericErrorLiveData.value = response.body
@@ -44,6 +46,7 @@ class PasswordViewModel(
 
     fun createPassword(nik: String, password: String) {
         viewModelScope.launch {
+            showLoadingWidget()
             when (val response = createPasswordUseCase(nik, password)) {
                 is NetworkResponse.Success -> {
                     response.body.status.let {

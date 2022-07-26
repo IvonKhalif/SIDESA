@@ -53,6 +53,7 @@ class LoginActivity : BaseActivity() {
     private fun initObserver() {
         viewModel.apply {
             statusNIKLiveData.observeNonNull(this@LoginActivity, ::handleStatusNIK)
+            loadingWidgetLiveData.observeNonNull(this@LoginActivity, ::handleLoadingWidget)
         }
     }
 

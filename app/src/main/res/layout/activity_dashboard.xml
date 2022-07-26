@@ -19,19 +19,19 @@
 
             <Button
                 android:id="@+id/button_account"
-                android:layout_width="0dp"
+                style="@style/ButtonBorderless.Vanilla.StrokePrimary"
+                android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 android:layout_marginTop="@dimen/margin_container"
                 android:layout_marginEnd="@dimen/margin_container"
                 android:text="@string/general_action_account"
-                android:drawableStart="@drawable/ic_round_account_circle_16dp"
+                android:drawableLeft="@drawable/ic_round_account_circle_16dp"
                 android:drawablePadding="8dp"
-                android:background="@drawable/bg_button_white_stroke"
-                app:layout_constrainedWidth="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_default="wrap"
-                app:layout_constraintWidth_max="85dp" />
+                app:layout_constraintWidth_max="85dp"
+                tools:ignore="RtlHardcoded" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/text_welcome"
@@ -165,7 +165,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/icon_default"
-            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/button_choose_letter">

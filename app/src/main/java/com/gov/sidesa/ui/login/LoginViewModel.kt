@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 class LoginViewModel(private val validateNIKUseCase: ValidateNIKUseCase): BaseViewModel() {
     val statusNIKLiveData = PostLiveData<String?>()
     fun validateNIK(nik: String) {
+        showLoadingWidget()
         viewModelScope.launch {
             when (val response = validateNIKUseCase(nik)) {
                 is NetworkResponse.Success -> {

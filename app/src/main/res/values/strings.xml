@@ -15,6 +15,7 @@
     <string name="general_action_send">Kirim</string>
     <string name="general_action_account">Akun</string>
     <string name="general_action_see_all">Lihat Semua</string>
+    <string name="general_captio_all">Semua</string>
 
     <!--  Login  -->
     <string name="login_ktp_number_label">No. KTP</string>
@@ -97,8 +98,13 @@
     <string name="dashboard_need_approval_caption">Butuh Persetujuan</string>
     <string name="dashboard_submission_list_caption">Daftar Pengajuan</string>
 
-    <!--  List Approval  -->
-
+    <!--  Letter List  -->
+    <string name="letter_list_empty_state_caption">Belum ada daftar pengajuan</string>
+    <string name="letter_list_waiting_approval_rt_caption">Menunggu Disetujui RT</string>
+    <string name="letter_list_waiting_approval_rw_caption">Menunggu Disetujui RW</string>
+    <string name="letter_list_ready_for_pickup_caption">Surat Siap Diambil Di Kelurahan</string>
+    <string name="letter_list_need_approval_title">Daftar Surat Persetujuan</string>
+    <string name="letter_list_submission_title">Daftar Surat Yang Diajukan</string>
 
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

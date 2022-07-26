@@ -1,9 +1,12 @@
 package com.gov.sidesa.utils.constants
 
-object ExtrasConstant {
-    const val EXTRA_CONTAINER_DATA = "EXTRA_CONTAINER_DATA"
+object LetterConstant {
+    const val EXTRA_LETTER_CATEGORY = "EXTRA_LETTER_CATEGORY"
     const val EXTRA_CONTAINER_ID = "EXTRA_CONTAINER_ID"
     const val EXTRA_VOYAGE_ID_IN = "EXTRA_VOYAGE_ID_IN"
     const val EXTRA_VOYAGE_ID_OUT = "EXTRA_VOYAGE_ID_OUT"
     const val EXTRA_SO_NUMBER = "EXTRA_SO_NUMBER"
+
+    const val ARG_TAB_CATEGORY = "ARG_TAB_CATEGORY"
+    const val ARG_IS_SUBMISSION_PAGE = "ARG_IS_SUBMISSION_PAGE"
 }

@@ -87,6 +87,7 @@ class PasswordActivity : BaseActivity() {
         viewModel.apply {
             userLiveData.observeNonNull(this@PasswordActivity, ::handleUpdateUser)
             statusCreatePassword.observeNonNull(this@PasswordActivity, ::handleStatusCreated)
+            loadingWidgetLiveData.observeNonNull(this@PasswordActivity, ::handleLoadingWidget)
         }
     }
 
