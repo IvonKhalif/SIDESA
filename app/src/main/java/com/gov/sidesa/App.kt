@@ -1,6 +1,7 @@
 package com.gov.sidesa
 
 import android.content.Context
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
 import com.gov.sidesa.utils.PreferenceUtils
@@ -29,6 +30,7 @@ class App : MultiDexApplication() {
                 )
             )
         }
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         AndroidThreeTen.init(this)
         PreferenceUtils.with(this)
     }
