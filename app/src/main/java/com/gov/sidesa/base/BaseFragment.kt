@@ -4,8 +4,12 @@ import android.app.Activity
 import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 
 abstract class BaseFragment: Fragment() {
+
+    var loadingDialog: LoadingDialogWidget? = null
+
     protected val baseActivity: com.gov.sidesa.base.BaseActivity
         get() = requireActivity() as com.gov.sidesa.base.BaseActivity
 
@@ -19,5 +23,20 @@ abstract class BaseFragment: Fragment() {
         }
 
     open fun onResultData(result: Intent?) {}
+
+    fun handleLoadingWidget(fragmentManager: FragmentManager, isLoading: Boolean) {
+        if (isLoading) showLoadingWidget(fragmentManager) else hideLoadingWidget()
+    }
+
+    private fun showLoadingWidget(fragmentManager: FragmentManager) {
+        showImmediately(fragmentManager, "loading") {
+            loadingDialog = LoadingDialogWidget.newInstance()
+            loadingDialog!!
+        }
+    }
+
+    private fun hideLoadingWidget() {
+        loadingDialog?.dismissAllowingStateLoss()
+    }
 
 }

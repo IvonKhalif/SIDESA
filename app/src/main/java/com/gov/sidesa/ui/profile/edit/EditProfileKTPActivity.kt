@@ -6,19 +6,19 @@ import android.widget.AutoCompleteTextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.gov.sidesa.R
-import com.gov.sidesa.databinding.ActivityEditProfileBinding
+import com.gov.sidesa.databinding.ActivityEditKtpprofileBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
 class EditProfileKTPActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityEditProfileBinding
+    private lateinit var binding: ActivityEditKtpprofileBinding
     private val bindingBiodataKtp by lazy { binding.customKtpBiodata }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityEditProfileBinding.inflate(layoutInflater)
+        binding = ActivityEditKtpprofileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setDatePicker()
