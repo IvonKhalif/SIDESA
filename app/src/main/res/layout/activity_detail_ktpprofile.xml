@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/green40_E8F5E9"
-    tools:context=".ui.profile.detail.DetailProfileActivity">
+    tools:context=".ui.profile.detail.DetailProfileKTPActivity">
 
     <include
         android:id="@+id/custom_toolbar"
