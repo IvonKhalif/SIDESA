@@ -11,7 +11,7 @@ import com.gov.sidesa.base.dynamic_adapter.AbstractViewHolder
 
 class LetterInputViewHolderFactoryImpl : LetterInputViewHolderFactory {
 
-    override fun createViewHolder(parent: View, type: Int): AbstractViewHolder<*> {
+    override fun createViewHolder(parent: View, type: Int): AbstractViewHolder<Any> {
         TODO("Not yet implemented")
     }
 }
