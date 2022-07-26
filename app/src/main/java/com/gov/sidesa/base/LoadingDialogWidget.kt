@@ -1,4 +1,4 @@
-package com.gov.sidesa.ui.widget
+package com.gov.sidesa.base
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -11,6 +11,9 @@ import androidx.appcompat.app.AppCompatDialogFragment
 import com.gov.sidesa.R
 
 class LoadingDialogWidget : AppCompatDialogFragment() {
+    companion object {
+        fun newInstance() = LoadingDialogWidget()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,9 +32,5 @@ class LoadingDialogWidget : AppCompatDialogFragment() {
 
     private fun initViews() {
         isCancelable = false
-    }
-
-    companion object {
-        fun newInstance() = LoadingDialogWidget()
     }
 }

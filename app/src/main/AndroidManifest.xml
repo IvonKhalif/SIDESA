@@ -40,8 +40,12 @@
             android:name=".ui.login.password.PasswordActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.profile.ProfileActivity"
+            android:name=".ui.profile.edit.EditProfileKTPActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.profile.detail.DetailProfileKTPActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ContainerTracker.NoActionBar" />
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="false" />
@@ -49,7 +53,7 @@
             android:name=".ui.DashboardActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.profile.edit.EditProfileKTPActivity"
+            android:name=".ui.profile.ProfileActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.ContainerTracker.NoActionBar">

@@ -11,14 +11,17 @@ import com.gov.sidesa.base.dynamic_adapter.ViewHolderFactory
 
 class LetterInputAdapter(
     private val adapterTypeFactory: ViewHolderFactory,
-): ListAdapter<BaseItemModel, AbstractViewHolder<BaseItemModel>>(
+) : ListAdapter<BaseItemModel, AbstractViewHolder<BaseItemModel>>(
     DiffUtilItemCallback(
-        isItemsTheSame = { oldItem, newItem ->  oldItem.areItemsTheSame(newItem) },
-        isContentTheSame = { oldItem, newItem ->  oldItem.areContentsTheSame(newItem) }
+        isItemsTheSame = { oldItem, newItem -> oldItem.areItemsTheSame(newItem) },
+        isContentTheSame = { oldItem, newItem -> oldItem.areContentsTheSame(newItem) }
     )
 ) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AbstractViewHolder<BaseItemModel> {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): AbstractViewHolder<BaseItemModel> {
         val view = inflateItem(parent, viewType)
         return adapterTypeFactory.createViewHolder(view, viewType)
     }

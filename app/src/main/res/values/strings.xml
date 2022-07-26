@@ -110,6 +110,9 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="loading">Loading...</string>
 
+    <string name="gallery_label">Galeri</string>
+    <string name="camera_label">Kamera</string>
+
     <!--GENDER-->
     <string-array name="gender">
         <item>Laki-Laki</item>

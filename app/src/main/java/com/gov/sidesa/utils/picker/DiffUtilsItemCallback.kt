@@ -1,12 +1,6 @@
-package com.gov.sidesa.base.dynamic_adapter
+package com.gov.sidesa.utils.picker
 
 import androidx.recyclerview.widget.DiffUtil
-
-/**
- * Created by yovi.putra on 20/07/22"
- * Project name: Container Tracker
- **/
-
 
 class DiffUtilItemCallback<T>(
     private val isItemsTheSame: (oldItem: T, newItem: T) -> Boolean,
