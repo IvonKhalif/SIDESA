@@ -1,4 +1,4 @@
-package com.gov.sidesa.ui.letter.input.models
+package com.gov.sidesa.domain.letter.input.models
 
 /**
  * Created by yovi.putra on 27/07/22"

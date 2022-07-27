@@ -28,17 +28,27 @@ class LetterInputActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityLetterInputBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
+
         initObserver()
         initView()
         initEvent()
     }
 
+    /**
+     * set listener for handling input from user
+     */
     private fun initEvent() = with (binding){
         viewModel.onLoad()
+
+        customToolbar.toolbarDetailProfile.setNavigationOnClickListener {
+            finish()
+        }
     }
 
+    /**
+     * observing view-model data
+     */
     private fun initObserver() = with(viewModel) {
         componentData.observe(this@LetterInputActivity) {
             binding.rvComponents.post {
@@ -47,11 +57,19 @@ class LetterInputActivity : BaseActivity() {
         }
     }
 
+    /**
+     * prepare content view
+     */
     private fun initView() = with (binding) {
-        customToolbar.toolbarDetailProfile.title = getString(R.string.letter_input_submission)
+        customToolbar.apply {
+            toolbarDetailProfile.title = getString(R.string.letter_input_submission)
+            toolbarDetailProfile.setNavigationIcon(R.drawable.ic_arrow_left)
+        }
 
-        rvComponents.adapter = adapter
-        rvComponents.layoutManager = LinearLayoutManager(this@LetterInputActivity)
+        rvComponents.apply {
+            rvComponents.adapter = this@LetterInputActivity.adapter
+            rvComponents.layoutManager = LinearLayoutManager(this@LetterInputActivity)
+        }
     }
 
     override fun onDestroy() {

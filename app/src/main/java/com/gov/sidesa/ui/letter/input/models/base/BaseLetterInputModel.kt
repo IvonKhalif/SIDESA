@@ -1,6 +1,6 @@
 package com.gov.sidesa.ui.letter.input.models.base
 
-import com.gov.sidesa.ui.letter.input.models.WidgetType
+import com.gov.sidesa.domain.letter.input.models.WidgetType
 import com.gov.sidesa.ui.letter.input.view_holder_factory.LetterInputViewHolderFactory
 
 abstract class BaseLetterInputModel(

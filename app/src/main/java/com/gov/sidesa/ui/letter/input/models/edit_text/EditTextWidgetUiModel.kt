@@ -1,6 +1,7 @@
 package com.gov.sidesa.ui.letter.input.models.edit_text
 
-import com.gov.sidesa.ui.letter.input.models.WidgetType
+import com.gov.sidesa.domain.letter.input.models.InputType
+import com.gov.sidesa.domain.letter.input.models.WidgetType
 import com.gov.sidesa.ui.letter.input.models.base.BaseLetterInputModel
 import com.gov.sidesa.ui.letter.input.view_holder_factory.LetterInputViewHolderFactory
 
@@ -11,7 +12,7 @@ import com.gov.sidesa.ui.letter.input.view_holder_factory.LetterInputViewHolderF
 
 data class EditTextWidgetUiModel(
     override val name: String,
-    val inputType: String,
+    val inputType: InputType,
     val title: String?,
 ) : BaseLetterInputModel(type = WidgetType.EditText, name = name) {
 

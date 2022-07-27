@@ -139,4 +139,5 @@
 
     <!-- LETTER SUBMISSION-->
     <string name="letter_input_submission">Pengajuan Surat</string>
+    <string name="letter_input_submit">Ajukan</string>
 </resources>

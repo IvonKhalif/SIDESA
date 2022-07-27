@@ -1,12 +1,12 @@
 package com.gov.sidesa.ui.letter.input.view_holder.edit_text
 
-import android.text.InputType
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import com.gov.sidesa.R
 import com.gov.sidesa.base.dynamic_adapter.AbstractViewHolder
 import com.gov.sidesa.databinding.ItemLetterInputEditTextWidgetBinding
+import com.gov.sidesa.domain.letter.input.models.asAndroidInputText
 import com.gov.sidesa.ui.letter.input.models.edit_text.EditTextWidgetUiModel
 import com.gov.sidesa.ui.letter.input.view_holder_factory.LetterInputViewHolderListener
 
@@ -38,7 +38,7 @@ class EditTextViewHolder(
 
     override fun bind(model: EditTextWidgetUiModel): Unit = with(binding) {
         tilInputLayout.hint = model.title
-        etInput.inputType = InputType.TYPE_CLASS_TEXT
+        etInput.inputType = model.inputType.asAndroidInputText()
 
         etInput.addTextChangedListener(onTextChanged = { _, _, _, _ ->
             listener.onEditTextChanged(model)

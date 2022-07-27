@@ -1,6 +1,7 @@
 package com.gov.sidesa.ui.letter.input.models.drop_down
 
-import com.gov.sidesa.ui.letter.input.models.WidgetType
+import com.gov.sidesa.domain.letter.input.models.InputType
+import com.gov.sidesa.domain.letter.input.models.WidgetType
 import com.gov.sidesa.ui.letter.input.models.base.BaseLetterInputModel
 import com.gov.sidesa.ui.letter.input.view_holder_factory.LetterInputViewHolderFactory
 
@@ -12,7 +13,7 @@ import com.gov.sidesa.ui.letter.input.view_holder_factory.LetterInputViewHolderF
 data class DropDownWidgetUiModel(
     override val name: String,
     val selectedId: String?,
-    val inputType: String,
+    val inputType: InputType,
     val title: String?,
     val api: String,
     val apiType: String?,

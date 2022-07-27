@@ -1,6 +1,6 @@
 package com.gov.sidesa.ui.letter.input.models.text_view
 
-import com.gov.sidesa.ui.letter.input.models.WidgetType
+import com.gov.sidesa.domain.letter.input.models.WidgetType
 import com.gov.sidesa.ui.letter.input.models.base.BaseLetterInputModel
 import com.gov.sidesa.ui.letter.input.view_holder_factory.LetterInputViewHolderFactory
 

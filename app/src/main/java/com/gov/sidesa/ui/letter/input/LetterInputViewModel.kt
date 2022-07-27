@@ -3,6 +3,7 @@ package com.gov.sidesa.ui.letter.input
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.gov.sidesa.base.BaseViewModel
+import com.gov.sidesa.domain.letter.input.models.InputType
 import com.gov.sidesa.ui.letter.input.models.base.BaseLetterInputModel
 import com.gov.sidesa.ui.letter.input.models.divider.DividerWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.drop_down.DropDownWidgetUiModel
@@ -31,22 +32,22 @@ class LetterInputViewModel : BaseViewModel(), LetterInputViewHolderListener {
             DividerWidgetUiModel(name = "divider"),
             EditTextWidgetUiModel(
                 name = "type_of_business",
-                inputType = "text",
+                inputType = InputType.Text,
                 title = "Jenis Usaha"
             ),
             EditTextWidgetUiModel(
                 name = "company_name",
-                inputType = "text",
+                inputType = InputType.Email,
                 title = "Nama Usaha"
             ),
             EditTextWidgetUiModel(
                 name = "company_address",
-                inputType = "text",
+                inputType = InputType.Number,
                 title = "Alamat Tempat Usaha"
             ),
             DropDownWidgetUiModel(
                 name = "districts",
-                inputType = "text",
+                inputType = InputType.Text,
                 title = "Kecamatan",
                 api = "/test/test",
                 apiType = "list",
@@ -55,7 +56,7 @@ class LetterInputViewModel : BaseViewModel(), LetterInputViewHolderListener {
             ),
             DropDownWidgetUiModel(
                 name = "country",
-                inputType = "text",
+                inputType = InputType.Text,
                 title = "Desa/Kelurahan",
                 api = "/test/test",
                 apiType = "list",
