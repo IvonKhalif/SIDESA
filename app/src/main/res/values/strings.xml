@@ -18,19 +18,25 @@
     <string name="general_captio_all">Semua</string>
 
     <!--  Login  -->
+    <string name="login_title">Login</string>
+    <string name="login_new_password_title">Password Baru</string>
     <string name="login_ktp_number_label">No. KTP</string>
     <string name="login_ktp_number_hint">Masukkan Nomor KTP</string>
     <string name="login_password_label">Password</string>
     <string name="login_password_hint">Masukkan Password</string>
+    <string name="login_email_hint">Alamat Email</string>
     <string name="login_re_password_hint">Ulangi Password</string>
     <string name="login_button_login_label">Login</string>
     <string name="login_ktp_number_error_16_digit">Nomor KTP harus 16 digit</string>
     <string name="action_settings">Settings</string>
+    <string name="input_email_header">Kami akan mengirimkan email berupa form untuk ubah password, jika Kamu sudah menambahkan email pada akun Kamu </string>
 
     <!--  Password  -->
     <string name="input_password_forgot_password_label">Lupa password</string>
+    <string name="input_password_create_password_label">Buat password</string>
     <string name="input_password_has_account_header">Selanjutnya masukkan password untuk login ke aplikasi DIGIPDESA</string>
     <string name="input_password_has_not_account_header">Ini pertama kali Kamu login di aplikasi DIGIPDESA, buat password untuk mengamankan akun Kamu.</string>
+    <string name="input_password_has_reseted_header">Karena sebelumnya Kamu sudah ke kelurahan untuk mereset password, Kamu harus buat password baru.</string>
     <string name="input_password_has_account_footer">Jika Kamu tidak pernah merasa Login pada aplikasi DIGIPDESA, maka Kamu harus ke kelurahan yang sesuai dengan KTP Kamu untuk mereset password pada akun Kamu.</string>
     <string name="input_password_error_7_digit">Password minimal 7 digit</string>
     <string name="input_password_error_not_match">Password berbeda</string>

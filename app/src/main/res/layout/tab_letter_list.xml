@@ -31,6 +31,7 @@
             android:textColor="@color/white_929292"
             android:textSize="14sp"
             android:fontFamily="@font/inter_medium"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

@@ -58,12 +58,6 @@ class LetterListActivity : BaseActivity() {
                 else -> getString(R.string.letter_list_ready_for_pickup_caption)
             }
         }.attach()
-//        for (i in 0 until binding.tabLayoutLetter.tabCount) {
-//            val tab = binding.tabLayoutLetter.getTabAt(i)
-//            tab?.customView = adapter.getTabView(i)
-//            tab?.let { pagerAdapter.setOnSelectView(binding.tabLayoutLetter, 0) }
-//        }
-
         binding.tabLayoutLetter.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
 //                tab?.let { pagerAdapter.setOnSelectView(binding.tabLayoutLetter, it.position) }
