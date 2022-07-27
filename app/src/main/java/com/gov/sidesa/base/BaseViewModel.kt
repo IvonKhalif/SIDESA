@@ -12,8 +12,10 @@ import java.io.IOException
 open class BaseViewModel: ViewModel() {
     @Deprecated("broken observe when save history")
     val genericErrorLiveData = PostLiveData<GenericErrorResponse?>()
+
     @Deprecated("broken observe when save history")
     val networkErrorLiveData = PostLiveData<IOException?>()
+
     @Deprecated("broken observe when save history")
     val loadingWidgetLiveData = PostLiveData<Boolean?>()
 
@@ -26,14 +28,14 @@ open class BaseViewModel: ViewModel() {
     private val _loadingState = MutableLiveData<Boolean>()
     val loadingState: LiveData<Boolean> get() = _loadingState
 
-    fun showLoadingWidget(){
+    fun showLoadingWidget() {
         viewModelScope.launch {
             loadingWidgetLiveData.value = true
             _loadingState.value = true
         }
     }
 
-    fun hideLoadingWidget(){
+    fun hideLoadingWidget() {
         viewModelScope.launch {
             loadingWidgetLiveData.value = false
             _loadingState.value = false

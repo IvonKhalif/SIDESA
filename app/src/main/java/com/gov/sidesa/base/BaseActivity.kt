@@ -11,9 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import com.gov.sidesa.R
 import com.gov.sidesa.databinding.SquareToastFormatBinding
-import com.gov.sidesa.ui.widget.LoadingDialogWidget
 import com.gov.sidesa.utils.constants.ToastConstant
-import com.gov.sidesa.utils.extension.showImmediately
 
 abstract class BaseActivity : AppCompatActivity() {
 
