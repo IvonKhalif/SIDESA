@@ -1,17 +1,9 @@
 package com.gov.sidesa.ui.profile.edit
 
-import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.datepicker.MaterialDatePicker
-import com.gov.sidesa.R
-import com.gov.sidesa.databinding.ActivityEditProfileBinding
-import java.text.SimpleDateFormat
-import java.util.*
 
 class EditProfileKTPActivity : AppCompatActivity() {
-
+/*
     private lateinit var binding: ActivityEditProfileBinding
     private val bindingBiodataKtp by lazy { binding.customKtpBiodata }
 
@@ -53,5 +45,5 @@ class EditProfileKTPActivity : AppCompatActivity() {
         val genderAdapter = ArrayAdapter(this, R.layout.item_dropdown, genders)
         val inputGenderAutoComplete = findViewById<AutoCompleteTextView>(R.id.input_ktp_gender)
         inputGenderAutoComplete.setAdapter(genderAdapter)
-    }
+    }*/
 }

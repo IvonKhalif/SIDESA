@@ -7,6 +7,6 @@ abstract class AbstractViewHolder<in T>(
     private val view: View
 ): RecyclerView.ViewHolder(view) {
 
-    abstract fun bind(element: T)
+    abstract fun bind(model: T)
 
 }

@@ -134,4 +134,6 @@
         <item>Khonghucu</item>
     </string-array>
 
+    <!-- LETTER SUBMISSION-->
+    <string name="letter_input_submission">Pengajuan Surat</string>
 </resources>
