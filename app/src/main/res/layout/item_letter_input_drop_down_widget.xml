@@ -16,6 +16,8 @@
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/dd_select"
             style="@style/Large"
+            android:maxLines="1"
+            android:inputType="none"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="Android" />

@@ -12,8 +12,8 @@ import com.gov.sidesa.ui.letter.input.view_holder_factory.LetterInputViewHolderF
 data class TextViewWidgetUiModel(
     override val name: String,
     val title: String,
-    val value: String
-) : BaseLetterInputModel(type = WidgetType.TextView, name = name) {
+    override val value: String
+) : BaseLetterInputModel(type = WidgetType.TextView, name = name, value = value) {
 
     override fun type(typeFactory: LetterInputViewHolderFactory): Int {
         return typeFactory.type(this)
@@ -25,6 +25,5 @@ data class TextViewWidgetUiModel(
         return super.areItemsTheSame(newItem = textView)
                 && name == textView.name
                 && title == textView.title
-                && value == textView.value
     }
 }

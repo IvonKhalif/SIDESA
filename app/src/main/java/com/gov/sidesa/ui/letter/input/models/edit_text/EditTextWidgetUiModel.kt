@@ -14,7 +14,8 @@ data class EditTextWidgetUiModel(
     override val name: String,
     val inputType: InputType,
     val title: String?,
-) : BaseLetterInputModel(type = WidgetType.EditText, name = name) {
+    override val value: String = ""
+) : BaseLetterInputModel(type = WidgetType.EditText, name = name, value = value) {
 
     override fun type(typeFactory: LetterInputViewHolderFactory): Int {
         return typeFactory.type(this)

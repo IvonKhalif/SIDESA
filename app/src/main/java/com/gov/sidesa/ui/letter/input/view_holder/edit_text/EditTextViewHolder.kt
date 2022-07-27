@@ -39,9 +39,10 @@ class EditTextViewHolder(
     override fun bind(model: EditTextWidgetUiModel): Unit = with(binding) {
         tilInputLayout.hint = model.title
         etInput.inputType = model.inputType.asAndroidInputText()
+        etInput.setText(model.value)
 
         etInput.addTextChangedListener(onTextChanged = { _, _, _, _ ->
-            listener.onEditTextChanged(model)
+            listener.onEditTextChanged(model.copy(value = etInput.text.toString()))
         })
     }
 }

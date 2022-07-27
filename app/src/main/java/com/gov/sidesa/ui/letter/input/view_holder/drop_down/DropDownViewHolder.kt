@@ -1,9 +1,7 @@
 package com.gov.sidesa.ui.letter.input.view_holder.drop_down
 
-import android.text.InputType
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
 import com.gov.sidesa.R
 import com.gov.sidesa.base.dynamic_adapter.AbstractViewHolder
 import com.gov.sidesa.databinding.ItemLetterInputDropDownWidgetBinding
@@ -37,11 +35,11 @@ class DropDownViewHolder(
     }
 
     override fun bind(model: DropDownWidgetUiModel) = with(binding) {
-       /* etInput.hint = model.placeholder
-        etInput.inputType = InputType.TYPE_CLASS_TEXT
+        tilSelectLayout.hint = model.title
+        ddSelect.setText(model.selectedText.orEmpty())
 
-        etInput.addTextChangedListener(onTextChanged = { _, _, _, _ ->
-            listener.onEditTextChanged(model)
-        })*/
+        ddSelect.setOnClickListener {
+            listener.onDropDownClick(model = model)
+        }
     }
 }

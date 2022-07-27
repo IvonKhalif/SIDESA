@@ -5,7 +5,8 @@ import com.gov.sidesa.ui.letter.input.view_holder_factory.LetterInputViewHolderF
 
 abstract class BaseLetterInputModel(
     open val type: WidgetType,
-    open val name: String
+    open val name: String,
+    open val value: String? = null
 ) {
 
     abstract fun type(typeFactory: LetterInputViewHolderFactory): Int
@@ -16,5 +17,5 @@ abstract class BaseLetterInputModel(
 
     open fun areContentsTheSame(
         newItem: BaseLetterInputModel
-    ): Boolean = this == newItem
+    ): Boolean = areItemsTheSame(newItem = newItem)
 }

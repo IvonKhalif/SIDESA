@@ -44,6 +44,10 @@ class LetterInputActivity : BaseActivity() {
         customToolbar.toolbarDetailProfile.setNavigationOnClickListener {
             finish()
         }
+
+        buttonSave.setOnClickListener {
+            viewModel.onSubmit()
+        }
     }
 
     /**

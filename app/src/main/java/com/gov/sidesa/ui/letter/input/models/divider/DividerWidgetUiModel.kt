@@ -10,8 +10,8 @@ import com.gov.sidesa.ui.letter.input.view_holder_factory.LetterInputViewHolderF
  **/
 
 data class DividerWidgetUiModel(
-    override val name: String
-) : BaseLetterInputModel(type = WidgetType.Divider, name = name) {
+    override val name: String = WidgetType.Divider.type
+) : BaseLetterInputModel(type = WidgetType.Divider, name = name, value = WidgetType.Divider.type) {
 
     override fun type(typeFactory: LetterInputViewHolderFactory): Int {
         return typeFactory.type(this)
