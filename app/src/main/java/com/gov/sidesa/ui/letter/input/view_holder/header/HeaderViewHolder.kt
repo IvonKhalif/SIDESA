@@ -31,6 +31,7 @@ class HeaderViewHolder(
         }
     }
 
-    override fun bind(model: HeaderWidgetUiModel) {
+    override fun bind(model: HeaderWidgetUiModel) = with(binding) {
+        tvTitle.text = model.title
     }
 }
