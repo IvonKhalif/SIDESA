@@ -1,4 +1,4 @@
-package com.gov.sidesa.ui.letterlist.submission
+package com.gov.sidesa.ui.letter.list.needapproval
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,14 +6,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.gov.sidesa.R
 import com.gov.sidesa.data.letterlist.models.LettersModel
-import com.gov.sidesa.databinding.ItemSubmissionBinding
+import com.gov.sidesa.databinding.ItemNeedApprovalBinding
 
-class LetterSubmissionViewHolder(
-    val binding: ItemSubmissionBinding,
+class LetterNeedApprovalViewHolder(
+    val binding: ItemNeedApprovalBinding,
     private val onItemClick: (LettersModel) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(item: LettersModel) {
         binding.apply {
+            textDateSubmission.text = item.createDate
             textLetterNumber.text = item.number
             textLetterTitle.text = item.title
             root.setOnClickListener {
@@ -26,15 +27,15 @@ class LetterSubmissionViewHolder(
         fun create(
             parent: ViewGroup,
             onItemClicked: (LettersModel) -> Unit
-        ): LetterSubmissionViewHolder {
+        ): LetterNeedApprovalViewHolder {
             val view = DataBindingUtil
-                .inflate<ItemSubmissionBinding>(
+                .inflate<ItemNeedApprovalBinding>(
                     LayoutInflater.from(parent.context),
-                    R.layout.item_submission,
+                    R.layout.item_need_approval,
                     parent,
                     false
                 )
-            return LetterSubmissionViewHolder(view, onItemClicked)
+            return LetterNeedApprovalViewHolder(view, onItemClicked)
         }
     }
 }

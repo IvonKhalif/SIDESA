@@ -1,9 +1,6 @@
-package com.gov.sidesa.ui.letterlist
+package com.gov.sidesa.ui.letter.list
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.view.LayoutInflater
-import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
@@ -20,8 +17,14 @@ class LetterListPagerAdapter(
 
     private val fragmentList = listOf(
         TabLetterListFragment.newInstance(LetterSubmissionTypeEnum.ALL.type, isSubmissionPage),
-        TabLetterListFragment.newInstance(LetterSubmissionTypeEnum.WAITING_APPROVAL_RT.type, isSubmissionPage),
-        TabLetterListFragment.newInstance(LetterSubmissionTypeEnum.WAITING_APPROVAL_RW.type, isSubmissionPage),
+        TabLetterListFragment.newInstance(
+            LetterSubmissionTypeEnum.WAITING_APPROVAL_RT.type,
+            isSubmissionPage
+        ),
+        TabLetterListFragment.newInstance(
+            LetterSubmissionTypeEnum.WAITING_APPROVAL_RW.type,
+            isSubmissionPage
+        ),
         TabLetterListFragment.newInstance(LetterSubmissionTypeEnum.READY.type, isSubmissionPage)
     )
 

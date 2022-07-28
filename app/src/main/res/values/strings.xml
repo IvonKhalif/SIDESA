@@ -111,6 +111,23 @@
     <string name="letter_list_ready_for_pickup_caption">Surat Siap Diambil Di Kelurahan</string>
     <string name="letter_list_need_approval_title">Daftar Surat Persetujuan</string>
     <string name="letter_list_submission_title">Daftar Surat Yang Diajukan</string>
+    <string name="letter_list_unsigned_title">Belum Disetujui</string>
+    <string name="letter_list_signed_title">Sudah Disetujui</string>
+
+    <!--  Letter Detail  -->
+    <string name="letter_detail_submission_title">Rincian Surat Pengajuan</string>
+    <string name="letter_detail_id_letter_caption">ID Surat</string>
+    <string name="letter_detail_letter_type_caption">Jenis Surat</string>
+    <string name="letter_detail_letter_date_submission_caption">Tanggal Diajukan</string>
+    <string name="letter_detail_letter_status_caption">Status</string>
+    <string name="letter_detail_letter_rejected_caption">Ditolak</string>
+    <string name="letter_detail_submission_marker_caption">Surat Diajukan</string>
+    <string name="letter_detail_history_approval_caption">Riwayat Persetujuan</string>
+    <string name="letter_detail_approval_rt_marker_caption">Menunggu Disetujui RT</string>
+    <string name="letter_detail_has_approval_rt_marker_caption">Sudah Disetujui RT</string>
+    <string name="letter_detail_approval_rw_marker_caption">Menunggu Disetujui RW</string>
+    <string name="letter_detail_has_approval_rw_marker_caption">Sudah Disetujui RW</string>
+    <string name="letter_detail_ready_to_pickup_marker_caption">Surat Siap Diambil Di Kelurahan</string>
 
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

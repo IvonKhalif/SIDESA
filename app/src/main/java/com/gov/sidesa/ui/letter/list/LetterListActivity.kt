@@ -1,11 +1,10 @@
-package com.gov.sidesa.ui.letterlist
+package com.gov.sidesa.ui.letter.list
 
 import android.os.Bundle
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseActivity
-import com.gov.sidesa.data.letterlist.models.LettersModel
 import com.gov.sidesa.databinding.ActivityLetterListBinding
 import com.gov.sidesa.utils.constants.LetterConstant
 import com.gov.sidesa.utils.enums.CategoryLetterEnum
@@ -51,12 +50,20 @@ class LetterListActivity : BaseActivity() {
 
     private fun setUpTabLayout() {
         TabLayoutMediator(binding.tabLayoutLetter, binding.vpLetter) { tab, position ->
-            tab.text = when (position) {
-                0 -> getString(R.string.general_captio_all)
-                1 -> getString(R.string.letter_list_waiting_approval_rt_caption)
-                2 -> getString(R.string.letter_list_waiting_approval_rw_caption)
-                else -> getString(R.string.letter_list_ready_for_pickup_caption)
-            }
+            if (category == CategoryLetterEnum.NEED_APPROVAL.category)
+                tab.text = when (position) {
+                    0 -> getString(R.string.general_captio_all)
+                    1 -> getString(R.string.letter_list_unsigned_title)
+                    2 -> getString(R.string.letter_list_signed_title)
+                    else -> getString(R.string.letter_detail_letter_rejected_caption)
+                }
+            else
+                tab.text = when (position) {
+                    0 -> getString(R.string.general_captio_all)
+                    1 -> getString(R.string.letter_list_waiting_approval_rt_caption)
+                    2 -> getString(R.string.letter_list_waiting_approval_rw_caption)
+                    else -> getString(R.string.letter_list_ready_for_pickup_caption)
+                }
         }.attach()
         binding.tabLayoutLetter.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {

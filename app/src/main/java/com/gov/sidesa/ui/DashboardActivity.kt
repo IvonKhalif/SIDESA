@@ -6,13 +6,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.gov.sidesa.base.BaseActivity
 import com.gov.sidesa.data.letterlist.models.LettersModel
 import com.gov.sidesa.databinding.ActivityDashboardBinding
-import com.gov.sidesa.ui.letterlist.LetterListActivity
-import com.gov.sidesa.ui.letterlist.needapproval.LetterNeedApprovalAdapter
-import com.gov.sidesa.ui.letterlist.submission.LetterSubmissionAdapter
-import com.gov.sidesa.ui.profile.edit.EditProfileActivity
+import com.gov.sidesa.ui.letter.detail.DetailSubmissionLetterActivity
+import com.gov.sidesa.ui.letter.list.LetterListActivity
+import com.gov.sidesa.ui.letter.list.needapproval.LetterNeedApprovalAdapter
+import com.gov.sidesa.ui.letter.list.submission.LetterSubmissionAdapter
+import com.gov.sidesa.ui.profile.edit.EditProfileKTPActivity
 import com.gov.sidesa.utils.constants.LetterConstant
 import com.gov.sidesa.utils.enums.CategoryLetterEnum
-import com.gov.sidesa.ui.profile.edit.EditProfileKTPActivity
 
 class DashboardActivity : BaseActivity() {
     private lateinit var binding: ActivityDashboardBinding
@@ -88,6 +88,6 @@ class DashboardActivity : BaseActivity() {
     }
 
     private fun onItemSubmissionClick(lettersModel: LettersModel) {
-        //TODO("Not yet implemented")
+        startActivity(Intent(this, DetailSubmissionLetterActivity::class.java))
     }
 }

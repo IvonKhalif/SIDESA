@@ -1,5 +1,6 @@
-package com.gov.sidesa.ui.letterlist
+package com.gov.sidesa.ui.letter.list
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +13,9 @@ import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseFragment
 import com.gov.sidesa.data.letterlist.models.LettersModel
 import com.gov.sidesa.databinding.TabLetterListBinding
-import com.gov.sidesa.ui.letterlist.needapproval.LetterNeedApprovalAdapter
-import com.gov.sidesa.ui.letterlist.submission.LetterSubmissionAdapter
+import com.gov.sidesa.ui.letter.detail.DetailSubmissionLetterActivity
+import com.gov.sidesa.ui.letter.list.needapproval.LetterNeedApprovalAdapter
+import com.gov.sidesa.ui.letter.list.submission.LetterSubmissionAdapter
 import com.gov.sidesa.utils.constants.LetterConstant.ARG_IS_SUBMISSION_PAGE
 import com.gov.sidesa.utils.constants.LetterConstant.ARG_TAB_CATEGORY
 
@@ -111,6 +113,6 @@ class TabLetterListFragment : BaseFragment() {
     }
 
     private fun onItemSubmissionClick(lettersModel: LettersModel) {
-        //TODO("Not yet implemented")
+        startActivity(Intent(context, DetailSubmissionLetterActivity::class.java))
     }
 }
