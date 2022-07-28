@@ -1,11 +1,14 @@
 package com.gov.sidesa.base
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
@@ -14,6 +17,17 @@ import com.gov.sidesa.databinding.SquareToastFormatBinding
 import com.gov.sidesa.utils.constants.ToastConstant
 
 abstract class BaseActivity : AppCompatActivity() {
+
+    var resultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                // There are no request codes
+                val data: Intent? = result.data
+                onResultData(data)
+            }
+        }
+
+    open fun onResultData(result: Intent?) {}
 
     var loadingDialog: LoadingDialogWidget? = null
 

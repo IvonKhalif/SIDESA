@@ -1,8 +1,12 @@
 package com.gov.sidesa.ui.login.password
 
+import android.app.Activity
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.content.ContextCompat
+import androidx.core.content.IntentCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import com.gov.sidesa.R
@@ -36,15 +40,34 @@ class PasswordActivity : BaseActivity() {
 
     private fun mainView() {
         with(binding) {
-            if (accountHasRegistered()) {
-                buttonForgotPassword.isVisible = true
-                inputRePassword.isVisible = false
-            } else {
-                textInputPasswordHeader.text = getString(R.string.input_password_has_not_account_header)
-                textInputPasswordFooter.isVisible = false
+            var titleToolbar = ""
+            when {
+                accountHasRegistered() -> {
+                    titleToolbar = getString(R.string.login_title)
+                    buttonLogin.text = getString(R.string.login_title)
+                    buttonForgotPassword.isVisible = true
+                    inputRePassword.isVisible = false
+                }
+                accountHasReset() -> {
+                    titleToolbar = getString(R.string.login_new_password_title)
+                    textInputPasswordHeader.text =
+                        getString(R.string.input_password_has_reseted_header)
+                    textInputPasswordFooter.isVisible = false
+                }
+                else -> {
+                    titleToolbar = getString(R.string.input_password_create_password_label)
+                    textInputPasswordHeader.text =
+                        getString(R.string.input_password_has_not_account_header)
+                    textInputPasswordFooter.isVisible = false
+                }
             }
-
-            inputPassword.value().doOnTextChanged { text, start, before, count ->
+            customToolbar.toolbarDetailProfile.apply {
+                title = titleToolbar
+                navigationIcon =
+                    ContextCompat.getDrawable(this@PasswordActivity, R.drawable.ic_crossline_24dp)
+                setNavigationOnClickListener { finish() }
+            }
+            inputPassword.value().doOnTextChanged { text, _, _, _ ->
                 if (!text.isNullOrBlank() && text.length < 7) {
                     inputPassword.inputLayout().error =
                         getString(R.string.input_password_error_7_digit)
@@ -52,6 +75,7 @@ class PasswordActivity : BaseActivity() {
                 } else {
                     buttonLogin.isEnabled = !text.isNullOrBlank()
                     inputPassword.inputLayout().error = null
+                    inputPassword.inputLayout().isErrorEnabled = false
                 }
             }
             inputPassword.value().setOnFocusChangeListener { _, isFocus ->
@@ -65,6 +89,7 @@ class PasswordActivity : BaseActivity() {
                 } else {
                     buttonLogin.isEnabled = true
                     inputRePassword.inputLayout().error = null
+                    inputRePassword.inputLayout().isErrorEnabled = false
                 }
             }
 
@@ -87,6 +112,7 @@ class PasswordActivity : BaseActivity() {
         viewModel.apply {
             userLiveData.observeNonNull(this@PasswordActivity, ::handleUpdateUser)
             statusCreatePassword.observeNonNull(this@PasswordActivity, ::handleStatusCreated)
+            loadingWidgetLiveData.observeNonNull(this@PasswordActivity, ::handleLoadingWidget)
         }
     }
 
@@ -96,9 +122,14 @@ class PasswordActivity : BaseActivity() {
     }
 
     private fun handleUpdateUser(user: User) {
-        startActivity(Intent(this, DashboardActivity::class.java))
+        val intent = Intent()
+        setResult(Activity.RESULT_OK, intent)
+        finish()
     }
 
     private fun accountHasRegistered() =
         intent.getStringExtra(UserExtrasConstant.EXTRA_STATUS_NIK) == StatusResponseEnum.REGISTERED.status
+
+    private fun accountHasReset() =
+        intent.getStringExtra(UserExtrasConstant.EXTRA_STATUS_NIK) == StatusResponseEnum.RESET_PASSWORD.status
 }

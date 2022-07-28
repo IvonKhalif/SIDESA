@@ -22,16 +22,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/image_status_approval"
-                android:layout_width="wrap_content"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_date_submission"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_container"
-                android:layout_marginTop="@dimen/margin_container"
-                android:contentDescription="@string/general_image_content_description"
-                android:src="@drawable/background_waiting_approval"
+                android:layout_margin="@dimen/margin_container"
+                android:fontFamily="@font/inter_medium"
+                android:lineSpacingExtra="2sp"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@id/icon_chevron"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/dashboard_register_button_label" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/text_letter_title"
@@ -39,14 +42,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_container"
                 android:layout_marginTop="@dimen/margin_component"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="@dimen/margin_container"
                 android:fontFamily="@font/inter_medium"
                 android:lineSpacingExtra="2sp"
                 android:textColor="@color/black_302C2C"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toStartOf="@id/icon_chevron"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/image_status_approval"
+                app:layout_constraintTop_toBottomOf="@id/text_date_submission"
                 tools:text="@string/dashboard_register_button_label" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -71,6 +74,7 @@
                 android:id="@+id/icon_chevron"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_container"
                 android:layout_marginEnd="@dimen/margin_container"
                 android:contentDescription="@string/general_image_content_description"
                 android:src="@drawable/ic_chevron_right_16dp"

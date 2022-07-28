@@ -3,7 +3,7 @@ package com.gov.sidesa.utils.extension
 import android.text.Editable
 import java.util.regex.Pattern
 
-fun Editable.isEmailPattern(): Boolean {
+fun String.isEmailPattern(): Boolean {
     val emailRegex = Pattern.compile(
         "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
                 "\\@" +

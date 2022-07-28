@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:background="@drawable/background_dashed"
+            app:layout_constraintBottom_toTopOf="@id/icon_ready_to_pickup_marker"
+            app:layout_constraintEnd_toEndOf="@id/icon_submission_marker"
+            app:layout_constraintStart_toStartOf="@id/icon_submission_marker"
+            app:layout_constraintTop_toBottomOf="@id/icon_submission_marker" />
+
+        <ImageView
+            android:id="@+id/icon_submission_marker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:contentDescription="@string/general_image_content_description"
+            android:src="@drawable/ic_history_green"
+            app:layout_constraintBottom_toBottomOf="@id/text_submission_caption"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/text_submission_caption" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_submission_caption"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_component"
+            android:layout_marginBottom="@dimen/margin_container"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/letter_detail_submission_marker_caption"
+            android:textColor="@color/black_302C2C"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/icon_submission_marker"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/dashboard_register_button_label" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_submission_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/inter_medium"
+            android:textColor="@color/grey_AAAAAA"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@id/text_submission_caption"
+            app:layout_constraintTop_toBottomOf="@id/text_submission_caption"
+            tools:text="@string/dashboard_register_button_label" />
+
+        <ImageView
+            android:id="@+id/icon_waiting_approval_rt_marker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:contentDescription="@string/general_image_content_description"
+            android:src="@drawable/ic_history_green"
+            app:layout_constraintBottom_toBottomOf="@id/text_waiting_approval_rt_caption"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/text_waiting_approval_rt_caption" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_waiting_approval_rt_caption"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_component"
+            android:layout_marginTop="@dimen/icon_default"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/letter_detail_approval_rt_marker_caption"
+            android:textColor="@color/black_302C2C"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/icon_waiting_approval_rt_marker"
+            app:layout_constraintTop_toBottomOf="@id/text_submission_date" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_waiting_approval_rt_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/inter_medium"
+            android:textColor="@color/grey_AAAAAA"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@id/text_waiting_approval_rt_caption"
+            app:layout_constraintTop_toBottomOf="@id/text_waiting_approval_rt_caption"
+            tools:text="@string/dashboard_register_button_label" />
+
+        <ImageView
+            android:id="@+id/icon_has_approval_rt_marker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:contentDescription="@string/general_image_content_description"
+            android:src="@drawable/ic_history_grey"
+            app:layout_constraintBottom_toBottomOf="@id/text_has_approval_rt_caption"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/text_has_approval_rt_caption" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_has_approval_rt_caption"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_component"
+            android:layout_marginTop="@dimen/icon_default"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/letter_detail_has_approval_rt_marker_caption"
+            android:textColor="@color/black_302C2C"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/icon_has_approval_rt_marker"
+            app:layout_constraintTop_toBottomOf="@id/text_waiting_approval_rt_date" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_has_approval_rt_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/inter_medium"
+            android:textColor="@color/grey_AAAAAA"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@id/text_has_approval_rt_caption"
+            app:layout_constraintTop_toBottomOf="@id/text_has_approval_rt_caption"
+            tools:text="@string/dashboard_register_button_label" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_has_approval_rt_rejected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/letter_detail_letter_rejected_caption"
+            android:textColor="@color/red_EE3636"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@id/text_has_approval_rt_caption"
+            app:layout_constraintTop_toBottomOf="@id/text_has_approval_rt_date" />
+
+        <ImageView
+            android:id="@+id/icon_waiting_approval_rw_marker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:contentDescription="@string/general_image_content_description"
+            android:src="@drawable/ic_history_grey"
+            app:layout_constraintBottom_toBottomOf="@id/text_waiting_approval_rw_caption"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/text_waiting_approval_rw_caption" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_waiting_approval_rw_caption"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_component"
+            android:layout_marginTop="@dimen/icon_default"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/letter_detail_approval_rw_marker_caption"
+            android:textColor="@color/black_302C2C"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/icon_waiting_approval_rw_marker"
+            app:layout_constraintTop_toBottomOf="@id/text_has_approval_rt_date" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_waiting_approval_rw_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/inter_medium"
+            android:textColor="@color/grey_AAAAAA"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@id/text_waiting_approval_rw_caption"
+            app:layout_constraintTop_toBottomOf="@id/text_waiting_approval_rw_caption"
+            tools:text="@string/dashboard_register_button_label" />
+
+        <ImageView
+            android:id="@+id/icon_has_approval_rw_marker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:contentDescription="@string/general_image_content_description"
+            android:src="@drawable/ic_history_grey"
+            app:layout_constraintBottom_toBottomOf="@id/text_has_approval_rw_caption"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/text_has_approval_rw_caption" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_has_approval_rw_caption"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_component"
+            android:layout_marginTop="@dimen/icon_default"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/letter_detail_has_approval_rw_marker_caption"
+            android:textColor="@color/black_302C2C"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/icon_has_approval_rw_marker"
+            app:layout_constraintTop_toBottomOf="@id/text_waiting_approval_rw_date" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_has_approval_rw_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/inter_medium"
+            android:textColor="@color/grey_AAAAAA"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@id/text_has_approval_rw_caption"
+            app:layout_constraintTop_toBottomOf="@id/text_has_approval_rw_caption"
+            tools:text="@string/dashboard_register_button_label" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_has_approval_rw_rejected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/letter_detail_letter_rejected_caption"
+            android:textColor="@color/red_EE3636"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@id/text_has_approval_rw_caption"
+            app:layout_constraintTop_toBottomOf="@id/text_has_approval_rw_date" />
+
+        <ImageView
+            android:id="@+id/icon_ready_to_pickup_marker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:contentDescription="@string/general_image_content_description"
+            android:src="@drawable/ic_history_grey"
+            app:layout_constraintBottom_toBottomOf="@id/text_ready_to_pickup_caption"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/text_ready_to_pickup_caption" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_ready_to_pickup_caption"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_component"
+            android:layout_marginTop="@dimen/icon_default"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/letter_detail_approval_rw_marker_caption"
+            android:textColor="@color/black_302C2C"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/icon_ready_to_pickup_marker"
+            app:layout_constraintTop_toBottomOf="@id/text_has_approval_rw_date" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
