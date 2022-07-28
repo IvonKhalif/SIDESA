@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
 import com.gov.sidesa.R
+import com.gov.sidesa.databinding.FragmentGeneralKtpBinding
 
 class GeneralKtpFragment : Fragment() {
 
@@ -15,10 +18,55 @@ class GeneralKtpFragment : Fragment() {
         }
     }
 
+    private lateinit var binding: FragmentGeneralKtpBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_general_ktp, container, false)
+    ): View {
+        binding = FragmentGeneralKtpBinding.inflate(layoutInflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setDropDownReligion()
+        setDropDownMarriageStatus()
+        setDropDownJob()
+        setDropDownNationality()
+    }
+
+    private fun setDropDownReligion() {
+        val religionList = resources.getStringArray(R.array.religion)
+        val religionAdapter = ArrayAdapter(requireContext(), R.layout.item_dropdown, religionList)
+        val religionAutoComplete =
+            binding.root.findViewById<AutoCompleteTextView>(R.id.input_ktp_religion)
+        religionAutoComplete.setAdapter(religionAdapter)
+    }
+
+    private fun setDropDownMarriageStatus() {
+        val marriageStatusList = resources.getStringArray(R.array.marriage_status)
+        val marriageStatusAdapter =
+            ArrayAdapter(requireContext(), R.layout.item_dropdown, marriageStatusList)
+        val marriageStatusAutoComplete =
+            binding.root.findViewById<AutoCompleteTextView>(R.id.input_ktp_marriage)
+        marriageStatusAutoComplete.setAdapter(marriageStatusAdapter)
+    }
+
+    private fun setDropDownJob() {
+        val jobList = resources.getStringArray(R.array.job)
+        val jobAdapter = ArrayAdapter(requireContext(), R.layout.item_dropdown, jobList)
+        val jobAutoComplete = binding.root.findViewById<AutoCompleteTextView>(R.id.input_ktp_job)
+        jobAutoComplete.setAdapter(jobAdapter)
+    }
+
+    private fun setDropDownNationality() {
+        val nationalityList = resources.getStringArray(R.array.nationality)
+        val nationalityAdapter =
+            ArrayAdapter(requireContext(), R.layout.item_dropdown, nationalityList)
+        val nationalityAutoComplete =
+            binding.root.findViewById<AutoCompleteTextView>(R.id.input_ktp_nationality)
+        nationalityAutoComplete.setAdapter(nationalityAdapter)
     }
 }
