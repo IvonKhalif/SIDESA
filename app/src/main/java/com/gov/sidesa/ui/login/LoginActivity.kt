@@ -53,6 +53,7 @@ class LoginActivity : BaseActivity() {
     private fun initObserver() {
         viewModel.apply {
             statusNIKLiveData.observeNonNull(this@LoginActivity, ::handleStatusNIK)
+            loadingWidgetLiveData.observeNonNull(this@LoginActivity, ::handleLoadingWidget)
         }
     }
 
@@ -60,7 +61,12 @@ class LoginActivity : BaseActivity() {
         val intent = Intent(this, PasswordActivity::class.java)
         intent.putExtra(EXTRA_STATUS_NIK, status)
         intent.putExtra(EXTRA_USER_NIK, binding.inputUserKtp.value().text.toString())
-        startActivity(intent)
+        resultLauncher.launch(intent)
+    }
+
+    override fun onResultData(result: Intent?) {
+        super.onResultData(result)
+        startActivity(Intent(this, DashboardActivity::class.java))
         finish()
     }
 }

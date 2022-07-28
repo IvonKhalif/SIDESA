@@ -4,5 +4,6 @@ enum class StatusResponseEnum(val status: String?) {
     SUCCESS("success"),
     FAILED("failed"),
     REGISTERED("registered"),
-    NOT_REGISTERED("not-registered")
+    UNREGISTERED("unregistered"),
+    RESET_PASSWORD("reset_password")
 }

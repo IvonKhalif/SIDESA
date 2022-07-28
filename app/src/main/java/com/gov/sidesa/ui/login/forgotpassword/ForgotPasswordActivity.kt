@@ -1,8 +1,11 @@
 package com.gov.sidesa.ui.login.forgotpassword
 
 import android.os.Bundle
+import androidx.core.widget.doOnTextChanged
+import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseActivity
 import com.gov.sidesa.databinding.ActivityForgotPasswordBinding
+import com.gov.sidesa.utils.enums.CategoryLetterEnum
 import com.gov.sidesa.utils.extension.isEmailPattern
 
 class ForgotPasswordActivity : BaseActivity() {
@@ -18,8 +21,13 @@ class ForgotPasswordActivity : BaseActivity() {
 
     private fun mainView() {
         with(binding) {
-            val textEmail = binding.inputEmail.value().text
-            buttonSendEmail.isEnabled = textEmail.isEmailPattern()
+            customToolbar.toolbarDetailProfile.apply {
+                title = getString(R.string.input_password_forgot_password_label)
+                setNavigationOnClickListener { finish() }
+            }
+            inputEmail.value().doOnTextChanged { text, _, _, _ ->
+                buttonSendEmail.isEnabled = text.toString().isEmailPattern()
+            }
         }
     }
 }
