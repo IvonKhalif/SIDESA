@@ -91,6 +91,10 @@ class LetterInputActivity : BaseActivity() {
         menuList.observe(this@LetterInputActivity) {
             showMenuSheet(uiModel = it.first, items = it.second)
         }
+
+        btnSubmitVisibilityState.observe(this@LetterInputActivity) {
+            binding.buttonSave.isVisible = it.not()
+        }
     }
 
     /**

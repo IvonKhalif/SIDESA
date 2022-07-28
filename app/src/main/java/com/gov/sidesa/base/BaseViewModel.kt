@@ -20,34 +20,34 @@ open class BaseViewModel : ViewModel() {
     @Deprecated("broken observe when save history")
     val loadingWidgetLiveData = PostLiveData<Boolean?>()
 
-    protected val _serverErrorState = MutableLiveData<GenericErrorResponse>()
-    val serverErrorState: LiveData<GenericErrorResponse> get() = _serverErrorState
+    protected val mServerErrorState = MutableLiveData<GenericErrorResponse>()
+    val serverErrorState: LiveData<GenericErrorResponse> get() = mServerErrorState
 
-    protected val _networkErrorState = MutableLiveData<IOException>()
-    val networkErrorState: LiveData<IOException> get() = _networkErrorState
+    protected val mNetworkErrorState = MutableLiveData<IOException>()
+    val networkErrorState: LiveData<IOException> get() = mNetworkErrorState
 
-    private val _loadingState = MutableLiveData<Boolean>()
-    val loadingState: LiveData<Boolean> get() = _loadingState
+    protected val mLoadingState = MutableLiveData<Boolean>()
+    val loadingState: LiveData<Boolean> get() = mLoadingState
 
     fun showLoadingWidget() {
         viewModelScope.launch {
             loadingWidgetLiveData.value = true
-            _loadingState.value = true
+            mLoadingState.value = true
         }
     }
 
     fun hideLoadingWidget() {
         viewModelScope.launch {
             loadingWidgetLiveData.value = false
-            _loadingState.value = false
+            mLoadingState.value = false
         }
     }
 
     protected fun <T : Any> onResponseNotSuccess(response: NetworkResponse<T, GenericErrorResponse>) {
         when (response) {
-            is NetworkResponse.ServerError -> _serverErrorState.value =
+            is NetworkResponse.ServerError -> mServerErrorState.value =
                 response.body ?: GenericErrorResponse.generalError()
-            is NetworkResponse.NetworkError -> _networkErrorState.value = response.error
+            is NetworkResponse.NetworkError -> mNetworkErrorState.value = response.error
             else -> return
         }
     }

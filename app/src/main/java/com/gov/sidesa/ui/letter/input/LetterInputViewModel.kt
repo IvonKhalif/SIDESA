@@ -19,6 +19,7 @@ import com.gov.sidesa.utils.response.GenericErrorResponse
 import com.haroldadmin.cnradapter.NetworkResponse
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
@@ -40,6 +41,8 @@ class LetterInputViewModel(
      */
     private val _widgetList = MutableLiveData<List<BaseLetterInputModel>>()
     val widgetList: LiveData<List<BaseLetterInputModel>> get() = _widgetList
+
+    val btnSubmitVisibilityState: LiveData<Boolean> get() = mLoadingState
 
     /**
      * Widget Event
@@ -64,7 +67,9 @@ class LetterInputViewModel(
         observerEvent()
     }
 
-    fun onLoad(layoutId: String) {
+    fun onLoad(layoutId: String) = viewModelScope.launch {
+        showLoadingWidget()
+        delay(2000)
         _widgetList.value = listOf(
             HeaderWidgetUiModel(title = "Surat Izin Tempat Usaha (SITU)"),
             TextViewWidgetUiModel(name = "name", title = "Nama", value = "Yovi Eka Putra"),
@@ -111,6 +116,7 @@ class LetterInputViewModel(
                 selectedText = "Pondok Kacang Barat"
             )
         )
+        hideLoadingWidget()
     }
 
     private fun observerEvent() {
@@ -157,7 +163,7 @@ class LetterInputViewModel(
         if (uiModel.api.isNotBlank()) {
             getResources(uiModel = uiModel)
         } else {
-            _serverErrorState.value = GenericErrorResponse.customError(
+            mServerErrorState.value = GenericErrorResponse.customError(
                 status = "no route not found"
             )
         }
@@ -202,7 +208,7 @@ class LetterInputViewModel(
         Log.d("letter_input", components.joinToString("\n"))
     }
 
-    fun onMenuSelected(uiModel: DropDownWidgetUiModel, selected: Resource) {
+    fun onMenuSelected(uiModel: DropDownWidgetUiModel, selected: Resource) = viewModelScope.launch {
         val model = uiModel.copy(value = selected.id, selectedText = selected.name)
         updateWidget(uiModel = model)
     }
