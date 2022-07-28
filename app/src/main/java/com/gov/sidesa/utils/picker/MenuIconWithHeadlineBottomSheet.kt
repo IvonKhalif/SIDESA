@@ -16,7 +16,7 @@ open class MenuIconWithHeadlineBottomSheet<T> : BottomSheetDialogFragment() {
     private var _binding: BottomSheetMenuIconWithHeadlineBinding? = null
     protected val binding get() = _binding!!
 
-    var adapter: MenuIconWithHeadlineAdapter<T>? = null
+    protected var adapter: MenuIconWithHeadlineAdapter<T>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,9 +61,11 @@ open class MenuIconWithHeadlineBottomSheet<T> : BottomSheetDialogFragment() {
         const val TITLE = "title"
 
         fun <T> newInstance(
-            title: String
+            title: String,
+            adapter: MenuIconWithHeadlineAdapter<T>
         ): MenuIconWithHeadlineBottomSheet<T> {
             val dialog = MenuIconWithHeadlineBottomSheet<T>()
+            dialog.adapter = adapter
             dialog.arguments = Bundle().apply {
                 putString(TITLE, title)
             }

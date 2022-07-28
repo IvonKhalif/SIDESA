@@ -11,6 +11,7 @@ class MenuIconWithHeadlineAdapter<T>(
     private val setIconLeft: (T) -> Int,
     private val setHeadline: (T) -> String,
     private val setIconRight: (T) -> Int? = { null },
+    private val customUi: ItemIconWithHeadlineArrowBinding.() -> Unit = {},
     private val onClick: (T) -> Unit,
     areItemsTheSame: (oldItem: T, newItem: T) -> Boolean,
     areContentTheSame: (oldItem: T, newItem: T) -> Boolean
@@ -27,6 +28,7 @@ class MenuIconWithHeadlineAdapter<T>(
             setHeadline = setHeadline,
             setIconLeft = setIconLeft,
             setIconRight = setIconRight,
+            customUi = customUi,
             onClick = onClick
         )
     }
@@ -40,6 +42,7 @@ class MenuIconWithHeadlineAdapter<T>(
         private val setIconLeft: (T) -> Int,
         private val setHeadline: (T) -> String,
         private val setIconRight: (T) -> Int?,
+        private val customUi: ItemIconWithHeadlineArrowBinding.() -> Unit,
         private val onClick: (T) -> Unit
     ) : RecyclerView.ViewHolder(view.root) {
 
@@ -48,7 +51,7 @@ class MenuIconWithHeadlineAdapter<T>(
             view.ivArrow.setImageResource(arrow)
             view.ivIcon.setImageResource(setIconLeft.invoke(data))
             view.tvHeadline.text = setHeadline.invoke(data)
-
+            customUi.invoke(view)
             view.root.setOnClickListener {
                 onClick.invoke(data)
             }
@@ -61,6 +64,7 @@ class MenuIconWithHeadlineAdapter<T>(
                 setIconLeft: (T) -> Int,
                 setHeadline: (T) -> String,
                 setIconRight: (T) -> Int?,
+                customUi: ItemIconWithHeadlineArrowBinding.() -> Unit,
                 onClick: (T) -> Unit
             ): ViewHolder<T> {
                 val inflater = LayoutInflater.from(parent.context)
@@ -70,6 +74,7 @@ class MenuIconWithHeadlineAdapter<T>(
                     setHeadline = setHeadline,
                     setIconLeft = setIconLeft,
                     setIconRight = setIconRight,
+                    customUi = customUi,
                     onClick = onClick
                 )
             }

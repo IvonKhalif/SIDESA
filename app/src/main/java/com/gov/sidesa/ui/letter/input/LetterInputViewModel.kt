@@ -6,6 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.gov.sidesa.base.BaseViewModel
 import com.gov.sidesa.domain.letter.input.models.InputType
+import com.gov.sidesa.domain.letter.input.models.Resource
+import com.gov.sidesa.domain.letter.input.usecases.GetResourcesUseCase
 import com.gov.sidesa.ui.letter.input.models.base.BaseLetterInputModel
 import com.gov.sidesa.ui.letter.input.models.divider.DividerWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.drop_down.DropDownWidgetUiModel
@@ -13,6 +15,8 @@ import com.gov.sidesa.ui.letter.input.models.edit_text.EditTextWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.header.HeaderWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.text_view.TextViewWidgetUiModel
 import com.gov.sidesa.ui.letter.input.view_holder_factory.LetterInputViewHolderListener
+import com.gov.sidesa.utils.response.GenericErrorResponse
+import com.haroldadmin.cnradapter.NetworkResponse
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -27,36 +31,41 @@ import kotlinx.coroutines.launch
 
 
 @FlowPreview
-class LetterInputViewModel : BaseViewModel(), LetterInputViewHolderListener {
-    private val _editText = MutableSharedFlow<EditTextWidgetUiModel>(
+class LetterInputViewModel(
+    private val getResourcesUseCase: GetResourcesUseCase
+) : BaseViewModel(), LetterInputViewHolderListener {
+
+    /**
+     * widget list should render to view
+     */
+    private val _widgetList = MutableLiveData<List<BaseLetterInputModel>>()
+    val widgetList: LiveData<List<BaseLetterInputModel>> get() = _widgetList
+
+    /**
+     * Widget Event
+     */
+    // edit text changed
+    private val _editTextChanged = MutableSharedFlow<EditTextWidgetUiModel>(
         replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST
     )
-    private val editText
-        get() = _editText.debounce(750)
+    // drop-down changed
+    private val _dropDownChanged = MutableSharedFlow<DropDownWidgetUiModel>(
+        replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST
+    )
 
-
-    private val _componentData = MutableLiveData<List<BaseLetterInputModel>>()
-    val componentData: LiveData<List<BaseLetterInputModel>> get() = _componentData
+    /**
+     * supporting view
+     * - select list from menu
+     */
+    private val _menuList = MutableLiveData<Pair<DropDownWidgetUiModel, List<Resource>>>()
+    val menuList: LiveData<Pair<DropDownWidgetUiModel, List<Resource>>> get() = _menuList
 
     init {
-        viewModelScope.launch {
-            editText.collectLatest {
-                val components = _componentData.value.orEmpty().toMutableList()
-
-                components.forEachIndexed { index, baseLetterInputModel ->
-                    if (baseLetterInputModel.name == it.name) {
-                        components[index] = it
-                        return@forEachIndexed
-                    }
-                }
-
-                _componentData.value = components
-            }
-        }
+        observerEvent()
     }
 
-    fun onLoad() {
-        _componentData.value = listOf(
+    fun onLoad(layoutId: String) {
+        _widgetList.value = listOf(
             HeaderWidgetUiModel(title = "Surat Izin Tempat Usaha (SITU)"),
             TextViewWidgetUiModel(name = "name", title = "Nama", value = "Yovi Eka Putra"),
             TextViewWidgetUiModel(
@@ -82,40 +91,119 @@ class LetterInputViewModel : BaseViewModel(), LetterInputViewHolderListener {
                 title = "Alamat Tempat Usaha"
             ),
             DropDownWidgetUiModel(
-                name = "districts",
+                name = "kecamatan",
                 inputType = InputType.Text,
                 title = "Kecamatan",
-                api = "/test/test",
+                api = "http://desa.digidana.id/api/v1/master/kecamatan?id_kota=3603",
                 apiType = "list",
                 apiParam = null,
-                value = "1",
+                value = "3603030",
                 selectedText = "Pondok Kacang"
             ),
             DropDownWidgetUiModel(
                 name = "country",
                 inputType = InputType.Text,
                 title = "Desa/Kelurahan",
-                api = "/test/test",
+                api = "http://desa.digidana.id/api/v1/master/kelurahan",
                 apiType = "list",
-                apiParam = "districts",
+                apiParam = "id_kecamatan",
                 value = "1",
                 selectedText = "Pondok Kacang Barat"
             )
         )
     }
 
+    private fun observerEvent() {
+        viewModelScope.launch {
+            _editTextChanged.debounce(750).collectLatest {
+                doEditTextChanged(uiModel = it)
+            }
+        }
+
+        viewModelScope.launch {
+            _dropDownChanged.collectLatest {
+                doDropDownChanged(uiModel = it)
+            }
+        }
+    }
+
+    /**
+     * Update widget field when changed
+     */
+    private fun updateWidget(uiModel: BaseLetterInputModel) {
+        val components = _widgetList.value.orEmpty().toMutableList()
+
+        components.forEachIndexed { index, baseLetterInputModel ->
+            if (baseLetterInputModel.name == uiModel.name) {
+                components[index] = uiModel
+                return@forEachIndexed
+            }
+        }
+
+        _widgetList.value = components
+    }
+
+    /**
+     * process edit text changed from view holder
+     */
+    private fun doEditTextChanged(uiModel: EditTextWidgetUiModel) {
+        updateWidget(uiModel = uiModel)
+    }
+
+    /**
+     * process drop-down selected changed from view holder
+     */
+    private fun doDropDownChanged(uiModel: DropDownWidgetUiModel) {
+        if (uiModel.api.isNotBlank()) {
+            getResources(uiModel = uiModel)
+        } else {
+            _serverErrorState.value = GenericErrorResponse.customError(
+                status = "no route not found"
+            )
+        }
+    }
+
+    private fun getResources(uiModel: DropDownWidgetUiModel) = viewModelScope.launch {
+        showLoadingWidget()
+
+        val components = _widgetList.value.orEmpty().toMutableList()
+
+        when (val response = getResourcesUseCase.invoke(uiModel.api, uiModel.getApiParam(components))) {
+            is NetworkResponse.Success -> {
+                _menuList.value = Pair(uiModel, response.body)
+            }
+            else -> onResponseNotSuccess(response)
+        }
+
+        hideLoadingWidget()
+    }
+
+    /**
+     * listening edit text changed from view-holder
+     */
     override fun onEditTextChanged(model: EditTextWidgetUiModel) {
-        _editText.tryEmit(model)
+        _editTextChanged.tryEmit(model)
     }
 
+    /**
+     * listening drop-down clicked from view-holder
+     */
     override fun onDropDownClick(model: DropDownWidgetUiModel) {
-
+        _dropDownChanged.tryEmit(model)
     }
 
+    /**
+     * Submit letter submission
+     */
     fun onSubmit() {
-        val components = _componentData.value.orEmpty().map {
+        val components = _widgetList.value.orEmpty().map {
             "${it.name} : ${it.value}"
         }
         Log.d("letter_input", components.joinToString("\n"))
+    }
+
+    fun onMenuSelected(uiModel: DropDownWidgetUiModel, selected: Resource) {
+        val model = uiModel.copy(value = selected.id, selectedText = selected.name)
+        updateWidget(uiModel = model)
     }
 }

@@ -6,10 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gov.sidesa.utils.PostLiveData
 import com.gov.sidesa.utils.response.GenericErrorResponse
+import com.haroldadmin.cnradapter.NetworkResponse
 import kotlinx.coroutines.launch
 import java.io.IOException
 
-open class BaseViewModel: ViewModel() {
+open class BaseViewModel : ViewModel() {
     @Deprecated("broken observe when save history")
     val genericErrorLiveData = PostLiveData<GenericErrorResponse?>()
 
@@ -39,6 +40,15 @@ open class BaseViewModel: ViewModel() {
         viewModelScope.launch {
             loadingWidgetLiveData.value = false
             _loadingState.value = false
+        }
+    }
+
+    protected fun <T : Any> onResponseNotSuccess(response: NetworkResponse<T, GenericErrorResponse>) {
+        when (response) {
+            is NetworkResponse.ServerError -> _serverErrorState.value =
+                response.body ?: GenericErrorResponse.generalError()
+            is NetworkResponse.NetworkError -> _networkErrorState.value = response.error
+            else -> return
         }
     }
 }

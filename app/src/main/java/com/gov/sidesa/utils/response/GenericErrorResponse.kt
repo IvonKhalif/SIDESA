@@ -21,6 +21,12 @@ data class GenericErrorResponse(
             status = "Error Status",
             message = "Error"
         )
+
+        fun customError(status: String)  = GenericErrorResponse(
+            errorCode = "101",
+            status = status,
+            message = "Internal Error"
+        )
     }
 
     fun isAlreadySignUp(): Boolean{

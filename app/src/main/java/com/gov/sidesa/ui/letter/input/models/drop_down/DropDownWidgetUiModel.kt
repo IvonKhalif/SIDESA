@@ -33,5 +33,28 @@ data class DropDownWidgetUiModel(
                 && title == dropDown.title
                 && api == dropDown.api
                 && apiParam == dropDown.apiParam
+                && value == dropDown.value // ensure update when selected item
+    }
+
+    fun getApiParam(components: List<BaseLetterInputModel>): Map<String, String> {
+        // return empty if api param is empty
+        if (apiParam.isNullOrBlank()) return emptyMap()
+        val params = hashMapOf<String, String>()
+
+        // split api param if has mare param -> example: id_kecamatan, id_desa etc
+        apiParam.split(";").forEach { p ->
+            // cari component name yang berisikan nama parameter
+            // contoh component name `kecamatan`, apiParam id_kecamatan.
+            // maka ini di anggap ditemukan dan tidak null
+            val param = components.firstOrNull {
+                p.trim().contains(it.name)
+            }
+
+            if (param != null) {
+                params[p] = param.value.orEmpty()
+            }
+        }
+
+        return params
     }
 }

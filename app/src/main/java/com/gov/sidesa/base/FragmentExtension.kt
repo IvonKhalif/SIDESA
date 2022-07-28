@@ -2,6 +2,7 @@ package com.gov.sidesa.base
 
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 fun showImmediately(
     fragmentManager: FragmentManager,
@@ -20,4 +21,8 @@ fun showImmediately(
 
         }
     }
+}
+
+fun FragmentManager.findSheetByTag(tag: String): BottomSheetDialogFragment? {
+    return (findFragmentByTag(tag) as? BottomSheetDialogFragment)
 }
