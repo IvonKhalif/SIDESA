@@ -11,5 +11,5 @@ import org.koin.dsl.module
 val ViewModelModule = module {
     viewModel { LoginViewModel(get()) }
     viewModel { PasswordViewModel(get(), get()) }
-    viewModel { LetterInputViewModel(get()) }
+    viewModel { LetterInputViewModel(get(), get()) }
 }

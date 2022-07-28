@@ -1,7 +1,7 @@
 package com.gov.sidesa.ui.letter.input.models.header
 
 import com.gov.sidesa.domain.letter.input.models.WidgetType
-import com.gov.sidesa.ui.letter.input.models.base.BaseLetterInputModel
+import com.gov.sidesa.ui.letter.input.models.base.BaseWidgetUiModel
 import com.gov.sidesa.ui.letter.input.view_holder_factory.LetterInputViewHolderFactory
 
 /**
@@ -11,13 +11,13 @@ import com.gov.sidesa.ui.letter.input.view_holder_factory.LetterInputViewHolderF
 
 data class HeaderWidgetUiModel(
     val title: String,
-) : BaseLetterInputModel(type = WidgetType.Header, name = "header", value = "header") {
+) : BaseWidgetUiModel(type = WidgetType.Header, name = "header", value = "header") {
 
     override fun type(typeFactory: LetterInputViewHolderFactory): Int {
         return typeFactory.type(this)
     }
 
-    override fun areItemsTheSame(newItem: BaseLetterInputModel): Boolean {
+    override fun areItemsTheSame(newItem: BaseWidgetUiModel): Boolean {
         val header = newItem as? HeaderWidgetUiModel ?: return false
 
         return super.areItemsTheSame(newItem = header)

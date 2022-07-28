@@ -2,7 +2,7 @@ package com.gov.sidesa.ui.letter.input.models.drop_down
 
 import com.gov.sidesa.domain.letter.input.models.InputType
 import com.gov.sidesa.domain.letter.input.models.WidgetType
-import com.gov.sidesa.ui.letter.input.models.base.BaseLetterInputModel
+import com.gov.sidesa.ui.letter.input.models.base.BaseWidgetUiModel
 import com.gov.sidesa.ui.letter.input.view_holder_factory.LetterInputViewHolderFactory
 
 /**
@@ -19,13 +19,13 @@ data class DropDownWidgetUiModel(
     val api: String,
     val apiType: String?,
     val apiParam: String?
-) : BaseLetterInputModel(type = WidgetType.DropDown, name = name, value = value) {
+) : BaseWidgetUiModel(type = WidgetType.DropDown, name = name, value = value) {
 
     override fun type(typeFactory: LetterInputViewHolderFactory): Int {
         return typeFactory.type(this)
     }
 
-    override fun areItemsTheSame(newItem: BaseLetterInputModel): Boolean {
+    override fun areItemsTheSame(newItem: BaseWidgetUiModel): Boolean {
         val dropDown = newItem as? DropDownWidgetUiModel ?: return false
 
         return super.areItemsTheSame(newItem = dropDown)
@@ -36,7 +36,7 @@ data class DropDownWidgetUiModel(
                 && value == dropDown.value // ensure update when selected item
     }
 
-    fun getApiParam(components: List<BaseLetterInputModel>): Map<String, String> {
+    fun getApiParam(components: List<BaseWidgetUiModel>): Map<String, String> {
         // return empty if api param is empty
         if (apiParam.isNullOrBlank()) return emptyMap()
         val params = hashMapOf<String, String>()

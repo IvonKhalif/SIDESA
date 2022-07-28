@@ -5,21 +5,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.gov.sidesa.base.BaseViewModel
-import com.gov.sidesa.domain.letter.input.models.InputType
+import com.gov.sidesa.domain.letter.input.models.LetterLayout
 import com.gov.sidesa.domain.letter.input.models.Resource
+import com.gov.sidesa.domain.letter.input.usecases.GetLetterLayoutUseCase
 import com.gov.sidesa.domain.letter.input.usecases.GetResourcesUseCase
-import com.gov.sidesa.ui.letter.input.models.base.BaseLetterInputModel
-import com.gov.sidesa.ui.letter.input.models.divider.DividerWidgetUiModel
+import com.gov.sidesa.ui.letter.input.models.base.BaseWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.drop_down.DropDownWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.edit_text.EditTextWidgetUiModel
-import com.gov.sidesa.ui.letter.input.models.header.HeaderWidgetUiModel
-import com.gov.sidesa.ui.letter.input.models.text_view.TextViewWidgetUiModel
+import com.gov.sidesa.ui.letter.input.models.mapper.asUiModel
 import com.gov.sidesa.ui.letter.input.view_holder_factory.LetterInputViewHolderListener
 import com.gov.sidesa.utils.response.GenericErrorResponse
 import com.haroldadmin.cnradapter.NetworkResponse
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.BufferOverflow
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
@@ -33,16 +31,24 @@ import kotlinx.coroutines.launch
 
 @FlowPreview
 class LetterInputViewModel(
+    private val getLayout: GetLetterLayoutUseCase,
     private val getResourcesUseCase: GetResourcesUseCase
 ) : BaseViewModel(), LetterInputViewHolderListener {
+    /**
+     * layout data
+     */
+    private val _layoutData = MutableLiveData<LetterLayout>()
 
     /**
      * widget list should render to view
      */
-    private val _widgetList = MutableLiveData<List<BaseLetterInputModel>>()
-    val widgetList: LiveData<List<BaseLetterInputModel>> get() = _widgetList
+    private val _widgetList = MutableLiveData<List<BaseWidgetUiModel>>()
+    val widgetList: LiveData<List<BaseWidgetUiModel>> get() = _widgetList
 
     val btnSubmitVisibilityState: LiveData<Boolean> get() = mLoadingState
+
+    private val _closeViewState = MutableLiveData<Unit>()
+    val closeViewState: LiveData<Unit> get() = _closeViewState
 
     /**
      * Widget Event
@@ -67,55 +73,20 @@ class LetterInputViewModel(
         observerEvent()
     }
 
-    fun onLoad(layoutId: String) = viewModelScope.launch {
+    fun onLoad(layoutId: String, letterName: String) = viewModelScope.launch {
         showLoadingWidget()
-        delay(2000)
-        _widgetList.value = listOf(
-            HeaderWidgetUiModel(title = "Surat Izin Tempat Usaha (SITU)"),
-            TextViewWidgetUiModel(name = "name", title = "Nama", value = "Yovi Eka Putra"),
-            TextViewWidgetUiModel(
-                name = "address",
-                title = "Alamat",
-                value = "Jalanin aja, RT 001 RW 001, Bojong Utara, Bojong, Kabupaten Tangerang, Banten."
-            ),
-            TextViewWidgetUiModel(name = "work", title = "Pekerjaan", value = "Pelajar/Mahasiswa"),
-            DividerWidgetUiModel(name = "divider"),
-            EditTextWidgetUiModel(
-                name = "type_of_business",
-                inputType = InputType.Text,
-                title = "Jenis Usaha"
-            ),
-            EditTextWidgetUiModel(
-                name = "company_name",
-                inputType = InputType.Email,
-                title = "Nama Usaha"
-            ),
-            EditTextWidgetUiModel(
-                name = "company_address",
-                inputType = InputType.Number,
-                title = "Alamat Tempat Usaha"
-            ),
-            DropDownWidgetUiModel(
-                name = "kecamatan",
-                inputType = InputType.Text,
-                title = "Kecamatan",
-                api = "http://desa.digidana.id/api/v1/master/kecamatan?id_kota=3603",
-                apiType = "list",
-                apiParam = null,
-                value = "3603030",
-                selectedText = "Pondok Kacang"
-            ),
-            DropDownWidgetUiModel(
-                name = "country",
-                inputType = InputType.Text,
-                title = "Desa/Kelurahan",
-                api = "http://desa.digidana.id/api/v1/master/kelurahan",
-                apiType = "list",
-                apiParam = "id_kecamatan",
-                value = "1",
-                selectedText = "Pondok Kacang Barat"
-            )
-        )
+
+        when(val response = getLayout.invoke(letterTypeId = layoutId, letterName = letterName)) {
+            is NetworkResponse.Success -> {
+                _layoutData.value = response.body
+                _widgetList.value = response.body.asUiModel()
+            }
+            else -> {
+                onResponseNotSuccess(response = response)
+                _closeViewState.value = Unit
+            }
+        }
+
         hideLoadingWidget()
     }
 
@@ -136,7 +107,7 @@ class LetterInputViewModel(
     /**
      * Update widget field when changed
      */
-    private fun updateWidget(uiModel: BaseLetterInputModel) {
+    private fun updateWidget(uiModel: BaseWidgetUiModel) {
         val components = _widgetList.value.orEmpty().toMutableList()
 
         components.forEachIndexed { index, baseLetterInputModel ->
@@ -206,6 +177,13 @@ class LetterInputViewModel(
             "${it.name} : ${it.value}"
         }
         Log.d("letter_input", components.joinToString("\n"))
+    }
+
+    /**
+     * close activity
+     */
+    fun onFinish() = viewModelScope.launch {
+        _closeViewState.value = Unit
     }
 
     fun onMenuSelected(uiModel: DropDownWidgetUiModel, selected: Resource) = viewModelScope.launch {

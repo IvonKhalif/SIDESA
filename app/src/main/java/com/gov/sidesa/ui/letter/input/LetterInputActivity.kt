@@ -55,10 +55,10 @@ class LetterInputActivity : BaseActivity() {
      */
     private fun initEvent() = with (binding){
 
-        viewModel.onLoad(layoutId = argsLayoutId.orEmpty())
+        viewModel.onLoad(layoutId = "4", letterName = "SUSI")
 
         customToolbar.toolbarDetailProfile.setNavigationOnClickListener {
-            finish()
+            viewModel.onFinish()
         }
 
         buttonSave.setOnClickListener {
@@ -94,6 +94,10 @@ class LetterInputActivity : BaseActivity() {
 
         btnSubmitVisibilityState.observe(this@LetterInputActivity) {
             binding.buttonSave.isVisible = it.not()
+        }
+
+        closeViewState.observe(this@LetterInputActivity) {
+            finish()
         }
     }
 

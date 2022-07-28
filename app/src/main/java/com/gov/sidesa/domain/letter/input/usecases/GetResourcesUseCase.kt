@@ -1,6 +1,6 @@
 package com.gov.sidesa.domain.letter.input.usecases
 
-import com.gov.sidesa.domain.letter.input.repository.LetterInputRepository
+import com.gov.sidesa.domain.letter.repository.LetterRepository
 
 /**
  * Created by yovi.putra on 27/07/22"
@@ -9,7 +9,7 @@ import com.gov.sidesa.domain.letter.input.repository.LetterInputRepository
 
 
 class GetResourcesUseCase(
-    private val repository: LetterInputRepository
+    private val repository: LetterRepository
 ) {
 
     suspend operator fun invoke(

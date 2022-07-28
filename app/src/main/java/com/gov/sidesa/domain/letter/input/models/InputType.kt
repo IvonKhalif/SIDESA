@@ -13,7 +13,7 @@ sealed class InputType(val type: String) {
     object Number : InputType(type = "number")
 }
 
-fun String.asInputType(): InputType = when (this) {
+fun String?.asInputType(): InputType = when (this) {
     InputType.Text.type -> InputType.Text
     InputType.PhoneNumber.type -> InputType.PhoneNumber
     InputType.Email.type -> InputType.Email
