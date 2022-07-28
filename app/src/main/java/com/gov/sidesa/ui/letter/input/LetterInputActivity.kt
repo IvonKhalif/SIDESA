@@ -3,6 +3,7 @@ package com.gov.sidesa.ui.letter.input
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseActivity
@@ -118,6 +119,9 @@ class LetterInputActivity : BaseActivity() {
             onClick = { item ->
                 viewModel.onMenuSelected(uiModel = uiModel, selected = item)
                 supportFragmentManager.findSheetByTag(tag = sheetTag)?.dismissAllowingStateLoss()
+            },
+            customUi = {
+                ivIcon.isVisible = false
             },
             areContentTheSame = {oldItem, newItem -> oldItem == newItem },
             areItemsTheSame = { oldItem, newItem -> oldItem.id == newItem.id }
