@@ -169,4 +169,6 @@
     <!-- LETTER SUBMISSION-->
     <string name="letter_input_submission">Pengajuan Surat</string>
     <string name="letter_input_submit">Ajukan</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
