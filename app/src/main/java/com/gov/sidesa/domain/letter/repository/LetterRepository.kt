@@ -2,6 +2,7 @@ package com.gov.sidesa.domain.letter.repository
 
 import com.gov.sidesa.domain.letter.input.models.LetterLayout
 import com.gov.sidesa.domain.letter.input.models.Resource
+import com.gov.sidesa.domain.letter.template.models.Template
 import com.gov.sidesa.utils.response.GenericErrorResponse
 import com.haroldadmin.cnradapter.NetworkResponse
 
@@ -20,4 +21,6 @@ interface LetterRepository {
     suspend fun getLayout(
         letterTypeId: String
     ): NetworkResponse<LetterLayout, GenericErrorResponse>
+
+    suspend fun getTemplate(): NetworkResponse<List<Template>, GenericErrorResponse>
 }

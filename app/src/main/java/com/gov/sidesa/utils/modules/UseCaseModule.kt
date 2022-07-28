@@ -2,6 +2,7 @@ package com.gov.sidesa.utils.modules
 
 import com.gov.sidesa.domain.letter.input.usecases.GetLetterLayoutUseCase
 import com.gov.sidesa.domain.letter.input.usecases.GetResourcesUseCase
+import com.gov.sidesa.domain.letter.template.usecases.GetTemplateUseCase
 import com.gov.sidesa.domain.user.CreatePasswordUseCase
 import com.gov.sidesa.domain.user.LoginUseCase
 import com.gov.sidesa.domain.user.ValidateNIKUseCase
@@ -13,4 +14,5 @@ val UseCaseModule = module {
     single { CreatePasswordUseCase(get()) }
     single { GetResourcesUseCase(get()) }
     single { GetLetterLayoutUseCase(get()) }
+    single { GetTemplateUseCase(get()) }
 }

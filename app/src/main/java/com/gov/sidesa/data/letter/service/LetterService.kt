@@ -1,5 +1,6 @@
 package com.gov.sidesa.data.letter.service
 
+import com.gov.sidesa.data.letter.models.LetterTemplateResponse
 import com.gov.sidesa.data.letter.models.ResourceResponse
 import com.gov.sidesa.data.letter.models.WidgetResponse
 import com.gov.sidesa.utils.constants.ContentTypeConstant
@@ -24,4 +25,9 @@ interface LetterService {
     suspend fun getLetterLayout(
         @Query("id_type_surat") letterTypeId: String
     ): NetworkResponse<RetrofitResponse<List<WidgetResponse>>, GenericErrorResponse>
+
+    @GET("master/surat")
+    @Headers(ContentTypeConstant.CONTENT_TYPE_JSON)
+    suspend fun getTemplates()
+            : NetworkResponse<RetrofitResponse<List<LetterTemplateResponse>>, GenericErrorResponse>
 }
