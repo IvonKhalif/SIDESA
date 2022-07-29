@@ -43,6 +43,7 @@
     <style name="Theme.ContainerTracker.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 
     <style name="Theme.ContainerTracker.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

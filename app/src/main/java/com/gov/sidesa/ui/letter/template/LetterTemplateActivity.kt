@@ -1,5 +1,7 @@
 package com.gov.sidesa.ui.letter.template
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -92,11 +94,22 @@ class LetterTemplateActivity : BaseActivity() {
     }
 
     private fun onItemSelected(template: LetterTemplateUiModel) {
-        val intent = LetterInputActivity.newIntent(
-            context = this,
-            layoutId = template.id.toString(),
-            layoutName = template.name
-        )
-        startActivity(intent)
+        try {
+            val intent = LetterInputActivity.newIntent(
+                context = this,
+                layoutId = template.id.toString(),
+                layoutName = template.name
+            )
+            startActivity(intent)
+        } catch (e: Throwable) {
+            showErrorMessage(e.message.orEmpty())
+        }
+    }
+
+    companion object {
+
+        fun newIntent(context: Context): Intent {
+            return Intent(context, LetterTemplateActivity::class.java)
+        }
     }
 }
