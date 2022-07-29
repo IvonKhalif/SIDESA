@@ -166,6 +166,29 @@
         <item>Khonghucu</item>
     </string-array>
 
+    <!--MARRIAGE STATUS-->
+    <string-array name="marriage_status">
+        <item>Belum Kawin</item>
+        <item>Kawin</item>
+        <item>Cerai Hidup</item>
+        <item>Cerai Mati</item>
+    </string-array>
+
+    <!--JOB-->
+    <string-array name="job">
+        <item>Karyawan Swasta</item>
+        <item>Pegawai Negeri Sipil</item>
+        <item>Pilot</item>
+        <item>Dokter</item>
+        <item>Lain-Lain</item>
+    </string-array>
+
+    <!--NATIONALITY-->
+    <string-array name="nationality">
+        <item>WNA</item>
+        <item>WNI</item>
+    </string-array>
+
     <!-- LETTER SUBMISSION-->
     <string name="letter_choose_template">Pilih Jenis Surat</string>
     <string name="letter_input_submission">Pengajuan Surat</string>
