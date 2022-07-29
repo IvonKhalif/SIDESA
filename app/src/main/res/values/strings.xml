@@ -189,6 +189,25 @@
         <item>WNI</item>
     </string-array>
 
+    <!--Province-->
+    <string-array name="province">
+        <item>Banten</item>
+    </string-array>
+
+    <!--Status-->
+    <string-array name="status_applicant">
+        <item>Suami</item>
+        <item>Istri</item>
+    </string-array>
+
+    <!--City-->
+    <string-array name="city">
+        <item>Kab. Tangerang</item>
+        <item>Kota Tangerang</item>
+        <item>Serang</item>
+        <item>Cilegon</item>
+    </string-array>
+
     <!-- LETTER SUBMISSION-->
     <string name="letter_choose_template">Pilih Jenis Surat</string>
     <string name="letter_input_submission">Pengajuan Surat</string>

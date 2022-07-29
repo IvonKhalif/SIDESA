@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/green40_E8F5E9"
+    tools:context=".ui.registration.kk.UploadKkFragment">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/label_header_kk"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_horizontal"
+        android:text="Data Diri Berdasarkan KK"
+        android:textColor="@color/black_302C2C"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Pastikan data yang Kamu masukkan sesuai dengan yang ada di KTP, karena data ini yang digunakan pada surat pengajuan "
+        android:textColor="@color/black_302C2C"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label_header_kk" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_pick_kk"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+ Upload KK"
+        android:textAllCaps="false"
+        android:textColor="@color/primary_4FBD1C"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_description" />
+
+    <LinearLayout
+        android:id="@+id/container_kk"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_pick_kk">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image_ktp"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:layout_margin="20dp"
+            android:adjustViewBounds="true"
+            android:background="@color/white_929292"
+            android:maxWidth="380dp"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/custom_address" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_edit_kk"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ubah Foto"
+            android:textAllCaps="false"
+            android:textColor="@color/white_929292"
+            app:icon="@drawable/ic_edit"
+            app:iconGravity="start"
+            app:iconTint="@color/white_929292"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_kk" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

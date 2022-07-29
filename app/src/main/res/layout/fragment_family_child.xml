@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.registration.keluarga.FamilyChildFragment">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/label_header_ktp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_horizontal"
+        android:text="Data Keluarga"
+        android:textColor="@color/black_302C2C"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Pastikan data yang Kamu masukkan sesuai dengan yang ada, karena data ini yang digunakan pada surat pengajuan "
+        android:textColor="@color/black_302C2C"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label_header_ktp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/label_child"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Anak 1"
+        android:textColor="@color/black_302C2C"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_description" />
+
+    <include
+        android:id="@+id/custom_family_child"
+        layout="@layout/custom_family"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label_child" />
+
+    <include
+        android:id="@+id/custom_family_address"
+        layout="@layout/custom_address"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/custom_family_child" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_add_child_form"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+ Tambah Form Anak"
+        android:textAllCaps="false"
+        android:textColor="@color/green_2B7608"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/custom_family_address" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
