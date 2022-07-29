@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.gov.sidesa.R
 import com.gov.sidesa.databinding.ActivityRegistrationKtpactivityBinding
 import com.gov.sidesa.ui.registration.RegistrationStackState
+import com.gov.sidesa.ui.registration.keluarga.*
 import com.gov.sidesa.ui.registration.kk.KkAddressFragment
 import com.gov.sidesa.ui.registration.kk.KkBiodataFragment
 import com.gov.sidesa.ui.registration.kk.KkDetailFragment
@@ -74,6 +75,36 @@ class RegistrationKTPActivity : AppCompatActivity() {
                         supportFragmentManager.findFragmentByTag(RegistrationStackState.KkUpload.toString())
                     fragment?.let { it1 -> showFragment(it1, RegistrationStackState.KkUpload) }
                 }
+                is RegistrationStackState.FamilyFather -> {
+                    val fragment =
+                        supportFragmentManager.findFragmentByTag(RegistrationStackState.KkReview.toString())
+                    fragment?.let { it1 -> showFragment(it1, RegistrationStackState.KkReview) }
+                }
+                is RegistrationStackState.FamilyMother -> {
+                    val fragment =
+                        supportFragmentManager.findFragmentByTag(RegistrationStackState.FamilyFather.toString())
+                    fragment?.let { it1 -> showFragment(it1, RegistrationStackState.FamilyFather) }
+                }
+                is RegistrationStackState.FamilyApplicant -> {
+                    val fragment =
+                        supportFragmentManager.findFragmentByTag(RegistrationStackState.FamilyMother.toString())
+                    fragment?.let { it1 -> showFragment(it1, RegistrationStackState.FamilyMother) }
+                }
+                is RegistrationStackState.FamilyChild -> {
+                    val fragment =
+                        supportFragmentManager.findFragmentByTag(RegistrationStackState.FamilyApplicant.toString())
+                    fragment?.let { it1 ->
+                        showFragment(
+                            it1,
+                            RegistrationStackState.FamilyApplicant
+                        )
+                    }
+                }
+                is RegistrationStackState.FamilyReview -> {
+                    val fragment =
+                        supportFragmentManager.findFragmentByTag(RegistrationStackState.FamilyChild.toString())
+                    fragment?.let { it1 -> showFragment(it1, RegistrationStackState.FamilyChild) }
+                }
             }
         }
 
@@ -127,6 +158,44 @@ class RegistrationKTPActivity : AppCompatActivity() {
                     fragment?.let { it1 -> showFragment(it1, RegistrationStackState.KkReview) }
                         ?: showFragment(KkDetailFragment(), RegistrationStackState.KkReview)
                 }
+                is RegistrationStackState.KkReview -> {
+                    val fragment =
+                        supportFragmentManager.findFragmentByTag(RegistrationStackState.FamilyFather.toString())
+                    fragment?.let { it1 -> showFragment(it1, RegistrationStackState.FamilyFather) }
+                        ?: showFragment(FamilyFatherFragment(), RegistrationStackState.FamilyFather)
+                }
+                is RegistrationStackState.FamilyFather -> {
+                    val fragment =
+                        supportFragmentManager.findFragmentByTag(RegistrationStackState.FamilyMother.toString())
+                    fragment?.let { it1 -> showFragment(it1, RegistrationStackState.FamilyMother) }
+                        ?: showFragment(FamilyMotherFragment(), RegistrationStackState.FamilyMother)
+                }
+                is RegistrationStackState.FamilyMother -> {
+                    val fragment =
+                        supportFragmentManager.findFragmentByTag(RegistrationStackState.FamilyApplicant.toString())
+                    fragment?.let { it1 ->
+                        showFragment(
+                            it1,
+                            RegistrationStackState.FamilyApplicant
+                        )
+                    }
+                        ?: showFragment(
+                            FamilyApplicantFragment(),
+                            RegistrationStackState.FamilyApplicant
+                        )
+                }
+                is RegistrationStackState.FamilyApplicant -> {
+                    val fragment =
+                        supportFragmentManager.findFragmentByTag(RegistrationStackState.FamilyChild.toString())
+                    fragment?.let { it1 -> showFragment(it1, RegistrationStackState.FamilyChild) }
+                        ?: showFragment(FamilyChildFragment(), RegistrationStackState.FamilyChild)
+                }
+                is RegistrationStackState.FamilyChild -> {
+                    val fragment =
+                        supportFragmentManager.findFragmentByTag(RegistrationStackState.FamilyReview.toString())
+                    fragment?.let { it1 -> showFragment(it1, RegistrationStackState.FamilyReview) }
+                        ?: showFragment(FamilyReviewFragment(), RegistrationStackState.FamilyReview)
+                }
             }
         }
     }
@@ -155,19 +224,40 @@ class RegistrationKTPActivity : AppCompatActivity() {
                     binding.buttonPreviousKtp.visibility = VISIBLE
                 }
                 is RegistrationStackState.KkBiodata -> {
-                    binding.progressBar.progress = 60
+                    binding.progressBar.progress = 55
                     binding.buttonPreviousKtp.visibility = VISIBLE
                 }
                 is RegistrationStackState.KkAddress -> {
-                    binding.progressBar.progress = 70
+                    binding.progressBar.progress = 60
                     binding.buttonPreviousKtp.visibility = VISIBLE
                 }
                 is RegistrationStackState.KkUpload -> {
-                    binding.progressBar.progress = 80
+                    binding.progressBar.progress = 65
                     binding.buttonPreviousKtp.visibility = VISIBLE
                 }
                 is RegistrationStackState.KkReview -> {
-                    binding.progressBar.progress = 90
+                    binding.progressBar.progress = 70
+                    binding.buttonPreviousKtp.visibility = VISIBLE
+                }
+                is RegistrationStackState.FamilyFather -> {
+                    binding.progressBar.progress = 75
+                    binding.buttonPreviousKtp.visibility = VISIBLE
+                }
+                is RegistrationStackState.FamilyMother -> {
+                    binding.progressBar.progress = 80
+                    binding.buttonPreviousKtp.visibility = VISIBLE
+                }
+                is RegistrationStackState.FamilyApplicant -> {
+                    binding.progressBar.progress = 85
+                    binding.buttonPreviousKtp.visibility = VISIBLE
+                }
+                is RegistrationStackState.FamilyChild -> {
+                    binding.progressBar.progress = 95
+                    binding.buttonPreviousKtp.visibility = VISIBLE
+                    binding.buttonNextKtp.text = "Simpan Data"
+                }
+                is RegistrationStackState.FamilyReview -> {
+                    binding.progressBar.progress = 100
                     binding.buttonPreviousKtp.visibility = VISIBLE
                 }
             }

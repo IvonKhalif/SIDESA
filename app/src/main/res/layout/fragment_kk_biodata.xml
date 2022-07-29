@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:gravity="center_horizontal"
-        android:text="Data Diri Berdasarkan KTP"
+        android:text="Data Keluarga Berdasarkan Kartu Keluarga"
         android:textColor="@color/black_302C2C"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

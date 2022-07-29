@@ -11,4 +11,10 @@ sealed class RegistrationStackState {
     object KkAddress : RegistrationStackState()
     object KkUpload : RegistrationStackState()
     object KkReview : RegistrationStackState()
+
+    object FamilyFather : RegistrationStackState()
+    object FamilyMother : RegistrationStackState()
+    object FamilyApplicant : RegistrationStackState()
+    object FamilyChild : RegistrationStackState()
+    object FamilyReview : RegistrationStackState()
 }

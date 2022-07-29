@@ -194,6 +194,12 @@
         <item>Banten</item>
     </string-array>
 
+    <!--Status-->
+    <string-array name="status_applicant">
+        <item>Suami</item>
+        <item>Istri</item>
+    </string-array>
+
     <!--City-->
     <string-array name="city">
         <item>Kab. Tangerang</item>
