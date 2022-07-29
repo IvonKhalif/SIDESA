@@ -37,7 +37,11 @@ class LetterInputActivity : BaseActivity() {
     }
 
     private val argsLayoutId by lazy {
-        intent.getStringExtra(ARGS_LAYOUT_ID)
+        intent.getStringExtra(ARGS_LAYOUT_ID).orEmpty()
+    }
+
+    private val argsLayoutName by lazy {
+        intent.getStringExtra(ARGS_LAYOUT_NAME).orEmpty()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,7 +59,7 @@ class LetterInputActivity : BaseActivity() {
      */
     private fun initEvent() = with (binding){
 
-        viewModel.onLoad(layoutId = "4", letterName = "SUSI")
+        viewModel.onLoad(layoutId = argsLayoutId, letterName = argsLayoutName)
 
         customToolbar.toolbarDetailProfile.setNavigationOnClickListener {
             viewModel.onFinish()
@@ -151,13 +155,16 @@ class LetterInputActivity : BaseActivity() {
 
     companion object {
         private const val ARGS_LAYOUT_ID = "layout_id"
+        private const val ARGS_LAYOUT_NAME = "layout_name"
 
         fun newIntent(
             context: Context,
-            layoutId: String
+            layoutId: String,
+            layoutName: String
         ): Intent {
             val intent = Intent(context, LetterInputActivity::class.java)
             intent.putExtra(ARGS_LAYOUT_ID, layoutId)
+            intent.putExtra(ARGS_LAYOUT_NAME, layoutName)
             return intent
         }
     }

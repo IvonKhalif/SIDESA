@@ -26,7 +26,7 @@
         android:gravity="start|center"
         android:maxLines="1"
         android:textAppearance="@style/Medium"
-        android:textColor="@color/black"
+        android:textColor="@color/fontColorPrimary"
         app:layout_constraintBottom_toBottomOf="@+id/iv_icon"
         app:layout_constraintEnd_toStartOf="@+id/iv_arrow"
         app:layout_constraintStart_toEndOf="@+id/iv_icon"

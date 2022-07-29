@@ -20,15 +20,11 @@ class GetLetterLayoutUseCase(
         letterTypeId: String,
         letterName: String
     ): NetworkResponse<LetterLayout, GenericErrorResponse> {
-        return when(val result = repository.getLayout(letterTypeId = letterTypeId)) {
+        return when (val result = repository.getLayout(letterTypeId = letterTypeId)) {
             is NetworkResponse.Success -> {
-                val widget = result.body.widgets.toMutableList()
-                val header = Widget(
-                    type = WidgetType.Header.type,
-                    title = letterName
-                )
-                widget.add(0, header)
-                NetworkResponse.Success(result.body.copy(widgets = widget))
+                val layout = assignWidgetFromLocal(letterName, result.body)
+
+                NetworkResponse.Success(layout)
             }
             else -> result
         }

@@ -190,6 +190,7 @@
     </string-array>
 
     <!-- LETTER SUBMISSION-->
+    <string name="letter_choose_template">Pilih Jenis Surat</string>
     <string name="letter_input_submission">Pengajuan Surat</string>
     <string name="letter_input_submit">Ajukan</string>
     <!-- TODO: Remove or change this placeholder text -->

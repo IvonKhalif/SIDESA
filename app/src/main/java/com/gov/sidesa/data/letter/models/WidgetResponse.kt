@@ -26,7 +26,7 @@ data class WidgetResponse(
     val inputType: String? = null,
     @SerializedName("title")
     @Expose
-    val title: String = "",
+    val title: String? = "",
     @SerializedName("api")
     @Expose
     val api: String? = null,
