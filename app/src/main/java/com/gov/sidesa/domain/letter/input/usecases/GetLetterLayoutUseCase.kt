@@ -30,21 +30,39 @@ class GetLetterLayoutUseCase(
         }
     }
 
+    /**
+     * Modify widget from be response
+     */
     private fun assignWidgetFromLocal(
         letterName: String,
         layout: LetterLayout
     ): LetterLayout {
-        val widget = layout.widgets.toMutableList()
+        val widgets = layout.widgets.toMutableList()
 
         // add header widget
         val header = createHeader(letterName = letterName)
-        widget.add(0, header)
+        widgets.add(0, header)
 
-        return layout.copy(widgets = widget)
+        // assign text view value
+        widgets.forEachIndexed { index, widget ->
+            if (widget.type == WidgetType.TextView.type) {
+                widgets[index] = assignTextView(widget = widget)
+            }
+        }
+
+        return layout.copy(widgets = widgets)
     }
 
     private fun createHeader(letterName: String) = Widget(
         type = WidgetType.Header.type,
         title = letterName
     )
+
+    // TODO set data from local storage
+    private fun assignTextView(widget: Widget) = when (widget.name) {
+        "nama" -> widget.copy(value = "Ivon Khalif")
+        "alamat" -> widget.copy(value = "Jalanin aja, RT 001 RW 001, Bojong Utara, Bojong, Kabupaten Tangerang, Banten.")
+        "pekerjaan" -> widget.copy(value = "Swasta")
+        else -> widget
+    }
 }
