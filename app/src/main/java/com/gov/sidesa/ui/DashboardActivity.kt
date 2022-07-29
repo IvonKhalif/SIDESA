@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseActivity
 import com.gov.sidesa.base.showImmediately
 import com.gov.sidesa.data.letterlist.models.LettersModel
@@ -18,6 +19,8 @@ import com.gov.sidesa.ui.letter.template.LetterTemplateActivity
 import com.gov.sidesa.ui.profile.edit.EditProfileKTPActivity
 import com.gov.sidesa.ui.widget.notification_dialog.NotificationBottomSheet
 import com.gov.sidesa.utils.constants.LetterConstant
+import com.gov.sidesa.utils.constants.LetterConstant.EXTRA_SUBMISSION_HAS_APPROVED
+import com.gov.sidesa.utils.constants.LetterConstant.EXTRA_SUBMISSION_HAS_REJECTED
 import com.gov.sidesa.utils.enums.CategoryLetterEnum
 import kotlinx.coroutines.FlowPreview
 
@@ -40,14 +43,16 @@ class DashboardActivity : BaseActivity() {
         )
     }
     private val needApprovalAdapter by lazy {
-        LetterNeedApprovalAdapter(listOf(
-            LettersModel(
-                "1",
-                "Kamis, 21 Juli 2022",
-                "Surat Keterangan Kerja Dan Untuk Calon Tenaga Kerja Indonesia",
-                "ID: 21/07/2022/SKKDUCTKI"
-            )
-        ), ::onItemNeedApprovalClick)
+        LetterNeedApprovalAdapter(
+            listOf(
+                LettersModel(
+                    "1",
+                    "Kamis, 21 Juli 2022",
+                    "Surat Keterangan Kerja Dan Untuk Calon Tenaga Kerja Indonesia",
+                    "ID: 21/07/2022/SKKDUCTKI"
+                )
+            ), ::onItemNeedApprovalClick
+        )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -124,7 +129,9 @@ class DashboardActivity : BaseActivity() {
     }
 
     private fun onItemNeedApprovalClick(lettersModel: LettersModel) {
-        startActivity(Intent(this, DetailApprovalLetterActivity::class.java))
+        val intent = Intent(this, DetailApprovalLetterActivity::class.java)
+        resultLauncher.launch(intent)
+//        startActivity(Intent(this, DetailApprovalLetterActivity::class.java))
     }
 
     private fun onItemSubmissionClick(lettersModel: LettersModel) {
@@ -141,6 +148,27 @@ class DashboardActivity : BaseActivity() {
             NotificationBottomSheet.newInstance(
                 title = title,
                 description = description
+            )
+        }
+    }
+
+    override fun onResultData(result: Intent?) {
+        super.onResultData(result)
+        if (result?.getBooleanExtra(EXTRA_SUBMISSION_HAS_APPROVED, false) == true) {
+            showNotification(
+                getString(R.string.letter_detail_success_approve_submission_headline),
+                getString(
+                    R.string.letter_detail_success_approve_submission_subheadline,
+                    "Surat Keterangan Kerja Dan Untuk Calon Tenaga Kerja Indonesia"
+                )
+            )
+        } else if (result?.getBooleanExtra(EXTRA_SUBMISSION_HAS_REJECTED, false) == true) {
+            showNotification(
+                getString(R.string.letter_detail_success_reject_submission_headline),
+                getString(
+                    R.string.letter_detail_success_reject_submission_subheadline,
+                    "Surat Keterangan Kerja Dan Untuk Calon Tenaga Kerja Indonesia"
+                )
             )
         }
     }

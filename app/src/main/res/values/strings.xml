@@ -134,6 +134,7 @@
     <string name="letter_detail_reason_approval_caption">Alasan</string>
     <string name="letter_detail_see_history_approval_caption">Lihat riwayat persetujuan</string>
     <string name="letter_detail_see_detail_approval_caption">Lihat Detail Pengajuan</string>
+    <string name="letter_detail_detail_Submission_title">Detail Pengajuan</string>
     <string name="letter_detail_approve_submission_headline">Mensetujui Surat Pengajuan</string>
     <string name="letter_detail_approve_submission_subheadline">Apakah Kamu yakin untuk mensetujui surat pengajuan ini?</string>
     <string name="letter_detail_approve_submission_title">Setujui Pengajuan</string>
@@ -141,6 +142,14 @@
     <string name="letter_detail_button_cancel_title">Tidak</string>
     <string name="letter_detail_reject_submission_headline">Tolak Pengajuan</string>
     <string name="letter_detail_reject_submission_subheadline">Untuk menolak pengajuan, Kamu harus menulis alasan kenapa ingin menolak surat pengajuan ini</string>
+    <string name="letter_detail_success_reject_submission_headline">Surat Pengajuan Berhasil Ditolak</string>
+    <string name="letter_detail_success_reject_submission_subheadline"><![CDATA[
+        Kamu telah menolak surat pengajuan <font color="#484848"><b>%s</b></font> yang diajukan Oleh <font color="#484848"><b>Saya</b></font>.
+        ]]></string>
+    <string name="letter_detail_success_approve_submission_headline">Surat Pengajuan Berhasil Disetujui</string>
+    <string name="letter_detail_success_approve_submission_subheadline"><![CDATA[
+        Kamu telah mensetujui surat pengajuan <font color="#484848"><b>%s</b></font> yang diajukan Oleh <font color="#484848"><b>Saya</b></font>.
+        ]]></string>
 
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

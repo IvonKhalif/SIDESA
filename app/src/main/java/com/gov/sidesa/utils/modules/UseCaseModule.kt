@@ -1,5 +1,6 @@
 package com.gov.sidesa.utils.modules
 
+import com.gov.sidesa.domain.letter.detail.GetLetterDetailUseCase
 import com.gov.sidesa.domain.letter.input.usecases.GetLetterLayoutUseCase
 import com.gov.sidesa.domain.letter.input.usecases.GetResourcesUseCase
 import com.gov.sidesa.domain.letter.input.usecases.SaveLetterUseCase
@@ -17,4 +18,5 @@ val UseCaseModule = module {
     single { GetLetterLayoutUseCase(get()) }
     single { GetTemplateUseCase(get()) }
     single { SaveLetterUseCase(get()) }
+    single { GetLetterDetailUseCase(get()) }
 }

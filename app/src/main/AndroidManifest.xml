@@ -55,7 +55,8 @@
         </activity>
         <activity
             android:name=".ui.approval.submissiondetail.DetailApprovalSubmissionActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.ContainerTracker.NoActionBar"/>
         <activity
             android:name=".ui.approval.DetailApprovalLetterActivity"
             android:exported="true"
@@ -117,10 +118,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.ContainerTracker.NoActionBar">
 
-        </activity> <!-- <activity -->
-        <!-- android:name=".ui.profile.edit.EditProfileActivity" -->
-        <!-- android:exported="true" -->
-        <!-- android:theme="@style/Theme.ContainerTracker.NoActionBar" /> -->
+        </activity>
     </application>
 
 </manifest>

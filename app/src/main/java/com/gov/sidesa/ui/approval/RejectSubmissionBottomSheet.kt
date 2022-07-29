@@ -4,12 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseBottomSheet
 import com.gov.sidesa.databinding.BottomSheetRejectSubmissionBinding
 
-class RejectSubmissionBottomSheet : BaseBottomSheet() {
+class RejectSubmissionBottomSheet(
+    private val onReject: () -> Unit
+) : BaseBottomSheet() {
     private lateinit var binding: BottomSheetRejectSubmissionBinding
 
     override fun onCreateView(
@@ -35,7 +39,14 @@ class RejectSubmissionBottomSheet : BaseBottomSheet() {
 
     private fun mainView() {
         with(binding) {
+            inputReason.value().doOnTextChanged { text, start, before, count ->
+                buttonSaveReason.isEnabled = !text.isNullOrBlank()
+            }
             buttonClose.setOnClickListener {
+                dismissAllowingStateLoss()
+            }
+            buttonSaveReason.setOnClickListener {
+                onReject()
                 dismissAllowingStateLoss()
             }
         }
