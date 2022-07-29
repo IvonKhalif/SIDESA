@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white_FFFFFF"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_who_submitted_caption"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_container"
+        android:layout_marginTop="@dimen/margin_container"
+        android:fontFamily="@font/inter_medium"
+        android:lineSpacingExtra="2sp"
+        android:text="@string/dashboard_need_approval_caption"
+        android:textColor="@color/black_302C2C"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.34" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_name_caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_container"
+        android:fontFamily="@font/inter_bold"
+        android:lineSpacingExtra="2sp"
+        android:text="@string/letter_detail_id_letter_caption"
+        android:textColor="@color/white_929292"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/text_name" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_container"
+        android:layout_marginEnd="@dimen/margin_container"
+        android:fontFamily="@font/inter_regular"
+        android:lineSpacingExtra="2sp"
+        android:textColor="@color/black_302C2C"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/text_who_submitted_caption"
+        tools:text="@string/dashboard_register_button_label" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_ktp_number_caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_container"
+        android:fontFamily="@font/inter_bold"
+        android:lineSpacingExtra="2sp"
+        android:text="@string/letter_detail_letter_type_caption"
+        android:textColor="@color/white_929292"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/text_ktp_number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/text_ktp_number" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_ktp_number"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_container"
+        android:layout_marginEnd="@dimen/margin_container"
+        android:fontFamily="@font/inter_regular"
+        android:lineSpacingExtra="2sp"
+        android:textColor="@color/black_302C2C"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/text_name"
+        tools:text="@string/dashboard_register_button_label" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_address_caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_container"
+        android:fontFamily="@font/inter_bold"
+        android:lineSpacingExtra="2sp"
+        android:text="@string/letter_detail_letter_date_submission_caption"
+        android:textColor="@color/white_929292"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/text_address" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_address"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_container"
+        android:layout_marginEnd="@dimen/margin_container"
+        android:fontFamily="@font/inter_regular"
+        android:lineSpacingExtra="2sp"
+        android:textColor="@color/black_302C2C"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/text_ktp_number"
+        tools:text="@string/dashboard_register_button_label" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

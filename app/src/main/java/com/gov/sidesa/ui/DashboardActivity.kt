@@ -9,6 +9,7 @@ import com.gov.sidesa.base.BaseActivity
 import com.gov.sidesa.base.showImmediately
 import com.gov.sidesa.data.letterlist.models.LettersModel
 import com.gov.sidesa.databinding.ActivityDashboardBinding
+import com.gov.sidesa.ui.approval.DetailApprovalLetterActivity
 import com.gov.sidesa.ui.letter.detail.DetailSubmissionLetterActivity
 import com.gov.sidesa.ui.letter.list.LetterListActivity
 import com.gov.sidesa.ui.letter.list.needapproval.LetterNeedApprovalAdapter
@@ -123,7 +124,7 @@ class DashboardActivity : BaseActivity() {
     }
 
     private fun onItemNeedApprovalClick(lettersModel: LettersModel) {
-        //TODO("Not yet implemented")
+        startActivity(Intent(this, DetailApprovalLetterActivity::class.java))
     }
 
     private fun onItemSubmissionClick(lettersModel: LettersModel) {
