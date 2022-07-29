@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.gov.sidesa.databinding.FragmentUploadKtpBinding
+import com.gov.sidesa.utils.gone
 import com.gov.sidesa.utils.picker.SelectImageBottomSheet
+import com.gov.sidesa.utils.visible
 import java.io.File
 
 class UploadKtpFragment : Fragment() {

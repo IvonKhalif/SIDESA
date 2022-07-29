@@ -194,5 +194,9 @@
     <string name="letter_input_submission">Pengajuan Surat</string>
     <string name="letter_input_submit">Ajukan</string>
     <string name="letter_input_success_dialog_title">Pengajuan Surat Berhasil Dikirm</string>
-    <string name="letter_input_success_dialog_description">Surat Pengajuan Berupa <b>%s</b> yang Kamu ajukan berhasil dikirm. Silahkan menunggu untuk persetujuan</string>
+    <string name="letter_input_success_dialog_description">
+        <![CDATA[
+        Surat Pengajuan Berupa <font color="#484848"><b>%s</b></font> yang Kamu ajukan berhasil dikirm. Silahkan menunggu untuk persetujuan.
+        ]]>
+    </string>
 </resources>

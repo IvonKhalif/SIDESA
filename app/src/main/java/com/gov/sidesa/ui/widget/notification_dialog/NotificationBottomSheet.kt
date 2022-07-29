@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.HtmlCompat
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.gov.sidesa.R
 import com.gov.sidesa.databinding.BottomSheetNotificationBinding
@@ -54,8 +55,8 @@ open class NotificationBottomSheet : BottomSheetDialogFragment() {
 
     private fun initView() = with(binding) {
         tvTitle.text = argsTitle
-        tvDescription.text = argsDescription
         btnOke.text = argsButtonLabel.ifBlank { getString(R.string.general_action_ok) }
+        tvDescription.text = HtmlCompat.fromHtml(argsDescription, HtmlCompat.FROM_HTML_MODE_COMPACT)
     }
 
     override fun onDestroyView() {
