@@ -1,14 +1,14 @@
 package com.gov.sidesa.ui.letter.input
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.gov.sidesa.base.BaseViewModel
-import com.gov.sidesa.domain.letter.input.models.LetterLayout
-import com.gov.sidesa.domain.letter.input.models.Resource
+import com.gov.sidesa.domain.letter.input.models.layout.LetterLayout
+import com.gov.sidesa.domain.letter.input.models.resource.Resource
 import com.gov.sidesa.domain.letter.input.usecases.GetLetterLayoutUseCase
 import com.gov.sidesa.domain.letter.input.usecases.GetResourcesUseCase
+import com.gov.sidesa.domain.letter.input.usecases.SaveLetterUseCase
 import com.gov.sidesa.ui.letter.input.models.base.BaseWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.drop_down.DropDownWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.edit_text.EditTextWidgetUiModel
@@ -18,6 +18,7 @@ import com.gov.sidesa.utils.response.GenericErrorResponse
 import com.haroldadmin.cnradapter.NetworkResponse
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
@@ -32,7 +33,8 @@ import kotlinx.coroutines.launch
 @FlowPreview
 class LetterInputViewModel(
     private val getLayout: GetLetterLayoutUseCase,
-    private val getResourcesUseCase: GetResourcesUseCase
+    private val getResourcesUseCase: GetResourcesUseCase,
+    private val saveLetterUseCase: SaveLetterUseCase
 ) : BaseViewModel(), LetterInputViewHolderListener {
     /**
      * layout data
@@ -57,6 +59,7 @@ class LetterInputViewModel(
     private val _editTextChanged = MutableSharedFlow<EditTextWidgetUiModel>(
         replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST
     )
+
     // drop-down changed
     private val _dropDownChanged = MutableSharedFlow<DropDownWidgetUiModel>(
         replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST
@@ -69,6 +72,10 @@ class LetterInputViewModel(
     private val _menuList = MutableLiveData<Pair<DropDownWidgetUiModel, List<Resource>>>()
     val menuList: LiveData<Pair<DropDownWidgetUiModel, List<Resource>>> get() = _menuList
 
+    // submit success state
+    private val _onSubmitSuccess = MutableLiveData<Unit>()
+    val onSubmitSuccess: LiveData<Unit> get() = _onSubmitSuccess
+
     init {
         observerEvent()
     }
@@ -76,7 +83,7 @@ class LetterInputViewModel(
     fun onLoad(layoutId: String, letterName: String) = viewModelScope.launch {
         showLoadingWidget()
 
-        when(val response = getLayout.invoke(letterTypeId = layoutId, letterName = letterName)) {
+        when (val response = getLayout.invoke(letterTypeId = layoutId, letterName = letterName)) {
             is NetworkResponse.Success -> {
                 _layoutData.value = response.body
                 _widgetList.value = response.body.asUiModel()
@@ -145,7 +152,8 @@ class LetterInputViewModel(
 
         val components = _widgetList.value.orEmpty().toMutableList()
 
-        when (val response = getResourcesUseCase.invoke(uiModel.api, uiModel.getApiParam(components))) {
+        when (val response =
+            getResourcesUseCase.invoke(uiModel.api, uiModel.getApiParam(components))) {
             is NetworkResponse.Success -> {
                 _menuList.value = Pair(uiModel, response.body)
             }
@@ -172,11 +180,21 @@ class LetterInputViewModel(
     /**
      * Submit letter submission
      */
-    fun onSubmit() {
-        val components = _widgetList.value.orEmpty().map {
-            "${it.name} : ${it.value}"
-        }
-        Log.d("letter_input", components.joinToString("\n"))
+    fun onSubmit() = viewModelScope.launch {
+        showLoadingWidget()
+
+        val letterTypeId = _layoutData.value?.letterTypeId.orEmpty()
+        val components = _widgetList.value.orEmpty()
+        delay(1000)
+        /*when (val result =
+            saveLetterUseCase.invoke(letterTypeId = letterTypeId, widget = components)) {
+            is NetworkResponse.Success -> {*/
+                _onSubmitSuccess.value = Unit
+            /*}
+            else -> onResponseNotSuccess(response = result)
+        }*/
+
+        hideLoadingWidget()
     }
 
     /**

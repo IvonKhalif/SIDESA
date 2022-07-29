@@ -1,9 +1,9 @@
 package com.gov.sidesa.ui.letter.input.models.mapper
 
-import com.gov.sidesa.domain.letter.input.models.LetterLayout
-import com.gov.sidesa.domain.letter.input.models.Widget
-import com.gov.sidesa.domain.letter.input.models.WidgetType
-import com.gov.sidesa.domain.letter.input.models.asInputType
+import com.gov.sidesa.domain.letter.input.models.layout.LetterLayout
+import com.gov.sidesa.domain.letter.input.models.layout.Widget
+import com.gov.sidesa.domain.letter.input.models.layout.WidgetType
+import com.gov.sidesa.domain.letter.input.models.layout.asInputType
 import com.gov.sidesa.ui.letter.input.models.divider.DividerWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.drop_down.DropDownWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.edit_text.EditTextWidgetUiModel

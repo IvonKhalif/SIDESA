@@ -2,8 +2,9 @@ package com.gov.sidesa.data.letter.repository
 
 import com.gov.sidesa.data.letter.mapper.asDomain
 import com.gov.sidesa.data.letter.service.LetterService
-import com.gov.sidesa.domain.letter.input.models.LetterLayout
-import com.gov.sidesa.domain.letter.input.models.Resource
+import com.gov.sidesa.domain.letter.input.models.layout.LetterLayout
+import com.gov.sidesa.domain.letter.input.models.resource.Resource
+import com.gov.sidesa.domain.letter.input.models.save.SaveLetter
 import com.gov.sidesa.domain.letter.repository.LetterRepository
 import com.gov.sidesa.domain.letter.template.models.Template
 import com.gov.sidesa.utils.extension.asDomain
@@ -46,6 +47,21 @@ class LetterRepositoryImpl(
     override suspend fun getTemplate(): NetworkResponse<List<Template>, GenericErrorResponse> {
         return service.getTemplates().asDomain {
             data.orEmpty().asDomain()
+        }
+    }
+
+    override suspend fun save(letter: SaveLetter): NetworkResponse<String, GenericErrorResponse> {
+        val formBody = mutableMapOf<String, String>().apply {
+            put("id_account", letter.accountId)
+            put("id_type_surat", letter.letterTypeId)
+            letter.contents.forEachIndexed { index, content ->
+                put("field[$index]", content.field)
+                put("value[$index]", content.value)
+            }
+        }
+
+        return service.save(letter = formBody).asDomain {
+            desc
         }
     }
 }

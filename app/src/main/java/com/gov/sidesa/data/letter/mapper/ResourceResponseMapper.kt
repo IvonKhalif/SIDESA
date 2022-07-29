@@ -1,7 +1,7 @@
 package com.gov.sidesa.data.letter.mapper
 
 import com.gov.sidesa.data.letter.models.ResourceResponse
-import com.gov.sidesa.domain.letter.input.models.Resource
+import com.gov.sidesa.domain.letter.input.models.resource.Resource
 
 /**
  * Created by yovi.putra on 27/07/22"

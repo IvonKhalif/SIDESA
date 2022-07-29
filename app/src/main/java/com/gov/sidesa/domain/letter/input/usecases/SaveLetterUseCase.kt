@@ -1,7 +1,11 @@
 package com.gov.sidesa.domain.letter.input.usecases
 
+import com.gov.sidesa.domain.letter.input.models.save.LetterContent
+import com.gov.sidesa.domain.letter.input.models.save.SaveLetter
 import com.gov.sidesa.domain.letter.repository.LetterRepository
 import com.gov.sidesa.ui.letter.input.models.base.BaseWidgetUiModel
+import com.gov.sidesa.utils.response.GenericErrorResponse
+import com.haroldadmin.cnradapter.NetworkResponse
 
 /**
  * Created by yovi.putra on 28/07/22"
@@ -14,9 +18,17 @@ class SaveLetterUseCase(
 ) {
 
     suspend operator fun invoke(
-        letterTypeId: Int,
+        letterTypeId: String,
         widget: List<BaseWidgetUiModel>
-    ) {
+    ): NetworkResponse<String, GenericErrorResponse> {
+        val letter = SaveLetter(
+            accountId = "3",
+            letterTypeId = letterTypeId,
+            contents = widget.map {
+                LetterContent(field = it.name, value = it.value.orEmpty())
+            }
+        )
 
+        return repository.save(letter = letter)
     }
 }

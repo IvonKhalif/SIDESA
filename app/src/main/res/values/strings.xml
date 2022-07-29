@@ -3,7 +3,7 @@
 
     <!--  General  -->
     <string name="general_image_content_description">This is an image</string>
-    <string name="general_action_ok">Ok</string>
+    <string name="general_action_ok">Oke</string>
     <string name="general_action_yes">Yes</string>
     <string name="general_action_no">No</string>
     <string name="general_action_save">Simpan</string>
@@ -170,4 +170,6 @@
     <string name="letter_choose_template">Pilih Jenis Surat</string>
     <string name="letter_input_submission">Pengajuan Surat</string>
     <string name="letter_input_submit">Ajukan</string>
+    <string name="letter_input_success_dialog_title">Pengajuan Surat Berhasil Dikirm</string>
+    <string name="letter_input_success_dialog_description">Surat Pengajuan Berupa <b>%s</b> yang Kamu ajukan berhasil dikirm. Silahkan menunggu untuk persetujuan</string>
 </resources>
