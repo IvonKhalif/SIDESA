@@ -1,4 +1,4 @@
-package com.gov.sidesa.ui.registration.ktp
+package com.gov.sidesa.ui.registration.kk
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,39 +6,32 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-import com.gov.sidesa.databinding.FragmentUploadKtpBinding
+import com.gov.sidesa.databinding.FragmentUploadKkBinding
 import com.gov.sidesa.utils.gone
 import com.gov.sidesa.utils.picker.SelectImageBottomSheet
 import com.gov.sidesa.utils.visible
 import java.io.File
 
-class UploadKtpFragment : Fragment() {
+class UploadKkFragment : Fragment() {
 
-    companion object {
-        fun newInstance(): UploadKtpFragment {
-            return UploadKtpFragment()
-        }
-    }
-
-    private lateinit var binding: FragmentUploadKtpBinding
+    private lateinit var binding: FragmentUploadKkBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        binding = FragmentUploadKtpBinding.inflate(layoutInflater, container, false)
+        binding = FragmentUploadKkBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonPickKtp.setOnClickListener {
+        binding.buttonPickKk.setOnClickListener {
             showMediaDialog()
         }
 
-        binding.buttonEditKtp.setOnClickListener {
+        binding.buttonEditKk.setOnClickListener {
             showMediaDialog()
         }
     }
@@ -48,7 +41,7 @@ class UploadKtpFragment : Fragment() {
 
         media.onImageSelected = {
             setImageKtp(it)
-            binding.buttonPickKtp.gone()
+            binding.buttonPickKk.gone()
             media.dismissAllowingStateLoss()
         }
 
@@ -56,7 +49,7 @@ class UploadKtpFragment : Fragment() {
     }
 
     private fun setImageKtp(it: File) {
-        binding.containerKtp.visible()
+        binding.containerKk.visible()
         Glide.with(requireContext())
             .load(it)
             .into(binding.imageKtp)

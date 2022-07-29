@@ -6,4 +6,9 @@ sealed class RegistrationStackState {
     object KtpGeneral : RegistrationStackState()
     object KtpUpload : RegistrationStackState()
     object KtpReviewKtp : RegistrationStackState()
+
+    object KkBiodata : RegistrationStackState()
+    object KkAddress : RegistrationStackState()
+    object KkUpload : RegistrationStackState()
+    object KkReview : RegistrationStackState()
 }

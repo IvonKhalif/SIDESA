@@ -51,7 +51,7 @@ class AddressKtpFragment : Fragment() {
         val genderAdapter =
             ArrayAdapter(requireContext(), R.layout.item_dropdown, getDummyKelurahanList())
         val inputGenderAutoComplete =
-            binding.root.findViewById<AutoCompleteTextView>(R.id.input_ktp_gender)
+            binding.root.findViewById<AutoCompleteTextView>(R.id.input_ktp_kelurahan)
         inputGenderAutoComplete.setAdapter(genderAdapter)
     }
 
