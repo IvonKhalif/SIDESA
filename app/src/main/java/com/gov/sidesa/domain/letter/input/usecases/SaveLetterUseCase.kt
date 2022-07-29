@@ -1,5 +1,6 @@
 package com.gov.sidesa.domain.letter.input.usecases
 
+import com.gov.sidesa.domain.letter.input.models.layout.WidgetType
 import com.gov.sidesa.domain.letter.input.models.save.LetterContent
 import com.gov.sidesa.domain.letter.input.models.save.SaveLetter
 import com.gov.sidesa.domain.letter.repository.LetterRepository
@@ -24,7 +25,9 @@ class SaveLetterUseCase(
         val letter = SaveLetter(
             accountId = "3",
             letterTypeId = letterTypeId,
-            contents = widget.map {
+            contents = widget.filterNot {
+                it.type == WidgetType.Header
+            }.map {
                 LetterContent(field = it.name, value = it.value.orEmpty())
             }
         )

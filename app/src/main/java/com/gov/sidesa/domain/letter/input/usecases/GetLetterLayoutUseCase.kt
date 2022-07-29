@@ -63,6 +63,11 @@ class GetLetterLayoutUseCase(
         "nama" -> widget.copy(value = "Ivon Khalif")
         "alamat" -> widget.copy(value = "Jalanin aja, RT 001 RW 001, Bojong Utara, Bojong, Kabupaten Tangerang, Banten.")
         "pekerjaan" -> widget.copy(value = "Swasta")
+        "no_kk" -> widget.copy(value = "1312390291039123")
+        "nik" -> widget.copy(value = "1312390291039122")
+        "nama_kepala_keluarga" -> widget.copy(value = "Wahyu Pradana Putra")
+        "nama_lengkap_anak" -> widget.copy(value = "Arrumaisha Hanum")
+        "jenis_kelamin" -> widget.copy(value = "Perempuan")
         else -> widget
     }
 }

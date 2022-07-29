@@ -18,7 +18,6 @@ import com.gov.sidesa.utils.response.GenericErrorResponse
 import com.haroldadmin.cnradapter.NetworkResponse
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.BufferOverflow
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
@@ -185,14 +184,14 @@ class LetterInputViewModel(
 
         val letterTypeId = _layoutData.value?.letterTypeId.orEmpty()
         val components = _widgetList.value.orEmpty()
-        delay(1000)
-        /*when (val result =
+
+        when (val result =
             saveLetterUseCase.invoke(letterTypeId = letterTypeId, widget = components)) {
-            is NetworkResponse.Success -> {*/
+            is NetworkResponse.Success -> {
                 _onSubmitSuccess.value = Unit
-            /*}
+            }
             else -> onResponseNotSuccess(response = result)
-        }*/
+        }
 
         hideLoadingWidget()
     }
