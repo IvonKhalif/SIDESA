@@ -1,31 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.registration.ktp.BiodataKtpFragment">
+<layout>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/label_header_ktp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:gravity="center_horizontal"
-        android:text="Data Diri Berdasarkan KTP"
-        android:textColor="@color/black_302C2C"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <include
-        android:id="@+id/custom_ktp_biodata"
-        layout="@layout/custom_ktp_biodata"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/label_header_ktp" />
+        <variable
+            name="viewModel"
+            type="com.gov.sidesa.ui.registration.ktp.RegistrationKTPViewModel" />
+    </data>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.registration.ktp.BiodataKtpFragment">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/label_header_ktp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
+            android:text="Data Diri Berdasarkan KTP"
+            android:textColor="@color/black_302C2C"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/custom_ktp_biodata"
+            layout="@layout/custom_ktp_biodata"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_header_ktp"
+            app:viewModel="@{viewModel.biodataUiModel}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

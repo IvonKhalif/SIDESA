@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.gov.sidesa.R
 import com.gov.sidesa.databinding.FragmentBiodataKtpBinding
@@ -22,6 +23,7 @@ class BiodataKtpFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentBiodataKtpBinding
+    private val viewModel by activityViewModels<RegistrationKTPViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

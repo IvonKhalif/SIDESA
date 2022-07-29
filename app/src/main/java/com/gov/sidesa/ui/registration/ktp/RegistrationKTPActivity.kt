@@ -40,6 +40,16 @@ class RegistrationKTPActivity : AppCompatActivity() {
                         supportFragmentManager.findFragmentByTag(RegistrationStackState.KtpAddress.toString())
                     fragment?.let { it1 -> showFragment(it1, RegistrationStackState.KtpAddress) }
                 }
+                is RegistrationStackState.KtpUpload -> {
+                    val fragment =
+                        supportFragmentManager.findFragmentByTag(RegistrationStackState.KtpGeneral.toString())
+                    fragment?.let { it1 -> showFragment(it1, RegistrationStackState.KtpGeneral) }
+                }
+                is RegistrationStackState.KtpReviewKtp -> {
+                    val fragment =
+                        supportFragmentManager.findFragmentByTag(RegistrationStackState.KtpUpload.toString())
+                    fragment?.let { it1 -> showFragment(it1, RegistrationStackState.KtpUpload) }
+                }
             }
         }
 
@@ -56,6 +66,18 @@ class RegistrationKTPActivity : AppCompatActivity() {
                         supportFragmentManager.findFragmentByTag(RegistrationStackState.KtpGeneral.toString())
                     fragment?.let { it1 -> showFragment(it1, RegistrationStackState.KtpGeneral) }
                         ?: showFragment(GeneralKtpFragment(), RegistrationStackState.KtpGeneral)
+                }
+                is RegistrationStackState.KtpGeneral -> {
+                    val fragment =
+                        supportFragmentManager.findFragmentByTag(RegistrationStackState.KtpUpload.toString())
+                    fragment?.let { it1 -> showFragment(it1, RegistrationStackState.KtpUpload) }
+                        ?: showFragment(UploadKtpFragment(), RegistrationStackState.KtpUpload)
+                }
+                is RegistrationStackState.KtpUpload -> {
+                    val fragment =
+                        supportFragmentManager.findFragmentByTag(RegistrationStackState.KtpReviewKtp.toString())
+                    fragment?.let { it1 -> showFragment(it1, RegistrationStackState.KtpReviewKtp) }
+                        ?: showFragment(ReviewKtpFragment(), RegistrationStackState.KtpReviewKtp)
                 }
             }
         }
@@ -74,6 +96,14 @@ class RegistrationKTPActivity : AppCompatActivity() {
                 }
                 is RegistrationStackState.KtpGeneral -> {
                     binding.progressBar.progress = 30
+                    binding.buttonPreviousKtp.visibility = VISIBLE
+                }
+                is RegistrationStackState.KtpUpload -> {
+                    binding.progressBar.progress = 40
+                    binding.buttonPreviousKtp.visibility = VISIBLE
+                }
+                is RegistrationStackState.KtpReviewKtp -> {
+                    binding.progressBar.progress = 50
                     binding.buttonPreviousKtp.visibility = VISIBLE
                 }
             }

@@ -9,7 +9,15 @@ class RegistrationKTPViewModel : ViewModel() {
     var registrationStackState =
         MutableLiveData<RegistrationStackState>(RegistrationStackState.KtpBiodata)
 
-    var increaseProgress = MutableLiveData(false)
-    var decreaseProgress = MutableLiveData(false)
+    var biodataUiModel = MutableLiveData<BiodataUiModel>()
 
 }
+
+data class BiodataUiModel(
+    var nik: String = "",
+    var fullName: String = "",
+    var placeOfBirth: String = "",
+    var dateOfBirth: String = "",
+    var gender: String = "",
+    var bloodType: String = ""
+)
