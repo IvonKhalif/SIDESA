@@ -1,8 +1,8 @@
 package com.gov.sidesa.domain.letter.input.usecases
 
-import com.gov.sidesa.domain.letter.input.models.LetterLayout
-import com.gov.sidesa.domain.letter.input.models.Widget
-import com.gov.sidesa.domain.letter.input.models.WidgetType
+import com.gov.sidesa.domain.letter.input.models.layout.LetterLayout
+import com.gov.sidesa.domain.letter.input.models.layout.Widget
+import com.gov.sidesa.domain.letter.input.models.layout.WidgetType
 import com.gov.sidesa.domain.letter.repository.LetterRepository
 import com.gov.sidesa.utils.response.GenericErrorResponse
 import com.haroldadmin.cnradapter.NetworkResponse
@@ -30,21 +30,44 @@ class GetLetterLayoutUseCase(
         }
     }
 
+    /**
+     * Modify widget from be response
+     */
     private fun assignWidgetFromLocal(
         letterName: String,
         layout: LetterLayout
     ): LetterLayout {
-        val widget = layout.widgets.toMutableList()
+        val widgets = layout.widgets.toMutableList()
 
         // add header widget
         val header = createHeader(letterName = letterName)
-        widget.add(0, header)
+        widgets.add(0, header)
 
-        return layout.copy(widgets = widget)
+        // assign text view value
+        widgets.forEachIndexed { index, widget ->
+            if (widget.type == WidgetType.TextView.type) {
+                widgets[index] = assignTextView(widget = widget)
+            }
+        }
+
+        return layout.copy(widgets = widgets)
     }
 
     private fun createHeader(letterName: String) = Widget(
         type = WidgetType.Header.type,
         title = letterName
     )
+
+    // TODO set data from local storage
+    private fun assignTextView(widget: Widget) = when (widget.name) {
+        "nama" -> widget.copy(value = "Ivon Khalif")
+        "alamat" -> widget.copy(value = "Jalanin aja, RT 001 RW 001, Bojong Utara, Bojong, Kabupaten Tangerang, Banten.")
+        "pekerjaan" -> widget.copy(value = "Swasta")
+        "no_kk" -> widget.copy(value = "1312390291039123")
+        "nik" -> widget.copy(value = "1312390291039122")
+        "nama_kepala_keluarga" -> widget.copy(value = "Wahyu Pradana Putra")
+        "nama_lengkap_anak" -> widget.copy(value = "Arrumaisha Hanum")
+        "jenis_kelamin" -> widget.copy(value = "Perempuan")
+        else -> widget
+    }
 }

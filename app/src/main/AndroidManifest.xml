@@ -39,11 +39,7 @@
             android:name=".ui.registration.ktp.RegistrationKTPActivity"
             android:exported="true"
             android:theme="@style/Theme.ContainerTracker.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.letter.detail.DetailSubmissionLetterActivity"
@@ -90,8 +86,14 @@
             android:exported="false" />
         <activity
             android:name=".ui.DashboardActivity"
-            android:exported="false"
-            android:theme="@style/Theme.ContainerTracker.NoActionBar" /> <!-- <activity -->
+            android:exported="true"
+            android:theme="@style/Theme.ContainerTracker.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity> <!-- <activity -->
         <!-- android:name=".ui.profile.edit.EditProfileActivity" -->
         <!-- android:exported="true" -->
         <!-- android:theme="@style/Theme.ContainerTracker.NoActionBar" /> -->

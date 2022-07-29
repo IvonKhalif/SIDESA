@@ -1,9 +1,11 @@
 package com.gov.sidesa.ui.letter.template
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseActivity
@@ -93,17 +95,28 @@ class LetterTemplateActivity : BaseActivity() {
         }
     }
 
-    private fun onItemSelected(template: LetterTemplateUiModel) {
-        try {
-            val intent = LetterInputActivity.newIntent(
-                context = this,
-                layoutId = template.id.toString(),
-                layoutName = template.name
-            )
-            startActivity(intent)
-        } catch (e: Throwable) {
-            showErrorMessage(e.message.orEmpty())
+    /**
+     * Launcher to start activity for result [LetterInputActivity]
+     */
+    private val letterInputLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        if (it.resultCode == Activity.RESULT_OK && intent != null) {
+            setResult(it.resultCode, it.data)
+            finish()
         }
+    }
+
+    /**
+     * Goto Letter Input Activity
+     */
+    private fun onItemSelected(template: LetterTemplateUiModel) {
+        val intent = LetterInputActivity.newIntent(
+            context = this,
+            layoutId = template.id.toString(),
+            layoutName = template.name
+        )
+        letterInputLauncher.launch(intent)
     }
 
     companion object {

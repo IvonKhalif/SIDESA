@@ -6,11 +6,9 @@ import com.gov.sidesa.data.letter.models.WidgetResponse
 import com.gov.sidesa.utils.constants.ContentTypeConstant
 import com.gov.sidesa.utils.response.GenericErrorResponse
 import com.gov.sidesa.utils.response.RetrofitResponse
+import com.gov.sidesa.utils.response.RetrofitStatusResponse
 import com.haroldadmin.cnradapter.NetworkResponse
-import retrofit2.http.GET
-import retrofit2.http.Headers
-import retrofit2.http.Query
-import retrofit2.http.Url
+import retrofit2.http.*
 
 interface LetterService {
 
@@ -30,4 +28,10 @@ interface LetterService {
     @Headers(ContentTypeConstant.CONTENT_TYPE_JSON)
     suspend fun getTemplates()
             : NetworkResponse<RetrofitResponse<List<LetterTemplateResponse>>, GenericErrorResponse>
+
+    @POST("pengajuan-surat/save")
+    @FormUrlEncoded
+    suspend fun save(
+        @FieldMap letter: Map<String, String>
+    ): NetworkResponse<RetrofitStatusResponse, GenericErrorResponse>
 }

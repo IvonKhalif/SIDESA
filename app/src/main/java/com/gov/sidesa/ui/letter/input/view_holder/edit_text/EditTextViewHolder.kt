@@ -6,7 +6,7 @@ import androidx.core.widget.addTextChangedListener
 import com.gov.sidesa.R
 import com.gov.sidesa.base.dynamic_adapter.AbstractViewHolder
 import com.gov.sidesa.databinding.ItemLetterInputEditTextWidgetBinding
-import com.gov.sidesa.domain.letter.input.models.asAndroidInputText
+import com.gov.sidesa.domain.letter.input.models.layout.asAndroidInputText
 import com.gov.sidesa.ui.letter.input.models.edit_text.EditTextWidgetUiModel
 import com.gov.sidesa.ui.letter.input.view_holder_factory.LetterInputViewHolderListener
 

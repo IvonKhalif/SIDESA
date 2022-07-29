@@ -1,8 +1,8 @@
 package com.gov.sidesa.data.letter.mapper
 
 import com.gov.sidesa.data.letter.models.WidgetResponse
-import com.gov.sidesa.domain.letter.input.models.LetterLayout
-import com.gov.sidesa.domain.letter.input.models.Widget
+import com.gov.sidesa.domain.letter.input.models.layout.LetterLayout
+import com.gov.sidesa.domain.letter.input.models.layout.Widget
 
 /**
  * Created by yovi.putra on 28/07/22"

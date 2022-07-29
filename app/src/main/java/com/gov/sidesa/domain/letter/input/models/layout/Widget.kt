@@ -1,4 +1,4 @@
-package com.gov.sidesa.domain.letter.input.models
+package com.gov.sidesa.domain.letter.input.models.layout
 
 data class Widget(
     val name: String = "",

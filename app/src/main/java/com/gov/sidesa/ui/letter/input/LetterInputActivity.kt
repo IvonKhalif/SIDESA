@@ -1,5 +1,6 @@
 package com.gov.sidesa.ui.letter.input
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -10,7 +11,7 @@ import com.gov.sidesa.base.BaseActivity
 import com.gov.sidesa.base.findSheetByTag
 import com.gov.sidesa.base.showImmediately
 import com.gov.sidesa.databinding.ActivityLetterInputBinding
-import com.gov.sidesa.domain.letter.input.models.Resource
+import com.gov.sidesa.domain.letter.input.models.resource.Resource
 import com.gov.sidesa.ui.letter.input.adapter.LetterInputAdapter
 import com.gov.sidesa.ui.letter.input.models.drop_down.DropDownWidgetUiModel
 import com.gov.sidesa.ui.letter.input.view_holder_factory.LetterInputViewHolderFactory
@@ -57,7 +58,7 @@ class LetterInputActivity : BaseActivity() {
     /**
      * set listener for handling input from user
      */
-    private fun initEvent() = with (binding){
+    private fun initEvent() = with(binding) {
 
         viewModel.onLoad(layoutId = argsLayoutId, letterName = argsLayoutName)
 
@@ -103,12 +104,16 @@ class LetterInputActivity : BaseActivity() {
         closeViewState.observe(this@LetterInputActivity) {
             finish()
         }
+
+        onSubmitSuccess.observe(this@LetterInputActivity) {
+            finishWithSuccessState()
+        }
     }
 
     /**
      * prepare content view
      */
-    private fun initView() = with (binding) {
+    private fun initView() = with(binding) {
         customToolbar.apply {
             toolbarDetailProfile.title = getString(R.string.letter_input_submission)
             toolbarDetailProfile.setNavigationIcon(R.drawable.ic_arrow_left)
@@ -135,7 +140,7 @@ class LetterInputActivity : BaseActivity() {
             customUi = {
                 ivIcon.isVisible = false
             },
-            areContentTheSame = {oldItem, newItem -> oldItem == newItem },
+            areContentTheSame = { oldItem, newItem -> oldItem == newItem },
             areItemsTheSame = { oldItem, newItem -> oldItem.id == newItem.id }
         )
         adapter.submitList(items)
@@ -148,6 +153,21 @@ class LetterInputActivity : BaseActivity() {
         }
     }
 
+    /**
+     * prepare intent for return parcelable
+     */
+    private fun finishWithSuccessState() {
+        val intent = Intent().apply {
+            putExtra(RESULT_TITLE, getString(R.string.letter_input_success_dialog_title))
+            putExtra(
+                RESULT_CONTENT,
+                getString(R.string.letter_input_success_dialog_description, argsLayoutName)
+            )
+        }
+        setResult(Activity.RESULT_OK, intent)
+        finish()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
@@ -156,6 +176,9 @@ class LetterInputActivity : BaseActivity() {
     companion object {
         private const val ARGS_LAYOUT_ID = "layout_id"
         private const val ARGS_LAYOUT_NAME = "layout_name"
+
+        const val RESULT_TITLE = "result_title"
+        const val RESULT_CONTENT = "result_content"
 
         fun newIntent(
             context: Context,
