@@ -6,9 +6,9 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class User(
-    @SerializedName("id_account") var id: String,
-    @SerializedName("id_level") var idLevel: String,
-    @SerializedName("nik") var nik: String,
+    @SerializedName("id_account") var id: String?,
+    @SerializedName("id_level") var idLevel: String?,
+    @SerializedName("nik") var nik: String?,
     @SerializedName("nama_lengkap") var name: String?,
     @SerializedName("tempat_lahir") var birthPlace: String?,
     @SerializedName("tanggal_lahir") var birthDate: String?,

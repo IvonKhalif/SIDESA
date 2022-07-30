@@ -240,4 +240,8 @@
         Surat Pengajuan Berupa <font color="#484848"><b>%s</b></font> yang Kamu ajukan berhasil dikirm. Silahkan menunggu untuk persetujuan.
         ]]>
     </string>
+
+    <!-- PROFILE -->
+    <string name="family_data_detail">Rincian Data Keluarga</string>
+    <string name="family_data_edit">Ubah Data Keluarga</string>
 </resources>

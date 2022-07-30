@@ -35,28 +35,23 @@
         <activity
             android:name=".ui.DashboardActivity"
             android:exported="true"
-            android:theme="@style/Theme.ContainerTracker.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/Theme.ContainerTracker.NoActionBar" />
 
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="false"
-            android:theme="@style/Theme.ContainerTracker.NoActionBar"/>
+            android:theme="@style/Theme.ContainerTracker.NoActionBar" />
+
         <activity
             android:name=".ui.letter.template.LetterTemplateActivity"
             android:exported="true"
-            android:theme="@style/Theme.ContainerTracker.NoActionBar">
+            android:theme="@style/Theme.ContainerTracker.NoActionBar" />
 
-        </activity>
         <activity
             android:name=".ui.approval.submissiondetail.DetailApprovalSubmissionActivity"
             android:exported="true"
-            android:theme="@style/Theme.ContainerTracker.NoActionBar"/>
+            android:theme="@style/Theme.ContainerTracker.NoActionBar" />
+
         <activity
             android:name=".ui.approval.DetailApprovalLetterActivity"
             android:exported="true"
@@ -71,10 +66,12 @@
             android:theme="@style/Theme.ContainerTracker.NoActionBar" />
         <activity
             android:name=".ui.profile.edit.EditProfileFamilyActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.ContainerTracker.NoActionBar" />
         <activity
-            android:name=".ui.profile.detail.DetailProfileFamilyActivity"
-            android:exported="false" />
+            android:name=".ui.profile.detail.family.DetailProfileFamilyActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ContainerTracker.NoActionBar" />
         <activity
             android:name=".ui.profile.edit.EditProfileKKActivity"
             android:exported="false" />
@@ -98,20 +95,17 @@
         <activity
             android:name=".ui.login.password.PasswordActivity"
             android:exported="false"
-            android:theme="@style/Theme.ContainerTracker.NoActionBar" /> <!-- <activity -->
-        <!-- android:name=".ui.profile.detail.DetailProfileActivity" -->
-        <!-- android:exported="false" /> -->
+            android:theme="@style/Theme.ContainerTracker.NoActionBar" />
         <activity
             android:name=".ui.profile.ProfileActivity"
-            android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".ui.DashboardActivity"-->
-<!--            android:exported="false"-->
-<!--            android:theme="@style/Theme.ContainerTracker.NoActionBar" />-->
-<!--        <activity-->
-<!--            android:name=".ui.profile.edit.EditProfileActivity"-->
-<!--            android:exported="true"-->
-<!--            android:theme="@style/Theme.ContainerTracker.NoActionBar" />-->
+            android:exported="true"
+            android:theme="@style/Theme.ContainerTracker.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.registration.ktp.RegistrationKTPActivity"
             android:exported="true"
