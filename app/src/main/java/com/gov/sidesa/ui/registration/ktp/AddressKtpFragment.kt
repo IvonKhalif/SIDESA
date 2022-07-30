@@ -7,8 +7,12 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import com.google.gson.Gson
 import com.gov.sidesa.R
+import com.gov.sidesa.data.registration.ktp.AddressKtpModel
 import com.gov.sidesa.databinding.FragmentAddressKtpBinding
+import com.gov.sidesa.ui.registration.RegistrationStackState
 import com.gov.sidesa.utils.gone
 
 class AddressKtpFragment : Fragment() {
@@ -20,6 +24,7 @@ class AddressKtpFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentAddressKtpBinding
+    private val viewModel by activityViewModels<RegistrationKTPViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,6 +32,25 @@ class AddressKtpFragment : Fragment() {
     ): View {
         binding = FragmentAddressKtpBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        val addressKtpToJson = Gson().toJson(
+            AddressKtpModel(
+                binding.customKtpAddress.inputKtpAddress.text.toString(),
+                binding.customKtpAddress.inputKtpRt.text.toString(),
+                binding.customKtpAddress.inputKtpRw.text.toString(),
+                binding.customKtpAddress.inputKtpKecamatan.text.toString(),
+                binding.customKtpAddress.inputKtpKelurahan.text.toString()
+            )
+        )
+        viewModel.setPref(
+            requireContext(),
+            RegistrationStackState.KtpAddress.toString(),
+            addressKtpToJson
+        )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

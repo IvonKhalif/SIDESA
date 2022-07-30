@@ -1,15 +1,16 @@
 package com.gov.sidesa.data.user
 
+import com.gov.sidesa.data.registration.family.FamilyApplicantModel
+import com.gov.sidesa.data.registration.family.FamilyChildModel
+import com.gov.sidesa.data.registration.family.FamilyFatherModel
+import com.gov.sidesa.data.registration.family.FamilyMotherModel
 import com.gov.sidesa.data.user.response.User
 import com.gov.sidesa.utils.constants.ContentTypeConstant
 import com.gov.sidesa.utils.response.GenericErrorResponse
 import com.gov.sidesa.utils.response.RetrofitResponse
 import com.gov.sidesa.utils.response.RetrofitStatusResponse
 import com.haroldadmin.cnradapter.NetworkResponse
-import retrofit2.http.GET
-import retrofit2.http.Headers
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface UserService {
     @GET("account/validation-nik")
@@ -27,8 +28,10 @@ interface UserService {
 
     @POST("account/create-password")
     @Headers(ContentTypeConstant.CONTENT_TYPE_JSON)
-    suspend fun createPassword(
-        @Query("nik") nik: String,
-        @Query("password") password: String
+    suspend fun submit(
+        @Body fatherPayload: FamilyFatherModel,
+        @Body motherPayload: FamilyMotherModel,
+        @Body applicantPayload: FamilyApplicantModel,
+        @Body listChildPayload: List<FamilyChildModel>
     ): NetworkResponse<RetrofitStatusResponse, GenericErrorResponse>
 }

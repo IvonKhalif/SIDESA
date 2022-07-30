@@ -15,6 +15,7 @@ import com.gov.sidesa.ui.letter.list.needapproval.LetterNeedApprovalAdapter
 import com.gov.sidesa.ui.letter.list.submission.LetterSubmissionAdapter
 import com.gov.sidesa.ui.letter.template.LetterTemplateActivity
 import com.gov.sidesa.ui.profile.edit.EditProfileKTPActivity
+import com.gov.sidesa.ui.registration.ktp.RegistrationKTPActivity
 import com.gov.sidesa.ui.widget.notification_dialog.NotificationBottomSheet
 import com.gov.sidesa.utils.constants.LetterConstant
 import com.gov.sidesa.utils.enums.CategoryLetterEnum
@@ -84,6 +85,10 @@ class DashboardActivity : BaseActivity() {
             }
             buttonChooseLetter.setOnClickListener {
                 goToLetterTemplate()
+            }
+            buttonRegisterNow.setOnClickListener {
+                val intent = Intent(this@DashboardActivity, RegistrationKTPActivity::class.java)
+                startActivity(intent)
             }
         }
     }

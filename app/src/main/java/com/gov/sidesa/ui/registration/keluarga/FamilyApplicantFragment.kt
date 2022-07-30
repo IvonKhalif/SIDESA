@@ -7,9 +7,15 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.gson.Gson
 import com.gov.sidesa.R
+import com.gov.sidesa.data.registration.family.FamilyFatherModel
+import com.gov.sidesa.data.registration.ktp.AddressKtpModel
 import com.gov.sidesa.databinding.FragmentFamilyApplicantBinding
+import com.gov.sidesa.ui.registration.RegistrationStackState
+import com.gov.sidesa.ui.registration.ktp.RegistrationKTPViewModel
 import com.gov.sidesa.utils.isVisible
 import java.text.SimpleDateFormat
 import java.util.*
@@ -17,6 +23,7 @@ import java.util.*
 class FamilyApplicantFragment : Fragment() {
 
     private lateinit var binding: FragmentFamilyApplicantBinding
+    private val viewModel by activityViewModels<RegistrationKTPViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,8 +33,38 @@ class FamilyApplicantFragment : Fragment() {
         return binding.root
     }
 
+    override fun onPause() {
+        super.onPause()
+
+        val ktpAddress = AddressKtpModel(
+            binding.customFamilyAddress.inputKtpAddress.text.toString(),
+            binding.customFamilyAddress.inputKtpRt.text.toString(),
+            binding.customFamilyAddress.inputKtpRw.text.toString(),
+            binding.customFamilyAddress.inputKtpKecamatan.text.toString(),
+            binding.customFamilyAddress.inputKtpKelurahan.text.toString(),
+        )
+        val isSameAddress = binding.customFamilyApplicant.checkBoxAddress.isChecked
+        val familyFatherToJson = Gson().toJson(
+            FamilyFatherModel(
+                binding.customFamilyApplicant.inputFather.text.toString(),
+                binding.customFamilyApplicant.inputNik.text.toString(),
+                binding.customFamilyApplicant.inputPlace.text.toString(),
+                binding.customFamilyApplicant.inputDob.text.toString(),
+                isSameAddress,
+                if (isSameAddress) null else ktpAddress
+            )
+        )
+        viewModel.setPref(
+            requireContext(),
+            RegistrationStackState.FamilyApplicant.toString(),
+            familyFatherToJson
+        )
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.customFamilyApplicant.inputLayoutFather.hint = "Nama Lengkap"
 
         setDropDownStatus()
         setupDateOfBirth()

@@ -7,8 +7,12 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import com.google.gson.Gson
 import com.gov.sidesa.R
+import com.gov.sidesa.data.registration.ktp.GeneralKtpModel
 import com.gov.sidesa.databinding.FragmentGeneralKtpBinding
+import com.gov.sidesa.ui.registration.RegistrationStackState
 
 class GeneralKtpFragment : Fragment() {
 
@@ -19,6 +23,7 @@ class GeneralKtpFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentGeneralKtpBinding
+    private val viewModel by activityViewModels<RegistrationKTPViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,6 +31,25 @@ class GeneralKtpFragment : Fragment() {
     ): View {
         binding = FragmentGeneralKtpBinding.inflate(layoutInflater, container, false)
         return binding.root
+    }
+
+
+    override fun onPause() {
+        super.onPause()
+
+        val generalKtpToJson = Gson().toJson(
+            GeneralKtpModel(
+                binding.customKtpGeneral.inputKtpReligion.text.toString(),
+                binding.customKtpGeneral.inputKtpMarriage.text.toString(),
+                binding.customKtpGeneral.inputKtpJob.text.toString(),
+                binding.customKtpGeneral.inputKtpNationality.text.toString(),
+            )
+        )
+        viewModel.setPref(
+            requireContext(),
+            RegistrationStackState.KtpGeneral.toString(),
+            generalKtpToJson
+        )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

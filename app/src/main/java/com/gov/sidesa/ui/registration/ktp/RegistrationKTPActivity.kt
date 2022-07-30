@@ -12,7 +12,7 @@ import com.gov.sidesa.ui.registration.RegistrationStackState
 import com.gov.sidesa.ui.registration.keluarga.*
 import com.gov.sidesa.ui.registration.kk.KkAddressFragment
 import com.gov.sidesa.ui.registration.kk.KkBiodataFragment
-import com.gov.sidesa.ui.registration.kk.KkDetailFragment
+import com.gov.sidesa.ui.registration.kk.ReviewKkFragment
 import com.gov.sidesa.ui.registration.kk.UploadKkFragment
 
 class RegistrationKTPActivity : AppCompatActivity() {
@@ -27,6 +27,7 @@ class RegistrationKTPActivity : AppCompatActivity() {
         binding = ActivityRegistrationKtpactivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.customToolbar.toolbarDetailProfile.title = "Registrasi Data"
         initObserver()
         initListener()
         showFragment(BiodataKtpFragment(), RegistrationStackState.KtpBiodata)
@@ -156,7 +157,7 @@ class RegistrationKTPActivity : AppCompatActivity() {
                     val fragment =
                         supportFragmentManager.findFragmentByTag(RegistrationStackState.KkReview.toString())
                     fragment?.let { it1 -> showFragment(it1, RegistrationStackState.KkReview) }
-                        ?: showFragment(KkDetailFragment(), RegistrationStackState.KkReview)
+                        ?: showFragment(ReviewKkFragment(), RegistrationStackState.KkReview)
                 }
                 is RegistrationStackState.KkReview -> {
                     val fragment =

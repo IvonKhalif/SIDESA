@@ -7,15 +7,6 @@
     android:background="@color/green40_E8F5E9"
     tools:context=".ui.registration.kk.KkBiodataFragment">
 
-    <include
-        android:id="@+id/custom_toolbar"
-        layout="@layout/custom_toolbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/label_header_ktp"
         android:layout_width="0dp"
@@ -27,7 +18,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/custom_toolbar" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <include
         android:id="@+id/custom_kk_biodata"
