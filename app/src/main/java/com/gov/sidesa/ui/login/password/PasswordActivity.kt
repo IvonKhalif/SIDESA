@@ -17,6 +17,8 @@ import com.gov.sidesa.databinding.ActivityPasswordBinding
 import com.gov.sidesa.ui.DashboardActivity
 import com.gov.sidesa.ui.login.LoginViewModel
 import com.gov.sidesa.ui.login.forgotpassword.ForgotPasswordActivity
+import com.gov.sidesa.utils.PreferenceUtils
+import com.gov.sidesa.utils.PreferenceUtils.USER_PREFERENCE
 import com.gov.sidesa.utils.constants.UserExtrasConstant
 import com.gov.sidesa.utils.enums.StatusResponseEnum
 import com.gov.sidesa.utils.extension.observeNonNull
@@ -73,24 +75,28 @@ class PasswordActivity : BaseActivity() {
                         getString(R.string.input_password_error_7_digit)
                     buttonLogin.isEnabled = false
                 } else {
-                    buttonLogin.isEnabled = !text.isNullOrBlank()
+                    if (inputRePassword.isVisible)
+                        buttonLogin.isEnabled =
+                            !text.isNullOrBlank() &&
+                                    text.toString() == inputRePassword.value().text.toString() &&
+                                    inputRePassword.value().text.isNotBlank()
+                    else
+                        buttonLogin.isEnabled = !text.isNullOrBlank()
                     inputPassword.inputLayout().error = null
                     inputPassword.inputLayout().isErrorEnabled = false
+                    checkRePassword(text.toString(), inputRePassword.value().text.toString())
                 }
             }
             inputPassword.value().setOnFocusChangeListener { _, isFocus ->
                 inputPassword.inputLayout().hint = getString(R.string.login_password_label)
             }
             inputRePassword.value().doOnTextChanged { text, start, before, count ->
-                if (!text.isNullOrBlank() && text != inputPassword.value().text) {
-                    inputRePassword.inputLayout().error =
-                        getString(R.string.input_password_error_not_match)
+                if (!text.isNullOrBlank() && text.length < 7) {
                     buttonLogin.isEnabled = false
                 } else {
-                    buttonLogin.isEnabled = true
-                    inputRePassword.inputLayout().error = null
-                    inputRePassword.inputLayout().isErrorEnabled = false
+                    buttonLogin.isEnabled = text.toString() == inputPassword.value().text.toString()
                 }
+                checkRePassword(inputPassword.value().text.toString(), text.toString())
             }
 
             buttonLogin.setOnClickListener {
@@ -108,6 +114,14 @@ class PasswordActivity : BaseActivity() {
         initObserver()
     }
 
+    private fun ActivityPasswordBinding.checkRePassword(password: String?, rePassword: String?) {
+        inputRePassword.inputLayout().isErrorEnabled = !rePassword.isNullOrBlank() &&
+                rePassword != password
+        if (inputRePassword.inputLayout().isErrorEnabled)
+            inputRePassword.inputLayout().error =
+                getString(R.string.input_password_error_not_match)
+    }
+
     private fun initObserver() {
         viewModel.apply {
             userLiveData.observeNonNull(this@PasswordActivity, ::handleUpdateUser)
@@ -122,8 +136,13 @@ class PasswordActivity : BaseActivity() {
     }
 
     private fun handleUpdateUser(user: User) {
+        PreferenceUtils.put(user, USER_PREFERENCE)
+        doOnSuccessLogin()
+    }
+
+    private fun doOnSuccessLogin() {
         val intent = Intent()
-        setResult(Activity.RESULT_OK, intent)
+        setResult(RESULT_OK, intent)
         finish()
     }
 

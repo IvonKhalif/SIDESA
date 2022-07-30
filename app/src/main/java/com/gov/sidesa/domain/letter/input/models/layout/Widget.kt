@@ -1,5 +1,9 @@
 package com.gov.sidesa.domain.letter.input.models.layout
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Widget(
     val name: String = "",
     val type: String = "",
@@ -9,4 +13,4 @@ data class Widget(
     val api: String? = null,
     val apiType: String? = null,
     val apiParam: String? = null
-)
+): Parcelable

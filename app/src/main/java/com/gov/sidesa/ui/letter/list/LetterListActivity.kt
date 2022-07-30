@@ -34,7 +34,7 @@ class LetterListActivity : BaseActivity() {
                     if (category == CategoryLetterEnum.NEED_APPROVAL.category)
                         getString(R.string.letter_list_need_approval_title)
                     else
-                        getString(R.string.letter_list_need_approval_title)
+                        getString(R.string.letter_list_submission_title)
                 setNavigationOnClickListener { finish() }
             }
 
