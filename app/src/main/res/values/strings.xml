@@ -244,4 +244,9 @@
     <!-- PROFILE -->
     <string name="family_data_detail">Rincian Data Keluarga</string>
     <string name="family_data_edit">Ubah Data Keluarga</string>
+    <string name="family_data_father">Ayah</string>
+    <string name="family_data_mother">Ibu</string>
+    <string name="family_data_husband">Suami</string>
+    <string name="family_data_wife">Istri</string>
+    <string name="family_data_child_to">Anak %s</string>
 </resources>
