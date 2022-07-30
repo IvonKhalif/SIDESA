@@ -16,7 +16,9 @@ import com.gov.sidesa.ui.letter.list.LetterListActivity
 import com.gov.sidesa.ui.letter.list.needapproval.LetterNeedApprovalAdapter
 import com.gov.sidesa.ui.letter.list.submission.LetterSubmissionAdapter
 import com.gov.sidesa.ui.letter.template.LetterTemplateActivity
+import com.gov.sidesa.ui.profile.ProfileActivity
 import com.gov.sidesa.ui.profile.edit.EditProfileKTPActivity
+import com.gov.sidesa.ui.registration.ktp.RegistrationKTPActivity
 import com.gov.sidesa.ui.widget.notification_dialog.NotificationBottomSheet
 import com.gov.sidesa.utils.constants.LetterConstant
 import com.gov.sidesa.utils.constants.LetterConstant.EXTRA_SUBMISSION_HAS_APPROVED
@@ -80,7 +82,7 @@ class DashboardActivity : BaseActivity() {
             )
 
             buttonAccount.setOnClickListener {
-                startActivity(Intent(this@DashboardActivity, EditProfileKTPActivity::class.java))
+                startActivity(Intent(this@DashboardActivity, ProfileActivity::class.java))
             }
             buttonSeeAllNeedApproval.setOnClickListener {
                 goToLetterList(CategoryLetterEnum.NEED_APPROVAL.category)
@@ -90,6 +92,9 @@ class DashboardActivity : BaseActivity() {
             }
             buttonChooseLetter.setOnClickListener {
                 goToLetterTemplate()
+            }
+            buttonRegisterNow.setOnClickListener {
+                startActivity(Intent(this@DashboardActivity, RegistrationKTPActivity::class.java))
             }
         }
     }

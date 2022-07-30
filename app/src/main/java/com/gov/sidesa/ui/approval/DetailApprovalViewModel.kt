@@ -4,10 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.gov.sidesa.base.BaseViewModel
-import com.gov.sidesa.data.letterdetail.models.DetailApprovalModel
+import com.gov.sidesa.data.letterdetail.models.DetailApprovalResponse
 import com.gov.sidesa.domain.letter.detail.GetLetterDetailUseCase
-import com.gov.sidesa.ui.letter.input.models.base.BaseWidgetUiModel
-import com.gov.sidesa.ui.letter.input.models.mapper.asUiModel
+import com.gov.sidesa.domain.letter.detail.models.DetailApprovalModel
 import com.haroldadmin.cnradapter.NetworkResponse
 import kotlinx.coroutines.launch
 
@@ -23,7 +22,7 @@ class DetailApprovalViewModel(
         when (val response =
             getDetail.invoke(letterTypeId = letterTypeId, letterName = letterName)) {
             is NetworkResponse.Success -> {
-                response.body.data?.let { _letterDetail.value = it }
+                _letterDetail.value = response.body
             }
             else -> {
                 onResponseNotSuccess(response = response)

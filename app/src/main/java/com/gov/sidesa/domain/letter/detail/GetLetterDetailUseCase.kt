@@ -1,12 +1,13 @@
 package com.gov.sidesa.domain.letter.detail
 
-import com.gov.sidesa.data.letterdetail.models.DetailApprovalModel
-import com.gov.sidesa.domain.letter.input.models.layout.LetterLayout
+import com.gov.sidesa.data.user.response.User
+import com.gov.sidesa.domain.letter.detail.models.DetailApprovalModel
 import com.gov.sidesa.domain.letter.input.models.layout.Widget
 import com.gov.sidesa.domain.letter.input.models.layout.WidgetType
 import com.gov.sidesa.domain.letter.repository.LetterDetailRepository
+import com.gov.sidesa.utils.PreferenceUtils
+import com.gov.sidesa.utils.PreferenceUtils.USER_PREFERENCE
 import com.gov.sidesa.utils.response.GenericErrorResponse
-import com.gov.sidesa.utils.response.RetrofitResponse
 import com.haroldadmin.cnradapter.NetworkResponse
 
 class GetLetterDetailUseCase(
@@ -15,56 +16,43 @@ class GetLetterDetailUseCase(
     suspend operator fun invoke(
         letterTypeId: String,
         letterName: String
-    ): NetworkResponse<RetrofitResponse<DetailApprovalModel>, GenericErrorResponse> {
-        return when (val result = repository.getDetail(letterTypeId = letterTypeId, "3")) {
+    ): NetworkResponse<DetailApprovalModel, GenericErrorResponse> {
+        return when (val result = repository.getDetail(letterId = letterTypeId, "3")) {
             is NetworkResponse.Success -> {
                 val layout = assignWidgetFromLocal(letterName, result.body)
 
                 NetworkResponse.Success(layout)
             }
-            else -> {
-                val layout = assignWidgetFromLocal(
-                    letterName, RetrofitResponse(
-                        data = DetailApprovalModel(
-                            0, "", "",
-                            listOf(), listOf()
-                        ), ""
-                    )
-                )
-                NetworkResponse.Success(layout)
-            }
+            else -> result
         }
     }
 
     private fun assignWidgetFromLocal(
         letterName: String,
-        body: RetrofitResponse<DetailApprovalModel>
-    ): RetrofitResponse<DetailApprovalModel> {
-        val widgets = body.data?.documentFilled?.toMutableList()
+        body: DetailApprovalModel
+    ): DetailApprovalModel {
+        val widgets = body.documentFilled.toMutableList()
 
         // add header widget
         val header = createHeader(letterName = letterName)
-        widgets?.add(0, header)
-        widgets?.add(1, Widget(type = WidgetType.TextView.type,title = "nama", value = "Ivon Khalif"))
-        widgets?.add(2, Widget(type = WidgetType.TextView.type,title = "alamat", value = "Jalanin aja, RT 001 RW 001, Bojong Utara, Bojong, Kabupaten Tangerang, Banten."))
-        widgets?.add(3, Widget(type = WidgetType.TextView.type,title = "pekerjaan", value = "Karyawan Swasta"))
-        widgets?.add(4, Widget(type = WidgetType.Divider.type))
+        widgets.add(0, header)
 
         // assign text view value
-//        widgets?.forEachIndexed { index, widget ->
-//            if (widget.type == WidgetType.TextView.type) {
-//                widgets[index] = assignTextView(widget = widget)
-//            }
-//        }
+        widgets.forEachIndexed { index, widget ->
+            if (index > 0)
+                if (widget.value == WidgetType.Divider.type) {
+                    widgets[index] = widget.copy(type = WidgetType.Divider.type)
+                } else {
+                    widgets[index] = widget.copy(type = WidgetType.TextView.type)
+                }
+        }
 
-        return body.copy(
-            data = DetailApprovalModel(
-                documentTypeId = body.data?.documentTypeId ?: 0,
-                letterType = body.data?.letterType.orEmpty(),
-                status = body.data?.status.orEmpty(),
-                documentFilled = widgets?.toList().orEmpty(),
-                historyApproval = body.data?.historyApproval.orEmpty()
-            )
+        return DetailApprovalModel(
+            documentTypeId = body.documentTypeId,
+            letterType = body.letterType,
+            status = body.status,
+            documentFilled = widgets,
+            historyApproval = body.historyApproval
         )
     }
 
@@ -74,10 +62,12 @@ class GetLetterDetailUseCase(
     )
 
     // TODO set data from local storage
-    private fun assignTextView(widget: Widget) = when (widget.name) {
-        "nama" -> widget.copy(value = "Ivon Khalif")
-        "alamat" -> widget.copy(value = "Jalanin aja, RT 001 RW 001, Bojong Utara, Bojong, Kabupaten Tangerang, Banten.")
-        "pekerjaan" -> widget.copy(value = "Swasta")
+    private fun assignTextView(widget: Widget) = when (widget.title) {
+        "Nama" -> widget.copy(value = user?.name.orEmpty())
+        "Alamat" -> widget.copy(value = user?.addres.orEmpty())
+        "Pekerjaan" -> widget.copy(value = user?.job.orEmpty())
         else -> widget
     }
+
+    private val user = PreferenceUtils.get<User>(USER_PREFERENCE)
 }

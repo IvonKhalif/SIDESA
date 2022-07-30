@@ -1,15 +1,14 @@
 package com.gov.sidesa.ui.approval.submissiondetail
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseActivity
-import com.gov.sidesa.data.letterdetail.models.DetailApprovalModel
+import com.gov.sidesa.data.letterdetail.models.DetailApprovalResponse
 import com.gov.sidesa.databinding.ActivityDetailApprovalSubmissionBinding
+import com.gov.sidesa.domain.letter.detail.models.DetailApprovalModel
 import com.gov.sidesa.ui.letter.input.adapter.LetterInputAdapter
 import com.gov.sidesa.ui.letter.input.models.mapper.WidgetUiModelMapper
-import com.gov.sidesa.ui.letter.input.models.mapper.asUiModel
 import com.gov.sidesa.ui.letter.input.view_holder_factory.LetterInputViewHolderFactory
 import com.gov.sidesa.ui.letter.input.view_holder_factory.LetterInputViewHolderFactoryImpl
 import com.gov.sidesa.utils.constants.LetterConstant
@@ -57,6 +56,5 @@ class DetailApprovalSubmissionActivity : BaseActivity() {
     private fun getWidgetList() = letterDetail?.documentFilled?.map {
         WidgetUiModelMapper.asUiModel(widget = it)
     }
-
 
 }

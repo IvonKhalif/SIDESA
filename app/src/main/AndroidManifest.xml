@@ -33,7 +33,7 @@
         </provider>
 
         <activity
-            android:name=".ui.login.LoginActivity"
+            android:name=".ui.DashboardActivity"
             android:exported="true"
             android:theme="@style/Theme.ContainerTracker.NoActionBar">
             <intent-filter>
@@ -44,7 +44,7 @@
         </activity>
 
         <activity
-            android:name=".ui.DashboardActivity"
+            android:name=".ui.login.LoginActivity"
             android:exported="false"
             android:theme="@style/Theme.ContainerTracker.NoActionBar"/>
         <activity
