@@ -83,13 +83,15 @@
             android:name=".ui.login.forgotpassword.ForgotPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.profile.detail.DetailProfileKKActivity"
-            android:exported="false" />
+            android:name=".ui.profile.detail.kk.DetailProfileKKActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ContainerTracker.NoActionBar" />
         <activity
             android:name=".ui.profile.edit.EditProfileKTPActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.ContainerTracker.NoActionBar" />
         <activity
-            android:name=".ui.profile.detail.DetailProfileKTPActivity"
+            android:name=".ui.profile.detail.ktp.DetailProfileKTPActivity"
             android:exported="false"
             android:theme="@style/Theme.ContainerTracker.NoActionBar" />
         <activity

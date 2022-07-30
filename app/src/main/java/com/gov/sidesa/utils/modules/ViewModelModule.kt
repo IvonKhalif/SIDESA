@@ -7,6 +7,8 @@ import com.gov.sidesa.ui.letter.template.LetterTemplateViewModel
 import com.gov.sidesa.ui.login.LoginViewModel
 import com.gov.sidesa.ui.login.password.PasswordViewModel
 import com.gov.sidesa.ui.profile.detail.family.DetailProfileFamilyViewModel
+import com.gov.sidesa.ui.profile.detail.kk.DetailProfileKKViewModel
+import com.gov.sidesa.ui.profile.detail.ktp.DetailProfileKTPViewModel
 import kotlinx.coroutines.FlowPreview
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -20,4 +22,6 @@ val ViewModelModule = module {
     viewModel { DetailApprovalSubmissionViewModel() }
     viewModel { DetailApprovalViewModel(get()) }
     viewModel { DetailProfileFamilyViewModel(get()) }
+    viewModel { DetailProfileKKViewModel(get()) }
+    viewModel { DetailProfileKTPViewModel(get()) }
 }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/green40_E8F5E9"
-    tools:context=".ui.profile.detail.DetailProfileKTPActivity">
+    tools:context=".ui.profile.detail.ktp.DetailProfileKTPActivity">
 
     <include
         android:id="@+id/custom_toolbar"
@@ -59,11 +59,18 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="16dp"
-                android:text="3603673637836382"
                 android:textColor="@color/black_302C2C"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guideline"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="3603673637836382" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_nik"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="label_nik, text_nik" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/label_name"
@@ -76,7 +83,7 @@
                 android:textColor="@color/white_929292"
                 app:layout_constraintEnd_toEndOf="@id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/label_nik" />
+                app:layout_constraintTop_toBottomOf="@id/barrier_nik" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_name"
@@ -85,11 +92,18 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="16dp"
-                android:text="Roi"
                 android:textColor="@color/black_302C2C"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guideline"
-                app:layout_constraintTop_toBottomOf="@id/text_nik" />
+                app:layout_constraintTop_toBottomOf="@id/barrier_nik"
+                tools:text="Roi" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="label_name, text_name" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/label_ttl"
@@ -102,7 +116,7 @@
                 android:textColor="@color/white_929292"
                 app:layout_constraintEnd_toEndOf="@id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/label_name" />
+                app:layout_constraintTop_toBottomOf="@id/barrier_name" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_ttl"
@@ -111,11 +125,18 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="16dp"
-                android:text="Tangerang, 01 Januari 2022"
                 android:textColor="@color/black_302C2C"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guideline"
-                app:layout_constraintTop_toBottomOf="@id/text_name" />
+                app:layout_constraintTop_toBottomOf="@id/barrier_name"
+                tools:text="Tangerang, 01 Januari 2022" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_ttl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="label_ttl, text_ttl" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/label_gender"
@@ -128,7 +149,7 @@
                 android:textColor="@color/white_929292"
                 app:layout_constraintEnd_toEndOf="@id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/label_ttl" />
+                app:layout_constraintTop_toBottomOf="@id/barrier_ttl" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_gender"
@@ -137,11 +158,18 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="16dp"
-                android:text="Laki-Laki"
                 android:textColor="@color/black_302C2C"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guideline"
-                app:layout_constraintTop_toBottomOf="@id/text_ttl" />
+                app:layout_constraintTop_toBottomOf="@id/barrier_ttl"
+                tools:text="Laki-Laki" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="label_gender, text_gender" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/label_address"
@@ -154,7 +182,7 @@
                 android:textColor="@color/white_929292"
                 app:layout_constraintEnd_toEndOf="@id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/label_gender" />
+                app:layout_constraintTop_toBottomOf="@id/barrier_gender" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_address"
@@ -165,11 +193,18 @@
                 android:layout_marginEnd="16dp"
                 android:ellipsize="end"
                 android:maxLines="5"
-                android:text="Jalanin aja, RT 001 RW 001, Bojong Utara, Bojong."
                 android:textColor="@color/black_302C2C"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guideline"
-                app:layout_constraintTop_toBottomOf="@id/text_gender" />
+                app:layout_constraintTop_toBottomOf="@id/barrier_gender"
+                tools:text="Jalanin aja, RT 001 RW 001, Bojong Utara, Bojong." />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="label_address, text_address" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/label_religion"
@@ -182,7 +217,7 @@
                 android:textColor="@color/white_929292"
                 app:layout_constraintEnd_toEndOf="@id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_address" />
+                app:layout_constraintTop_toBottomOf="@id/barrier_address" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_religion"
@@ -191,11 +226,18 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="16dp"
-                android:text="Islam"
                 android:textColor="@color/black_302C2C"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guideline"
-                app:layout_constraintTop_toBottomOf="@id/text_address" />
+                app:layout_constraintTop_toBottomOf="@id/barrier_address"
+                tools:text="Islam" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_religion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="label_religion, text_religion" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/label_marriage_status"
@@ -208,7 +250,7 @@
                 android:textColor="@color/white_929292"
                 app:layout_constraintEnd_toEndOf="@id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_religion" />
+                app:layout_constraintTop_toBottomOf="@id/barrier_religion" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_marriage_status"
@@ -217,11 +259,18 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="16dp"
-                android:text="Menikah"
                 android:textColor="@color/black_302C2C"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guideline"
-                app:layout_constraintTop_toBottomOf="@id/text_religion" />
+                app:layout_constraintTop_toBottomOf="@id/barrier_religion"
+                tools:text="Menikah" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_marriage_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="label_marriage_status, text_marriage_status" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/label_job"
@@ -234,7 +283,7 @@
                 android:textColor="@color/white_929292"
                 app:layout_constraintEnd_toEndOf="@id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/label_marriage_status" />
+                app:layout_constraintTop_toBottomOf="@id/barrier_marriage_status" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_job"
@@ -243,11 +292,18 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="16dp"
-                android:text="Karyawan Swasta"
                 android:textColor="@color/black_302C2C"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guideline"
-                app:layout_constraintTop_toBottomOf="@id/text_marriage_status" />
+                app:layout_constraintTop_toBottomOf="@id/barrier_marriage_status"
+                tools:text="Karyawan Swasta" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_job"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="label_job, text_job" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/label_nationality"
@@ -260,7 +316,7 @@
                 android:textColor="@color/white_929292"
                 app:layout_constraintEnd_toEndOf="@id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/label_job" />
+                app:layout_constraintTop_toBottomOf="@id/barrier_job" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_nationality"
@@ -269,11 +325,18 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="16dp"
-                android:text="WNI"
                 android:textColor="@color/black_302C2C"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guideline"
-                app:layout_constraintTop_toBottomOf="@id/text_job" />
+                app:layout_constraintTop_toBottomOf="@id/barrier_job"
+                tools:text="WNI" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_nationality"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="label_nationality, text_nationality" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/label_photo"
@@ -287,7 +350,7 @@
                 android:textColor="@color/white_929292"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/label_nationality" />
+                app:layout_constraintTop_toBottomOf="@id/barrier_nationality" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/image_id_card"

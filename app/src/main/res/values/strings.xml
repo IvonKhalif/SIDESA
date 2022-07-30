@@ -249,4 +249,11 @@
     <string name="family_data_husband">Suami</string>
     <string name="family_data_wife">Istri</string>
     <string name="family_data_child_to">Anak %s</string>
+    <string name="profile_kk_number">Nomor Kartu Keluarga</string>
+    <string name="profile_kk_family_head">Kepala Keluarga</string>
+    <string name="profile_address">Alamat</string>
+    <string name="profile_kk_photo">Foto KK</string>
+
+    <string name="profile_kk">Rincian Data Kartu Keluarga</string>
+    <string name="profile_ktp">Rincian Data KTP</string>
 </resources>

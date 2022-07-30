@@ -7,8 +7,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.gov.sidesa.databinding.ActivityProfileBinding
 import com.gov.sidesa.ui.profile.detail.family.DetailProfileFamilyActivity
-import com.gov.sidesa.ui.profile.detail.DetailProfileKKActivity
-import com.gov.sidesa.ui.profile.detail.DetailProfileKTPActivity
+import com.gov.sidesa.ui.profile.detail.kk.DetailProfileKKActivity
+import com.gov.sidesa.ui.profile.detail.ktp.DetailProfileKTPActivity
 
 class ProfileActivity : AppCompatActivity() {
 
