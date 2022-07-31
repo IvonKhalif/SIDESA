@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import com.google.gson.Gson
 import com.gov.sidesa.R
 import com.gov.sidesa.data.registration.ktp.AddressKtpModel
 import com.gov.sidesa.databinding.FragmentAddressKtpBinding
 import com.gov.sidesa.ui.registration.RegistrationStackState
 import com.gov.sidesa.utils.gone
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AddressKtpFragment : Fragment() {
 
@@ -24,7 +24,7 @@ class AddressKtpFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentAddressKtpBinding
-    private val viewModel by activityViewModels<RegistrationKTPViewModel>()
+    private val viewModel: RegistrationKTPViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import com.google.gson.Gson
 import com.gov.sidesa.data.registration.family.FamilyApplicantModel
 import com.gov.sidesa.data.registration.family.FamilyChildModel
@@ -15,11 +14,12 @@ import com.gov.sidesa.data.registration.ktp.AddressKtpModel
 import com.gov.sidesa.databinding.FragmentFamilyReviewBinding
 import com.gov.sidesa.ui.registration.RegistrationStackState
 import com.gov.sidesa.ui.registration.ktp.RegistrationKTPViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FamilyReviewFragment : Fragment() {
 
     private lateinit var binding: FragmentFamilyReviewBinding
-    private val viewModel by activityViewModels<RegistrationKTPViewModel>()
+    private val viewModel: RegistrationKTPViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

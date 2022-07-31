@@ -2,6 +2,13 @@ package com.gov.sidesa.data.registration.family
 
 import com.gov.sidesa.data.registration.ktp.AddressKtpModel
 
+data class FamilyListModel(
+    val fatherModel: FamilyFatherModel,
+    val motherModel: FamilyMotherModel,
+    val applicantModel: FamilyApplicantModel,
+    val childModel: FamilyChildModel
+)
+
 data class FamilyFatherModel(
     val name: String,
     val nik: String,

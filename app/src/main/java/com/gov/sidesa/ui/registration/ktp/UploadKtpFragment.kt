@@ -8,13 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import com.gov.sidesa.databinding.FragmentUploadKtpBinding
 import com.gov.sidesa.ui.registration.RegistrationStackState
 import com.gov.sidesa.utils.gone
 import com.gov.sidesa.utils.picker.SelectImageBottomSheet
 import com.gov.sidesa.utils.visible
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.ByteArrayOutputStream
 import java.io.File
 
@@ -27,7 +27,7 @@ class UploadKtpFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentUploadKtpBinding
-    private val viewModel by activityViewModels<RegistrationKTPViewModel>()
+    private val viewModel: RegistrationKTPViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.gov.sidesa.data.registration.ktp.AddressKtpModel
@@ -16,6 +15,7 @@ import com.gov.sidesa.data.registration.ktp.BiodataKtpModel
 import com.gov.sidesa.data.registration.ktp.GeneralKtpModel
 import com.gov.sidesa.databinding.FragmentReviewKtpBinding
 import com.gov.sidesa.ui.registration.RegistrationStackState
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class ReviewKtpFragment : Fragment() {
@@ -27,7 +27,7 @@ class ReviewKtpFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentReviewKtpBinding
-    private val viewModel by activityViewModels<RegistrationKTPViewModel>()
+    private val viewModel: RegistrationKTPViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
