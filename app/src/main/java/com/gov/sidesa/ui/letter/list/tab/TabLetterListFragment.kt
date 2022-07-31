@@ -172,6 +172,7 @@ class TabLetterListFragment : BaseFragment() {
         val user = PreferenceUtils.getUser()
         val letterType = result?.getStringExtra(LetterConstant.EXTRA_LETTER_TYPE).orEmpty()
         if (result?.getBooleanExtra(LetterConstant.EXTRA_SUBMISSION_HAS_APPROVED, false) == true) {
+            viewModel.getSubmissionLetters()
             showNotification(
                 getString(R.string.letter_detail_success_approve_submission_headline),
                 getString(
@@ -181,6 +182,7 @@ class TabLetterListFragment : BaseFragment() {
                 )
             )
         } else if (result?.getBooleanExtra(LetterConstant.EXTRA_SUBMISSION_HAS_REJECTED, false) == true) {
+            viewModel.getSubmissionLetters()
             showNotification(
                 getString(R.string.letter_detail_success_reject_submission_headline),
                 getString(

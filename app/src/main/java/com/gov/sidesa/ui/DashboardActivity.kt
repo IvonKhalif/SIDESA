@@ -174,7 +174,7 @@ class DashboardActivity : BaseActivity() {
      */
     private fun showNotification(title: String, description: String) {
         val tag = "notification_tag"
-
+        viewModel.getSubmissionLetters()
         showImmediately(supportFragmentManager, tag) {
             NotificationBottomSheet.newInstance(
                 title = title,
@@ -188,6 +188,7 @@ class DashboardActivity : BaseActivity() {
         val user = PreferenceUtils.getUser()
         val letterType = result?.getStringExtra(EXTRA_LETTER_TYPE).orEmpty()
         if (result?.getBooleanExtra(EXTRA_SUBMISSION_HAS_APPROVED, false) == true) {
+            viewModel.getSubmissionLetters()
             showNotification(
                 getString(R.string.letter_detail_success_approve_submission_headline),
                 getString(
@@ -197,6 +198,7 @@ class DashboardActivity : BaseActivity() {
                 )
             )
         } else if (result?.getBooleanExtra(EXTRA_SUBMISSION_HAS_REJECTED, false) == true) {
+            viewModel.getSubmissionLetters()
             showNotification(
                 getString(R.string.letter_detail_success_reject_submission_headline),
                 getString(
