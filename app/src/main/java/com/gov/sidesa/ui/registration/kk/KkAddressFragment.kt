@@ -7,10 +7,15 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
+import com.google.gson.Gson
 import com.gov.sidesa.R
+import com.gov.sidesa.data.registration.kk.KkAddressModel
 import com.gov.sidesa.databinding.FragmentKkAddressBinding
+import com.gov.sidesa.ui.registration.RegistrationStackState
+import com.gov.sidesa.ui.registration.ktp.RegistrationKTPViewModel
 import com.gov.sidesa.ui.registration.ktp.getDummyKecamatanList
 import com.gov.sidesa.ui.registration.ktp.getDummyKelurahanList
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class KkAddressFragment : Fragment() {
 
@@ -21,6 +26,7 @@ class KkAddressFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentKkAddressBinding
+    private val viewModel: RegistrationKTPViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +34,27 @@ class KkAddressFragment : Fragment() {
     ): View? {
         binding = FragmentKkAddressBinding.inflate(layoutInflater)
         return binding.root
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        val addressKkToJson = Gson().toJson(
+            KkAddressModel(
+                binding.customKkAddress.inputKtpAddress.text.toString(),
+                binding.customKkAddress.inputKtpRt.text.toString(),
+                binding.customKkAddress.inputKtpRw.text.toString(),
+                binding.customKkAddress.inputKtpProvince.text.toString(),
+                binding.customKkAddress.inputKtpCity.text.toString(),
+                binding.customKkAddress.inputKtpKecamatan.text.toString(),
+                binding.customKkAddress.inputKtpKelurahan.text.toString(),
+            )
+        )
+        viewModel.setPref(
+            requireContext(),
+            RegistrationStackState.KkAddress.toString(),
+            addressKkToJson
+        )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

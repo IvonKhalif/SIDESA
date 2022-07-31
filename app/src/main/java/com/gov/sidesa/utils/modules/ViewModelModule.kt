@@ -6,6 +6,7 @@ import com.gov.sidesa.ui.letter.input.LetterInputViewModel
 import com.gov.sidesa.ui.letter.template.LetterTemplateViewModel
 import com.gov.sidesa.ui.login.LoginViewModel
 import com.gov.sidesa.ui.login.password.PasswordViewModel
+import com.gov.sidesa.ui.registration.ktp.RegistrationKTPViewModel
 import com.gov.sidesa.ui.profile.detail.family.DetailProfileFamilyViewModel
 import com.gov.sidesa.ui.profile.detail.kk.DetailProfileKKViewModel
 import com.gov.sidesa.ui.profile.detail.ktp.DetailProfileKTPViewModel
@@ -21,6 +22,7 @@ val ViewModelModule = module {
     viewModel { PasswordViewModel(get(), get()) }
     viewModel { LetterInputViewModel(get(), get(), get()) }
     viewModel { LetterTemplateViewModel(get()) }
+    viewModel { RegistrationKTPViewModel(get()) }
     viewModel { DetailApprovalSubmissionViewModel() }
     viewModel { DetailApprovalViewModel(get()) }
     viewModel { DetailProfileFamilyViewModel(get()) }

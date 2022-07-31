@@ -7,14 +7,21 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.gson.Gson
+import com.gov.sidesa.data.registration.family.FamilyFatherModel
+import com.gov.sidesa.data.registration.ktp.AddressKtpModel
 import com.gov.sidesa.databinding.FragmentFamilyChildBinding
+import com.gov.sidesa.ui.registration.RegistrationStackState
+import com.gov.sidesa.ui.registration.ktp.RegistrationKTPViewModel
 import com.gov.sidesa.utils.gone
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
 class FamilyChildFragment : Fragment() {
 
     private lateinit var binding: FragmentFamilyChildBinding
+    private val viewModel: RegistrationKTPViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,6 +29,34 @@ class FamilyChildFragment : Fragment() {
     ): View? {
         binding = FragmentFamilyChildBinding.inflate(layoutInflater, container, false)
         return binding.root
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        val ktpAddress = AddressKtpModel(
+            binding.customFamilyAddress.inputKtpAddress.text.toString(),
+            binding.customFamilyAddress.inputKtpRt.text.toString(),
+            binding.customFamilyAddress.inputKtpRw.text.toString(),
+            binding.customFamilyAddress.inputKtpKecamatan.text.toString(),
+            binding.customFamilyAddress.inputKtpKelurahan.text.toString(),
+        )
+        val isSameAddress = binding.customFamilyChild.checkBoxAddress.isChecked
+        val familyFatherToJson = Gson().toJson(
+            FamilyFatherModel(
+                binding.customFamilyChild.inputFather.text.toString(),
+                binding.customFamilyChild.inputNik.text.toString(),
+                binding.customFamilyChild.inputPlace.text.toString(),
+                binding.customFamilyChild.inputDob.text.toString(),
+                isSameAddress,
+                if (isSameAddress) null else ktpAddress
+            )
+        )
+        viewModel.setPref(
+            requireContext(),
+            RegistrationStackState.FamilyChild.toString(),
+            familyFatherToJson
+        )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
