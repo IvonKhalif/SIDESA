@@ -15,6 +15,7 @@ fun WidgetResponse.asDomain() = Widget(
     type = type,
     inputType = inputType,
     title = title.orEmpty(),
+    value = value.orEmpty(),
     api = api,
     apiType = apiType,
     apiParam = apiParam

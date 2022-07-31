@@ -1,9 +1,11 @@
 package com.gov.sidesa.domain.letter.input.usecases
 
+import com.gov.sidesa.data.user.response.User
 import com.gov.sidesa.domain.letter.input.models.layout.LetterLayout
 import com.gov.sidesa.domain.letter.input.models.layout.Widget
 import com.gov.sidesa.domain.letter.input.models.layout.WidgetType
 import com.gov.sidesa.domain.letter.repository.LetterRepository
+import com.gov.sidesa.utils.PreferenceUtils
 import com.gov.sidesa.utils.response.GenericErrorResponse
 import com.haroldadmin.cnradapter.NetworkResponse
 
@@ -60,14 +62,12 @@ class GetLetterLayoutUseCase(
 
     // TODO set data from local storage
     private fun assignTextView(widget: Widget) = when (widget.name) {
-        "nama" -> widget.copy(value = "Ivon Khalif")
-        "alamat" -> widget.copy(value = "Jalanin aja, RT 001 RW 001, Bojong Utara, Bojong, Kabupaten Tangerang, Banten.")
-        "pekerjaan" -> widget.copy(value = "Swasta")
-        "no_kk" -> widget.copy(value = "1312390291039123")
-        "nik" -> widget.copy(value = "1312390291039122")
-        "nama_kepala_keluarga" -> widget.copy(value = "Wahyu Pradana Putra")
-        "nama_lengkap_anak" -> widget.copy(value = "Arrumaisha Hanum")
-        "jenis_kelamin" -> widget.copy(value = "Perempuan")
+        "nama" -> widget.copy(value = user?.name.orEmpty())
+        "alamat" -> widget.copy(value = user?.addres.orEmpty())
+        "pekerjaan" -> widget.copy(value = user?.job.orEmpty())
+        "nik" -> widget.copy(value = user?.nik.orEmpty())
         else -> widget
     }
+
+    private val user = PreferenceUtils.get<User>(PreferenceUtils.USER_PREFERENCE)
 }

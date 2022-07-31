@@ -49,4 +49,5 @@
     <color name="fontColorPrimary">#484848</color>
     <color name="fontColorSecondary">#AAAAAA</color>
     <color name="divider_color">#ECECEC</color>
+    <color name="background_color_F8FFF5">#F8FFF5</color>
 </resources>

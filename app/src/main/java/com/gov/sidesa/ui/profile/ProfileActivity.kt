@@ -6,7 +6,9 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.gov.sidesa.databinding.ActivityProfileBinding
-import com.gov.sidesa.ui.profile.detail.DetailProfileKTPActivity
+import com.gov.sidesa.ui.profile.detail.family.DetailProfileFamilyActivity
+import com.gov.sidesa.ui.profile.detail.kk.DetailProfileKKActivity
+import com.gov.sidesa.ui.profile.detail.ktp.DetailProfileKTPActivity
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -41,6 +43,16 @@ class ProfileActivity : AppCompatActivity() {
     private fun initListener() {
         binding.textDataKtp.setOnClickListener {
             val intent = Intent(this, DetailProfileKTPActivity::class.java)
+            launcher.launch(intent)
+        }
+
+        binding.textDataKk.setOnClickListener {
+            val intent = Intent(this, DetailProfileKKActivity::class.java)
+            launcher.launch(intent)
+        }
+
+        binding.textDataFamily.setOnClickListener {
+            val intent = Intent(this, DetailProfileFamilyActivity::class.java)
             launcher.launch(intent)
         }
     }

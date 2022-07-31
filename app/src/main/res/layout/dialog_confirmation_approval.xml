@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white_FFFFFF">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_approve_submission_headline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_container"
+                android:layout_marginTop="@dimen/margin_container"
+                android:layout_marginEnd="@dimen/margin_container"
+                android:fontFamily="@font/inter_medium"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/letter_detail_approve_submission_title"
+                android:textColor="@color/black_484848"
+                android:textSize="20sp"
+                android:textAlignment="textStart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_approve_submission_subheadline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_container"
+                android:layout_marginTop="@dimen/margin_container"
+                android:layout_marginEnd="@dimen/margin_container"
+                android:fontFamily="@font/inter_regular"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/letter_detail_approve_submission_subheadline"
+                android:textColor="@color/white_929292"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_approve_submission_headline" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_container"
+                android:background="@drawable/background_border"
+                android:text="@string/letter_detail_button_cancel_title"
+                android:textAppearance="@style/Button"
+                android:textColor="@color/primary_4FBD1C"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/button_approved"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_approve_submission_subheadline" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_approved"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_container"
+                android:background="@drawable/selector_button_corner_radius_6dp"
+                android:text="@string/letter_detail_button_approve_title"
+                android:textAppearance="@style/Button"
+                android:textColor="@color/white_FFFFFF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/button_cancel" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

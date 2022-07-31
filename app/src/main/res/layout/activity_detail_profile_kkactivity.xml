@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.profile.detail.DetailProfileKKActivity">
+    tools:context=".ui.profile.detail.kk.DetailProfileKKActivity">
 
     <include
         android:id="@+id/custom_toolbar"
@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.50" />
+        app:layout_constraintGuide_percent="0.45" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/label_kk"
@@ -28,8 +28,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="16dp"
-        android:text="Nomor Kartu Keluarga"
+        android:layout_marginEnd="8dp"
+        android:text="@string/profile_kk_number"
         android:textColor="@color/white_929292"
         app:layout_constraintEnd_toEndOf="@id/guideline"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,14 +39,21 @@
         android:id="@+id/text_kk"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
-        android:text="3603673637836382"
         android:textColor="@color/black_302C2C"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/guideline"
-        app:layout_constraintTop_toBottomOf="@id/custom_toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/custom_toolbar"
+        tools:text="123123" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier_jkk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="label_kk, text_kk" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/label_kepala_keluarga"
@@ -54,8 +61,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="16dp"
-        android:text="Kepala Keluarga"
+        android:layout_marginEnd="8dp"
+        android:text="@string/profile_kk_family_head"
         android:textColor="@color/white_929292"
         app:layout_constraintEnd_toEndOf="@id/guideline"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,14 +72,21 @@
         android:id="@+id/text_kepala_keluarga"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
-        android:text="Roi"
         android:textColor="@color/black_302C2C"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/guideline"
-        app:layout_constraintTop_toBottomOf="@id/text_kk" />
+        app:layout_constraintTop_toBottomOf="@id/text_kk"
+        tools:text="Roi" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier_family_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="label_kepala_keluarga, text_kepala_keluarga" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/label_address"
@@ -80,27 +94,34 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="16dp"
-        android:text="Alamat"
+        android:layout_marginEnd="8dp"
+        android:text="@string/profile_address"
         android:textColor="@color/white_929292"
         app:layout_constraintEnd_toEndOf="@id/guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/label_kepala_keluarga" />
+        app:layout_constraintTop_toBottomOf="@id/barrier_family_head" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text_address"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
         android:ellipsize="end"
         android:maxLines="5"
-        android:text="Jalanin aja, RT 001 RW 001, Bojong Utara, Bojong."
         android:textColor="@color/black_302C2C"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/guideline"
-        app:layout_constraintTop_toBottomOf="@id/text_kepala_keluarga" />
+        app:layout_constraintTop_toBottomOf="@id/barrier_family_head"
+        tools:text="Jalanin aja, RT 001 RW 001, Bojong Utara, Bojong." />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="label_address, text_address" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/label_photo_kk"
@@ -110,11 +131,11 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
         android:gravity="center_horizontal"
-        android:text="Foto KK"
+        android:text="@string/profile_kk_photo"
         android:textColor="@color/white_929292"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_address" />
+        app:layout_constraintTop_toBottomOf="@id/barrier_address" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/image_id_card"
@@ -133,7 +154,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="Simpan Perubahan"
+        android:text="Ubah Data"
         android:textAllCaps="false"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"

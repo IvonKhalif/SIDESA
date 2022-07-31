@@ -28,6 +28,9 @@ class ForgotPasswordActivity : BaseActivity() {
             inputEmail.value().doOnTextChanged { text, _, _, _ ->
                 buttonSendEmail.isEnabled = text.toString().isEmailPattern()
             }
+            buttonSendEmail.setOnClickListener {
+                showErrorMessage("Feature sedang dalam pengembangan")
+            }
         }
     }
 }

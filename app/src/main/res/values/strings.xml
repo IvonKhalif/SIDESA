@@ -123,11 +123,33 @@
     <string name="letter_detail_letter_rejected_caption">Ditolak</string>
     <string name="letter_detail_submission_marker_caption">Surat Diajukan</string>
     <string name="letter_detail_history_approval_caption">Riwayat Persetujuan</string>
+    <string name="letter_detail_history_submission_caption">Riwayat Pengajuan</string>
     <string name="letter_detail_approval_rt_marker_caption">Menunggu Disetujui RT</string>
     <string name="letter_detail_has_approval_rt_marker_caption">Sudah Disetujui RT</string>
     <string name="letter_detail_approval_rw_marker_caption">Menunggu Disetujui RW</string>
     <string name="letter_detail_has_approval_rw_marker_caption">Sudah Disetujui RW</string>
     <string name="letter_detail_ready_to_pickup_marker_caption">Surat Siap Diambil Di Kelurahan</string>
+    <string name="letter_detail_rejected_caption">Surat Ditolak</string>
+    <string name="letter_detail_approved_caption">Surat Sudah Disetujui</string>
+    <string name="letter_detail_reason_approval_caption">Alasan</string>
+    <string name="letter_detail_see_history_approval_caption">Lihat riwayat persetujuan</string>
+    <string name="letter_detail_see_detail_approval_caption">Lihat Detail Pengajuan</string>
+    <string name="letter_detail_detail_Submission_title">Detail Pengajuan</string>
+    <string name="letter_detail_approve_submission_headline">Mensetujui Surat Pengajuan</string>
+    <string name="letter_detail_approve_submission_subheadline">Apakah Kamu yakin untuk mensetujui surat pengajuan ini?</string>
+    <string name="letter_detail_approve_submission_title">Setujui Pengajuan</string>
+    <string name="letter_detail_button_approve_title">Iya, Setujui</string>
+    <string name="letter_detail_button_cancel_title">Tidak</string>
+    <string name="letter_detail_reject_submission_headline">Tolak Pengajuan</string>
+    <string name="letter_detail_reject_submission_subheadline">Untuk menolak pengajuan, Kamu harus menulis alasan kenapa ingin menolak surat pengajuan ini</string>
+    <string name="letter_detail_success_reject_submission_headline">Surat Pengajuan Berhasil Ditolak</string>
+    <string name="letter_detail_success_reject_submission_subheadline"><![CDATA[
+        Kamu telah menolak surat pengajuan <font color="#484848"><b>%s</b></font> yang diajukan Oleh <font color="#484848"><b>Saya</b></font>.
+        ]]></string>
+    <string name="letter_detail_success_approve_submission_headline">Surat Pengajuan Berhasil Disetujui</string>
+    <string name="letter_detail_success_approve_submission_subheadline"><![CDATA[
+        Kamu telah mensetujui surat pengajuan <font color="#484848"><b>%s</b></font> yang diajukan Oleh <font color="#484848"><b>Saya</b></font>.
+        ]]></string>
 
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -218,4 +240,27 @@
         Surat Pengajuan Berupa <font color="#484848"><b>%s</b></font> yang Kamu ajukan berhasil dikirm. Silahkan menunggu untuk persetujuan.
         ]]>
     </string>
+
+    <!-- PROFILE -->
+    <string name="family_data_detail">Rincian Data Keluarga</string>
+    <string name="family_data_edit">Ubah Data Keluarga</string>
+    <string name="family_data_father">Ayah</string>
+    <string name="family_data_mother">Ibu</string>
+    <string name="family_data_husband">Suami</string>
+    <string name="family_data_wife">Istri</string>
+    <string name="family_data_child_to">Anak %s</string>
+    <string name="profile_kk_number">Nomor Kartu Keluarga</string>
+    <string name="profile_kk_family_head">Kepala Keluarga</string>
+    <string name="profile_address">Alamat</string>
+    <string name="profile_kk_photo">Foto KK</string>
+
+    <string name="profile_kk">Rincian Data Kartu Keluarga</string>
+    <string name="profile_ktp">Rincian Data KTP</string>
+
+    <string name="province">Provinsi</string>
+    <string name="city">Kota</string>
+    <string name="district">Kecamatan</string>
+    <string name="village">Kelurahan/Desa</string>
+    <string name="edit_profile_family_header_title">Pastikan data yang Kamu masukkan sesuai dengan yang ada, karena data ini yang digunakan pada surat pengajuan</string>
+    <string name="edit_profile_family_add_child">Tambah Form Anak</string>
 </resources>

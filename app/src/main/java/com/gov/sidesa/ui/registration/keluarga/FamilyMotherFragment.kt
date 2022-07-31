@@ -10,8 +10,6 @@ import com.google.gson.Gson
 import com.gov.sidesa.data.registration.family.FamilyFatherModel
 import com.gov.sidesa.data.registration.ktp.AddressKtpModel
 import com.gov.sidesa.databinding.FragmentFamilyMotherBinding
-import com.gov.sidesa.ui.registration.RegistrationStackState
-import com.gov.sidesa.ui.registration.ktp.RegistrationKTPViewModel
 import com.gov.sidesa.utils.gone
 import com.gov.sidesa.utils.isVisible
 import org.koin.androidx.viewmodel.ext.android.viewModel

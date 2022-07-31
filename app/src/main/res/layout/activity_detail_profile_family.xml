@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.profile.detail.DetailProfileFamilyActivity">
+    android:background="@color/green40_E8F5E9"
+    tools:context=".ui.profile.detail.family.DetailProfileFamilyActivity">
 
     <include
         android:id="@+id/custom_toolbar"
