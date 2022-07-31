@@ -1,6 +1,6 @@
 package com.gov.sidesa.utils.modules
 
-import com.gov.sidesa.ui.DashboardViewModel
+import com.gov.sidesa.ui.dashboard.DashboardViewModel
 import com.gov.sidesa.ui.approval.DetailApprovalViewModel
 import com.gov.sidesa.ui.approval.submissiondetail.DetailApprovalSubmissionViewModel
 import com.gov.sidesa.ui.letter.detail.DetailSubmissionLetterViewModel

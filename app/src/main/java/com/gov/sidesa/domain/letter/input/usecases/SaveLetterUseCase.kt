@@ -5,6 +5,7 @@ import com.gov.sidesa.domain.letter.input.models.save.LetterContent
 import com.gov.sidesa.domain.letter.input.models.save.SaveLetter
 import com.gov.sidesa.domain.letter.repository.LetterRepository
 import com.gov.sidesa.ui.letter.input.models.base.BaseWidgetUiModel
+import com.gov.sidesa.utils.PreferenceUtils
 import com.gov.sidesa.utils.response.GenericErrorResponse
 import com.haroldadmin.cnradapter.NetworkResponse
 
@@ -33,7 +34,7 @@ class SaveLetterUseCase(
             ), 0)
 
         val letter = SaveLetter(
-            accountId = "3",
+            accountId = PreferenceUtils.getUser()?.id.orEmpty(),
             letterTypeId = letterTypeId,
             contents = widget.filterNot {
                 it.type == WidgetType.Header

@@ -35,9 +35,7 @@
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true"
-            android:theme="@style/Theme.ContainerTracker.NoActionBar" >
-
-        </activity>
+            android:theme="@style/Theme.ContainerTracker.NoActionBar" />
 
         <activity
             android:name=".ui.DashboardActivity"
@@ -114,6 +112,10 @@
             android:name=".ui.letter.template.LetterTemplateActivity"
             android:exported="false"
             android:theme="@style/Theme.ContainerTracker.NoActionBar" />
+        <activity
+            android:name=".ui.SplashActivity"
+            android:exported="false"
+            android:theme="@style/SplashTheme"/>
     </application>
 
 </manifest>

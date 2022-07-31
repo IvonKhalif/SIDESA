@@ -20,9 +20,9 @@ class GetLetterDetailUseCase(
         val user = PreferenceUtils.getUser()
         return when (val result = repository.getDetail(letterId = letterId, accountId = user?.id.orEmpty())) {
             is NetworkResponse.Success -> {
-                val layout = assignWidgetFromLocal(result.body.letterType, result.body)
+                val layout = result.body.letterType?.let { assignWidgetFromLocal(it, result.body) }
 
-                NetworkResponse.Success(layout)
+                NetworkResponse.Success(layout!!)
             }
             else -> result
         }

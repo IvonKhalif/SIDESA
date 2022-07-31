@@ -13,28 +13,28 @@ data class DetailApprovalResponse(
 //    val documentTypeId: Int,
     @SerializedName("type_surat")
     @Expose
-    val letterType: String,
+    val letterType: String?,
     @SerializedName("id_pengajuan_surat")
     @Expose
-    val submissionLetterId: String = "",
+    val submissionLetterId: String? = "",
     @SerializedName("nama_lengkap")
     @Expose
-    val userName: String = "",
+    val userName: String? = "",
     @SerializedName("nik")
     @Expose
-    val nik: String = "",
+    val nik: String? = "",
     @SerializedName("alamat")
     @Expose
     val address: String? = "",
     @SerializedName("created_date")
     @Expose
-    val createdDate: String = "",
+    val createdDate: String? = "",
     @SerializedName("no_surat")
     @Expose
-    val letterNumber: String = "",
+    val letterNumber: String? = "",
     @SerializedName("status")
     @Expose
-    val status: String = "",
+    val status: String? = "",
     @SerializedName("description")
     @Expose
     val description: String? = "",

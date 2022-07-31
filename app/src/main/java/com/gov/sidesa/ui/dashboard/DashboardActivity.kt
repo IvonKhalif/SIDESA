@@ -1,9 +1,8 @@
-package com.gov.sidesa.ui
+package com.gov.sidesa.ui.dashboard
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gov.sidesa.R
@@ -29,6 +28,7 @@ import com.gov.sidesa.utils.constants.LetterConstant.EXTRA_LETTER_TYPE
 import com.gov.sidesa.utils.constants.LetterConstant.EXTRA_SUBMISSION_HAS_APPROVED
 import com.gov.sidesa.utils.constants.LetterConstant.EXTRA_SUBMISSION_HAS_REJECTED
 import com.gov.sidesa.utils.constants.LetterConstant.EXTRA_SUBMISSION_LETTER_ID
+import com.gov.sidesa.utils.constants.UserExtrasConstant.PROFILE_NOT_COMPLETE
 import com.gov.sidesa.utils.enums.CategoryLetterEnum
 import com.gov.sidesa.utils.extension.observeNonNull
 import kotlinx.coroutines.FlowPreview
@@ -40,6 +40,9 @@ class DashboardActivity : BaseActivity() {
 
     private val viewModel by viewModel<DashboardViewModel>()
     private var actor = ""
+    private val user by lazy {
+        PreferenceUtils.getUser()
+    }
 
     private val submissionAdapter by lazy {
         LetterSubmissionAdapter(
@@ -77,16 +80,22 @@ class DashboardActivity : BaseActivity() {
             )
 
             buttonAccount.setOnClickListener {
-                startActivity(Intent(this@DashboardActivity, ProfileActivity::class.java))
+                doClickOtherThanRegister {
+                    startActivity(Intent(this@DashboardActivity, ProfileActivity::class.java))
+                }
             }
             buttonSeeAllNeedApproval.setOnClickListener {
-                goToLetterList(CategoryLetterEnum.NEED_APPROVAL.category)
+                doClickOtherThanRegister {
+                    goToLetterList(CategoryLetterEnum.NEED_APPROVAL.category)
+                }
             }
             buttonSeeAllSubmission.setOnClickListener {
-                goToLetterList(CategoryLetterEnum.SUBMISSION.category)
+                doClickOtherThanRegister {
+                    goToLetterList(CategoryLetterEnum.SUBMISSION.category)
+                }
             }
             buttonChooseLetter.setOnClickListener {
-                goToLetterTemplate()
+                doClickOtherThanRegister(::goToLetterTemplate)
             }
             buttonRegisterNow.setOnClickListener {
                 startActivity(Intent(this@DashboardActivity, RegistrationKTPActivity::class.java))
@@ -160,7 +169,6 @@ class DashboardActivity : BaseActivity() {
         intent.putExtra(EXTRA_SUBMISSION_LETTER_ID, letterListApprovalModel.letterId)
         intent.putExtra(EXTRA_ACTOR_APPROVAL, actor)
         resultLauncher.launch(intent)
-//        startActivity(Intent(this, DetailApprovalLetterActivity::class.java))
     }
 
     private fun onItemSubmissionClick(letterSubmissionModel: LetterSubmissionModel) {
@@ -208,5 +216,15 @@ class DashboardActivity : BaseActivity() {
                 )
             )
         }
+    }
+
+    private fun doClickOtherThanRegister(onHasRegister: () -> Unit) {
+        if (user?.statusUser == PROFILE_NOT_COMPLETE)
+            showNotification(
+                getString(R.string.dashboard_must_regist_first_headline),
+                getString(R.string.dashboard_must_regist_first_subheadline)
+            )
+        else
+            onHasRegister()
     }
 }

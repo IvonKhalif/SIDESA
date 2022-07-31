@@ -1,4 +1,4 @@
-package com.gov.sidesa.ui
+package com.gov.sidesa.ui.dashboard
 
 import android.app.Activity
 import android.content.Intent

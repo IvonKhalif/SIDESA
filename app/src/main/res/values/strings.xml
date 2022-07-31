@@ -103,6 +103,8 @@
     <string name="dashboard_select_letter_caption">Surat apa yang ingin Kamu ajukan hari ini?</string>
     <string name="dashboard_need_approval_caption">Butuh Persetujuan</string>
     <string name="dashboard_submission_list_caption">Daftar Pengajuan</string>
+    <string name="dashboard_must_regist_first_headline">Kamu Harus Registrasi Terlebih Dahulu</string>
+    <string name="dashboard_must_regist_first_subheadline">Kamu tidak bisa akses ke menu ini, karena harus mengisi registrasi data terlebih dahulu.</string>
 
     <!--  Letter List  -->
     <string name="letter_list_empty_state_caption">Belum ada daftar pengajuan</string>

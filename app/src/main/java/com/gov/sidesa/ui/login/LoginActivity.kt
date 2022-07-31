@@ -1,18 +1,16 @@
 package com.gov.sidesa.ui.login
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.widget.doOnTextChanged
 import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseActivity
 import com.gov.sidesa.databinding.ActivityLoginBinding
-import com.gov.sidesa.ui.DashboardActivity
+import com.gov.sidesa.ui.dashboard.DashboardActivity
 import com.gov.sidesa.ui.login.password.PasswordActivity
 import com.gov.sidesa.utils.constants.UserExtrasConstant.EXTRA_STATUS_NIK
 import com.gov.sidesa.utils.constants.UserExtrasConstant.EXTRA_USER_ID
 import com.gov.sidesa.utils.constants.UserExtrasConstant.EXTRA_USER_NIK
-import com.gov.sidesa.utils.enums.StatusResponseEnum
 import com.gov.sidesa.utils.extension.observeNonNull
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

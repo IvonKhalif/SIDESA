@@ -90,7 +90,7 @@ class DetailApprovalLetterActivity : BaseActivity() {
             textIdLetter.text = detailApprovalModel.letterNumber
             textLetterType.text = detailApprovalModel.letterType
             textLetterDateSubmission.text = detailApprovalModel.createdDate
-            textLetterStatus.text = getLetterStatus(detailApprovalModel.status)
+            textLetterStatus.text = detailApprovalModel.status?.let { getLetterStatus(it) }
             textReason.text = detailApprovalModel.description
             customUserSubmittedLetter.textName.text = detailApprovalModel.userName
             customUserSubmittedLetter.textKtpNumber.text = detailApprovalModel.nik

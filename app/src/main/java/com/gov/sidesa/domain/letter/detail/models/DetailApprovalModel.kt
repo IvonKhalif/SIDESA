@@ -9,15 +9,15 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 class DetailApprovalModel(
 //    val documentTypeId: Int,
-    val letterType: String,
-    val submissionLetterId: String = "",
-    val userName: String = "",
-    val nik: String = "",
-    val address: String = "",
-    val createdDate: String = "",
-    val letterNumber: String = "",
-    val status: String = "",
-    val description: String = "",
+    val letterType: String?,
+    val submissionLetterId: String? = "",
+    val userName: String? = "",
+    val nik: String? = "",
+    val address: String? = "",
+    val createdDate: String? = "",
+    val letterNumber: String? = "",
+    val status: String? = "",
+    val description: String? = "",
     val documentFilled: List<Widget>,
     val historyApproval: List<HistoryApprovalModel>
 ) : Parcelable

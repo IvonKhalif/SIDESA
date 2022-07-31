@@ -37,7 +37,7 @@ class DetailSubmissionLetterActivity : BaseActivity() {
             textIdLetter.text = detailApprovalModel.letterNumber
             textLetterType.text = detailApprovalModel.letterType
             textLetterDateSubmission.text = detailApprovalModel.createdDate
-            textLetterStatus.text = getLetterStatus(detailApprovalModel.status)
+            textLetterStatus.text = detailApprovalModel.status?.let { getLetterStatus(it) }
             historyApproval.initialize(detailApprovalModel.historyApproval)
         }
 
