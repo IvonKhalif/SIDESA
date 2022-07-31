@@ -11,6 +11,7 @@ import com.gov.sidesa.ui.profile.edit.family.models.EditProfileFamilyViewType
 import com.gov.sidesa.utils.response.GenericErrorResponse
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.*
 
 /**
  * Created by yovi.putra on 31/07/22"
@@ -38,13 +39,19 @@ class EditProfileFamilyViewModel : BaseViewModel(), EditProfileFamilyListener {
     private val _selectVillageState = MutableLiveData<EditProfileFamilyUiModel>()
     val selectVillageState: LiveData<EditProfileFamilyUiModel> get() = _selectVillageState
 
+    private val _selectBirthDateState = MutableLiveData<EditProfileFamilyUiModel>()
+    val selectBirthDateState: LiveData<EditProfileFamilyUiModel> get() = _selectBirthDateState
+
     init {
         viewModelScope.launch {
             showLoadingWidget()
             delay(1000)
             _componentData.value = listOf(
                 EditProfileFamilyUiModel(type = EditProfileFamilyViewType.Header),
-                EditProfileFamilyUiModel(type = EditProfileFamilyViewType.Form),
+                EditProfileFamilyUiModel(
+                    type = EditProfileFamilyViewType.Form,
+                    relationFamily = "istri"
+                ),
                 EditProfileFamilyUiModel(type = EditProfileFamilyViewType.Form),
                 EditProfileFamilyUiModel(type = EditProfileFamilyViewType.AddChild)
             )
@@ -55,8 +62,8 @@ class EditProfileFamilyViewModel : BaseViewModel(), EditProfileFamilyListener {
     /**
      * View Holder Listener Implementation
      */
-    override fun onRelationStatusClicked(uiModel: EditProfileFamilyUiModel) {
-
+    override fun onRelationStatusChanged(uiModel: EditProfileFamilyUiModel) {
+        updateWidget(uiModel)
     }
 
     override fun onNameTextChanged(uiModel: EditProfileFamilyUiModel) {
@@ -72,7 +79,7 @@ class EditProfileFamilyViewModel : BaseViewModel(), EditProfileFamilyListener {
     }
 
     override fun onBirthDateClicked(uiModel: EditProfileFamilyUiModel) {
-
+        _selectBirthDateState.value = uiModel
     }
 
     override fun onSameAddressClicked(uiModel: EditProfileFamilyUiModel) {
@@ -163,6 +170,10 @@ class EditProfileFamilyViewModel : BaseViewModel(), EditProfileFamilyListener {
 
     fun onVillageSelected(uiModel: EditProfileFamilyUiModel, region: Region) {
         updateWidget(uiModel = uiModel.copy(village = region))
+    }
+
+    fun onBirthDateSelected(uiModel: EditProfileFamilyUiModel, millis: Long) {
+        updateWidget(uiModel = uiModel.copy(birthDate = Date(millis)))
     }
 
     /**

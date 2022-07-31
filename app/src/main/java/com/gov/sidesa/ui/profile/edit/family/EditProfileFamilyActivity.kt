@@ -2,6 +2,7 @@ package com.gov.sidesa.ui.profile.edit.family
 
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseActivity
 import com.gov.sidesa.base.showImmediately
@@ -10,6 +11,8 @@ import com.gov.sidesa.ui.profile.edit.family.adapter.EditProfileFamilyAdapter
 import com.gov.sidesa.ui.regions.SelectRegionBottomSheet
 import com.gov.sidesa.utils.picker.RecyclerViewItemDecoration
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 class EditProfileFamilyActivity : BaseActivity() {
     private lateinit var binding: ActivityEditProfileFamilyBinding
@@ -102,6 +105,18 @@ class EditProfileFamilyActivity : BaseActivity() {
                     sheet.dismissAllowingStateLoss()
                 }
                 sheet
+            }
+        }
+
+        selectBirthDateState.observe(this@EditProfileFamilyActivity) { uiModel ->
+            showImmediately(supportFragmentManager, "select_birth_date") {
+                val picker = MaterialDatePicker.Builder.datePicker()
+                    .setTitleText("Pilih Tanggal Lahir")
+                    .build()
+                picker.addOnPositiveButtonClickListener {
+                    viewModel.onBirthDateSelected(uiModel = uiModel, millis = it)
+                }
+                picker
             }
         }
     }

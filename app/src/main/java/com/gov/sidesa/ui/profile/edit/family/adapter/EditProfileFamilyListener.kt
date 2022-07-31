@@ -9,7 +9,7 @@ import com.gov.sidesa.ui.profile.edit.family.models.EditProfileFamilyUiModel
 
 interface EditProfileFamilyListener {
 
-    fun onRelationStatusClicked(uiModel: EditProfileFamilyUiModel)
+    fun onRelationStatusChanged(uiModel: EditProfileFamilyUiModel)
 
     fun onNameTextChanged(uiModel: EditProfileFamilyUiModel)
 

@@ -1,6 +1,7 @@
 package com.gov.sidesa.ui.profile.edit.family.models
 
 import com.gov.sidesa.domain.regions.models.Region
+import java.text.SimpleDateFormat
 import java.util.*
 
 /**
@@ -15,7 +16,7 @@ data class EditProfileFamilyUiModel(
     val name: String = "",
     val ktpNumber: String = "",
     val birthPlace: String = "",
-    val birthDate: Date = Date(),
+    val birthDate: Date? = null,
     val address: String = "",
     val differentAddress: Boolean = false,
     val province: Region? = null,
@@ -32,6 +33,7 @@ data class EditProfileFamilyUiModel(
             && district?.id == newItem.district?.id
             && village?.id == newItem.village?.id
             && differentAddress == newItem.differentAddress
+            && birthDate == newItem.birthDate
 
     fun areContentsTheSame(
         newItem: EditProfileFamilyUiModel
@@ -39,4 +41,12 @@ data class EditProfileFamilyUiModel(
 
     val inputStatusVisibilityState
         get() = relationFamily == "istri" || relationFamily == "suami"
+
+    val birtDateFormatted: String
+        get() = run {
+            val format = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+            birthDate?.let {
+                format.format(it)
+            } ?: run { "" }
+        }
 }

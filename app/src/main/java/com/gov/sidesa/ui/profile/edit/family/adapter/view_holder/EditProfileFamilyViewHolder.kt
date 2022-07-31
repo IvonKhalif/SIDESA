@@ -2,9 +2,11 @@ package com.gov.sidesa.ui.profile.edit.family.adapter.view_holder
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
+import com.gov.sidesa.R
 import com.gov.sidesa.databinding.ItemEditProfileFamilyBinding
 import com.gov.sidesa.ui.profile.edit.family.adapter.EditProfileFamilyListener
 import com.gov.sidesa.ui.profile.edit.family.models.EditProfileFamilyUiModel
@@ -29,6 +31,7 @@ class EditProfileFamilyViewHolder(
         inputLayoutStatus.isVisible = data.inputStatusVisibilityState
         checkBoxAddress.isChecked = !data.differentAddress
         containerAddress.containerAddress.isVisible = data.differentAddress
+        inputDob.setText(data.birtDateFormatted)
 
         with(containerAddress) {
             inputProvince.setText(data.province?.name.orEmpty())
@@ -39,8 +42,8 @@ class EditProfileFamilyViewHolder(
     }
 
     private fun initEvent(data: EditProfileFamilyUiModel) = with(binding) {
-        inputStatus.setOnClickListener {
-            listener.onRelationStatusClicked(uiModel = data)
+        if (data.inputStatusVisibilityState) {
+            setRelationStatus(uiModel = data)
         }
 
         inputName.addTextChangedListener(onTextChanged = { _, _, _, _ ->
@@ -54,6 +57,10 @@ class EditProfileFamilyViewHolder(
         inputPlace.addTextChangedListener(onTextChanged = { _, _, _, _ ->
             listener.onBirthPlace(data.copy(name = inputNik.text.toString()))
         })
+
+        inputLayoutDob.setEndIconOnClickListener {
+            listener.onBirthDateClicked(uiModel = data)
+        }
 
         inputDob.setOnClickListener {
             listener.onBirthDateClicked(uiModel = data)
@@ -78,21 +85,50 @@ class EditProfileFamilyViewHolder(
                 listener.onRWChanged(data.copy(name = inputNik.text.toString()))
             })
 
+            inputLayoutProvince.setEndIconOnClickListener {
+                listener.onProvinceClicked(uiModel = data)
+            }
             inputProvince.setOnClickListener {
                 listener.onProvinceClicked(uiModel = data)
             }
 
+            inputLayoutCity.setOnClickListener {
+                listener.onCityClicked(uiModel = data)
+            }
             inputCity.setOnClickListener {
                 listener.onCityClicked(uiModel = data)
             }
 
+            inputLayoutKecamatan.setOnClickListener {
+                listener.onDistrictClicked(uiModel = data)
+            }
             inputKecamatan.setOnClickListener {
                 listener.onDistrictClicked(uiModel = data)
             }
 
+            inputLayoutKelurahan.setOnClickListener {
+                listener.onVillageClicked(uiModel = data)
+            }
             inputKelurahan.setOnClickListener {
                 listener.onVillageClicked(uiModel = data)
             }
+        }
+    }
+
+    private fun setRelationStatus(uiModel: EditProfileFamilyUiModel) {
+        val context = binding.root.context
+        val relationStatus = ArrayAdapter(
+            context,
+            R.layout.item_dropdown,
+            context.resources.getStringArray(R.array.status_applicant)
+        )
+        binding.inputStatus.setAdapter(relationStatus)
+        binding.inputStatus.addTextChangedListener {
+            listener.onRelationStatusChanged(
+                uiModel.copy(
+                    relationFamily = it.toString().lowercase()
+                )
+            )
         }
     }
 
