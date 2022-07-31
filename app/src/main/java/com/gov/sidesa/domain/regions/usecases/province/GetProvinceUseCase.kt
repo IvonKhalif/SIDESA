@@ -1,4 +1,4 @@
-package com.gov.sidesa.domain.regions.usecases.district
+package com.gov.sidesa.domain.regions.usecases.province
 
 import com.gov.sidesa.domain.regions.RegionsRepository
 import com.gov.sidesa.domain.regions.models.Region
@@ -11,10 +11,10 @@ import com.haroldadmin.cnradapter.NetworkResponse
  **/
 
 
-class GetDistrictUseCase(
+class GetProvinceUseCase(
     private val repository: RegionsRepository
 ) {
 
-    suspend operator fun invoke(cityId: Long): NetworkResponse<List<Region>, GenericErrorResponse> =
-        repository.getDistrict(cityId = cityId)
+    suspend operator fun invoke(): NetworkResponse<List<Region>, GenericErrorResponse> =
+        repository.getProvince()
 }
