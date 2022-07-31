@@ -31,6 +31,7 @@ data class EditProfileFamilyUiModel(
             && city?.id == newItem.city?.id
             && district?.id == newItem.district?.id
             && village?.id == newItem.village?.id
+            && differentAddress == newItem.differentAddress
 
     fun areContentsTheSame(
         newItem: EditProfileFamilyUiModel

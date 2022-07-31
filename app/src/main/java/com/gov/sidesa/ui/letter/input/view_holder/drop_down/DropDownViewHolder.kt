@@ -38,6 +38,9 @@ class DropDownViewHolder(
         tilSelectLayout.hint = model.title
         ddSelect.setText(model.selectedText.orEmpty())
 
+        tilSelectLayout.setEndIconOnClickListener {
+            listener.onDropDownClick(model = model)
+        }
         ddSelect.setOnClickListener {
             listener.onDropDownClick(model = model)
         }

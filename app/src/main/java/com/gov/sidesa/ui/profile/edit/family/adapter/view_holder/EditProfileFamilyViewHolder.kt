@@ -62,7 +62,7 @@ class EditProfileFamilyViewHolder(
         checkBoxAddress.setOnClickListener {
             val state = checkBoxAddress.isChecked
             containerAddress.containerAddress.isVisible = !state
-            listener.onSameAddressClicked(uiModel = data.copy(differentAddress = !state))
+            listener.onSameAddressClicked(uiModel = data.copy(differentAddress = state))
         }
 
         with(containerAddress) {
