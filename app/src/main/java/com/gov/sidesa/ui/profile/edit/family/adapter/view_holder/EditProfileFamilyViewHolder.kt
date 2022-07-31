@@ -10,6 +10,7 @@ import com.gov.sidesa.R
 import com.gov.sidesa.databinding.ItemEditProfileFamilyBinding
 import com.gov.sidesa.ui.profile.edit.family.adapter.EditProfileFamilyListener
 import com.gov.sidesa.ui.profile.edit.family.models.EditProfileFamilyUiModel
+import com.gov.sidesa.ui.profile.edit.family.models.RelationType
 
 /**
  * Created by yovi.putra on 31/07/22"
@@ -30,6 +31,9 @@ class EditProfileFamilyViewHolder(
     }
 
     private fun initView(data: EditProfileFamilyUiModel) = with(binding) {
+        textHeader.isVisible = data.titleVisibilityState
+        textHeader.text = data.titleText
+
         inputLayoutName.hint = context.getString(data.nameTitle)
         inputLayoutStatus.isVisible = data.inputStatusVisibilityState
         checkBoxAddress.isChecked = !data.differentAddress
@@ -128,7 +132,7 @@ class EditProfileFamilyViewHolder(
         binding.inputStatus.addTextChangedListener {
             listener.onRelationStatusChanged(
                 uiModel.copy(
-                    relationFamily = it.toString().lowercase()
+                    relationFamily = RelationType.find(it.toString())
                 )
             )
         }

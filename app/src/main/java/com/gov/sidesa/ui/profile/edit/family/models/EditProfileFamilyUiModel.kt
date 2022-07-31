@@ -13,7 +13,7 @@ import java.util.*
 data class EditProfileFamilyUiModel(
     val id: String = UUID.randomUUID().toString(),
     val type: EditProfileFamilyViewType = EditProfileFamilyViewType.Form,
-    val relationFamily: String = "",
+    val relationFamily: RelationType = RelationType.Father,
     val name: String = "",
     val ktpNumber: String = "",
     val birthPlace: String = "",
@@ -40,12 +40,21 @@ data class EditProfileFamilyUiModel(
         newItem: EditProfileFamilyUiModel
     ): Boolean = areItemsTheSame(newItem = newItem)
 
+    val titleVisibilityState
+        get() = relationFamily is RelationType.Child
+
+    val titleText: String
+        get() {
+            val child = (relationFamily as? RelationType.Child)
+            return "Anak ${child?.count}"
+        }
+
     val nameTitle
         get() = when (relationFamily) {
-            "ayah" -> {
+            is RelationType.Father -> {
                 R.string.fullname_father
             }
-            "ibu" -> {
+            is RelationType.Mother -> {
                 R.string.fullname_mother
             }
             else -> {
@@ -54,7 +63,7 @@ data class EditProfileFamilyUiModel(
         }
 
     val inputStatusVisibilityState
-        get() = relationFamily == "istri" || relationFamily == "suami"
+        get() = relationFamily == RelationType.Husband || relationFamily == RelationType.Wife
 
     val birtDateFormatted: String
         get() = run {

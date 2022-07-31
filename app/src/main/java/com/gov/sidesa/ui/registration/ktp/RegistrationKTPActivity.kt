@@ -16,11 +16,6 @@ import com.gov.sidesa.ui.registration.kk.ReviewKkFragment
 import com.gov.sidesa.ui.registration.kk.UploadKkFragment
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import com.gov.sidesa.ui.registration.keluarga.*
-import com.gov.sidesa.ui.registration.kk.KkAddressFragment
-import com.gov.sidesa.ui.registration.kk.KkBiodataFragment
-import com.gov.sidesa.ui.registration.kk.KkDetailFragment
-import com.gov.sidesa.ui.registration.kk.UploadKkFragment
 
 class RegistrationKTPActivity : AppCompatActivity() {
 

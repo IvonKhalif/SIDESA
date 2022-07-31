@@ -108,13 +108,6 @@
             android:name=".ui.profile.ProfileActivity"
             android:exported="false"
             android:theme="@style/Theme.ContainerTracker.NoActionBar" />
-        <activity
-            android:name=".ui.registration.ktp.RegistrationKTPActivity"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.ContainerTracker.NoActionBar">
-
-        </activity>
     </application>
 
 </manifest>

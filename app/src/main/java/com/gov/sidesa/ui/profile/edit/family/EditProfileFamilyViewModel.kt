@@ -8,6 +8,7 @@ import com.gov.sidesa.domain.regions.models.Region
 import com.gov.sidesa.ui.profile.edit.family.adapter.EditProfileFamilyListener
 import com.gov.sidesa.ui.profile.edit.family.models.EditProfileFamilyUiModel
 import com.gov.sidesa.ui.profile.edit.family.models.EditProfileFamilyViewType
+import com.gov.sidesa.ui.profile.edit.family.models.RelationType
 import com.gov.sidesa.utils.response.GenericErrorResponse
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -50,15 +51,15 @@ class EditProfileFamilyViewModel : BaseViewModel(), EditProfileFamilyListener {
                 EditProfileFamilyUiModel(type = EditProfileFamilyViewType.Header),
                 EditProfileFamilyUiModel(
                     type = EditProfileFamilyViewType.Form,
-                    relationFamily = "ayah"
+                    relationFamily = RelationType.Father
                 ),
                 EditProfileFamilyUiModel(
                     type = EditProfileFamilyViewType.Form,
-                    relationFamily = "ibu"
+                    relationFamily = RelationType.Mother
                 ),
                 EditProfileFamilyUiModel(
                     type = EditProfileFamilyViewType.Form,
-                    relationFamily = "istri"
+                    relationFamily = RelationType.Husband
                 ),
                 EditProfileFamilyUiModel(type = EditProfileFamilyViewType.AddChild)
             )
@@ -137,7 +138,15 @@ class EditProfileFamilyViewModel : BaseViewModel(), EditProfileFamilyListener {
         val component = _componentData.value.orEmpty()
             .filterNot { it.type == EditProfileFamilyViewType.AddChild }
             .toMutableList()
-        component.add(EditProfileFamilyUiModel())
+        val countChild = _componentData.value.orEmpty()
+            .count { it.relationFamily is RelationType.Child }
+        component.add(
+            EditProfileFamilyUiModel(
+                relationFamily = RelationType.Child(
+                    countChild + 1
+                )
+            )
+        )
         component.add(EditProfileFamilyUiModel(type = EditProfileFamilyViewType.AddChild))
         _componentData.value = component
     }
