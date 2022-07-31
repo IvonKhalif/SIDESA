@@ -49,7 +49,7 @@
             android:theme="@style/Theme.ContainerTracker.NoActionBar" />
 
         <activity
-            android:name=".ui.letter.template.LetterTemplateActivity"
+            android:name=".ui.registration.ktp.RegistrationKTPActivity"
             android:exported="true"
             android:theme="@style/Theme.ContainerTracker.NoActionBar" />
 

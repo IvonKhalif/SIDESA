@@ -7,10 +7,13 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.gson.Gson
 import com.gov.sidesa.R
+import com.gov.sidesa.data.registration.ktp.BiodataKtpModel
 import com.gov.sidesa.databinding.FragmentBiodataKtpBinding
+import com.gov.sidesa.ui.registration.RegistrationStackState
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -23,7 +26,7 @@ class BiodataKtpFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentBiodataKtpBinding
-    private val viewModel by activityViewModels<RegistrationKTPViewModel>()
+    private val viewModel: RegistrationKTPViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +34,26 @@ class BiodataKtpFragment : Fragment() {
     ): View {
         binding = FragmentBiodataKtpBinding.inflate(layoutInflater, container, false)
         return binding.root
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        val biodataKtpToJson = Gson().toJson(
+            BiodataKtpModel(
+                binding.customKtpBiodata.inputKtpNik.text.toString(),
+                binding.customKtpBiodata.inputKtpName.text.toString(),
+                binding.customKtpBiodata.inputKtpPlace.text.toString(),
+                binding.customKtpBiodata.inputKtpDob.text.toString(),
+                binding.customKtpBiodata.inputKtpGender.text.toString(),
+                binding.customKtpBiodata.inputKtpBloodType.text.toString(),
+            )
+        )
+        viewModel.setPref(
+            requireContext(),
+            RegistrationStackState.KtpBiodata.toString(),
+            biodataKtpToJson
+        )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

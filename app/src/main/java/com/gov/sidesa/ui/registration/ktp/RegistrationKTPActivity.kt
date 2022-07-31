@@ -5,10 +5,17 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.gov.sidesa.R
 import com.gov.sidesa.databinding.ActivityRegistrationKtpactivityBinding
 import com.gov.sidesa.ui.registration.RegistrationStackState
+import com.gov.sidesa.ui.registration.keluarga.*
+import com.gov.sidesa.ui.registration.kk.KkAddressFragment
+import com.gov.sidesa.ui.registration.kk.KkBiodataFragment
+import com.gov.sidesa.ui.registration.kk.ReviewKkFragment
+import com.gov.sidesa.ui.registration.kk.UploadKkFragment
+import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.gov.sidesa.ui.registration.keluarga.*
 import com.gov.sidesa.ui.registration.kk.KkAddressFragment
 import com.gov.sidesa.ui.registration.kk.KkBiodataFragment
@@ -18,15 +25,15 @@ import com.gov.sidesa.ui.registration.kk.UploadKkFragment
 class RegistrationKTPActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegistrationKtpactivityBinding
-    private lateinit var viewModel: RegistrationKTPViewModel
+    private val viewModel: RegistrationKTPViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel = ViewModelProvider(this)[RegistrationKTPViewModel::class.java]
         binding = ActivityRegistrationKtpactivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.customToolbar.toolbarDetailProfile.title = "Registrasi Data"
         initObserver()
         initListener()
         showFragment(BiodataKtpFragment(), RegistrationStackState.KtpBiodata)
@@ -156,7 +163,7 @@ class RegistrationKTPActivity : AppCompatActivity() {
                     val fragment =
                         supportFragmentManager.findFragmentByTag(RegistrationStackState.KkReview.toString())
                     fragment?.let { it1 -> showFragment(it1, RegistrationStackState.KkReview) }
-                        ?: showFragment(KkDetailFragment(), RegistrationStackState.KkReview)
+                        ?: showFragment(ReviewKkFragment(), RegistrationStackState.KkReview)
                 }
                 is RegistrationStackState.KkReview -> {
                     val fragment =
@@ -196,11 +203,20 @@ class RegistrationKTPActivity : AppCompatActivity() {
                     fragment?.let { it1 -> showFragment(it1, RegistrationStackState.FamilyReview) }
                         ?: showFragment(FamilyReviewFragment(), RegistrationStackState.FamilyReview)
                 }
+                is RegistrationStackState.FamilyReview -> {
+                    lifecycleScope.launch {
+                        viewModel.registrationNewAccount(this@RegistrationKTPActivity)
+                    }
+                }
             }
         }
     }
 
     private fun initObserver() {
+        viewModel.registrationStatus.observe(this) {
+            it
+        }
+
         viewModel.registrationStackState.observe(this) { state ->
             when (state) {
                 is RegistrationStackState.KtpBiodata -> {
