@@ -16,7 +16,7 @@ interface UserService {
     @Headers(ContentTypeConstant.CONTENT_TYPE_JSON)
     suspend fun validateNIK(
         @Query("nik") nik: String
-    ): NetworkResponse<RetrofitStatusResponse, GenericErrorResponse>
+    ): NetworkResponse<RetrofitResponse<User>, GenericErrorResponse>
 
     @POST("account/login")
     @Headers(ContentTypeConstant.CONTENT_TYPE_JSON)
@@ -29,6 +29,13 @@ interface UserService {
     @Headers(ContentTypeConstant.CONTENT_TYPE_JSON)
     suspend fun createPassword(
         @Query("nik") nik: String,
+        @Query("password") password: String
+    ): NetworkResponse<RetrofitStatusResponse, GenericErrorResponse>
+
+    @POST("account/reset-password")
+    @Headers(ContentTypeConstant.CONTENT_TYPE_JSON)
+    suspend fun resetPassword(
+        @Query("id_account") accountId: String,
         @Query("password") password: String
     ): NetworkResponse<RetrofitStatusResponse, GenericErrorResponse>
 }

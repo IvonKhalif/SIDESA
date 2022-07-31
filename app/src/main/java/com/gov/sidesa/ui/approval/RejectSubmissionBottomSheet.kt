@@ -12,7 +12,7 @@ import com.gov.sidesa.base.BaseBottomSheet
 import com.gov.sidesa.databinding.BottomSheetRejectSubmissionBinding
 
 class RejectSubmissionBottomSheet(
-    private val onReject: () -> Unit
+    private val onReject: (reason: String) -> Unit
 ) : BaseBottomSheet() {
     private lateinit var binding: BottomSheetRejectSubmissionBinding
 
@@ -46,7 +46,7 @@ class RejectSubmissionBottomSheet(
                 dismissAllowingStateLoss()
             }
             buttonSaveReason.setOnClickListener {
-                onReject()
+                onReject(inputReason.value().text.toString())
                 dismissAllowingStateLoss()
             }
         }

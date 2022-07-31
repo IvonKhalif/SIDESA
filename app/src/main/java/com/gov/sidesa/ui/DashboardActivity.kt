@@ -4,12 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseActivity
 import com.gov.sidesa.base.showImmediately
-import com.gov.sidesa.data.letterlist.models.LettersModel
+import com.gov.sidesa.domain.letter.list.models.LetterSubmissionModel
 import com.gov.sidesa.databinding.ActivityDashboardBinding
+import com.gov.sidesa.domain.letter.list.models.LetterApprovalModel
+import com.gov.sidesa.domain.letter.list.models.LetterListApprovalModel
 import com.gov.sidesa.ui.approval.DetailApprovalLetterActivity
 import com.gov.sidesa.ui.letter.detail.DetailSubmissionLetterActivity
 import com.gov.sidesa.ui.letter.list.LetterListActivity
@@ -17,43 +20,35 @@ import com.gov.sidesa.ui.letter.list.needapproval.LetterNeedApprovalAdapter
 import com.gov.sidesa.ui.letter.list.submission.LetterSubmissionAdapter
 import com.gov.sidesa.ui.letter.template.LetterTemplateActivity
 import com.gov.sidesa.ui.profile.ProfileActivity
-import com.gov.sidesa.ui.profile.edit.EditProfileKTPActivity
 import com.gov.sidesa.ui.registration.ktp.RegistrationKTPActivity
 import com.gov.sidesa.ui.widget.notification_dialog.NotificationBottomSheet
+import com.gov.sidesa.utils.PreferenceUtils
 import com.gov.sidesa.utils.constants.LetterConstant
+import com.gov.sidesa.utils.constants.LetterConstant.EXTRA_ACTOR_APPROVAL
+import com.gov.sidesa.utils.constants.LetterConstant.EXTRA_LETTER_TYPE
 import com.gov.sidesa.utils.constants.LetterConstant.EXTRA_SUBMISSION_HAS_APPROVED
 import com.gov.sidesa.utils.constants.LetterConstant.EXTRA_SUBMISSION_HAS_REJECTED
+import com.gov.sidesa.utils.constants.LetterConstant.EXTRA_SUBMISSION_LETTER_ID
 import com.gov.sidesa.utils.enums.CategoryLetterEnum
+import com.gov.sidesa.utils.extension.observeNonNull
 import kotlinx.coroutines.FlowPreview
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @FlowPreview
 class DashboardActivity : BaseActivity() {
     private lateinit var binding: ActivityDashboardBinding
 
-    private val viewModel by viewModels<DashboardViewModel>()
+    private val viewModel by viewModel<DashboardViewModel>()
+    private var actor = ""
 
     private val submissionAdapter by lazy {
         LetterSubmissionAdapter(
-            listOf(
-                LettersModel(
-                    "1",
-                    "Kamis, 21 Juli 2022",
-                    "Surat Keterangan Kerja Dan Untuk Calon Tenaga Kerja Indonesia",
-                    "ID: 21/07/2022/SKKDUCTKI"
-                )
-            ), ::onItemSubmissionClick
+            emptyList(), ::onItemSubmissionClick
         )
     }
     private val needApprovalAdapter by lazy {
         LetterNeedApprovalAdapter(
-            listOf(
-                LettersModel(
-                    "1",
-                    "Kamis, 21 Juli 2022",
-                    "Surat Keterangan Kerja Dan Untuk Calon Tenaga Kerja Indonesia",
-                    "ID: 21/07/2022/SKKDUCTKI"
-                )
-            ), ::onItemNeedApprovalClick
+            emptyList(), ::onItemNeedApprovalClick
         )
     }
 
@@ -103,6 +98,33 @@ class DashboardActivity : BaseActivity() {
         notificationState.observe(this@DashboardActivity) {
             showNotification(title = it.first, description = it.second)
         }
+
+        submissionLettersLiveData.observeNonNull(this@DashboardActivity, ::handleSubmissionLetters)
+        approvalLettersLiveData.observeNonNull(this@DashboardActivity, ::handleApprovalLetters)
+        loadingState.observe(this@DashboardActivity) {
+            handleLoadingWidget(isLoading = it)
+        }
+    }
+
+    private fun handleApprovalLetters(letterApprovalModel: LetterApprovalModel) {
+        actor = when {
+            letterApprovalModel.profile.isRt -> {
+                LetterConstant.TYPE_APPROVAL_RT
+            }
+            letterApprovalModel.profile.isRw -> {
+                LetterConstant.TYPE_APPROVAL_RW
+            }
+            else -> ""
+        }
+        if (letterApprovalModel.profile.isRt || letterApprovalModel.profile.isRw) {
+            needApprovalAdapter.items = letterApprovalModel.letters
+            if (letterApprovalModel.letters.isNotEmpty())
+                binding.containerNeedApproval.isVisible = true
+        }
+    }
+
+    private fun handleSubmissionLetters(list: List<LetterSubmissionModel>) {
+        submissionAdapter.items = list
     }
 
     /**
@@ -133,14 +155,18 @@ class DashboardActivity : BaseActivity() {
         startActivity(intent)
     }
 
-    private fun onItemNeedApprovalClick(lettersModel: LettersModel) {
+    private fun onItemNeedApprovalClick(letterListApprovalModel: LetterListApprovalModel) {
         val intent = Intent(this, DetailApprovalLetterActivity::class.java)
+        intent.putExtra(EXTRA_SUBMISSION_LETTER_ID, letterListApprovalModel.letterId)
+        intent.putExtra(EXTRA_ACTOR_APPROVAL, actor)
         resultLauncher.launch(intent)
 //        startActivity(Intent(this, DetailApprovalLetterActivity::class.java))
     }
 
-    private fun onItemSubmissionClick(lettersModel: LettersModel) {
-        startActivity(Intent(this, DetailSubmissionLetterActivity::class.java))
+    private fun onItemSubmissionClick(letterSubmissionModel: LetterSubmissionModel) {
+        val intent = Intent(this, DetailSubmissionLetterActivity::class.java)
+        intent.putExtra(EXTRA_SUBMISSION_LETTER_ID, letterSubmissionModel.letterId)
+        startActivity(intent)
     }
 
     /**
@@ -159,12 +185,15 @@ class DashboardActivity : BaseActivity() {
 
     override fun onResultData(result: Intent?) {
         super.onResultData(result)
+        val user = PreferenceUtils.getUser()
+        val letterType = result?.getStringExtra(EXTRA_LETTER_TYPE).orEmpty()
         if (result?.getBooleanExtra(EXTRA_SUBMISSION_HAS_APPROVED, false) == true) {
             showNotification(
                 getString(R.string.letter_detail_success_approve_submission_headline),
                 getString(
                     R.string.letter_detail_success_approve_submission_subheadline,
-                    "Surat Keterangan Kerja Dan Untuk Calon Tenaga Kerja Indonesia"
+                    letterType,
+                    user?.name.orEmpty()
                 )
             )
         } else if (result?.getBooleanExtra(EXTRA_SUBMISSION_HAS_REJECTED, false) == true) {
@@ -172,7 +201,8 @@ class DashboardActivity : BaseActivity() {
                 getString(R.string.letter_detail_success_reject_submission_headline),
                 getString(
                     R.string.letter_detail_success_reject_submission_subheadline,
-                    "Surat Keterangan Kerja Dan Untuk Calon Tenaga Kerja Indonesia"
+                    letterType,
+                    user?.name.orEmpty()
                 )
             )
         }

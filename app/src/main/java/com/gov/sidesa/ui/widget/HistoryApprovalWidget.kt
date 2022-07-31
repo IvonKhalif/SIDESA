@@ -4,7 +4,15 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
+import com.gov.sidesa.R
 import com.gov.sidesa.databinding.HistoryApprovalWidgetBinding
+import com.gov.sidesa.domain.letter.detail.models.HistoryApprovalModel
+import com.gov.sidesa.utils.constants.LetterConstant
+import com.gov.sidesa.utils.constants.LetterConstant.APPROVED_STATUS
+import com.gov.sidesa.utils.constants.LetterConstant.NORMAL_STATUS
+import com.gov.sidesa.utils.constants.LetterConstant.REJECTED_STATUS
+import com.gov.sidesa.utils.enums.TypeSubmissionEnum
 
 class HistoryApprovalWidget @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
@@ -17,18 +25,84 @@ class HistoryApprovalWidget @JvmOverloads constructor(
         addView(binding.root)
     }
 
-    fun setSubmissionDate(date: String): HistoryApprovalWidget {
-        binding.textSubmissionDate.text = date
+    fun initialize(approvalListModel: List<HistoryApprovalModel>): HistoryApprovalWidget {
+        approvalListModel.forEach {
+            when {
+                it.typeApproval == TypeSubmissionEnum.SUBMISSION.type -> setSubmitted(it)
+                it.typeApproval == LetterConstant.TYPE_APPROVAL_RT &&
+                        it.descriptionType == LetterConstant.TYPE_APPROVAL_WAITING_APPROVE -> setWaitingApproveRt(it)
+                it.typeApproval == LetterConstant.TYPE_APPROVAL_RT &&
+                        it.descriptionType == LetterConstant.TYPE_APPROVAL_APPROVE -> setApprovedRt(it)
+                it.typeApproval == LetterConstant.TYPE_APPROVAL_RW &&
+                        it.descriptionType == LetterConstant.TYPE_APPROVAL_WAITING_APPROVE -> setWaitingApproveRw(it)
+                it.typeApproval == LetterConstant.TYPE_APPROVAL_RW &&
+                        it.descriptionType == LetterConstant.TYPE_APPROVAL_APPROVE -> setApprovedRw(it)
+                else -> setFinished(it)
+
+            }
+        }
         return this
     }
 
-    fun setApprovedRtDate(date: String): HistoryApprovalWidget {
-        binding.textHasApprovalRtDate.text = date
-        return this
+    private fun setSubmitted(approvalModel: HistoryApprovalModel) {
+        binding.textSubmissionDate.text = approvalModel.createdDate
+        binding.iconSubmissionMarker.setImageResource(drawableStatus(approvalModel.statusApproval))
     }
 
-    fun setApprovedRwDate(date: String): HistoryApprovalWidget {
-        binding.textHasApprovalRwDate.text = date
-        return this
+    private fun setWaitingApproveRt(approvalModel: HistoryApprovalModel) {
+        binding.iconHasApprovalRtMarker.setImageResource(drawableStatus(approvalModel.statusApproval))
+    }
+
+    private fun setApprovedRt(approvalModel: HistoryApprovalModel) {
+        binding.textHasApprovalRtDate.text = approvalModel.createdDate
+        binding.iconHasApprovalRtMarker.setImageResource(drawableStatus(approvalModel.statusApproval))
+        when {
+            approvalModel.statusApproval.toInt() == REJECTED_STATUS -> {
+                binding.textHasApprovalRtRejected.isVisible = true
+                binding.textHasApprovalRtDate.isVisible = false
+            }
+            approvalModel.statusApproval.toInt() == APPROVED_STATUS -> {
+                binding.textHasApprovalRtRejected.isVisible = false
+                binding.textHasApprovalRtDate.isVisible = true
+            }
+            else -> {
+                binding.textHasApprovalRtRejected.isVisible = false
+                binding.textHasApprovalRtDate.isVisible = true
+            }
+        }
+    }
+
+    private fun setWaitingApproveRw(approvalModel: HistoryApprovalModel) {
+        binding.iconHasApprovalRwMarker.setImageResource(drawableStatus(approvalModel.statusApproval))
+    }
+
+    private fun setApprovedRw(approvalModel: HistoryApprovalModel) {
+        binding.textHasApprovalRwDate.text = approvalModel.createdDate
+        binding.iconHasApprovalRwMarker.setImageResource(drawableStatus(approvalModel.statusApproval))
+        when {
+            approvalModel.statusApproval.toInt() == REJECTED_STATUS -> {
+                binding.textHasApprovalRwRejected.isVisible = true
+                binding.textHasApprovalRwDate.isVisible = false
+            }
+            approvalModel.statusApproval.toInt() == APPROVED_STATUS -> {
+                binding.textHasApprovalRwRejected.isVisible = false
+                binding.textHasApprovalRwDate.isVisible = true
+            }
+            else -> {
+                binding.textHasApprovalRwRejected.isVisible = false
+                binding.textHasApprovalRwDate.isVisible = true
+            }
+        }
+    }
+
+    private fun setFinished(approvalModel: HistoryApprovalModel) {
+        binding.iconReadyToPickupMarker.setImageResource(drawableStatus(approvalModel.statusApproval))
+    }
+
+    private fun drawableStatus(status: String) = when (status.toInt()) {
+        NORMAL_STATUS -> R.drawable.ic_history_grey
+        APPROVED_STATUS -> R.drawable.ic_history_green
+        REJECTED_STATUS -> R.drawable.ic_history_red
+        else -> R.drawable.ic_history_grey
     }
 }

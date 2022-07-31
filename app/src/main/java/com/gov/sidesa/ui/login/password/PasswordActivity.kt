@@ -31,6 +31,9 @@ class PasswordActivity : BaseActivity() {
     private val userNik by lazy {
         intent.getStringExtra(UserExtrasConstant.EXTRA_USER_NIK).orEmpty()
     }
+    private val userId by lazy {
+        intent.getStringExtra(UserExtrasConstant.EXTRA_USER_ID).orEmpty()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,10 +103,11 @@ class PasswordActivity : BaseActivity() {
             }
 
             buttonLogin.setOnClickListener {
-                if (accountHasRegistered())
-                    viewModel.login(userNik, inputPassword.text())
-                else
-                    viewModel.createPassword(userNik, inputPassword.text())
+                when {
+                    accountHasRegistered() -> viewModel.login(userNik, inputPassword.text())
+                    accountHasReset() -> viewModel.resetPassword(userId, inputPassword.text())
+                    else -> viewModel.createPassword(userNik, inputPassword.text())
+                }
             }
 
             buttonForgotPassword.setOnClickListener {
@@ -131,7 +135,7 @@ class PasswordActivity : BaseActivity() {
     }
 
     private fun handleStatusCreated(status: String) {
-        if (status == StatusResponseEnum.SUCCESS.status)
+        if (status == StatusResponseEnum.SUCCESS.status || status == StatusResponseEnum.RESET_PASSWORD.status)
             viewModel.login(userNik, binding.inputPassword.text())
     }
 

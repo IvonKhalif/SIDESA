@@ -7,7 +7,9 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayout
 import com.gov.sidesa.R
-import com.gov.sidesa.utils.enums.LetterSubmissionTypeEnum
+import com.gov.sidesa.ui.letter.list.tab.TabLetterListFragment
+import com.gov.sidesa.utils.enums.TypeApprovalEnum
+import com.gov.sidesa.utils.enums.TypeSubmissionEnum
 
 class LetterListPagerAdapter(
     fa: FragmentActivity,
@@ -15,18 +17,34 @@ class LetterListPagerAdapter(
     private val isSubmissionPage: Boolean
 ) : FragmentStateAdapter(fa) {
 
-    private val fragmentList = listOf(
-        TabLetterListFragment.newInstance(LetterSubmissionTypeEnum.ALL.type, isSubmissionPage),
-        TabLetterListFragment.newInstance(
-            LetterSubmissionTypeEnum.WAITING_APPROVAL_RT.type,
-            isSubmissionPage
-        ),
-        TabLetterListFragment.newInstance(
-            LetterSubmissionTypeEnum.WAITING_APPROVAL_RW.type,
-            isSubmissionPage
-        ),
-        TabLetterListFragment.newInstance(LetterSubmissionTypeEnum.READY.type, isSubmissionPage)
-    )
+    private val fragmentList = getListFragment()
+
+    private fun getListFragment() = if (isSubmissionPage)
+        listOf(
+            TabLetterListFragment.newInstance("", isSubmissionPage),
+            TabLetterListFragment.newInstance(
+                TypeSubmissionEnum.RT_WAITING_Submission.type,
+                isSubmissionPage
+            ),
+            TabLetterListFragment.newInstance(
+                TypeSubmissionEnum.RW_WAITING_Submission.type,
+                isSubmissionPage
+            ),
+            TabLetterListFragment.newInstance(TypeSubmissionEnum.FINISH.type, isSubmissionPage)
+        )
+    else
+        listOf(
+            TabLetterListFragment.newInstance("", isSubmissionPage),
+            TabLetterListFragment.newInstance(
+                TypeApprovalEnum.NOT_APPROVED_YET.type,
+                isSubmissionPage
+            ),
+            TabLetterListFragment.newInstance(
+                TypeApprovalEnum.APPROVED.type,
+                isSubmissionPage
+            ),
+            TabLetterListFragment.newInstance(TypeApprovalEnum.REJECTED.type, isSubmissionPage)
+        )
 
     override fun getItemCount() = fragmentList.size
 

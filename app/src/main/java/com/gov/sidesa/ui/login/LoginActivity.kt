@@ -10,6 +10,7 @@ import com.gov.sidesa.databinding.ActivityLoginBinding
 import com.gov.sidesa.ui.DashboardActivity
 import com.gov.sidesa.ui.login.password.PasswordActivity
 import com.gov.sidesa.utils.constants.UserExtrasConstant.EXTRA_STATUS_NIK
+import com.gov.sidesa.utils.constants.UserExtrasConstant.EXTRA_USER_ID
 import com.gov.sidesa.utils.constants.UserExtrasConstant.EXTRA_USER_NIK
 import com.gov.sidesa.utils.enums.StatusResponseEnum
 import com.gov.sidesa.utils.extension.observeNonNull
@@ -61,6 +62,7 @@ class LoginActivity : BaseActivity() {
         val intent = Intent(this, PasswordActivity::class.java)
         intent.putExtra(EXTRA_STATUS_NIK, status)
         intent.putExtra(EXTRA_USER_NIK, binding.inputUserKtp.value().text.toString())
+        intent.putExtra(EXTRA_USER_ID, viewModel.userLiveData.value?.id.orEmpty())
         resultLauncher.launch(intent)
     }
 
