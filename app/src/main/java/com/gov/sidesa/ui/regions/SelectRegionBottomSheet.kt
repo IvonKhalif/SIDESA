@@ -14,7 +14,7 @@ import com.gov.sidesa.utils.picker.MenuIconWithHeadlineAdapter
 import com.gov.sidesa.utils.picker.RecyclerViewItemDecoration
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-open class SelectRegionBottomSheet : BaseBottomSheet() {
+open class SelectRegionBottomSheet private constructor(): BaseBottomSheet() {
 
     private var _binding: BottomSheetSelectRegionBinding? = null
     protected val binding get() = _binding!!

@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentManager
 import com.gov.sidesa.R
 import com.gov.sidesa.databinding.SquareToastFormatBinding
 import com.gov.sidesa.utils.constants.ToastConstant
+import com.gov.sidesa.utils.response.GenericErrorResponse
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -36,6 +37,9 @@ abstract class BaseActivity : AppCompatActivity() {
 
     fun showErrorMessage(message: String) =
         customToast(this, message, ToastConstant.CUSTOM_TOAST_ERROR)
+
+    fun showErrorMessage(error: GenericErrorResponse) =
+        customToast(this, "${error.status.orEmpty()} ${error.message.orEmpty()}".trim(), ToastConstant.CUSTOM_TOAST_ERROR)
 
     fun showErrorMessage(throwable: Throwable) =
         customToast(this, throwable.message.orEmpty(), ToastConstant.CUSTOM_TOAST_ERROR)

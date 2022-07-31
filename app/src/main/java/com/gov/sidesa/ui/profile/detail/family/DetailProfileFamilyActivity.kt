@@ -7,7 +7,7 @@ import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseActivity
 import com.gov.sidesa.databinding.ActivityDetailProfileFamilyBinding
 import com.gov.sidesa.ui.profile.detail.family.adapter.DetailProfileFamilyAdapter
-import com.gov.sidesa.ui.profile.edit.EditProfileFamilyActivity
+import com.gov.sidesa.ui.profile.edit.family.EditProfileFamilyActivity
 import com.gov.sidesa.utils.picker.RecyclerViewItemDecoration
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

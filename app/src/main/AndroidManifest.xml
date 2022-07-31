@@ -65,9 +65,15 @@
             android:exported="false"
             android:theme="@style/Theme.ContainerTracker.NoActionBar" />
         <activity
-            android:name=".ui.profile.edit.EditProfileFamilyActivity"
-            android:exported="false"
-            android:theme="@style/Theme.ContainerTracker.NoActionBar" />
+            android:name=".ui.profile.edit.family.EditProfileFamilyActivity"
+            android:exported="true"
+            android:theme="@style/Theme.ContainerTracker.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.profile.detail.family.DetailProfileFamilyActivity"
             android:exported="false"
@@ -100,14 +106,8 @@
             android:theme="@style/Theme.ContainerTracker.NoActionBar" />
         <activity
             android:name=".ui.profile.ProfileActivity"
-            android:exported="true"
-            android:theme="@style/Theme.ContainerTracker.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false"
+            android:theme="@style/Theme.ContainerTracker.NoActionBar" />
         <activity
             android:name=".ui.registration.ktp.RegistrationKTPActivity"
             android:exported="true"

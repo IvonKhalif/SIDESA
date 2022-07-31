@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/input_layout_status"
         style="@style/InputLayoutStyleDropDown"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="20dp"
         android:hint="Status"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -100,7 +102,7 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:drawableEnd="@drawable/ic_calendar"
-            android:focusable="false" />
+            android:focusable="true" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -108,10 +110,22 @@
         android:id="@+id/check_box_address"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="16dp"
         android:text="Alamat sama dengan saya"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/input_layout_dob" />
 
+    <include
+        android:id="@+id/container_address"
+        layout="@layout/item_edit_profile_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/check_box_address"
+        tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>
