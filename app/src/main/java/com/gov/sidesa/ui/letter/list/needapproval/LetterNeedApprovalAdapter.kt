@@ -2,11 +2,12 @@ package com.gov.sidesa.ui.letter.list.needapproval
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.gov.sidesa.data.letterlist.models.LettersModel
+import com.gov.sidesa.domain.letter.list.models.LetterListApprovalModel
+import com.gov.sidesa.domain.letter.list.models.LetterSubmissionModel
 
 class LetterNeedApprovalAdapter(
-    _items: List<LettersModel>,
-    private val onItemClick: (LettersModel) -> Unit
+    _items: List<LetterListApprovalModel>,
+    private val onItemClick: (LetterListApprovalModel) -> Unit
 ): RecyclerView.Adapter<LetterNeedApprovalViewHolder>() {
     var items = _items
         set(value) {

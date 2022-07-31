@@ -2,11 +2,11 @@ package com.gov.sidesa.ui.letter.list.submission
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.gov.sidesa.data.letterlist.models.LettersModel
+import com.gov.sidesa.domain.letter.list.models.LetterSubmissionModel
 
 class LetterSubmissionAdapter(
-    _items: List<LettersModel>,
-    private val onItemClick: (LettersModel) -> Unit
+    _items: List<LetterSubmissionModel>,
+    private val onItemClick: (LetterSubmissionModel) -> Unit
 ): RecyclerView.Adapter<LetterSubmissionViewHolder>() {
     var items = _items
         set(value) {

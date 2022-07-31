@@ -5,6 +5,7 @@ import com.gov.sidesa.domain.letter.detail.models.DetailApprovalModel
 import com.gov.sidesa.domain.letter.input.models.layout.Widget
 import com.gov.sidesa.domain.letter.input.models.layout.WidgetType
 import com.gov.sidesa.domain.letter.repository.LetterDetailRepository
+import com.gov.sidesa.utils.DateUtil
 import com.gov.sidesa.utils.PreferenceUtils
 import com.gov.sidesa.utils.PreferenceUtils.USER_PREFERENCE
 import com.gov.sidesa.utils.response.GenericErrorResponse
@@ -14,14 +15,14 @@ class GetLetterDetailUseCase(
     private val repository: LetterDetailRepository
 ) {
     suspend operator fun invoke(
-        letterTypeId: String,
-        letterName: String
+        letterId: String
     ): NetworkResponse<DetailApprovalModel, GenericErrorResponse> {
-        return when (val result = repository.getDetail(letterId = letterTypeId, "3")) {
+        val user = PreferenceUtils.getUser()
+        return when (val result = repository.getDetail(letterId = letterId, accountId = user?.id.orEmpty())) {
             is NetworkResponse.Success -> {
-                val layout = assignWidgetFromLocal(letterName, result.body)
+                val layout = result.body.letterType?.let { assignWidgetFromLocal(it, result.body) }
 
-                NetworkResponse.Success(layout)
+                NetworkResponse.Success(layout!!)
             }
             else -> result
         }
@@ -48,9 +49,16 @@ class GetLetterDetailUseCase(
         }
 
         return DetailApprovalModel(
-            documentTypeId = body.documentTypeId,
+//            documentTypeId = body.documentTypeId,
             letterType = body.letterType,
+            submissionLetterId = body.submissionLetterId,
+            userName = body.userName,
+            nik = body.nik,
+            address = body.address,
+            createdDate = body.createdDate,
+            letterNumber = body.letterNumber,
             status = body.status,
+            description = body.description,
             documentFilled = widgets,
             historyApproval = body.historyApproval
         )

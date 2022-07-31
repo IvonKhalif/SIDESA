@@ -103,6 +103,8 @@
     <string name="dashboard_select_letter_caption">Surat apa yang ingin Kamu ajukan hari ini?</string>
     <string name="dashboard_need_approval_caption">Butuh Persetujuan</string>
     <string name="dashboard_submission_list_caption">Daftar Pengajuan</string>
+    <string name="dashboard_must_regist_first_headline">Kamu Harus Registrasi Terlebih Dahulu</string>
+    <string name="dashboard_must_regist_first_subheadline">Kamu tidak bisa akses ke menu ini, karena harus mengisi registrasi data terlebih dahulu.</string>
 
     <!--  Letter List  -->
     <string name="letter_list_empty_state_caption">Belum ada daftar pengajuan</string>
@@ -119,6 +121,7 @@
     <string name="letter_detail_id_letter_caption">ID Surat</string>
     <string name="letter_detail_letter_type_caption">Jenis Surat</string>
     <string name="letter_detail_letter_date_submission_caption">Tanggal Diajukan</string>
+    <string name="letter_detail_letter_address_submission_caption">Alamat</string>
     <string name="letter_detail_letter_status_caption">Status</string>
     <string name="letter_detail_letter_rejected_caption">Ditolak</string>
     <string name="letter_detail_submission_marker_caption">Surat Diajukan</string>
@@ -144,11 +147,11 @@
     <string name="letter_detail_reject_submission_subheadline">Untuk menolak pengajuan, Kamu harus menulis alasan kenapa ingin menolak surat pengajuan ini</string>
     <string name="letter_detail_success_reject_submission_headline">Surat Pengajuan Berhasil Ditolak</string>
     <string name="letter_detail_success_reject_submission_subheadline"><![CDATA[
-        Kamu telah menolak surat pengajuan <font color="#484848"><b>%s</b></font> yang diajukan Oleh <font color="#484848"><b>Saya</b></font>.
+        Kamu telah menolak surat pengajuan <font color="#484848"><b>%s</b></font> yang diajukan Oleh <font color="#484848"><b>%s</b></font>.
         ]]></string>
     <string name="letter_detail_success_approve_submission_headline">Surat Pengajuan Berhasil Disetujui</string>
     <string name="letter_detail_success_approve_submission_subheadline"><![CDATA[
-        Kamu telah mensetujui surat pengajuan <font color="#484848"><b>%s</b></font> yang diajukan Oleh <font color="#484848"><b>Saya</b></font>.
+        Kamu telah mensetujui surat pengajuan <font color="#484848"><b>%s</b></font> yang diajukan Oleh <font color="#484848"><b>%s</b></font>.
         ]]></string>
 
     <!-- Strings used for fragments for navigation -->

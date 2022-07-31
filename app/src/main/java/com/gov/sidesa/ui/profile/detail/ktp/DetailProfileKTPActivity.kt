@@ -53,6 +53,7 @@ class DetailProfileKTPActivity : BaseActivity() {
     private fun initEvent() = with(binding) {
         binding.buttonEditKtp.setOnClickListener {
             val intent = Intent(this@DetailProfileKTPActivity, EditProfileKTPActivity::class.java)
+
             resultLauncher.launch(intent)
         }
 
