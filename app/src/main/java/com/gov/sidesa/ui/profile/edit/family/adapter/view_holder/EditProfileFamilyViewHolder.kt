@@ -58,17 +58,16 @@ class EditProfileFamilyViewHolder(
         })
 
         inputNik.addTextChangedListener(onTextChanged = { _, _, _, _ ->
-            listener.onKTPChanged(data.copy(name = inputNik.text.toString()))
+            listener.onKTPChanged(data.copy(ktpNumber = inputNik.text.toString()))
         })
 
         inputPlace.addTextChangedListener(onTextChanged = { _, _, _, _ ->
-            listener.onBirthPlace(data.copy(name = inputNik.text.toString()))
+            listener.onBirthPlace(data.copy(birthPlace = inputPlace.text.toString()))
         })
 
         inputLayoutDob.setEndIconOnClickListener {
             listener.onBirthDateClicked(uiModel = data)
         }
-
         inputDob.setOnClickListener {
             listener.onBirthDateClicked(uiModel = data)
         }
@@ -81,15 +80,15 @@ class EditProfileFamilyViewHolder(
 
         with(containerAddress) {
             inputAddress.addTextChangedListener(onTextChanged = { _, _, _, _ ->
-                listener.onAddressChanged(data.copy(name = inputNik.text.toString()))
+                listener.onAddressChanged(data.copy(address = inputNik.text.toString()))
             })
 
             inputRt.addTextChangedListener(onTextChanged = { _, _, _, _ ->
-                listener.onRTChanged(data.copy(name = inputNik.text.toString()))
+                listener.onRTChanged(data.copy(rt = inputNik.text.toString()))
             })
 
             inputRw.addTextChangedListener(onTextChanged = { _, _, _, _ ->
-                listener.onRWChanged(data.copy(name = inputNik.text.toString()))
+                listener.onRWChanged(data.copy(rw = inputNik.text.toString()))
             })
 
             inputLayoutProvince.setEndIconOnClickListener {

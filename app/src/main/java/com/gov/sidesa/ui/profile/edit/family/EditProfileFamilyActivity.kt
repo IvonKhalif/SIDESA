@@ -11,8 +11,6 @@ import com.gov.sidesa.ui.profile.edit.family.adapter.EditProfileFamilyAdapter
 import com.gov.sidesa.ui.regions.SelectRegionBottomSheet
 import com.gov.sidesa.utils.picker.RecyclerViewItemDecoration
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.text.SimpleDateFormat
-import java.util.*
 
 class EditProfileFamilyActivity : BaseActivity() {
     private lateinit var binding: ActivityEditProfileFamilyBinding

@@ -21,7 +21,6 @@ import java.util.*
 
 
 class EditProfileFamilyViewModel : BaseViewModel(), EditProfileFamilyListener {
-
     private val _componentData = MutableLiveData<List<EditProfileFamilyUiModel>>()
     val componentData: LiveData<List<EditProfileFamilyUiModel>> get() = _componentData
 
@@ -71,66 +70,82 @@ class EditProfileFamilyViewModel : BaseViewModel(), EditProfileFamilyListener {
      * View Holder Listener Implementation
      */
     override fun onRelationStatusChanged(uiModel: EditProfileFamilyUiModel) {
-        updateWidget(uiModel)
+        val upToDate = getComponentUpToDate(id = uiModel.id)
+        updateWidget(upToDate.copy(relationFamily = uiModel.relationFamily))
     }
 
     override fun onNameTextChanged(uiModel: EditProfileFamilyUiModel) {
-        updateWidget(uiModel)
+        val upToDate = getComponentUpToDate(id = uiModel.id)
+        updateWidget(upToDate.copy(name = uiModel.name))
     }
 
     override fun onKTPChanged(uiModel: EditProfileFamilyUiModel) {
-        updateWidget(uiModel)
+        val upToDate = getComponentUpToDate(id = uiModel.id)
+        updateWidget(upToDate.copy(ktpNumber = uiModel.ktpNumber))
     }
 
     override fun onBirthPlace(uiModel: EditProfileFamilyUiModel) {
-        updateWidget(uiModel)
+        val upToDate = getComponentUpToDate(id = uiModel.id)
+        updateWidget(upToDate.copy(birthPlace = uiModel.birthPlace))
     }
 
     override fun onBirthDateClicked(uiModel: EditProfileFamilyUiModel) {
-        _selectBirthDateState.value = uiModel
+        val upToDate = getComponentUpToDate(id = uiModel.id)
+        _selectBirthDateState.value = upToDate
     }
 
     override fun onSameAddressClicked(uiModel: EditProfileFamilyUiModel) {
-        updateWidget(uiModel)
+        val upToDate = getComponentUpToDate(id = uiModel.id)
+        updateWidget(upToDate.copy(differentAddress = uiModel.differentAddress))
     }
 
     override fun onAddressChanged(uiModel: EditProfileFamilyUiModel) {
-        updateWidget(uiModel)
+        val upToDate = getComponentUpToDate(id = uiModel.id)
+        updateWidget(upToDate.copy(address = uiModel.address))
     }
 
     override fun onRTChanged(uiModel: EditProfileFamilyUiModel) {
-        updateWidget(uiModel)
+        val upToDate = getComponentUpToDate(id = uiModel.id)
+        updateWidget(upToDate.copy(rt = uiModel.rt))
     }
 
     override fun onRWChanged(uiModel: EditProfileFamilyUiModel) {
-        updateWidget(uiModel)
+        val upToDate = getComponentUpToDate(id = uiModel.id)
+        updateWidget(upToDate.copy(rw = uiModel.rw))
     }
 
     override fun onProvinceClicked(uiModel: EditProfileFamilyUiModel) {
-        _selectProvinceState.value = uiModel
+        val upToDate = getComponentUpToDate(id = uiModel.id)
+        _selectProvinceState.value = upToDate
     }
 
     override fun onCityClicked(uiModel: EditProfileFamilyUiModel) {
-        if (uiModel.province == null) {
+        val upToDate = getComponentUpToDate(id = uiModel.id)
+
+        if (upToDate.province == null) {
             mServerErrorState.value = GenericErrorResponse(message = "Provinsi belum dipilih")
         } else {
-            _selectCityState.value = uiModel
+            _selectCityState.value = upToDate
         }
     }
 
     override fun onDistrictClicked(uiModel: EditProfileFamilyUiModel) {
-        if (uiModel.city == null) {
+        val upToDate = getComponentUpToDate(id = uiModel.id)
+
+        if (upToDate.city == null) {
             mServerErrorState.value = GenericErrorResponse(message = "Kabupaten/Kota belum dipilih")
         } else {
-            _selectDistrictState.value = uiModel
+            _selectDistrictState.value = upToDate
         }
     }
 
     override fun onVillageClicked(uiModel: EditProfileFamilyUiModel) {
-        if (uiModel.district == null) {
+        val upToDate = getComponentUpToDate(id = uiModel.id)
+
+        if (upToDate.district == null) {
             mServerErrorState.value = GenericErrorResponse(message = "Kecamatan belum dipilih")
         } else {
-            _selectVillageState.value = uiModel
+            _selectVillageState.value = upToDate
         }
     }
 
@@ -204,13 +219,20 @@ class EditProfileFamilyViewModel : BaseViewModel(), EditProfileFamilyListener {
     private fun updateWidget(uiModel: EditProfileFamilyUiModel) {
         val components = _componentData.value.orEmpty().toMutableList()
 
-        components.forEachIndexed { index, component ->
-            if (component.id == uiModel.id) {
+        for (index in 0 until components.size - 1) {
+            if (components[index].id == uiModel.id) {
                 components[index] = uiModel
-                return@forEachIndexed
+                break
             }
         }
 
         _componentData.value = components
+    }
+
+    /**
+     * Get data up-to-date
+     */
+    private fun getComponentUpToDate(id: Long): EditProfileFamilyUiModel {
+        return _componentData.value.orEmpty().first { it.id == id }
     }
 }

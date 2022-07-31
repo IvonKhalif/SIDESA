@@ -2,6 +2,8 @@ package com.gov.sidesa.ui.profile.edit.family.models
 
 import com.gov.sidesa.R
 import com.gov.sidesa.domain.regions.models.Region
+import java.math.BigInteger
+import java.nio.ByteBuffer
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -11,15 +13,17 @@ import java.util.*
  **/
 
 data class EditProfileFamilyUiModel(
-    val id: String = UUID.randomUUID().toString(),
+    val id: Long = generateUniqueId(),
     val type: EditProfileFamilyViewType = EditProfileFamilyViewType.Form,
     val relationFamily: RelationType = RelationType.Father,
     val name: String = "",
     val ktpNumber: String = "",
     val birthPlace: String = "",
     val birthDate: Date? = null,
-    val address: String = "",
     val differentAddress: Boolean = false,
+    val address: String = "",
+    val rt: String = "",
+    val rw: String = "",
     val province: Region? = null,
     val city: Region? = null,
     val district: Region? = null,
@@ -29,6 +33,7 @@ data class EditProfileFamilyUiModel(
     fun areItemsTheSame(
         newItem: EditProfileFamilyUiModel
     ): Boolean = id == newItem.id
+            && type == newItem.type
             && province?.id == newItem.province?.id
             && city?.id == newItem.city?.id
             && district?.id == newItem.district?.id
@@ -72,4 +77,17 @@ data class EditProfileFamilyUiModel(
                 format.format(it)
             } ?: run { "" }
         }
+}
+
+private fun generateUniqueId(): Long {
+    var result: Long = -1
+    do {
+        val uid = UUID.randomUUID()
+        val buffer: ByteBuffer = ByteBuffer.wrap(ByteArray(16))
+        buffer.putLong(uid.leastSignificantBits)
+        buffer.putLong(uid.mostSignificantBits)
+        val bi = BigInteger(buffer.array())
+        result = bi.toLong()
+    } while (result < 0)
+    return result
 }
