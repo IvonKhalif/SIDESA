@@ -1,5 +1,6 @@
 package com.gov.sidesa.ui.profile.edit.family.models
 
+import com.gov.sidesa.R
 import com.gov.sidesa.domain.regions.models.Region
 import java.text.SimpleDateFormat
 import java.util.*
@@ -38,6 +39,19 @@ data class EditProfileFamilyUiModel(
     fun areContentsTheSame(
         newItem: EditProfileFamilyUiModel
     ): Boolean = areItemsTheSame(newItem = newItem)
+
+    val nameTitle
+        get() = when (relationFamily) {
+            "ayah" -> {
+                R.string.fullname_father
+            }
+            "ibu" -> {
+                R.string.fullname_mother
+            }
+            else -> {
+                R.string.fullname
+            }
+        }
 
     val inputStatusVisibilityState
         get() = relationFamily == "istri" || relationFamily == "suami"

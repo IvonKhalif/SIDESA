@@ -263,4 +263,8 @@
     <string name="village">Kelurahan/Desa</string>
     <string name="edit_profile_family_header_title">Pastikan data yang Kamu masukkan sesuai dengan yang ada, karena data ini yang digunakan pada surat pengajuan</string>
     <string name="edit_profile_family_add_child">Tambah Form Anak</string>
+
+    <string name="fullname_father">Nama Lengkap Ayah</string>
+    <string name="fullname_mother">Nama Lengkap Ibu</string>
+    <string name="fullname">Nama Lengkap</string>
 </resources>

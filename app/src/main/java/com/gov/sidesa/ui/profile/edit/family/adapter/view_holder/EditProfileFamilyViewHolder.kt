@@ -22,12 +22,15 @@ class EditProfileFamilyViewHolder(
     private val listener: EditProfileFamilyListener
 ) : RecyclerView.ViewHolder(binding.root) {
 
+    private val context = binding.root.context
+
     fun binding(data: EditProfileFamilyUiModel) = with(binding) {
         initView(data = data)
         initEvent(data = data)
     }
 
     private fun initView(data: EditProfileFamilyUiModel) = with(binding) {
+        inputLayoutName.hint = context.getString(data.nameTitle)
         inputLayoutStatus.isVisible = data.inputStatusVisibilityState
         checkBoxAddress.isChecked = !data.differentAddress
         containerAddress.containerAddress.isVisible = data.differentAddress
@@ -116,7 +119,6 @@ class EditProfileFamilyViewHolder(
     }
 
     private fun setRelationStatus(uiModel: EditProfileFamilyUiModel) {
-        val context = binding.root.context
         val relationStatus = ArrayAdapter(
             context,
             R.layout.item_dropdown,

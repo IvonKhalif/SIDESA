@@ -50,9 +50,16 @@ class EditProfileFamilyViewModel : BaseViewModel(), EditProfileFamilyListener {
                 EditProfileFamilyUiModel(type = EditProfileFamilyViewType.Header),
                 EditProfileFamilyUiModel(
                     type = EditProfileFamilyViewType.Form,
+                    relationFamily = "ayah"
+                ),
+                EditProfileFamilyUiModel(
+                    type = EditProfileFamilyViewType.Form,
+                    relationFamily = "ibu"
+                ),
+                EditProfileFamilyUiModel(
+                    type = EditProfileFamilyViewType.Form,
                     relationFamily = "istri"
                 ),
-                EditProfileFamilyUiModel(type = EditProfileFamilyViewType.Form),
                 EditProfileFamilyUiModel(type = EditProfileFamilyViewType.AddChild)
             )
             hideLoadingWidget()
@@ -127,6 +134,12 @@ class EditProfileFamilyViewModel : BaseViewModel(), EditProfileFamilyListener {
     }
 
     override fun onAddChild() {
+        val component = _componentData.value.orEmpty()
+            .filterNot { it.type == EditProfileFamilyViewType.AddChild }
+            .toMutableList()
+        component.add(EditProfileFamilyUiModel())
+        component.add(EditProfileFamilyUiModel(type = EditProfileFamilyViewType.AddChild))
+        _componentData.value = component
     }
 
     /**
