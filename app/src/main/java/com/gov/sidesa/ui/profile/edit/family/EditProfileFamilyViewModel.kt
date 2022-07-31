@@ -126,15 +126,39 @@ class EditProfileFamilyViewModel : BaseViewModel(), EditProfileFamilyListener {
      * Callback other view
      */
     fun onProvinceSelected(uiModel: EditProfileFamilyUiModel, region: Region) {
-        updateWidget(uiModel = uiModel.copy(province = region))
+        if (region.id != uiModel.province?.id) {
+            updateWidget(
+                uiModel = uiModel.copy(
+                    province = region,
+                    city = null,
+                    district = null,
+                    village = null
+                )
+            )
+        }
     }
 
     fun onCitySelected(uiModel: EditProfileFamilyUiModel, region: Region) {
-        updateWidget(uiModel = uiModel.copy(city = region))
+        if (region.id != uiModel.city?.id) {
+            updateWidget(
+                uiModel = uiModel.copy(
+                    city = region,
+                    district = null,
+                    village = null
+                )
+            )
+        }
     }
 
     fun onDistrictSelected(uiModel: EditProfileFamilyUiModel, region: Region) {
-        updateWidget(uiModel = uiModel.copy(district = region))
+        if (region.id != uiModel.district?.id) {
+            updateWidget(
+                uiModel = uiModel.copy(
+                    district = region,
+                    village = null
+                )
+            )
+        }
     }
 
     fun onVillageSelected(uiModel: EditProfileFamilyUiModel, region: Region) {
