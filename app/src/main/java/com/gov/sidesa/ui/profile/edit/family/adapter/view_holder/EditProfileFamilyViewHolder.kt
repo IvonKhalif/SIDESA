@@ -3,6 +3,7 @@ package com.gov.sidesa.ui.profile.edit.family.adapter.view_holder
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
@@ -34,13 +35,21 @@ class EditProfileFamilyViewHolder(
         textHeader.isVisible = data.titleVisibilityState
         textHeader.text = data.titleText
 
-        inputLayoutName.hint = context.getString(data.nameTitle)
         inputLayoutStatus.isVisible = data.inputStatusVisibilityState
-        checkBoxAddress.isChecked = !data.differentAddress
-        containerAddress.containerAddress.isVisible = data.differentAddress
+
+        inputLayoutName.hint = context.getString(data.nameTitle)
+        inputName.setText(data.name)
+        inputNik.setText(data.ktpNumber)
+        inputPlace.setText(data.birthPlace)
         inputDob.setText(data.birtDateFormatted)
 
+        checkBoxAddress.isChecked = !data.differentAddress
+        containerAddress.containerAddress.isVisible = data.differentAddress
+
         with(containerAddress) {
+            inputAddress.setText(data.address)
+            inputRt.setText(data.rt)
+            inputRw.setText(data.rw)
             inputProvince.setText(data.province?.name.orEmpty())
             inputCity.setText(data.city?.name.orEmpty())
             inputKecamatan.setText(data.district?.name.orEmpty())
@@ -53,17 +62,17 @@ class EditProfileFamilyViewHolder(
             setRelationStatus(uiModel = data)
         }
 
-        inputName.addTextChangedListener(onTextChanged = { _, _, _, _ ->
+        inputName.distinctTextChange(data.name) {
             listener.onNameTextChanged(data.copy(name = inputName.text.toString()))
-        })
+        }
 
-        inputNik.addTextChangedListener(onTextChanged = { _, _, _, _ ->
+        inputNik.distinctTextChange(data.ktpNumber) {
             listener.onKTPChanged(data.copy(ktpNumber = inputNik.text.toString()))
-        })
+        }
 
-        inputPlace.addTextChangedListener(onTextChanged = { _, _, _, _ ->
+        inputPlace.distinctTextChange(data.birthPlace) {
             listener.onBirthPlace(data.copy(birthPlace = inputPlace.text.toString()))
-        })
+        }
 
         inputLayoutDob.setEndIconOnClickListener {
             listener.onBirthDateClicked(uiModel = data)
@@ -79,17 +88,17 @@ class EditProfileFamilyViewHolder(
         }
 
         with(containerAddress) {
-            inputAddress.addTextChangedListener(onTextChanged = { _, _, _, _ ->
-                listener.onAddressChanged(data.copy(address = inputNik.text.toString()))
-            })
+            inputAddress.distinctTextChange(data.address) {
+                listener.onAddressChanged(data.copy(address = inputAddress.text.toString()))
+            }
 
-            inputRt.addTextChangedListener(onTextChanged = { _, _, _, _ ->
-                listener.onRTChanged(data.copy(rt = inputNik.text.toString()))
-            })
+            inputRt.distinctTextChange(data.rt) {
+                listener.onRTChanged(data.copy(rt = inputRt.text.toString()))
+            }
 
-            inputRw.addTextChangedListener(onTextChanged = { _, _, _, _ ->
-                listener.onRWChanged(data.copy(rw = inputNik.text.toString()))
-            })
+            inputRw.distinctTextChange(data.rw) {
+                listener.onRWChanged(data.copy(rw = inputRw.text.toString()))
+            }
 
             inputLayoutProvince.setEndIconOnClickListener {
                 listener.onProvinceClicked(uiModel = data)
@@ -128,10 +137,10 @@ class EditProfileFamilyViewHolder(
             context.resources.getStringArray(R.array.status_applicant)
         )
         binding.inputStatus.setAdapter(relationStatus)
-        binding.inputStatus.addTextChangedListener {
+        binding.inputStatus.distinctTextChange(uiModel.relationFamily.type) {
             listener.onRelationStatusChanged(
                 uiModel.copy(
-                    relationFamily = RelationType.find(it.toString())
+                    relationFamily = RelationType.find(it)
                 )
             )
         }
@@ -148,4 +157,13 @@ class EditProfileFamilyViewHolder(
             return EditProfileFamilyViewHolder(binding = binding, listener = listener)
         }
     }
+}
+
+
+private fun TextView.distinctTextChange(prev: String, onTextChanged: (String) -> Unit = {}) {
+    addTextChangedListener(onTextChanged = { _, _, _, _ ->
+        if (prev != text.toString()) {
+            onTextChanged.invoke(this.text.toString())
+        }
+    })
 }

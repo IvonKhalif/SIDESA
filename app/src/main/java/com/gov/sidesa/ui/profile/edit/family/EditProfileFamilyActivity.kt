@@ -123,7 +123,11 @@ class EditProfileFamilyActivity : BaseActivity() {
         customToolbar.toolbarDetailProfile.setTitle(R.string.family_data_edit)
 
         rvComponents.adapter = adapter
-        rvComponents.layoutManager = LinearLayoutManager(this@EditProfileFamilyActivity)
+        rvComponents.layoutManager = LinearLayoutManager(
+            this@EditProfileFamilyActivity,
+            LinearLayoutManager.VERTICAL,
+            false
+        )
         rvComponents.addItemDecoration(RecyclerViewItemDecoration())
         rvComponents.itemAnimator = null
     }
