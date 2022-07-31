@@ -22,6 +22,13 @@ class SaveLetterUseCase(
         letterTypeId: String,
         widget: List<BaseWidgetUiModel>
     ): NetworkResponse<String, GenericErrorResponse> {
+        val haveEmptyField = widget.any { it.value.isNullOrBlank() }
+
+        if (haveEmptyField)
+            return NetworkResponse.ServerError(GenericErrorResponse(
+                status = "Mohon Lengkapi Data Sebelum Dikirim"
+            ), 0)
+
         val letter = SaveLetter(
             accountId = "3",
             letterTypeId = letterTypeId,
