@@ -95,21 +95,21 @@ class EditProfileFamilyViewHolder(
                 listener.onProvinceClicked(uiModel = data)
             }
 
-            inputLayoutCity.setOnClickListener {
+            inputLayoutCity.setEndIconOnClickListener {
                 listener.onCityClicked(uiModel = data)
             }
             inputCity.setOnClickListener {
                 listener.onCityClicked(uiModel = data)
             }
 
-            inputLayoutKecamatan.setOnClickListener {
+            inputLayoutKecamatan.setEndIconOnClickListener {
                 listener.onDistrictClicked(uiModel = data)
             }
             inputKecamatan.setOnClickListener {
                 listener.onDistrictClicked(uiModel = data)
             }
 
-            inputLayoutKelurahan.setOnClickListener {
+            inputLayoutKelurahan.setEndIconOnClickListener {
                 listener.onVillageClicked(uiModel = data)
             }
             inputKelurahan.setOnClickListener {
