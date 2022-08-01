@@ -19,7 +19,7 @@ interface ProfileService {
 
     @GET("account/detail")
     suspend fun getProfileFamily(
-        @Query("id_account") accountId: String
+        @Query("id_account") accountId: Long
     ): NetworkResponse<ProfileFamilyResponse, GenericErrorResponse>
 
     @POST("account/update-family")

@@ -22,14 +22,13 @@ fun ProfileFamilyResponse.asDomain() = ProfileFamily(
 
 fun UserResponse.asDomain() = Account(
     id = id.orZero(),
-    idLevel = idLevel.orEmpty(),
     nik = nik.orEmpty(),
     name = name.orEmpty(),
     birthPlace = birthPlace.orEmpty(),
-    birthDate = birthDate.orEmpty(),
+    birthDate = birthDate ?: Date(),
     gender = gender.orEmpty(),
     blood = blood.orEmpty(),
-    address = addres.orEmpty(),
+    address = address.orEmpty(),
     rt = rt.orEmpty(),
     rw = rw.orEmpty(),
     province = province.orEmpty(),
@@ -43,7 +42,17 @@ fun UserResponse.asDomain() = Account(
     imageKTP = imageKTP.orEmpty(),
     email = email.orEmpty(),
     statusUser = statusUser.orEmpty(),
-    expiredDate = expiredDate.orEmpty()
+    expiredDate = expiredDate.orEmpty(),
+    kk = kk.orEmpty(),
+    familyHead = familyHead.orEmpty(),
+    imageKK = imageKK.orEmpty(),
+    addressKK = addressKK.orEmpty(),
+    cityIdKK = cityIdKK.orEmpty(),
+    districtIdKK = districtIdKK.orEmpty(),
+    provinceIdKK = provinceIdKK.orEmpty(),
+    rtKK = rtKK.orEmpty(),
+    rwKK = rwKK.orEmpty(),
+    villageIdKK = villageIdKK.orEmpty()
 )
 
 fun FamilyResponse.asDomain() = Family(

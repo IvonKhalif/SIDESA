@@ -63,7 +63,7 @@ class GetLetterLayoutUseCase(
     // TODO set data from local storage
     private fun assignTextView(widget: Widget) = when (widget.name) {
         "nama" -> widget.copy(value = userResponse?.name.orEmpty())
-        "alamat" -> widget.copy(value = userResponse?.addres.orEmpty())
+        "alamat" -> widget.copy(value = userResponse?.address.orEmpty())
         "pekerjaan" -> widget.copy(value = userResponse?.job.orEmpty())
         "nik" -> widget.copy(value = userResponse?.nik.orEmpty())
         else -> widget

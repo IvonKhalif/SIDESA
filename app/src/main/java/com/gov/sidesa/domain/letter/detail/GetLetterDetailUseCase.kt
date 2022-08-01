@@ -7,6 +7,7 @@ import com.gov.sidesa.domain.letter.input.models.layout.WidgetType
 import com.gov.sidesa.domain.letter.repository.LetterDetailRepository
 import com.gov.sidesa.utils.PreferenceUtils
 import com.gov.sidesa.utils.PreferenceUtils.USER_PREFERENCE
+import com.gov.sidesa.utils.extension.orZero
 import com.gov.sidesa.utils.response.GenericErrorResponse
 import com.haroldadmin.cnradapter.NetworkResponse
 
@@ -17,7 +18,7 @@ class GetLetterDetailUseCase(
         letterId: String
     ): NetworkResponse<DetailApprovalModel, GenericErrorResponse> {
         val user = PreferenceUtils.getUser()
-        return when (val result = repository.getDetail(letterId = letterId, accountId = user?.id.orEmpty())) {
+        return when (val result = repository.getDetail(letterId = letterId, accountId = user?.id.orZero())) {
             is NetworkResponse.Success -> {
                 val layout = result.body.letterType?.let { assignWidgetFromLocal(it, result.body) }
 
@@ -71,7 +72,7 @@ class GetLetterDetailUseCase(
     // TODO set data from local storage
     private fun assignTextView(widget: Widget) = when (widget.title) {
         "Nama" -> widget.copy(value = userResponse?.name.orEmpty())
-        "Alamat" -> widget.copy(value = userResponse?.addres.orEmpty())
+        "Alamat" -> widget.copy(value = userResponse?.address.orEmpty())
         "Pekerjaan" -> widget.copy(value = userResponse?.job.orEmpty())
         else -> widget
     }

@@ -13,7 +13,7 @@ class LetterListRepositoryImpl(
     private val service: LetterListService
 ) : LetterListRepository {
     override suspend fun getSubmissionLetters(
-        account_id: String
+        account_id: Long
     ): NetworkResponse<List<LetterSubmissionModel>, GenericErrorResponse> {
         return service.getSubmissionLetters(account_id).asDomain {
             data!!.map {
@@ -22,7 +22,7 @@ class LetterListRepositoryImpl(
         }
     }
 
-    override suspend fun getApprovalLetters(account_id: String): NetworkResponse<LetterApprovalModel, GenericErrorResponse> {
+    override suspend fun getApprovalLetters(account_id: Long): NetworkResponse<LetterApprovalModel, GenericErrorResponse> {
         return service.getApprovalLetters(account_id).asDomain {
             this.asDomain()!!
         }

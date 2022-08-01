@@ -52,8 +52,8 @@ class LetterRepositoryImpl(
 
     override suspend fun save(letter: SaveLetter): NetworkResponse<String, GenericErrorResponse> {
         val formBody = mutableMapOf<String, String>().apply {
-            put("id_account", letter.accountId)
-            put("id_type_surat", letter.letterTypeId)
+            put("id_account", letter.accountId.toString())
+            put("id_type_surat", letter.letterTypeId.toString())
             letter.contents.forEachIndexed { index, content ->
                 put("field[$index]", content.field)
                 put("value[$index]", content.value)

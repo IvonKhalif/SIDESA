@@ -6,6 +6,7 @@ import com.gov.sidesa.domain.letter.input.models.save.SaveLetter
 import com.gov.sidesa.domain.letter.repository.LetterRepository
 import com.gov.sidesa.ui.letter.input.models.base.BaseWidgetUiModel
 import com.gov.sidesa.utils.PreferenceUtils
+import com.gov.sidesa.utils.extension.orZero
 import com.gov.sidesa.utils.response.GenericErrorResponse
 import com.haroldadmin.cnradapter.NetworkResponse
 
@@ -20,7 +21,7 @@ class SaveLetterUseCase(
 ) {
 
     suspend operator fun invoke(
-        letterTypeId: String,
+        letterTypeId: Long,
         widget: List<BaseWidgetUiModel>
     ): NetworkResponse<String, GenericErrorResponse> {
         val haveEmptyField = widget.any {
@@ -34,7 +35,7 @@ class SaveLetterUseCase(
             ), 0)
 
         val letter = SaveLetter(
-            accountId = PreferenceUtils.getUser()?.id.orEmpty(),
+            accountId = PreferenceUtils.getUser()?.id.orZero(),
             letterTypeId = letterTypeId,
             contents = widget.filterNot {
                 it.type == WidgetType.Header

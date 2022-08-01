@@ -19,8 +19,8 @@ class ProfileRepositoryImpl(
     private val service: ProfileService
 ) : ProfileRepository {
 
-    override suspend fun getProfileFamily(accountId: String): NetworkResponse<ProfileFamily, GenericErrorResponse> {
-        return service.getProfileFamily(accountId = "3").asDomain {
+    override suspend fun getProfileFamily(accountId: Long): NetworkResponse<ProfileFamily, GenericErrorResponse> {
+        return service.getProfileFamily(accountId = accountId).asDomain {
             asDomain()
         }
     }

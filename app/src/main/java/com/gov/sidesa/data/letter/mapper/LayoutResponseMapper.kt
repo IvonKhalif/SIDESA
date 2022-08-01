@@ -22,7 +22,7 @@ fun WidgetResponse.asDomain() = Widget(
 )
 
 fun List<WidgetResponse>.asDomain() = LetterLayout(
-    letterTypeId = (this.firstOrNull()?.letterTypeId ?: 0).toString(),
+    letterTypeId = this.firstOrNull()?.letterTypeId ?: 0L,
     widgets = map {
         it.asDomain()
     }

@@ -9,7 +9,7 @@ import com.haroldadmin.cnradapter.NetworkResponse
 interface LetterDetailRepository {
     suspend fun getDetail(
         letterId: String,
-        accountId: String
+        accountId: Long
     ): NetworkResponse<DetailApprovalModel, GenericErrorResponse>
 
     suspend fun doApproval(request: DoApprovalRequest):

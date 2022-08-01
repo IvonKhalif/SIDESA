@@ -14,6 +14,7 @@ import com.gov.sidesa.ui.letter.input.models.drop_down.DropDownWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.edit_text.EditTextWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.mapper.asUiModel
 import com.gov.sidesa.ui.letter.input.view_holder_factory.LetterInputViewHolderListener
+import com.gov.sidesa.utils.extension.orZero
 import com.gov.sidesa.utils.response.GenericErrorResponse
 import com.haroldadmin.cnradapter.NetworkResponse
 import kotlinx.coroutines.FlowPreview
@@ -182,11 +183,11 @@ class LetterInputViewModel(
     fun onSubmit() = viewModelScope.launch {
         showLoadingWidget()
 
-        val letterTypeId = _layoutData.value?.letterTypeId.orEmpty()
+        val letterTypeId = _layoutData.value?.letterTypeId
         val components = _widgetList.value.orEmpty()
 
         when (val result =
-            saveLetterUseCase.invoke(letterTypeId = letterTypeId, widget = components)) {
+            saveLetterUseCase.invoke(letterTypeId = letterTypeId.orZero(), widget = components)) {
             is NetworkResponse.Success -> {
                 _onSubmitSuccess.value = Unit
             }

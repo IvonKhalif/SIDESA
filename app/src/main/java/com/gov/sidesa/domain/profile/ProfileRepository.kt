@@ -13,7 +13,7 @@ import com.haroldadmin.cnradapter.NetworkResponse
 interface ProfileRepository {
 
     suspend fun getProfileFamily(
-        accountId: String
+        accountId: Long
     ): NetworkResponse<ProfileFamily, GenericErrorResponse>
 
     suspend fun updateProfileFamily(

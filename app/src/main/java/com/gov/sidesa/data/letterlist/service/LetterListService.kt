@@ -15,12 +15,12 @@ interface LetterListService {
     @GET("pengajuan-surat")
     @Headers(ContentTypeConstant.CONTENT_TYPE_JSON)
     suspend fun getSubmissionLetters(
-        @Query("id_account") accountId: String
+        @Query("id_account") accountId: Long
     ): NetworkResponse<RetrofitResponse<List<LetterSubmissionResponse>>, GenericErrorResponse>
 
     @GET("pengajuan-surat/list-approval")
     @Headers(ContentTypeConstant.CONTENT_TYPE_JSON)
     suspend fun getApprovalLetters(
-        @Query("id_account") accountId: String
+        @Query("id_account") accountId: Long
     ): NetworkResponse<RetrofitLetterApprovalResponse<List<LetterApprovalResponse>>, GenericErrorResponse>
 }

@@ -12,6 +12,7 @@ import com.gov.sidesa.utils.constants.UserExtrasConstant.EXTRA_STATUS_NIK
 import com.gov.sidesa.utils.constants.UserExtrasConstant.EXTRA_USER_ID
 import com.gov.sidesa.utils.constants.UserExtrasConstant.EXTRA_USER_NIK
 import com.gov.sidesa.utils.extension.observeNonNull
+import com.gov.sidesa.utils.extension.orZero
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : BaseActivity() {
@@ -60,7 +61,7 @@ class LoginActivity : BaseActivity() {
         val intent = Intent(this, PasswordActivity::class.java)
         intent.putExtra(EXTRA_STATUS_NIK, status)
         intent.putExtra(EXTRA_USER_NIK, binding.inputUserKtp.value().text.toString())
-        intent.putExtra(EXTRA_USER_ID, viewModel.userResponseLiveData.value?.id.orEmpty())
+        intent.putExtra(EXTRA_USER_ID, viewModel.userResponseLiveData.value?.id.orZero())
         resultLauncher.launch(intent)
     }
 

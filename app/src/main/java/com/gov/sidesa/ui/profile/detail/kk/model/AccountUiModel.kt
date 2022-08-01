@@ -1,17 +1,19 @@
 package com.gov.sidesa.ui.profile.detail.kk.model
 
+import java.util.*
+
 /**
  * Created by yovi.putra on 30/07/22"
  * Project name: SIDESA
  **/
 
 data class AccountUiModel(
-    val idLevel: String = "",
+    val id: Long = 0,
     val nik: String = "",
     val kk: String = "",
     val name: String = "",
     val birthPlace: String = "",
-    val birthDate: String = "",
+    val birthDate: Date = Date(),
     val gender: String = "",
     val blood: String = "",
     val address: String = "",
@@ -28,7 +30,17 @@ data class AccountUiModel(
     val imageKTP: String = "",
     val email: String = "",
     val statusUser: String = "",
-    val expiredDate: String = ""
+    val expiredDate: String = "",
+
+    val familyHead: String = "",
+    val imageKK: String = "",
+    val addressKK: String = "",
+    val rtKK: String = "",
+    val rwKK: String = "",
+    val provinceIdKK: String = "",
+    val cityIdKK: String = "",
+    val districtIdKK: String = "",
+    val villageIdKK: String = ""
 ) {
 
     val birthPlaceAndDate

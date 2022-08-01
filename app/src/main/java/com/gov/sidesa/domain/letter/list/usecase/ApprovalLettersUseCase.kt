@@ -6,6 +6,6 @@ class ApprovalLettersUseCase(
     private val repository: LetterListRepository
 ) {
     suspend operator fun invoke(
-        accountId: String
+        accountId: Long
     ) = repository.getApprovalLetters(accountId)
 }

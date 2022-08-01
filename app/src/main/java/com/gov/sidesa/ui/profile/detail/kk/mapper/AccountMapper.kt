@@ -9,8 +9,9 @@ import com.gov.sidesa.ui.profile.detail.kk.model.AccountUiModel
  **/
 
 fun Account.asUiModel() = AccountUiModel(
-    idLevel,
+    id,
     nik,
+    kk,
     name,
     birthPlace,
     birthDate,
@@ -22,5 +23,13 @@ fun Account.asUiModel() = AccountUiModel(
     province,
     city,
     district,
-    village
+    village,
+    religion,
+    maritalStatus,
+    job,
+    citizenship,
+    imageKTP,
+    email,
+    statusUser,
+    expiredDate
 )
