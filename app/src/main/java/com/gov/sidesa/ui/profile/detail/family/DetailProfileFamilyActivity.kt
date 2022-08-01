@@ -1,7 +1,9 @@
 package com.gov.sidesa.ui.profile.detail.family
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseActivity
@@ -62,6 +64,18 @@ class DetailProfileFamilyActivity : BaseActivity() {
                 adapter.submitList(it)
             }
         }
+
+        closeScreenState.observe(this@DetailProfileFamilyActivity) {
+            finish()
+        }
+    }
+
+    private val editLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            viewModel.onEditResult()
+        }
     }
 
     private fun initEvent() = with(binding) {
@@ -70,7 +84,7 @@ class DetailProfileFamilyActivity : BaseActivity() {
                 this@DetailProfileFamilyActivity,
                 EditProfileFamilyActivity::class.java
             )
-            resultLauncher.launch(intent)
+            editLauncher.launch(intent)
         }
 
         customToolbar.toolbarDetailProfile.setNavigationOnClickListener {

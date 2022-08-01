@@ -7,6 +7,7 @@ import com.gov.sidesa.BuildConfig
 import com.gov.sidesa.utils.constants.TimeoutConstant.OKHTTP_CONNECTION_TIMEOUT
 import com.gov.sidesa.utils.constants.TimeoutConstant.OKHTTP_READ_TIMEOUT
 import com.gov.sidesa.utils.constants.TimeoutConstant.OKHTTP_WRITE_TIMEOUT
+import com.gov.sidesa.utils.serialize.dateSerializer
 import com.haroldadmin.cnradapter.NetworkResponseAdapterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -14,6 +15,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 object NetworkUtil {
@@ -69,8 +71,9 @@ object NetworkUtil {
         val gson = GsonBuilder()
             .enableComplexMapKeySerialization()
             .serializeNulls()
-            .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+            .setDateFormat("yyyy-MM-dd")
             .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
+            .registerTypeAdapter(Date::class.java, dateSerializer)
             .setPrettyPrinting()
             .setVersion(1.0)
             .create()

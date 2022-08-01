@@ -1,7 +1,7 @@
 package com.gov.sidesa.data.profile.service
 
 import com.gov.sidesa.data.profile.models.ProfileFamilyResponse
-import com.gov.sidesa.domain.profile.edit.family.models.SaveFamily
+import com.gov.sidesa.data.profile.models.SaveFamilyRequest
 import com.gov.sidesa.utils.response.GenericErrorResponse
 import com.gov.sidesa.utils.response.RetrofitStatusResponse
 import com.haroldadmin.cnradapter.NetworkResponse
@@ -24,6 +24,6 @@ interface ProfileService {
 
     @POST("account/update-family")
     suspend fun updateProfileFamily(
-        @Body family: List<SaveFamily>
+        @Body family: List<SaveFamilyRequest>
     ): NetworkResponse<RetrofitStatusResponse, GenericErrorResponse>
 }

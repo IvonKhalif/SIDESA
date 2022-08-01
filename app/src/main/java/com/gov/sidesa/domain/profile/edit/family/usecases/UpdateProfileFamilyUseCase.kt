@@ -5,6 +5,7 @@ import com.gov.sidesa.domain.profile.detail.family.models.Account
 import com.gov.sidesa.domain.profile.edit.family.models.SaveFamily
 import com.gov.sidesa.ui.profile.edit.family.models.EditProfileFamilyUiModel
 import com.gov.sidesa.ui.profile.edit.family.models.EditProfileFamilyViewType
+import com.gov.sidesa.utils.extension.orZero
 import com.gov.sidesa.utils.response.GenericErrorResponse
 import com.haroldadmin.cnradapter.NetworkResponse
 
@@ -40,9 +41,9 @@ class UpdateProfileFamilyUseCase(
         address = if (differentAddress) address else account.address,
         rt = if (differentAddress) rt else account.rt,
         rw = if (differentAddress) rw else account.rw,
-        provinceId = if (differentAddress) province?.id else 0L,//account.province,
-        cityId = if (differentAddress) city?.id else 0L,//account.city,
-        districtId = if (differentAddress) district?.id else 0L,// account.district,
-        villageId = if (differentAddress) village?.id else 0L,// account.village
+        provinceId = if (differentAddress) province?.id else account.province.orZero(),
+        cityId = if (differentAddress) city?.id else account.city.orZero(),
+        districtId = if (differentAddress) district?.id else account.district.orZero(),
+        villageId = if (differentAddress) village?.id else account.village.orZero()
     )
 }

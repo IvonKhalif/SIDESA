@@ -24,22 +24,35 @@ class DetailProfileFamilyViewModel(
 
     private val _profileFamilyData = MutableLiveData<ProfileFamily>()
 
-    val familyData: LiveData<List<FamilyUiModel>> get() = _profileFamilyData.map {
-        it.family.asUiModel()
-    }
+    val familyData: LiveData<List<FamilyUiModel>>
+        get() = _profileFamilyData.map {
+            it.family.asUiModel()
+        }
+
+    private val _closeScreenState = MutableLiveData<Unit>()
+    val closeScreenState: LiveData<Unit> get() = _closeScreenState
 
     init {
-        viewModelScope.launch {
-            showLoadingWidget()
+        onLoadData()
+    }
 
-            when(val result = getFamilyUseCase.invoke()) {
-                is NetworkResponse.Success -> {
-                    _profileFamilyData.value = result.body
-                }
-                else -> onResponseNotSuccess(response = result)
+    private fun onLoadData() = viewModelScope.launch {
+        showLoadingWidget()
+
+        when (val result = getFamilyUseCase.invoke()) {
+            is NetworkResponse.Success -> {
+                _profileFamilyData.value = result.body
             }
-
-            hideLoadingWidget()
+            else -> {
+                onResponseNotSuccess(response = result)
+                _closeScreenState.value = Unit
+            }
         }
+
+        hideLoadingWidget()
+    }
+
+    fun onEditResult() {
+        onLoadData()
     }
 }

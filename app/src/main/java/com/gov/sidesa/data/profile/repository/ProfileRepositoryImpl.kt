@@ -1,5 +1,6 @@
 package com.gov.sidesa.data.profile.repository
 
+import com.gov.sidesa.data.profile.mapper.asData
 import com.gov.sidesa.data.profile.mapper.asDomain
 import com.gov.sidesa.data.profile.service.ProfileService
 import com.gov.sidesa.domain.profile.ProfileRepository
@@ -26,7 +27,7 @@ class ProfileRepositoryImpl(
     }
 
     override suspend fun updateProfileFamily(family: List<SaveFamily>): NetworkResponse<String, GenericErrorResponse> {
-        return service.updateProfileFamily(family = family).asDomain {
+        return service.updateProfileFamily(family = family.asData()).asDomain {
             desc
         }
     }
