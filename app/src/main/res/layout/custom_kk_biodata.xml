@@ -32,6 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:digits="1234567890"
+            android:imeOptions="actionNext"
             android:inputType="number"
             android:maxLength="16" />
 
@@ -52,6 +53,7 @@
             android:id="@+id/input_kk_kepala_keluarga"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:imeOptions="actionNext"
             android:inputType="textPersonName" />
 
     </com.google.android.material.textfield.TextInputLayout>
