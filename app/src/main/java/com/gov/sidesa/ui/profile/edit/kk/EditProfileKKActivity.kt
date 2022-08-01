@@ -13,6 +13,7 @@ import com.gov.sidesa.databinding.ActivityEditProfileKkactivityBinding
 import com.gov.sidesa.ui.profile.edit.kk.models.AccountKKUiModel
 import com.gov.sidesa.ui.profile.edit.kk.models.EditProfileKKUiEvent
 import com.gov.sidesa.ui.regions.SelectRegionBottomSheet
+import com.gov.sidesa.utils.extension.setTextDistinct
 import com.gov.sidesa.utils.picker.SelectImageBottomSheet
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -194,15 +195,25 @@ class EditProfileKKActivity : BaseActivity() {
     }
 
     private fun updateUI(uiModel: AccountKKUiModel) = with(binding) {
-        Glide.with(this@EditProfileKKActivity)
-            .load(uiModel.kkImageUri)
-            .into(imageKk)
+        with(customKkBiodata) {
+            inputKkNumber.setTextDistinct(uiModel.kk)
+            inputKkKepalaKeluarga.setTextDistinct(uiModel.familyHeadName)
+        }
 
         with(binding.containerAddress) {
+            inputAddress.setTextDistinct(uiModel.address)
+            inputRt.setTextDistinct(uiModel.rt)
+            inputRw.setTextDistinct(uiModel.rw)
+
             inputProvince.setText(uiModel.province.name)
             inputCity.setText(uiModel.city.name)
             inputKecamatan.setText(uiModel.district.name)
             inputKelurahan.setText(uiModel.village.name)
         }
+
+        Glide.with(this@EditProfileKKActivity)
+            .load(uiModel.kkImageUri)
+            .into(imageKk)
+
     }
 }

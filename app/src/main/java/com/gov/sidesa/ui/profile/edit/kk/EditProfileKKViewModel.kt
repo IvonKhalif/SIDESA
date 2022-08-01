@@ -76,7 +76,7 @@ class EditProfileKKViewModel : BaseViewModel() {
                 _uiModel.update { it.copy(rt = event.text) }
             }
             is EditProfileKKUiEvent.OnRWChanged -> {
-                _uiModel.update { it.copy(rt = event.text) }
+                _uiModel.update { it.copy(rw = event.text) }
             }
         }
     }
@@ -109,19 +109,47 @@ class EditProfileKKViewModel : BaseViewModel() {
      * Callback other view
      */
     fun onProvinceSelected(region: Region) {
-        _uiModel.update { it.copy(province = region) }
+        if (region.id != _uiModel.value.province.id) {
+            _uiModel.update {
+                it.copy(
+                    province = region,
+                    city = Region(),
+                    district = Region(),
+                    village = Region()
+                )
+            }
+        }
     }
 
     fun onCitySelected(region: Region) {
-        _uiModel.update { it.copy(city = region) }
+        if (region.id != _uiModel.value.city.id) {
+            _uiModel.update {
+                it.copy(
+                    city = region,
+                    district = Region(),
+                    village = Region()
+                )
+            }
+        }
     }
 
     fun onDistrictSelected(region: Region) {
-        _uiModel.update { it.copy(district = region) }
+        if (region.id != _uiModel.value.district.id) {
+            _uiModel.update {
+                it.copy(
+                    district = region,
+                    village = Region()
+                )
+            }
+        }
     }
 
     fun onVillageSelected(region: Region) {
-        _uiModel.update { it.copy(village = region) }
+        if (region.id != _uiModel.value.village.id) {
+            _uiModel.update {
+                it.copy(village = region)
+            }
+        }
     }
 
     fun onImageSelected(file: File) {
