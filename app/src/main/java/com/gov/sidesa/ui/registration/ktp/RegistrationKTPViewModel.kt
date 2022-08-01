@@ -67,88 +67,81 @@ class RegistrationKTPViewModel(
         val childPref = getPref(context, RegistrationStackState.FamilyChild.toString())
         val childModel = Gson().fromJson(childPref, FamilyChildModel::class.java)
 
-        val familyMap = mutableMapOf<String, String>()
         val familyList = mutableListOf<FamilyListModel>()
-        familyList.add(FamilyListModel(fatherModel, motherModel, applicantModel, childModel))
-        familyList.forEachIndexed { index, familyListModel ->
-            familyMap.apply {
-                put(
-                    "nama_lengkap_family", listOf(
-                        familyListModel.fatherModel.name,
-                        familyListModel.motherModel.name,
-                        familyListModel.applicantModel.name,
-                        familyListModel.childModel.name
-                    ).toString()
-                )
-                put(
-                    "no_ktp_family", listOf(
-                        familyListModel.fatherModel.nik,
-                        familyListModel.motherModel.nik,
-                        familyListModel.applicantModel.nik,
-                        familyListModel.childModel.nik,
-                    ).toString()
-                )
-                put(
-                    "tempat_lahir_family", listOf(
-                        familyListModel.fatherModel.placeOfBirth,
-                        familyListModel.motherModel.placeOfBirth,
-                        familyListModel.applicantModel.placeOfBirth,
-                        familyListModel.childModel.placeOfBirth,
-                    ).toString()
-                )
-                put(
-                    "type_family", listOf(
-                        "Ayah",
-                        "Ibu",
-                        familyListModel.applicantModel.status,
-                        "Anak 1"
-                    ).toString()
-                )
 
-                if (familyListModel.fatherModel.isSameAddress) {
-                    put(
-                        "alamat_family", listOf(
-                            familyListModel.fatherModel.addressKtp?.address.toString(),
-                            familyListModel.motherModel.addressKtp?.address.toString(),
-                            familyListModel.applicantModel.addressKtp?.address.toString(),
-                            familyListModel.childModel.addressKtp?.address.toString(),
-                        ).toString()
-                    )
-                    put(
-                        "rt_family", addressModel.rt
-                    )
-                    put(
-                        "rw_family", addressModel.rt
-                    )
-                    put(
-                        "id_kelurahan_family", "kelurahanId"
-                    )
-                    put(
-                        "id_kecamatan_family", "kecamatanId"
-                    )
-                } else {
-                    put(
-                        "alamat_family", listOf(
-                            familyListModel.fatherModel.addressKtp?.address.toString(),
-                            familyListModel.motherModel.addressKtp?.address.toString(),
-                            familyListModel.applicantModel.addressKtp?.address.toString(),
-                            familyListModel.childModel.addressKtp?.address.toString(),
-                        ).toString()
-                    )
-                    put(
-                        "rt_family", familyListModel.fatherModel.addressKtp?.rt.toString()
-                    )
-                    put(
-                        "rw_family", familyListModel.fatherModel.addressKtp?.rw.toString()
-                    )
-                    put(
-                        "id_kelurahan_family", "kelurahanId"
-                    )
-                    put(
-                        "id_kecamatan_family", "kecamatanId"
+        familyList.add(FamilyListModel.FatherModel(fatherModel))
+        familyList.add(FamilyListModel.MotherModel(motherModel))
+        familyList.add(FamilyListModel.ApplicantModel(applicantModel))
+        familyList.add(FamilyListModel.ChildModel(childModel))
+
+        val familyMap = mutableMapOf<String, String>()
+
+        familyList.forEachIndexed { index, familyListModel ->
+            when (familyListModel) {
+                is FamilyListModel.FatherModel -> {
+                    familyMapper(
+                        index,
+                        familyListModel.familyFatherModel.name,
+                        familyListModel.familyFatherModel.nik,
+                        familyListModel.familyFatherModel.placeOfBirth,
+                        "Ayah",
+                        AddressKtpModel(
+                            familyListModel.familyFatherModel.addressKtp?.address.orEmpty(),
+                            familyListModel.familyFatherModel.addressKtp?.rt.orEmpty(),
+                            familyListModel.familyFatherModel.addressKtp?.rw.orEmpty(),
+                            familyListModel.familyFatherModel.addressKtp?.kecamatan.orEmpty(),
+                            familyListModel.familyFatherModel.addressKtp?.kelurahan.orEmpty(),
+                        )
                     )
                 }
-
+                is FamilyListModel.MotherModel -> {
+                    familyMapper(
+                        index,
+                        familyListModel.familyMotherModel.name,
+                        familyListModel.familyMotherModel.nik,
+                        familyListModel.familyMotherModel.placeOfBirth,
+                        "Ibu",
+                        AddressKtpModel(
+                            familyListModel.familyMotherModel.addressKtp?.address.orEmpty(),
+                            familyListModel.familyMotherModel.addressKtp?.rt.orEmpty(),
+                            familyListModel.familyMotherModel.addressKtp?.rw.orEmpty(),
+                            familyListModel.familyMotherModel.addressKtp?.kecamatan.orEmpty(),
+                            familyListModel.familyMotherModel.addressKtp?.kelurahan.orEmpty(),
+                        )
+                    )
+                }
+                is FamilyListModel.ApplicantModel -> {
+                    familyMapper(
+                        index,
+                        familyListModel.familyApplicantModel.name,
+                        familyListModel.familyApplicantModel.nik,
+                        familyListModel.familyApplicantModel.placeOfBirth,
+                        familyListModel.familyApplicantModel.status,
+                        AddressKtpModel(
+                            familyListModel.familyApplicantModel.addressKtp?.address.orEmpty(),
+                            familyListModel.familyApplicantModel.addressKtp?.rt.orEmpty(),
+                            familyListModel.familyApplicantModel.addressKtp?.rw.orEmpty(),
+                            familyListModel.familyApplicantModel.addressKtp?.kecamatan.orEmpty(),
+                            familyListModel.familyApplicantModel.addressKtp?.kelurahan.orEmpty(),
+                        )
+                    )
+                }
+                is FamilyListModel.ChildModel -> {
+                    familyMapper(
+                        index,
+                        familyListModel.familyChildModel.name,
+                        familyListModel.familyChildModel.nik,
+                        familyListModel.familyChildModel.placeOfBirth,
+                        "Child",
+                        AddressKtpModel(
+                            familyListModel.familyChildModel.addressKtp?.address.orEmpty(),
+                            familyListModel.familyChildModel.addressKtp?.rt.orEmpty(),
+                            familyListModel.familyChildModel.addressKtp?.rw.orEmpty(),
+                            familyListModel.familyChildModel.addressKtp?.kecamatan.orEmpty(),
+                            familyListModel.familyChildModel.addressKtp?.kelurahan.orEmpty(),
+                        )
+                    )
+                }
             }
         }
 
@@ -181,6 +174,31 @@ class RegistrationKTPViewModel(
                 registrationStatus.value = ""
             }
         }
+    }
+
+    private fun familyMapper(
+        index: Int,
+        name: String,
+        nik: String,
+        placeOfBirth: String,
+        familyType: String,
+        addressKtpModel: AddressKtpModel?,
+    ): MutableMap<String, String> {
+        val familyMap = mutableMapOf<String, String>()
+        familyMap.apply {
+            put("nama_lengkap_family${index}", name)
+            put("no_ktp_family${index}", nik)
+            put("tempat_lahir_family${index}", placeOfBirth)
+            put("type_family${index}", familyType)
+
+            put("alamat_family${index}", addressKtpModel?.address.orEmpty())
+            put("rt_family${index}", addressKtpModel?.rt.orEmpty())
+            put("rw_family${index}", addressKtpModel?.rt.orEmpty())
+            put("id_kelurahan_family${index}", "kelurahanId")
+            put("id_kecamatan_family${index}", "kecamatanId")
+        }
+
+        return familyMap
     }
 
 }
