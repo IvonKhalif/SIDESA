@@ -2,6 +2,7 @@ package com.gov.sidesa.data.profile.models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import com.gov.sidesa.data.letter.models.ResourceResponse
 import com.gov.sidesa.data.user.response.User
 import java.util.*
 
@@ -44,28 +45,16 @@ data class FamilyResponse(
     @SerializedName("rw")
     @Expose
     val rw: String?,
-    @SerializedName("id_provinsi")
+    @SerializedName("province")
     @Expose
-    val provinceId: String?,
-    @SerializedName("id_kota")
-    @Expose
-    val cityId: String?,
-    @SerializedName("id_kecamatan")
-    @Expose
-    val districtId: String?,
-    @SerializedName("id_kelurahan")
-    @Expose
-    val villageId: String?,
-    @SerializedName("provinsi")
-    @Expose
-    val province: String?,
+    val province: ResourceResponse?,
     @SerializedName("kota")
     @Expose
-    val city: String?,
+    val city: ResourceResponse?,
     @SerializedName("kecamatan")
     @Expose
-    val district: String?,
+    val district: ResourceResponse?,
     @SerializedName("kelurahan")
     @Expose
-    val village: String?,
+    val village: ResourceResponse?,
 )

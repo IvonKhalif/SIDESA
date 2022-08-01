@@ -7,7 +7,6 @@ import com.gov.sidesa.domain.profile.detail.family.models.Account
 import com.gov.sidesa.domain.profile.detail.family.models.Family
 import com.gov.sidesa.domain.profile.detail.family.models.ProfileFamily
 import com.gov.sidesa.domain.regions.models.Region
-import com.gov.sidesa.utils.extension.orNull
 import com.gov.sidesa.utils.extension.orZero
 import java.util.*
 
@@ -56,21 +55,21 @@ fun FamilyResponse.asDomain() = Family(
     address.orEmpty(),
     rt = rt.orEmpty(),
     rw = rw.orEmpty(),
-    province = Region(id = provinceId.orZero(), name = province.orEmpty()),
+    province = Region(id = province?.id.orZero(), name = province?.name.orEmpty()),
     city = Region(
-        id = cityId.orZero(),
-        parentId = provinceId.orNull(),
-        name = city.orEmpty()
+        id = city?.id.orZero(),
+        parentId = province?.id,
+        name = city?.name.orEmpty()
     ),
     district = Region(
-        id = districtId.orZero(),
-        parentId = cityId.orNull(),
-        name = district.orEmpty()
+        id = district?.id.orZero(),
+        parentId = city?.id,
+        name = district?.name.orEmpty()
     ),
     village = Region(
-        id = villageId.orZero(),
-        parentId = districtId.orNull(),
-        name = village.orEmpty()
+        id = village?.id.orZero(),
+        parentId = district?.id,
+        name = village?.name.orEmpty()
     )
 )
 

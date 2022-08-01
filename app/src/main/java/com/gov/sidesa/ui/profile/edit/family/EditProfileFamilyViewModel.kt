@@ -4,13 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.gov.sidesa.base.BaseViewModel
+import com.gov.sidesa.domain.profile.detail.family.usecases.GetFamilyUseCase
 import com.gov.sidesa.domain.regions.models.Region
 import com.gov.sidesa.ui.profile.edit.family.adapter.EditProfileFamilyListener
 import com.gov.sidesa.ui.profile.edit.family.models.EditProfileFamilyUiModel
 import com.gov.sidesa.ui.profile.edit.family.models.EditProfileFamilyViewType
 import com.gov.sidesa.ui.profile.edit.family.models.RelationType
+import com.gov.sidesa.ui.profile.edit.family.models.asEditFamily
 import com.gov.sidesa.utils.response.GenericErrorResponse
-import kotlinx.coroutines.delay
+import com.haroldadmin.cnradapter.NetworkResponse
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -20,7 +22,9 @@ import java.util.*
  **/
 
 
-class EditProfileFamilyViewModel : BaseViewModel(), EditProfileFamilyListener {
+class EditProfileFamilyViewModel(
+    private val getFamilyUseCase: GetFamilyUseCase
+) : BaseViewModel(), EditProfileFamilyListener {
     private val _componentData = MutableLiveData<List<EditProfileFamilyUiModel>>()
     val componentData: LiveData<List<EditProfileFamilyUiModel>> get() = _componentData
 
@@ -45,23 +49,14 @@ class EditProfileFamilyViewModel : BaseViewModel(), EditProfileFamilyListener {
     init {
         viewModelScope.launch {
             showLoadingWidget()
-            delay(1000)
-            _componentData.value = listOf(
-                EditProfileFamilyUiModel(type = EditProfileFamilyViewType.Header),
-                EditProfileFamilyUiModel(
-                    type = EditProfileFamilyViewType.Form,
-                    relationFamily = RelationType.Father
-                ),
-                EditProfileFamilyUiModel(
-                    type = EditProfileFamilyViewType.Form,
-                    relationFamily = RelationType.Mother
-                ),
-                EditProfileFamilyUiModel(
-                    type = EditProfileFamilyViewType.Form,
-                    relationFamily = RelationType.Husband
-                ),
-                EditProfileFamilyUiModel(type = EditProfileFamilyViewType.AddChild)
-            )
+
+            when (val result = getFamilyUseCase.invoke()) {
+                is NetworkResponse.Success -> {
+                    _componentData.value = result.body.asEditFamily()
+                }
+                else -> onResponseNotSuccess(response = result)
+            }
+
             hideLoadingWidget()
         }
     }

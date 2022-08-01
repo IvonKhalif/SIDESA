@@ -12,4 +12,13 @@ import kotlinx.parcelize.Parcelize
 data class ProfileFamily(
     val account: Account = Account(),
     val family: List<Family> = emptyList()
-): Parcelable
+): Parcelable {
+
+    fun sameAddress(family: Family): Boolean = account.address.trim() == family.address.trim()
+            && account.rt == family.rt
+            && account.rw == family.rw
+            && account.province == family.province.name
+            && account.city == family.city.name
+            && account.district == family.district.name
+            && account.village == family.village.name
+}

@@ -36,6 +36,7 @@ class EditProfileFamilyViewHolder(
         textHeader.text = data.titleText
 
         inputLayoutStatus.isVisible = data.inputStatusVisibilityState
+        inputStatus.setText(data.relationFamily.getRelation(context))
 
         inputLayoutName.hint = context.getString(data.nameTitle)
         inputName.setText(data.name)

@@ -32,7 +32,7 @@ val ViewModelModule = module {
     viewModel { DetailProfileKKViewModel(get()) }
     viewModel { DetailProfileKTPViewModel(get()) }
     viewModel { SelectRegionViewModel(get(), get(), get(), get()) }
-    viewModel { EditProfileFamilyViewModel() }
+    viewModel { EditProfileFamilyViewModel(get()) }
     viewModel { DetailApprovalViewModel(get(), get()) }
     viewModel { DashboardViewModel(get(), get()) }
     viewModel { TabLetterListViewModel(get(), get()) }
