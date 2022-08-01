@@ -13,13 +13,13 @@ sealed class RelationType(val type: String) {
     data class Child(val count: Int) : RelationType("anak")
 
     companion object {
-        fun find(value: String): RelationType {
+        fun find(value: String, childCount: Int = 1): RelationType {
             return when (value.lowercase()) {
                 Mother.type -> Mother
                 Father.type -> Father
                 Wife.type -> Wife
                 Husband.type -> Husband
-                else -> Child(1)
+                else -> Child(childCount)
             }
         }
     }

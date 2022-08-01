@@ -1,6 +1,5 @@
 package com.gov.sidesa.utils.extension
 
-import android.text.Editable
 import java.util.regex.Pattern
 
 fun String.isEmailPattern(): Boolean {
@@ -14,4 +13,22 @@ fun String.isEmailPattern(): Boolean {
                 ")+"
     )
     return emailRegex.matcher(this).matches()
+}
+
+fun String?.orZero(): Long {
+    val numb = this ?: "0"
+    return try {
+        numb.toLong()
+    } catch (e: Exception) {
+        0L
+    }
+}
+
+fun String?.orNull(): Long? {
+    val numb = this ?: return null
+    return try {
+        numb.toLong()
+    } catch (e: Exception) {
+        0L
+    }
 }

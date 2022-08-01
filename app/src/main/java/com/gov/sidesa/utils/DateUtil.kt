@@ -57,6 +57,11 @@ object DateUtil {
 
     }
 
+    fun format(date: Date, pattern: String = "dd-MM-yyyy"): String {
+        val format = SimpleDateFormat(pattern, Locale.getDefault())
+        return format.format(date)
+    }
+
     fun convertToDayAndDate(baseDate: String): String {
         val localDateTime =
             if (baseDate.isBlank())

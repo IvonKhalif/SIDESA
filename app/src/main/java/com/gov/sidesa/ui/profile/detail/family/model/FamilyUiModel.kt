@@ -2,6 +2,10 @@ package com.gov.sidesa.ui.profile.detail.family.model
 
 import android.content.Context
 import com.gov.sidesa.R
+import com.gov.sidesa.domain.regions.models.Region
+import com.gov.sidesa.ui.profile.edit.family.models.RelationType
+import com.gov.sidesa.utils.extension.format
+import java.util.*
 
 /**
  * Created by yovi.putra on 30/07/22"
@@ -9,25 +13,36 @@ import com.gov.sidesa.R
  **/
 
 data class FamilyUiModel(
-    val relationFamily: String = "",
+    val relationType: RelationType = RelationType.Father,
     val name: String = "",
     val ktpNumber: String = "",
     val birthPlace: String = "",
-    val birthDate: String = "",
+    val birthDate: Date = Date(),
     val address: String = "",
-    val differentAddress: Boolean = false
+    val rt: String = "",
+    val rw: String = "",
+    val province: Region = Region(),
+    val city: Region = Region(),
+    val district: Region = Region(),
+    val village: Region = Region()
 ) {
-    fun getRelation(context: Context) = when (relationFamily) {
-        "father" -> context.getString(R.string.family_data_father)
-        "mother" -> context.getString(R.string.family_data_mother)
-        "husband" -> context.getString(R.string.family_data_husband)
-        "wife" -> context.getString(R.string.family_data_wife)
-        else -> context.getString(
+
+    val fullAddress
+        get() = "$address, RT$rt RW$rw, ${province.name}, " +
+                "${city.name}, ${district.name}, ${village.name}"
+                    .trim { it == ' ' || it == ',' }
+
+    fun getRelation(context: Context) = when (relationType) {
+        is RelationType.Father -> context.getString(R.string.family_data_father)
+        is RelationType.Mother -> context.getString(R.string.family_data_mother)
+        is RelationType.Husband -> context.getString(R.string.family_data_husband)
+        is RelationType.Wife -> context.getString(R.string.family_data_wife)
+        is RelationType.Child -> context.getString(
             R.string.family_data_child_to,
-            relationFamily.replace("child_", "")
+            relationType.count.toString()
         )
     }
 
     val birthPlaceAndDate
-        get() = "$birthPlace, $birthDate"
+        get() = "$birthPlace, ${birthDate.format()}"
 }

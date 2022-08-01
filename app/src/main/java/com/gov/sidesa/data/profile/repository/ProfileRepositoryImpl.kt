@@ -19,7 +19,7 @@ class ProfileRepositoryImpl(
 ) : ProfileRepository {
 
     override suspend fun getProfileFamily(accountId: String): NetworkResponse<ProfileFamily, GenericErrorResponse> {
-        return service.getProfileFamily(accountId = accountId).asDomain {
+        return service.getProfileFamily(accountId = "3").asDomain {
             asDomain()
         }
     }

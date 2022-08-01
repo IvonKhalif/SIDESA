@@ -3,6 +3,7 @@ package com.gov.sidesa.data.profile.models
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.gov.sidesa.data.user.response.User
+import java.util.*
 
 /**
  * Created by yovi.putra on 30/07/22"
@@ -19,9 +20,9 @@ data class ProfileFamilyResponse(
 )
 
 data class FamilyResponse(
-    @SerializedName("relation_family")
+    @SerializedName("relation_type")
     @Expose
-    val relationFamily: String?,
+    val relationType: String?,
     @SerializedName("name")
     @Expose
     val name: String?,
@@ -33,11 +34,38 @@ data class FamilyResponse(
     val birthPlace: String?,
     @SerializedName("birth_date")
     @Expose
-    val birthDate: String?,
+    val birthDate: Date?,
     @SerializedName("address")
     @Expose
     val address: String?,
-    @SerializedName("different_address")
+    @SerializedName("rt")
     @Expose
-    val differentAddress: Boolean?
+    val rt: String?,
+    @SerializedName("rw")
+    @Expose
+    val rw: String?,
+    @SerializedName("id_provinsi")
+    @Expose
+    val provinceId: String?,
+    @SerializedName("id_kota")
+    @Expose
+    val cityId: String?,
+    @SerializedName("id_kecamatan")
+    @Expose
+    val districtId: String?,
+    @SerializedName("id_kelurahan")
+    @Expose
+    val villageId: String?,
+    @SerializedName("provinsi")
+    @Expose
+    val province: String?,
+    @SerializedName("kota")
+    @Expose
+    val city: String?,
+    @SerializedName("kecamatan")
+    @Expose
+    val district: String?,
+    @SerializedName("kelurahan")
+    @Expose
+    val village: String?,
 )

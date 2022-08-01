@@ -66,7 +66,7 @@
             android:theme="@style/Theme.ContainerTracker.NoActionBar" />
         <activity
             android:name=".ui.profile.edit.family.EditProfileFamilyActivity"
-            android:exported="true"
+            android:exported="false"
             android:theme="@style/Theme.ContainerTracker.NoActionBar" />
         <activity
             android:name=".ui.profile.detail.family.DetailProfileFamilyActivity"
@@ -76,11 +76,6 @@
             android:name=".ui.profile.edit.kk.EditProfileKKActivity"
             android:exported="true"
             android:theme="@style/Theme.ContainerTracker.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.letter.list.LetterListActivity"
@@ -107,8 +102,14 @@
             android:theme="@style/Theme.ContainerTracker.NoActionBar" />
         <activity
             android:name=".ui.profile.ProfileActivity"
-            android:exported="false"
-            android:theme="@style/Theme.ContainerTracker.NoActionBar" />
+            android:exported="true"
+            android:theme="@style/Theme.ContainerTracker.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.letter.template.LetterTemplateActivity"
             android:exported="false"

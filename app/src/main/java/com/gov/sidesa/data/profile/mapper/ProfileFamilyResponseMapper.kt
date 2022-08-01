@@ -6,6 +6,10 @@ import com.gov.sidesa.data.user.response.User
 import com.gov.sidesa.domain.profile.detail.family.models.Account
 import com.gov.sidesa.domain.profile.detail.family.models.Family
 import com.gov.sidesa.domain.profile.detail.family.models.ProfileFamily
+import com.gov.sidesa.domain.regions.models.Region
+import com.gov.sidesa.utils.extension.orNull
+import com.gov.sidesa.utils.extension.orZero
+import java.util.*
 
 /**
  * Created by yovi.putra on 30/07/22"
@@ -44,13 +48,30 @@ fun User.asDomain() = Account(
 )
 
 fun FamilyResponse.asDomain() = Family(
-    relationFamily.orEmpty(),
+    relationType.orEmpty(),
     name.orEmpty(),
     ktpNumber.orEmpty(),
     birthPlace.orEmpty(),
-    birthDate.orEmpty(),
+    birthDate = birthDate ?: Date(),
     address.orEmpty(),
-    differentAddress ?: false
+    rt = rt.orEmpty(),
+    rw = rw.orEmpty(),
+    province = Region(id = provinceId.orZero(), name = province.orEmpty()),
+    city = Region(
+        id = cityId.orZero(),
+        parentId = provinceId.orNull(),
+        name = city.orEmpty()
+    ),
+    district = Region(
+        id = districtId.orZero(),
+        parentId = cityId.orNull(),
+        name = district.orEmpty()
+    ),
+    village = Region(
+        id = villageId.orZero(),
+        parentId = districtId.orNull(),
+        name = village.orEmpty()
+    )
 )
 
 fun List<FamilyResponse>.asDomain() = map { it.asDomain() }

@@ -18,10 +18,10 @@ class DetailProfileFamilyViewHolder(
 
     fun binding(family: FamilyUiModel) = with(binding) {
         labelHeaderFamily.text = family.getRelation(binding.root.context)
-        labelFamilyName.text = family.name
+        textFamilyName.text = family.name
         textFamilyNik.text = family.ktpNumber
         textFamilyTtl.text = family.birthPlaceAndDate
-        textFamilyAddress.text = family.address
+        textFamilyAddress.text = family.fullAddress
     }
 
     companion object {
