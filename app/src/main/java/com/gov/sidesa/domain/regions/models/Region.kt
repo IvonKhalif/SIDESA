@@ -10,7 +10,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Region(
-    val id: Long,
-    val parentId: Long?,
-    val name: String
+    val id: Long = 0L,
+    val parentId: Long? = null,
+    val name: String = ""
 ) : Parcelable

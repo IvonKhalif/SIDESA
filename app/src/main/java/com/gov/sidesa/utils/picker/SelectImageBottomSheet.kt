@@ -67,7 +67,7 @@ class SelectImageBottomSheet : MenuIconWithHeadlineBottomSheet<SelectImageMenuTy
                     is SelectImageMenuType.Gallery -> galleryHelper.open(launcher = galleryLauncher)
                     is SelectImageMenuType.Camera -> cameraHelper.open(launcher = cameraLauncher)
                 }
-            }
+            },
         ).also {
             it.submitList(
                 listOf(

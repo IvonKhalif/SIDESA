@@ -270,4 +270,7 @@
     <string name="fullname_father">Nama Lengkap Ayah</string>
     <string name="fullname_mother">Nama Lengkap Ibu</string>
     <string name="fullname">Nama Lengkap</string>
+
+    <!--EDIT KK-->
+    <string name="profile_edit_kk">Ubah Data Kartu Keluarga</string>
 </resources>

@@ -7,7 +7,7 @@ import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseActivity
 import com.gov.sidesa.databinding.ActivityDetailProfileKkactivityBinding
 import com.gov.sidesa.ui.profile.detail.kk.model.AccountUiModel
-import com.gov.sidesa.ui.profile.edit.EditProfileKKActivity
+import com.gov.sidesa.ui.profile.edit.kk.EditProfileKKActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailProfileKKActivity : BaseActivity() {

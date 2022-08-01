@@ -17,8 +17,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible"
-        tools:text="Anak 1" />
+        tools:text="Anak 1"
+        tools:visibility="visible" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/input_layout_status"
@@ -55,6 +55,7 @@
             android:id="@+id/input_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLength="50"
             android:inputType="textPersonName" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -74,7 +75,9 @@
             android:id="@+id/input_nik"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName" />
+            android:digits="1234567890"
+            android:inputType="number"
+            android:maxLength="16"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -94,7 +97,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/input_place"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:maxLength="50"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
