@@ -5,12 +5,16 @@ import android.os.Bundle
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.gov.sidesa.base.BaseActivity
 import com.gov.sidesa.databinding.ActivityProfileBinding
+import com.gov.sidesa.ui.login.LoginActivity
 import com.gov.sidesa.ui.profile.detail.family.DetailProfileFamilyActivity
 import com.gov.sidesa.ui.profile.detail.kk.DetailProfileKKActivity
 import com.gov.sidesa.ui.profile.detail.ktp.DetailProfileKTPActivity
+import com.gov.sidesa.utils.PreferenceUtils
+import com.gov.sidesa.utils.PreferenceUtils.USER_PREFERENCE
 
-class ProfileActivity : AppCompatActivity() {
+class ProfileActivity : BaseActivity() {
 
     private lateinit var binding: ActivityProfileBinding
     private lateinit var launcher: ActivityResultLauncher<Intent>
@@ -27,6 +31,15 @@ class ProfileActivity : AppCompatActivity() {
             }
 
         initListener()
+        initView()
+    }
+
+    private fun initView() {
+        val user = PreferenceUtils.getUser()
+        user?.let {
+            binding.textName.text = it.name
+            binding.textNik.text = it.nik
+        }
     }
 
 //    private fun showMediaDialog() {
@@ -41,6 +54,7 @@ class ProfileActivity : AppCompatActivity() {
 //    }
 
     private fun initListener() {
+        binding.toolbarProfile.setNavigationOnClickListener { finish() }
         binding.textDataKtp.setOnClickListener {
             val intent = Intent(this, DetailProfileKTPActivity::class.java)
             launcher.launch(intent)
@@ -54,6 +68,17 @@ class ProfileActivity : AppCompatActivity() {
         binding.textDataFamily.setOnClickListener {
             val intent = Intent(this, DetailProfileFamilyActivity::class.java)
             launcher.launch(intent)
+        }
+
+        binding.textDataEmail.setOnClickListener {
+            showErrorMessage("Feature sedang dalam pengembangan")
+        }
+
+        binding.buttonLogout.setOnClickListener {
+            PreferenceUtils.put(null, USER_PREFERENCE)
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 }

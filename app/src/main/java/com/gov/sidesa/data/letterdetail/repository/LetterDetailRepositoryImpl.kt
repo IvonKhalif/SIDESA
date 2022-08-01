@@ -2,12 +2,14 @@ package com.gov.sidesa.data.letterdetail.repository
 
 import com.gov.sidesa.data.letterdetail.mapper.asDomain
 import com.gov.sidesa.data.letterdetail.models.DetailApprovalResponse
+import com.gov.sidesa.data.letterdetail.request.DoApprovalRequest
 import com.gov.sidesa.data.letterdetail.service.LetterDetailService
 import com.gov.sidesa.domain.letter.detail.models.DetailApprovalModel
 import com.gov.sidesa.domain.letter.repository.LetterDetailRepository
 import com.gov.sidesa.utils.extension.asDomain
 import com.gov.sidesa.utils.response.GenericErrorResponse
 import com.gov.sidesa.utils.response.RetrofitResponse
+import com.gov.sidesa.utils.response.RetrofitStatusResponse
 import com.haroldadmin.cnradapter.NetworkResponse
 
 class LetterDetailRepositoryImpl(
@@ -21,4 +23,7 @@ class LetterDetailRepositoryImpl(
             data!!.asDomain()
         }
     }
+
+    override suspend fun doApproval(request: DoApprovalRequest): NetworkResponse<RetrofitStatusResponse, GenericErrorResponse> =
+        service.doApproval(request)
 }

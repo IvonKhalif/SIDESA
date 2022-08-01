@@ -86,6 +86,7 @@
     <style name="Medium">
         <item name="android:fontFamily">@font/firasans_regular</item>
         <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/fontColorPrimary</item>
     </style>
 
     <style name="Button">

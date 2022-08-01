@@ -12,7 +12,7 @@ class UserRepositoryImpl(
 ): UserRepository {
     override suspend fun validateNIK(
         nik: String
-    ): NetworkResponse<RetrofitStatusResponse, GenericErrorResponse> {
+    ): NetworkResponse<RetrofitResponse<User>, GenericErrorResponse> {
         return userService.validateNIK(nik)
     }
 
@@ -28,5 +28,12 @@ class UserRepositoryImpl(
         password: String
     ): NetworkResponse<RetrofitStatusResponse, GenericErrorResponse> {
         return userService.createPassword(nik, password)
+    }
+
+    override suspend fun resetPassword(
+        accountId: String,
+        password: String
+    ): NetworkResponse<RetrofitStatusResponse, GenericErrorResponse> {
+        return userService.resetPassword(accountId, password)
     }
 }

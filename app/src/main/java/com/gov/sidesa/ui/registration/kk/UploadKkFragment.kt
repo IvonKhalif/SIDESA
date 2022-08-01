@@ -4,7 +4,10 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Base64
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,9 +21,13 @@ import com.gov.sidesa.utils.picker.SelectImageBottomSheet
 import com.gov.sidesa.utils.visible
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.ByteArrayOutputStream
+import com.gov.sidesa.ui.registration.RegistrationStackState
+import com.gov.sidesa.ui.registration.ktp.RegistrationKTPViewModel
 import com.gov.sidesa.utils.gone
 import com.gov.sidesa.utils.picker.SelectImageBottomSheet
 import com.gov.sidesa.utils.visible
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.io.ByteArrayOutputStream
 import java.io.File
 
 class UploadKkFragment : Fragment() {

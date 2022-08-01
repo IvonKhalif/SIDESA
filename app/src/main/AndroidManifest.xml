@@ -33,18 +33,12 @@
         </provider>
 
         <activity
-            android:name=".ui.DashboardActivity"
+            android:name=".ui.login.LoginActivity"
             android:exported="true"
-            android:theme="@style/Theme.ContainerTracker.NoActionBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/Theme.ContainerTracker.NoActionBar" />
 
         <activity
-            android:name=".ui.login.LoginActivity"
+            android:name=".ui.dashboard.DashboardActivity"
             android:exported="false"
             android:theme="@style/Theme.ContainerTracker.NoActionBar" />
 
@@ -73,15 +67,21 @@
         <activity
             android:name=".ui.profile.edit.family.EditProfileFamilyActivity"
             android:exported="true"
-            android:theme="@style/Theme.ContainerTracker.NoActionBar">
-        </activity>
+            android:theme="@style/Theme.ContainerTracker.NoActionBar" />
         <activity
             android:name=".ui.profile.detail.family.DetailProfileFamilyActivity"
             android:exported="false"
             android:theme="@style/Theme.ContainerTracker.NoActionBar" />
         <activity
-            android:name=".ui.profile.edit.EditProfileKKActivity"
-            android:exported="false" />
+            android:name=".ui.profile.edit.kk.EditProfileKKActivity"
+            android:exported="true"
+            android:theme="@style/Theme.ContainerTracker.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.letter.list.LetterListActivity"
             android:exported="false"
@@ -110,12 +110,13 @@
             android:exported="false"
             android:theme="@style/Theme.ContainerTracker.NoActionBar" />
         <activity
-            android:name=".ui.registration.ktp.RegistrationKTPActivity"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.ContainerTracker.NoActionBar">
-
-        </activity>
+            android:name=".ui.letter.template.LetterTemplateActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ContainerTracker.NoActionBar" />
+        <activity
+            android:name=".ui.SplashActivity"
+            android:exported="false"
+            android:theme="@style/SplashTheme"/>
     </application>
 
 </manifest>

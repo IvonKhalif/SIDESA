@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background_color_F8FFF5"
-        tools:context=".ui.DashboardActivity">
+        tools:context=".ui.dashboard.DashboardActivity">
 
         <ScrollView
             android:layout_width="0dp"
@@ -43,8 +43,6 @@
                         android:text="@string/general_action_account"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintWidth_default="wrap"
-                        app:layout_constraintWidth_max="85dp"
                         tools:ignore="RtlHardcoded" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -179,6 +177,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/icon_default"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/button_choose_letter">

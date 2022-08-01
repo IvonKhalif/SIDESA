@@ -2,6 +2,7 @@ package com.gov.sidesa.ui.profile.edit.family
 
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseActivity
 import com.gov.sidesa.base.showImmediately
@@ -104,13 +105,29 @@ class EditProfileFamilyActivity : BaseActivity() {
                 sheet
             }
         }
+
+        selectBirthDateState.observe(this@EditProfileFamilyActivity) { uiModel ->
+            showImmediately(supportFragmentManager, "select_birth_date") {
+                val picker = MaterialDatePicker.Builder.datePicker()
+                    .setTitleText("Pilih Tanggal Lahir")
+                    .build()
+                picker.addOnPositiveButtonClickListener {
+                    viewModel.onBirthDateSelected(uiModel = uiModel, millis = it)
+                }
+                picker
+            }
+        }
     }
 
     private fun initView() = with(binding) {
         customToolbar.toolbarDetailProfile.setTitle(R.string.family_data_edit)
 
         rvComponents.adapter = adapter
-        rvComponents.layoutManager = LinearLayoutManager(this@EditProfileFamilyActivity)
+        rvComponents.layoutManager = LinearLayoutManager(
+            this@EditProfileFamilyActivity,
+            LinearLayoutManager.VERTICAL,
+            false
+        )
         rvComponents.addItemDecoration(RecyclerViewItemDecoration())
         rvComponents.itemAnimator = null
     }

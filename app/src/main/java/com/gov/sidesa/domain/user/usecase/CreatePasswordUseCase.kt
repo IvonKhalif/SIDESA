@@ -1,4 +1,6 @@
-package com.gov.sidesa.domain.user
+package com.gov.sidesa.domain.user.usecase
+
+import com.gov.sidesa.domain.user.UserRepository
 
 class CreatePasswordUseCase(private val userRepository: UserRepository) {
     suspend operator fun invoke(

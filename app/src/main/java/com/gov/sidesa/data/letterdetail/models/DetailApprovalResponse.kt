@@ -8,15 +8,36 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class DetailApprovalResponse(
-    @SerializedName("id_type_surat_document")
-    @Expose
-    val documentTypeId: Int,
+//    @SerializedName("id_type_surat_document")
+//    @Expose
+//    val documentTypeId: Int,
     @SerializedName("type_surat")
     @Expose
-    val letterType: String,
+    val letterType: String?,
+    @SerializedName("id_pengajuan_surat")
+    @Expose
+    val submissionLetterId: String? = "",
+    @SerializedName("nama_lengkap")
+    @Expose
+    val userName: String? = "",
+    @SerializedName("nik")
+    @Expose
+    val nik: String? = "",
+    @SerializedName("alamat")
+    @Expose
+    val address: String? = "",
+    @SerializedName("created_date")
+    @Expose
+    val createdDate: String? = "",
+    @SerializedName("no_surat")
+    @Expose
+    val letterNumber: String? = "",
     @SerializedName("status")
     @Expose
-    val status: String = "",
+    val status: String? = "",
+    @SerializedName("description")
+    @Expose
+    val description: String? = "",
     @SerializedName("document_filled")
     @Expose
     val documentFilled: List<WidgetResponse>,

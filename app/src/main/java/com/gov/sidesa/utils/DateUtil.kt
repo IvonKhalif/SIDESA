@@ -10,6 +10,7 @@ import java.util.*
 
 object DateUtil {
     const val LOCAL_DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm:ss"
+    val locale = Locale("id", "ID")
     fun formatStringToDateTime(
         date: String?,
         pattern: String = LOCAL_DATE_TIME_PATTERN,
@@ -31,7 +32,7 @@ object DateUtil {
 
     fun convertLocalDateTimeToLocalDate(dateTime: LocalDateTime): LocalDate {
         val dateTimeFormatter =
-            DateTimeFormatter.ofPattern(LOCAL_DATE_TIME_PATTERN, Locale.getDefault())
+            DateTimeFormatter.ofPattern(LOCAL_DATE_TIME_PATTERN, locale)
 
         val dueDateFormatted = dateTime.format(dateTimeFormatter)
 
@@ -40,7 +41,7 @@ object DateUtil {
 
     fun formatLocalDateTimeToString(date: LocalDateTime): String {
         val dateTimeFormatter =
-            DateTimeFormatter.ofPattern(LOCAL_DATE_TIME_PATTERN, Locale.getDefault())
+            DateTimeFormatter.ofPattern(LOCAL_DATE_TIME_PATTERN, Locale("id", "ID"))
         return date.format(dateTimeFormatter)
     }
 
@@ -54,5 +55,21 @@ object DateUtil {
         val dateInput = inputFormat.parse(date)
         return outputFormat.format(dateInput)
 
+    }
+
+    fun convertToDayAndDate(baseDate: String): String {
+        val localDateTime =
+            if (baseDate.isBlank())
+                LocalDateTime.now()
+            else
+                formatStringToDateTime(baseDate) ?: LocalDateTime.now()
+
+        val date = convertLocalDateTimeToLocalDate(localDateTime)
+//        val dateFormat = if (isHistoryDetail) {
+//            val formatter = formatLocalDateTimeToString(localDateTime)
+//            convertPattern(formatter, DateUtil.LOCAL_DATE_TIME_PATTERN, "dd MMM yyyy HH:mm")
+//        } else {
+        return formatLocalDateToString(date, "EEEE, dd MMMM yyyy")
+//        }
     }
 }

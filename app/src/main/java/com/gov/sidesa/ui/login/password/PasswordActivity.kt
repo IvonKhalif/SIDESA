@@ -1,21 +1,14 @@
 package com.gov.sidesa.ui.login.password
 
-import android.app.Activity
 import android.content.Intent
-import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.content.ContextCompat
-import androidx.core.content.IntentCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseActivity
 import com.gov.sidesa.data.user.response.User
-import com.gov.sidesa.databinding.ActivityLoginBinding
 import com.gov.sidesa.databinding.ActivityPasswordBinding
-import com.gov.sidesa.ui.DashboardActivity
-import com.gov.sidesa.ui.login.LoginViewModel
 import com.gov.sidesa.ui.login.forgotpassword.ForgotPasswordActivity
 import com.gov.sidesa.utils.PreferenceUtils
 import com.gov.sidesa.utils.PreferenceUtils.USER_PREFERENCE
@@ -30,6 +23,9 @@ class PasswordActivity : BaseActivity() {
     private val viewModel: PasswordViewModel by viewModel()
     private val userNik by lazy {
         intent.getStringExtra(UserExtrasConstant.EXTRA_USER_NIK).orEmpty()
+    }
+    private val userId by lazy {
+        intent.getStringExtra(UserExtrasConstant.EXTRA_USER_ID).orEmpty()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -100,10 +96,11 @@ class PasswordActivity : BaseActivity() {
             }
 
             buttonLogin.setOnClickListener {
-                if (accountHasRegistered())
-                    viewModel.login(userNik, inputPassword.text())
-                else
-                    viewModel.createPassword(userNik, inputPassword.text())
+                when {
+                    accountHasRegistered() -> viewModel.login(userNik, inputPassword.text())
+                    accountHasReset() -> viewModel.resetPassword(userId, inputPassword.text())
+                    else -> viewModel.createPassword(userNik, inputPassword.text())
+                }
             }
 
             buttonForgotPassword.setOnClickListener {
@@ -131,7 +128,7 @@ class PasswordActivity : BaseActivity() {
     }
 
     private fun handleStatusCreated(status: String) {
-        if (status == StatusResponseEnum.SUCCESS.status)
+        if (status == StatusResponseEnum.SUCCESS.status || status == StatusResponseEnum.RESET_PASSWORD.status)
             viewModel.login(userNik, binding.inputPassword.text())
     }
 

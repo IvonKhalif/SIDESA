@@ -9,7 +9,7 @@ import com.haroldadmin.cnradapter.NetworkResponse
 interface UserRepository {
     suspend fun validateNIK(
         nik: String
-    ): NetworkResponse<RetrofitStatusResponse, GenericErrorResponse>
+    ): NetworkResponse<RetrofitResponse<User>, GenericErrorResponse>
 
     suspend fun login(
         userName: String,
@@ -18,6 +18,11 @@ interface UserRepository {
 
     suspend fun createPassword(
         nik: String,
+        password: String
+    ): NetworkResponse<RetrofitStatusResponse, GenericErrorResponse>
+
+    suspend fun resetPassword(
+        accountId: String,
         password: String
     ): NetworkResponse<RetrofitStatusResponse, GenericErrorResponse>
 }

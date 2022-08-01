@@ -3,6 +3,7 @@ package com.gov.sidesa.utils
 import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.GsonBuilder
+import com.gov.sidesa.data.user.response.User
 
 object PreferenceUtils {
     private const val EDITOR_NAME = "ContainerPreferences"
@@ -32,4 +33,6 @@ object PreferenceUtils {
         //type Class < T >" is used to cast.
         return GsonBuilder().create().fromJson(value, T::class.java)
     }
+
+    fun getUser() = get<User>(USER_PREFERENCE)
 }
