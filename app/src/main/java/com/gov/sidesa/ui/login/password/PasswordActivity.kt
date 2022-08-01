@@ -7,7 +7,7 @@ import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseActivity
-import com.gov.sidesa.data.user.response.User
+import com.gov.sidesa.data.user.response.UserResponse
 import com.gov.sidesa.databinding.ActivityPasswordBinding
 import com.gov.sidesa.ui.login.forgotpassword.ForgotPasswordActivity
 import com.gov.sidesa.utils.PreferenceUtils
@@ -121,7 +121,7 @@ class PasswordActivity : BaseActivity() {
 
     private fun initObserver() {
         viewModel.apply {
-            userLiveData.observeNonNull(this@PasswordActivity, ::handleUpdateUser)
+            userResponseLiveData.observeNonNull(this@PasswordActivity, ::handleUpdateUser)
             statusCreatePassword.observeNonNull(this@PasswordActivity, ::handleStatusCreated)
             loadingWidgetLiveData.observeNonNull(this@PasswordActivity, ::handleLoadingWidget)
         }
@@ -132,8 +132,8 @@ class PasswordActivity : BaseActivity() {
             viewModel.login(userNik, binding.inputPassword.text())
     }
 
-    private fun handleUpdateUser(user: User) {
-        PreferenceUtils.put(user, USER_PREFERENCE)
+    private fun handleUpdateUser(userResponse: UserResponse) {
+        PreferenceUtils.put(userResponse, USER_PREFERENCE)
         doOnSuccessLogin()
     }
 

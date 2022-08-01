@@ -2,12 +2,11 @@ package com.gov.sidesa.ui.login.password
 
 import androidx.lifecycle.viewModelScope
 import com.gov.sidesa.base.BaseViewModel
-import com.gov.sidesa.data.user.response.User
+import com.gov.sidesa.data.user.response.UserResponse
 import com.gov.sidesa.domain.user.usecase.CreatePasswordUseCase
 import com.gov.sidesa.domain.user.usecase.LoginUseCase
 import com.gov.sidesa.domain.user.usecase.ResetPasswordUseCase
 import com.gov.sidesa.utils.PostLiveData
-import com.gov.sidesa.utils.PreferenceUtils
 import com.gov.sidesa.utils.response.GenericErrorResponse
 import com.haroldadmin.cnradapter.NetworkResponse
 import kotlinx.coroutines.launch
@@ -18,7 +17,7 @@ class PasswordViewModel(
     private val resetPasswordUseCase: ResetPasswordUseCase
 ) : BaseViewModel() {
 
-    val userLiveData = PostLiveData<User?>()
+    val userResponseLiveData = PostLiveData<UserResponse?>()
     val statusCreatePassword = PostLiveData<String?>()
 
     fun login(username: String, password: String) {
@@ -31,7 +30,7 @@ class PasswordViewModel(
                             GenericErrorResponse(message = response.body.desc)
                     }
                     response.body.data?.let {
-                        userLiveData.post(it)
+                        userResponseLiveData.post(it)
                     }
                     hideLoadingWidget()
                 }

@@ -3,8 +3,12 @@ package com.gov.sidesa.ui.profile.edit.family
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseViewModel
+import com.gov.sidesa.domain.profile.detail.family.models.Account
+import com.gov.sidesa.domain.profile.detail.family.models.ProfileFamily
 import com.gov.sidesa.domain.profile.detail.family.usecases.GetFamilyUseCase
+import com.gov.sidesa.domain.profile.edit.family.usecases.UpdateProfileFamilyUseCase
 import com.gov.sidesa.domain.regions.models.Region
 import com.gov.sidesa.ui.profile.edit.family.adapter.EditProfileFamilyListener
 import com.gov.sidesa.ui.profile.edit.family.models.EditProfileFamilyUiModel
@@ -23,8 +27,12 @@ import java.util.*
 
 
 class EditProfileFamilyViewModel(
-    private val getFamilyUseCase: GetFamilyUseCase
+    private val getFamilyUseCase: GetFamilyUseCase,
+    private val updateFamilyUseCase: UpdateProfileFamilyUseCase
 ) : BaseViewModel(), EditProfileFamilyListener {
+
+    private val _profileFamily = MutableLiveData<ProfileFamily>()
+
     private val _componentData = MutableLiveData<List<EditProfileFamilyUiModel>>()
     val componentData: LiveData<List<EditProfileFamilyUiModel>> get() = _componentData
 
@@ -46,15 +54,22 @@ class EditProfileFamilyViewModel(
     private val _selectBirthDateState = MutableLiveData<EditProfileFamilyUiModel>()
     val selectBirthDateState: LiveData<EditProfileFamilyUiModel> get() = _selectBirthDateState
 
+    private val _submitSuccessState = MutableLiveData<Int>()
+    val submitSuccessState: LiveData<Int> get() = _submitSuccessState
+
     init {
         viewModelScope.launch {
             showLoadingWidget()
 
             when (val result = getFamilyUseCase.invoke()) {
                 is NetworkResponse.Success -> {
+                    _profileFamily.value = result.body
                     _componentData.value = result.body.asEditFamily()
                 }
-                else -> onResponseNotSuccess(response = result)
+                else -> {
+                    onResponseNotSuccess(response = result)
+                    _closeScreenState.value = Unit
+                }
             }
 
             hideLoadingWidget()
@@ -229,5 +244,21 @@ class EditProfileFamilyViewModel(
      */
     private fun getComponentUpToDate(id: Long): EditProfileFamilyUiModel {
         return _componentData.value.orEmpty().first { it.id == id }
+    }
+
+    fun onSubmit() = viewModelScope.launch {
+        showLoadingWidget()
+
+        val account = _profileFamily.value?.account ?: Account()
+        val components = _componentData.value.orEmpty()
+
+        when (val result = updateFamilyUseCase.invoke(account = account, components = components)) {
+            is NetworkResponse.Success -> {
+                _submitSuccessState.value = R.string.profile_family_edit_success
+            }
+            else -> onResponseNotSuccess(response = result)
+        }
+
+        hideLoadingWidget()
     }
 }

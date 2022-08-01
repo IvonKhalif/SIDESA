@@ -1,6 +1,6 @@
 package com.gov.sidesa.domain.letter.input.usecases
 
-import com.gov.sidesa.data.user.response.User
+import com.gov.sidesa.data.user.response.UserResponse
 import com.gov.sidesa.domain.letter.input.models.layout.LetterLayout
 import com.gov.sidesa.domain.letter.input.models.layout.Widget
 import com.gov.sidesa.domain.letter.input.models.layout.WidgetType
@@ -62,12 +62,12 @@ class GetLetterLayoutUseCase(
 
     // TODO set data from local storage
     private fun assignTextView(widget: Widget) = when (widget.name) {
-        "nama" -> widget.copy(value = user?.name.orEmpty())
-        "alamat" -> widget.copy(value = user?.addres.orEmpty())
-        "pekerjaan" -> widget.copy(value = user?.job.orEmpty())
-        "nik" -> widget.copy(value = user?.nik.orEmpty())
+        "nama" -> widget.copy(value = userResponse?.name.orEmpty())
+        "alamat" -> widget.copy(value = userResponse?.addres.orEmpty())
+        "pekerjaan" -> widget.copy(value = userResponse?.job.orEmpty())
+        "nik" -> widget.copy(value = userResponse?.nik.orEmpty())
         else -> widget
     }
 
-    private val user = PreferenceUtils.get<User>(PreferenceUtils.USER_PREFERENCE)
+    private val userResponse = PreferenceUtils.get<UserResponse>(PreferenceUtils.USER_PREFERENCE)
 }

@@ -2,7 +2,7 @@ package com.gov.sidesa.data.profile.mapper
 
 import com.gov.sidesa.data.profile.models.FamilyResponse
 import com.gov.sidesa.data.profile.models.ProfileFamilyResponse
-import com.gov.sidesa.data.user.response.User
+import com.gov.sidesa.data.user.response.UserResponse
 import com.gov.sidesa.domain.profile.detail.family.models.Account
 import com.gov.sidesa.domain.profile.detail.family.models.Family
 import com.gov.sidesa.domain.profile.detail.family.models.ProfileFamily
@@ -20,8 +20,8 @@ fun ProfileFamilyResponse.asDomain() = ProfileFamily(
     family = family.asDomain()
 )
 
-fun User.asDomain() = Account(
-    id = id.orEmpty(),
+fun UserResponse.asDomain() = Account(
+    id = id.orZero(),
     idLevel = idLevel.orEmpty(),
     nik = nik.orEmpty(),
     name = name.orEmpty(),

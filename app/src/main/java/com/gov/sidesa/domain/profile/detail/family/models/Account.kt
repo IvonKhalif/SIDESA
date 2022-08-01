@@ -10,9 +10,10 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Account(
-    val id: String = "",
+    val id: Long = 0,
     val idLevel: String = "",
     val nik: String = "",
+    val kk: String = "",
     val name: String = "",
     val birthPlace: String = "",
     val birthDate: String = "",

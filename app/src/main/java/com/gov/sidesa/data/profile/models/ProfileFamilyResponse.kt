@@ -3,7 +3,7 @@ package com.gov.sidesa.data.profile.models
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.gov.sidesa.data.letter.models.ResourceResponse
-import com.gov.sidesa.data.user.response.User
+import com.gov.sidesa.data.user.response.UserResponse
 import java.util.*
 
 /**
@@ -14,7 +14,7 @@ import java.util.*
 data class ProfileFamilyResponse(
     @SerializedName("account")
     @Expose
-    val account: User,
+    val account: UserResponse,
     @SerializedName("family")
     @Expose
     val family: List<FamilyResponse>

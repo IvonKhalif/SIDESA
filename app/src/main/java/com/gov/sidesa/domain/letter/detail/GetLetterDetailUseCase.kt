@@ -1,11 +1,10 @@
 package com.gov.sidesa.domain.letter.detail
 
-import com.gov.sidesa.data.user.response.User
+import com.gov.sidesa.data.user.response.UserResponse
 import com.gov.sidesa.domain.letter.detail.models.DetailApprovalModel
 import com.gov.sidesa.domain.letter.input.models.layout.Widget
 import com.gov.sidesa.domain.letter.input.models.layout.WidgetType
 import com.gov.sidesa.domain.letter.repository.LetterDetailRepository
-import com.gov.sidesa.utils.DateUtil
 import com.gov.sidesa.utils.PreferenceUtils
 import com.gov.sidesa.utils.PreferenceUtils.USER_PREFERENCE
 import com.gov.sidesa.utils.response.GenericErrorResponse
@@ -71,11 +70,11 @@ class GetLetterDetailUseCase(
 
     // TODO set data from local storage
     private fun assignTextView(widget: Widget) = when (widget.title) {
-        "Nama" -> widget.copy(value = user?.name.orEmpty())
-        "Alamat" -> widget.copy(value = user?.addres.orEmpty())
-        "Pekerjaan" -> widget.copy(value = user?.job.orEmpty())
+        "Nama" -> widget.copy(value = userResponse?.name.orEmpty())
+        "Alamat" -> widget.copy(value = userResponse?.addres.orEmpty())
+        "Pekerjaan" -> widget.copy(value = userResponse?.job.orEmpty())
         else -> widget
     }
 
-    private val user = PreferenceUtils.get<User>(USER_PREFERENCE)
+    private val userResponse = PreferenceUtils.get<UserResponse>(USER_PREFERENCE)
 }

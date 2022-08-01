@@ -60,7 +60,7 @@ class LoginActivity : BaseActivity() {
         val intent = Intent(this, PasswordActivity::class.java)
         intent.putExtra(EXTRA_STATUS_NIK, status)
         intent.putExtra(EXTRA_USER_NIK, binding.inputUserKtp.value().text.toString())
-        intent.putExtra(EXTRA_USER_ID, viewModel.userLiveData.value?.id.orEmpty())
+        intent.putExtra(EXTRA_USER_ID, viewModel.userResponseLiveData.value?.id.orEmpty())
         resultLauncher.launch(intent)
     }
 
