@@ -6,8 +6,13 @@ import com.bumptech.glide.Glide
 import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseActivity
 import com.gov.sidesa.databinding.ActivityDetailKtpprofileBinding
+import com.gov.sidesa.domain.letter.detail.models.DetailApprovalModel
 import com.gov.sidesa.ui.profile.detail.kk.model.AccountUiModel
-import com.gov.sidesa.ui.profile.edit.EditProfileKTPActivity
+import com.gov.sidesa.ui.profile.edit.ktp.EditProfileKTPActivity
+import com.gov.sidesa.utils.constants.LetterConstant
+import com.gov.sidesa.utils.constants.ProfileConstant
+import com.gov.sidesa.utils.constants.ProfileConstant.EXTRA_KTP_DETAIL
+import com.gov.sidesa.utils.constants.UserExtrasConstant
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailProfileKTPActivity : BaseActivity() {
@@ -15,6 +20,7 @@ class DetailProfileKTPActivity : BaseActivity() {
     private lateinit var binding: ActivityDetailKtpprofileBinding
 
     private val viewModel by viewModel<DetailProfileKTPViewModel>()
+    private var detailProfileModel: AccountUiModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +29,6 @@ class DetailProfileKTPActivity : BaseActivity() {
 
         initObserver()
         initView()
-        initEvent()
     }
 
     private fun initObserver() = with(viewModel) {
@@ -47,23 +52,23 @@ class DetailProfileKTPActivity : BaseActivity() {
     }
 
     private fun initView() = with(binding) {
-        customToolbar.toolbarDetailProfile.setTitle(R.string.profile_ktp)
-    }
-
-    private fun initEvent() = with(binding) {
-        binding.buttonEditKtp.setOnClickListener {
+        customToolbar.toolbarDetailProfile.apply {
+            setTitle(R.string.profile_ktp)
+            setNavigationOnClickListener {
+                finish()
+            }
+        }
+        buttonEditKtp.setOnClickListener {
             val intent = Intent(this@DetailProfileKTPActivity, EditProfileKTPActivity::class.java)
-
+            intent.putExtra(EXTRA_KTP_DETAIL, detailProfileModel)
             resultLauncher.launch(intent)
         }
 
-        customToolbar.toolbarDetailProfile.setNavigationOnClickListener {
-            finish()
-        }
     }
 
     private fun assignDataToUi(data: AccountUiModel) = with(binding) {
-        textNik.text = data.kk
+        detailProfileModel = data
+        textNik.text = data.nik
         textName.text = data.name
         textTtl.text = data.birthPlaceAndDate
         textGender.text = data.gender
@@ -76,5 +81,13 @@ class DetailProfileKTPActivity : BaseActivity() {
         Glide.with(this@DetailProfileKTPActivity)
             .load(data.imageKTP)
             .into(imageIdCard)
+    }
+
+    override fun onResultData(result: Intent?) {
+        super.onResultData(result)
+        if (result?.getBooleanExtra(UserExtrasConstant.EXTRA_KTP_UPDATED, false) == true) {
+            viewModel.onLoadKTP()
+            showSuccessMessage(getString(R.string.general_success))
+        }
     }
 }

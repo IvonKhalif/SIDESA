@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.profile.edit.EditProfileKTPActivity">
+    tools:context=".ui.profile.edit.ktp.EditProfileKTPActivity">
 
     <include
         android:id="@+id/custom_toolbar"
@@ -37,6 +37,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <View
+                android:id="@+id/divider_1"
+                android:layout_width="0dp"
+                android:layout_height="3dp"
+                android:background="@color/grey_D1D1D1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/custom_ktp_biodata" />
+
             <include
                 android:id="@+id/custom_address"
                 layout="@layout/custom_address"
@@ -44,7 +53,16 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/custom_ktp_biodata" />
+                app:layout_constraintTop_toBottomOf="@id/divider_1" />
+
+            <View
+                android:id="@+id/divider_2"
+                android:layout_width="0dp"
+                android:layout_height="3dp"
+                android:background="@color/grey_D1D1D1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/custom_address" />
 
             <include
                 android:id="@+id/custom_ktp_general"
@@ -53,7 +71,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/custom_address" />
+                app:layout_constraintTop_toBottomOf="@id/divider_2" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/image_ktp"

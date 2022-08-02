@@ -1,6 +1,9 @@
 package com.gov.sidesa.data.profile.service
 
+import com.gov.sidesa.data.letterdetail.request.DoApprovalRequest
 import com.gov.sidesa.data.profile.models.ProfileFamilyResponse
+import com.gov.sidesa.data.profile.request.EditProfileKTPRequest
+import com.gov.sidesa.utils.constants.ContentTypeConstant
 import com.gov.sidesa.data.profile.models.SaveFamilyRequest
 import com.gov.sidesa.utils.response.GenericErrorResponse
 import com.gov.sidesa.utils.response.RetrofitStatusResponse
@@ -9,6 +12,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
+import retrofit2.http.*
 
 /**
  * Created by yovi.putra on 30/07/22"
@@ -25,5 +29,11 @@ interface ProfileService {
     @POST("account/update-family")
     suspend fun updateProfileFamily(
         @Body family: List<SaveFamilyRequest>
+    ): NetworkResponse<RetrofitStatusResponse, GenericErrorResponse>
+
+    @POST("account/update-ktp")
+    @Headers(ContentTypeConstant.CONTENT_TYPE_JSON)
+    suspend fun updateKTP(
+        @Body request: EditProfileKTPRequest
     ): NetworkResponse<RetrofitStatusResponse, GenericErrorResponse>
 }
