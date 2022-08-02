@@ -4,7 +4,6 @@ import android.os.Parcelable
 import com.gov.sidesa.domain.letter.input.models.resource.Resource
 import com.gov.sidesa.utils.extension.format
 import kotlinx.parcelize.Parcelize
-
 import java.util.*
 
 /**
@@ -80,7 +79,7 @@ data class AccountUiModel(
         get() = if (city.name.isNotBlank()) "${city.name}," else ""
 
     private val formatProvince
-        get() = if (province.name.isNotBlank()) "${province.name}," else ""
+        get() = province.name
 
     /**
      * KK
@@ -110,5 +109,5 @@ data class AccountUiModel(
         get() = if (cityKK.name.isNotBlank()) "${cityKK.name}," else ""
 
     private val formatProvinceKK
-        get() = if (provinceKK.name.isNotBlank()) "${provinceKK.name}," else ""
+        get() = provinceKK.name
 }
