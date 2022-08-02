@@ -36,11 +36,11 @@ object DateUtil {
         return LocalDate.parse(date, formatter)
     }
 
-    fun expiredDateLeft(date: LocalDateTime): Long {
-        val date1 = convertLocalDateTimeToLocalDate(LocalDateTime.now())
-        val date2 = convertLocalDateTimeToLocalDate(date)
+    fun expiredDateLeft(date: String): Long {
+        val currentDate = LocalDate.now()
+        val expiredDate = formatStringToLocalDate(date)
 
-        return ChronoUnit.DAYS.between(date2, date1)
+        return ChronoUnit.DAYS.between(currentDate, expiredDate)
     }
 
     fun convertLocalDateTimeToLocalDate(dateTime: LocalDateTime): LocalDate {

@@ -6,14 +6,16 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import com.gov.sidesa.R
+import com.gov.sidesa.base.BaseActivity
 import com.gov.sidesa.ui.dashboard.DashboardActivity
 import com.gov.sidesa.ui.login.LoginActivity
 import com.gov.sidesa.ui.profile.ProfileActivity
 import com.gov.sidesa.utils.DateUtil
 import com.gov.sidesa.utils.PreferenceUtils
+import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
 
-class SplashActivity : AppCompatActivity() {
+class SplashActivity : BaseActivity() {
     private val user by lazy {
         PreferenceUtils.getUser()
     }
@@ -30,9 +32,8 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun checkExpiredDate() {
-        val expiredDate = DateUtil.formatStringToDateTime(user?.expiredDate)
-        val expiredDateLeft = DateUtil.expiredDateLeft(expiredDate ?: LocalDateTime.now())
-        if (expiredDateLeft >= 0) goToLogin() else goToMainActivity()
+        val expiredDateLeft = DateUtil.expiredDateLeft(user?.expiredDate ?: LocalDate.now().toString())
+        if (expiredDateLeft >= 0) goToMainActivity() else goToLogin()
     }
 
     private fun goToLogin() {
@@ -41,7 +42,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun goToMainActivity() {
-        startActivity(Intent(this, ProfileActivity::class.java))
+        startActivity(Intent(this, DashboardActivity::class.java))
         finish()
     }
 }
