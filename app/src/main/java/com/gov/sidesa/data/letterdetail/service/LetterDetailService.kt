@@ -14,7 +14,7 @@ interface LetterDetailService {
     @Headers(ContentTypeConstant.CONTENT_TYPE_JSON)
     suspend fun getDetailApproval(
         @Query("id_pengajuan_surat") letterId: String,
-        @Query("id_account") accountId: String,
+        @Query("id_account") accountId: Long,
     ): NetworkResponse<RetrofitResponse<DetailApprovalResponse>, GenericErrorResponse>
 
     @POST("pengajuan-surat/approval")

@@ -14,10 +14,10 @@ import kotlinx.parcelize.Parcelize
 data class WidgetResponse(
     @SerializedName("id_type_surat_document")
     @Expose
-    val documentTypeId: Int? = null,
+    val documentTypeId: Long? = null,
     @SerializedName("id_type_surat")
     @Expose
-    val letterTypeId: Int? = null,
+    val letterTypeId: Long? = null,
     @SerializedName("name")
     @Expose
     val name: String = "",

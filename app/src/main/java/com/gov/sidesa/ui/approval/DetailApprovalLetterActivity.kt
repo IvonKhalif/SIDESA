@@ -28,6 +28,7 @@ import com.gov.sidesa.utils.constants.LetterConstant.TYPE_APPROVAL_RW
 import com.gov.sidesa.utils.enums.ApprovalStatusEnum
 import com.gov.sidesa.utils.enums.TypeSubmissionEnum
 import com.gov.sidesa.utils.extension.observeNonNull
+import com.gov.sidesa.utils.extension.orZero
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailApprovalLetterActivity : BaseActivity() {
@@ -236,7 +237,7 @@ class DetailApprovalLetterActivity : BaseActivity() {
     private fun createRequestDoApprovalParam(statusApproval: Int, reason: String?) =
         DoApprovalRequest(
             letterId = letterId,
-            accountId = PreferenceUtils.getUser()?.id.orEmpty(),
+            accountId = PreferenceUtils.getUser()?.id.orZero(),
             status = statusApproval.toString(),
             actor = actor,
             description = reason

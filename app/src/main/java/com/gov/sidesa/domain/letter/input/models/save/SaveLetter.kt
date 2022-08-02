@@ -6,7 +6,7 @@ package com.gov.sidesa.domain.letter.input.models.save
  **/
 
 data class SaveLetter(
-    val accountId: String,
-    val letterTypeId: String,
+    val accountId: Long,
+    val letterTypeId: Long,
     val contents: List<LetterContent>
 )

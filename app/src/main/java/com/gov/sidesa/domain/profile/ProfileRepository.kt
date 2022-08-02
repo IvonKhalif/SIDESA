@@ -1,7 +1,11 @@
 package com.gov.sidesa.domain.profile
 
+import com.gov.sidesa.data.profile.request.EditProfileKTPRequest
 import com.gov.sidesa.domain.profile.detail.family.models.ProfileFamily
+import com.gov.sidesa.domain.profile.edit.family.models.SaveFamily
+import com.gov.sidesa.domain.profile.edit.kk.models.SaveKK
 import com.gov.sidesa.utils.response.GenericErrorResponse
+import com.gov.sidesa.utils.response.RetrofitStatusResponse
 import com.haroldadmin.cnradapter.NetworkResponse
 
 /**
@@ -12,6 +16,17 @@ import com.haroldadmin.cnradapter.NetworkResponse
 interface ProfileRepository {
 
     suspend fun getProfileFamily(
-        accountId: String
+        accountId: Long
     ): NetworkResponse<ProfileFamily, GenericErrorResponse>
+
+    suspend fun updateKTP(request: EditProfileKTPRequest):
+            NetworkResponse<RetrofitStatusResponse, GenericErrorResponse>
+
+    suspend fun updateProfileFamily(
+        family: List<SaveFamily>
+    ): NetworkResponse<String, GenericErrorResponse>
+
+    suspend fun updateKK(
+        kk: SaveKK
+    ): NetworkResponse<String, GenericErrorResponse>
 }

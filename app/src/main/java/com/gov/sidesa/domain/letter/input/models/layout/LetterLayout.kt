@@ -10,6 +10,6 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class LetterLayout(
-    val letterTypeId: String,
+    val letterTypeId: Long,
     val widgets: List<Widget>
 ): Parcelable

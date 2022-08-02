@@ -1,13 +1,16 @@
 package com.gov.sidesa.ui.profile.detail.kk
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import com.bumptech.glide.Glide
 import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseActivity
 import com.gov.sidesa.databinding.ActivityDetailProfileKkactivityBinding
 import com.gov.sidesa.ui.profile.detail.kk.model.AccountUiModel
 import com.gov.sidesa.ui.profile.edit.kk.EditProfileKKActivity
+import com.gov.sidesa.utils.NetworkUtil
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailProfileKKActivity : BaseActivity() {
@@ -49,10 +52,18 @@ class DetailProfileKKActivity : BaseActivity() {
         customToolbar.toolbarDetailProfile.setTitle(R.string.profile_kk)
     }
 
+    private val editLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            viewModel.onEditResult()
+        }
+    }
+
     private fun initEvent() = with(binding) {
         buttonUpdateKk.setOnClickListener {
             val intent = Intent(this@DetailProfileKKActivity, EditProfileKKActivity::class.java)
-            resultLauncher.launch(intent)
+            editLauncher.launch(intent)
         }
 
         customToolbar.toolbarDetailProfile.setNavigationOnClickListener {
@@ -62,11 +73,11 @@ class DetailProfileKKActivity : BaseActivity() {
 
     private fun assignDataToUi(data: AccountUiModel) = with(binding) {
         textKk.text = data.kk
-        textKepalaKeluarga.text = "Ivon Khalif"
-        textAddress.text = "Tangerang"
+        textKepalaKeluarga.text = data.familyHead
+        textAddress.text = data.fullAddressKK
 
         Glide.with(this@DetailProfileKKActivity)
-            .load(data.imageKTP)
+            .load(NetworkUtil.SERVER_HOST + data.imageKK)
             .into(imageIdCard)
     }
 }

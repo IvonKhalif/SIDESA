@@ -1,5 +1,6 @@
 package com.gov.sidesa.ui.profile.edit.kk
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Lifecycle
@@ -13,6 +14,7 @@ import com.gov.sidesa.databinding.ActivityEditProfileKkactivityBinding
 import com.gov.sidesa.ui.profile.edit.kk.models.AccountKKUiModel
 import com.gov.sidesa.ui.profile.edit.kk.models.EditProfileKKUiEvent
 import com.gov.sidesa.ui.regions.SelectRegionBottomSheet
+import com.gov.sidesa.utils.NetworkUtil
 import com.gov.sidesa.utils.extension.setTextDistinct
 import com.gov.sidesa.utils.picker.SelectImageBottomSheet
 import kotlinx.coroutines.flow.collectLatest
@@ -46,6 +48,10 @@ class EditProfileKKActivity : BaseActivity() {
     private fun initEvent() = with(binding) {
         buttonEditKk.setOnClickListener {
             viewModel.onEvent(EditProfileKKUiEvent.OnKKImageClicked)
+        }
+
+        buttonSave.setOnClickListener {
+            viewModel.onEvent(EditProfileKKUiEvent.OnSubmit)
         }
 
         with(binding.customKkBiodata) {
@@ -192,6 +198,12 @@ class EditProfileKKActivity : BaseActivity() {
                 picker
             }
         }
+
+        submitSuccessState.observe(this@EditProfileKKActivity) {
+            showSuccessMessage(getString(it))
+            setResult(Activity.RESULT_OK)
+            finish()
+        }
     }
 
     private fun updateUI(uiModel: AccountKKUiModel) = with(binding) {
@@ -205,15 +217,20 @@ class EditProfileKKActivity : BaseActivity() {
             inputRt.setTextDistinct(uiModel.rt)
             inputRw.setTextDistinct(uiModel.rw)
 
-            inputProvince.setText(uiModel.province.name)
-            inputCity.setText(uiModel.city.name)
-            inputKecamatan.setText(uiModel.district.name)
-            inputKelurahan.setText(uiModel.village.name)
+            inputProvince.setTextDistinct(uiModel.province.name)
+            inputCity.setTextDistinct(uiModel.city.name)
+            inputKecamatan.setTextDistinct(uiModel.district.name)
+            inputKelurahan.setTextDistinct(uiModel.village.name)
+        }
+
+        val url = if (uiModel.kkImageUri.contains("upload")) {
+            NetworkUtil.SERVER_HOST + uiModel.kkImageUri
+        } else {
+            uiModel.kkImageUri
         }
 
         Glide.with(this@EditProfileKKActivity)
-            .load(uiModel.kkImageUri)
+            .load(url)
             .into(imageKk)
-
     }
 }

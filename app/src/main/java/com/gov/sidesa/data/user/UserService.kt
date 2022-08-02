@@ -1,6 +1,6 @@
 package com.gov.sidesa.data.user
 
-import com.gov.sidesa.data.user.response.User
+import com.gov.sidesa.data.user.response.UserResponse
 import com.gov.sidesa.utils.constants.ContentTypeConstant
 import com.gov.sidesa.utils.response.GenericErrorResponse
 import com.gov.sidesa.utils.response.RetrofitResponse
@@ -16,14 +16,14 @@ interface UserService {
     @Headers(ContentTypeConstant.CONTENT_TYPE_JSON)
     suspend fun validateNIK(
         @Query("nik") nik: String
-    ): NetworkResponse<RetrofitResponse<User>, GenericErrorResponse>
+    ): NetworkResponse<RetrofitResponse<UserResponse>, GenericErrorResponse>
 
     @POST("account/login")
     @Headers(ContentTypeConstant.CONTENT_TYPE_JSON)
     suspend fun login(
         @Query("username") userName: String,
         @Query("password") password: String
-    ): NetworkResponse<RetrofitResponse<User>, GenericErrorResponse>
+    ): NetworkResponse<RetrofitResponse<UserResponse>, GenericErrorResponse>
 
     @POST("account/create-password")
     @Headers(ContentTypeConstant.CONTENT_TYPE_JSON)

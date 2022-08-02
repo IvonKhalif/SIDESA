@@ -1,13 +1,16 @@
 package com.gov.sidesa.ui.profile.detail.family
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseActivity
 import com.gov.sidesa.databinding.ActivityDetailProfileFamilyBinding
 import com.gov.sidesa.ui.profile.detail.family.adapter.DetailProfileFamilyAdapter
 import com.gov.sidesa.ui.profile.edit.family.EditProfileFamilyActivity
+import com.gov.sidesa.utils.dp
 import com.gov.sidesa.utils.picker.RecyclerViewItemDecoration
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -39,7 +42,9 @@ class DetailProfileFamilyActivity : BaseActivity() {
             LinearLayoutManager.VERTICAL,
             false
         )
-        recyclerFamily.addItemDecoration(RecyclerViewItemDecoration())
+        recyclerFamily.addItemDecoration(
+            RecyclerViewItemDecoration(height = 2.dp, color = R.color.gray_D1D1D1)
+        )
     }
 
     private fun initObserver() = with(viewModel) {
@@ -62,6 +67,18 @@ class DetailProfileFamilyActivity : BaseActivity() {
                 adapter.submitList(it)
             }
         }
+
+        closeScreenState.observe(this@DetailProfileFamilyActivity) {
+            finish()
+        }
+    }
+
+    private val editLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            viewModel.onEditResult()
+        }
     }
 
     private fun initEvent() = with(binding) {
@@ -70,7 +87,7 @@ class DetailProfileFamilyActivity : BaseActivity() {
                 this@DetailProfileFamilyActivity,
                 EditProfileFamilyActivity::class.java
             )
-            resultLauncher.launch(intent)
+            editLauncher.launch(intent)
         }
 
         customToolbar.toolbarDetailProfile.setNavigationOnClickListener {

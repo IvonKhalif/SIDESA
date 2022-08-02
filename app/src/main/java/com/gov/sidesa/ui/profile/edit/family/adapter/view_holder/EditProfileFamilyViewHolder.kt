@@ -3,15 +3,14 @@ package com.gov.sidesa.ui.profile.edit.family.adapter.view_holder
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.TextView
 import androidx.core.view.isVisible
-import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import com.gov.sidesa.R
 import com.gov.sidesa.databinding.ItemEditProfileFamilyBinding
 import com.gov.sidesa.ui.profile.edit.family.adapter.EditProfileFamilyListener
 import com.gov.sidesa.ui.profile.edit.family.models.EditProfileFamilyUiModel
 import com.gov.sidesa.ui.profile.edit.family.models.RelationType
+import com.gov.sidesa.utils.extension.distinctTextChange
 
 /**
  * Created by yovi.putra on 31/07/22"
@@ -36,6 +35,7 @@ class EditProfileFamilyViewHolder(
         textHeader.text = data.titleText
 
         inputLayoutStatus.isVisible = data.inputStatusVisibilityState
+        inputStatus.setText(data.relationFamily.getRelation(context))
 
         inputLayoutName.hint = context.getString(data.nameTitle)
         inputName.setText(data.name)
@@ -62,15 +62,15 @@ class EditProfileFamilyViewHolder(
             setRelationStatus(uiModel = data)
         }
 
-        inputName.distinctTextChange(data.name) {
+        inputName.distinctTextChange {
             listener.onNameTextChanged(data.copy(name = inputName.text.toString()))
         }
 
-        inputNik.distinctTextChange(data.ktpNumber) {
+        inputNik.distinctTextChange {
             listener.onKTPChanged(data.copy(ktpNumber = inputNik.text.toString()))
         }
 
-        inputPlace.distinctTextChange(data.birthPlace) {
+        inputPlace.distinctTextChange {
             listener.onBirthPlace(data.copy(birthPlace = inputPlace.text.toString()))
         }
 
@@ -88,15 +88,15 @@ class EditProfileFamilyViewHolder(
         }
 
         with(containerAddress) {
-            inputAddress.distinctTextChange(data.address) {
+            inputAddress.distinctTextChange {
                 listener.onAddressChanged(data.copy(address = inputAddress.text.toString()))
             }
 
-            inputRt.distinctTextChange(data.rt) {
+            inputRt.distinctTextChange {
                 listener.onRTChanged(data.copy(rt = inputRt.text.toString()))
             }
 
-            inputRw.distinctTextChange(data.rw) {
+            inputRw.distinctTextChange {
                 listener.onRWChanged(data.copy(rw = inputRw.text.toString()))
             }
 
@@ -137,7 +137,7 @@ class EditProfileFamilyViewHolder(
             context.resources.getStringArray(R.array.status_applicant)
         )
         binding.inputStatus.setAdapter(relationStatus)
-        binding.inputStatus.distinctTextChange(uiModel.relationFamily.type) {
+        binding.inputStatus.distinctTextChange {
             listener.onRelationStatusChanged(
                 uiModel.copy(
                     relationFamily = RelationType.find(it)
@@ -157,13 +157,4 @@ class EditProfileFamilyViewHolder(
             return EditProfileFamilyViewHolder(binding = binding, listener = listener)
         }
     }
-}
-
-
-private fun TextView.distinctTextChange(prev: String, onTextChanged: (String) -> Unit = {}) {
-    addTextChangedListener(onTextChanged = { _, _, _, _ ->
-        if (prev != text.toString()) {
-            onTextChanged.invoke(this.text.toString())
-        }
-    })
 }

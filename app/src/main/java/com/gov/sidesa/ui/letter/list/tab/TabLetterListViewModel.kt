@@ -8,6 +8,7 @@ import com.gov.sidesa.domain.letter.list.usecase.ApprovalLettersUseCase
 import com.gov.sidesa.domain.letter.list.usecase.SubmissionLetterUseCase
 import com.gov.sidesa.utils.PostLiveData
 import com.gov.sidesa.utils.PreferenceUtils
+import com.gov.sidesa.utils.extension.orZero
 import com.haroldadmin.cnradapter.NetworkResponse
 import kotlinx.coroutines.launch
 
@@ -23,7 +24,7 @@ class TabLetterListViewModel(
         showLoadingWidget()
 
         when (val result =
-            submissionLetterUseCase.invoke(accountId = user?.id.orEmpty())) {
+            submissionLetterUseCase.invoke(accountId = user?.id.orZero())) {
             is NetworkResponse.Success -> {
                 submissionLettersLiveData.post(result.body)
             }
@@ -36,7 +37,7 @@ class TabLetterListViewModel(
         val user = PreferenceUtils.getUser()
         showLoadingWidget()
         when (val result =
-            approvalLetterUseCase.invoke(accountId = user?.id.orEmpty())) {
+            approvalLetterUseCase.invoke(accountId = user?.id.orZero())) {
             is NetworkResponse.Success -> {
                 approvalLettersLiveData.post(result.body)
             }

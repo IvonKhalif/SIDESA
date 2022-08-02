@@ -1,6 +1,6 @@
 package com.gov.sidesa.data.user
 
-import com.gov.sidesa.data.user.response.User
+import com.gov.sidesa.data.user.response.UserResponse
 import com.gov.sidesa.domain.user.UserRepository
 import com.gov.sidesa.utils.response.GenericErrorResponse
 import com.gov.sidesa.utils.response.RetrofitResponse
@@ -12,14 +12,14 @@ class UserRepositoryImpl(
 ): UserRepository {
     override suspend fun validateNIK(
         nik: String
-    ): NetworkResponse<RetrofitResponse<User>, GenericErrorResponse> {
+    ): NetworkResponse<RetrofitResponse<UserResponse>, GenericErrorResponse> {
         return userService.validateNIK(nik)
     }
 
     override suspend fun login(
         userName: String,
         password: String
-    ): NetworkResponse<RetrofitResponse<User>, GenericErrorResponse> {
+    ): NetworkResponse<RetrofitResponse<UserResponse>, GenericErrorResponse> {
         return userService.login(userName, password)
     }
 

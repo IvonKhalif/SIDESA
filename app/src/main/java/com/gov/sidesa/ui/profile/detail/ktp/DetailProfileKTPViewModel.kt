@@ -30,6 +30,10 @@ class DetailProfileKTPViewModel(
         }
 
     init {
+        onLoadKTP()
+    }
+
+    fun onLoadKTP() {
         viewModelScope.launch {
             showLoadingWidget()
 

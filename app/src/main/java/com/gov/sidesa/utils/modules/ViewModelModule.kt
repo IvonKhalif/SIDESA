@@ -1,21 +1,22 @@
 package com.gov.sidesa.utils.modules
 
+import com.gov.sidesa.ui.dashboard.DashboardViewModel
 import com.gov.sidesa.ui.approval.DetailApprovalViewModel
 import com.gov.sidesa.ui.approval.submissiondetail.DetailApprovalSubmissionViewModel
-import com.gov.sidesa.ui.dashboard.DashboardViewModel
 import com.gov.sidesa.ui.letter.detail.DetailSubmissionLetterViewModel
 import com.gov.sidesa.ui.letter.input.LetterInputViewModel
 import com.gov.sidesa.ui.letter.list.tab.TabLetterListViewModel
 import com.gov.sidesa.ui.letter.template.LetterTemplateViewModel
 import com.gov.sidesa.ui.login.LoginViewModel
 import com.gov.sidesa.ui.login.password.PasswordViewModel
+import com.gov.sidesa.ui.registration.ktp.RegistrationKTPViewModel
 import com.gov.sidesa.ui.profile.detail.family.DetailProfileFamilyViewModel
 import com.gov.sidesa.ui.profile.detail.kk.DetailProfileKKViewModel
 import com.gov.sidesa.ui.profile.detail.ktp.DetailProfileKTPViewModel
 import com.gov.sidesa.ui.profile.edit.family.EditProfileFamilyViewModel
 import com.gov.sidesa.ui.profile.edit.kk.EditProfileKKViewModel
+import com.gov.sidesa.ui.profile.edit.ktp.EditProfileKTPViewModel
 import com.gov.sidesa.ui.regions.SelectRegionViewModel
-import com.gov.sidesa.ui.registration.ktp.RegistrationKTPViewModel
 import kotlinx.coroutines.FlowPreview
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -32,10 +33,11 @@ val ViewModelModule = module {
     viewModel { DetailProfileKKViewModel(get()) }
     viewModel { DetailProfileKTPViewModel(get()) }
     viewModel { SelectRegionViewModel(get(), get(), get(), get()) }
-    viewModel { EditProfileFamilyViewModel() }
+    viewModel { EditProfileFamilyViewModel(get(), get()) }
     viewModel { DetailApprovalViewModel(get(), get()) }
     viewModel { DashboardViewModel(get(), get()) }
     viewModel { TabLetterListViewModel(get(), get()) }
     viewModel { DetailSubmissionLetterViewModel(get()) }
-    viewModel { EditProfileKKViewModel() }
+    viewModel { EditProfileKTPViewModel(get()) }
+    viewModel { EditProfileKKViewModel(get(), get()) }
 }

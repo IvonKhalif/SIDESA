@@ -1,5 +1,6 @@
 package com.gov.sidesa.ui.profile.edit.family
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -117,6 +118,12 @@ class EditProfileFamilyActivity : BaseActivity() {
                 picker
             }
         }
+
+        submitSuccessState.observe(this@EditProfileFamilyActivity) {
+            showSuccessMessage(getString(it))
+            setResult(Activity.RESULT_OK)
+            finish()
+        }
     }
 
     private fun initView() = with(binding) {
@@ -135,6 +142,10 @@ class EditProfileFamilyActivity : BaseActivity() {
     private fun initEvent() = with(binding) {
         customToolbar.toolbarDetailProfile.setNavigationOnClickListener {
             finish()
+        }
+
+        buttonSave.setOnClickListener {
+            viewModel.onSubmit()
         }
     }
 }
