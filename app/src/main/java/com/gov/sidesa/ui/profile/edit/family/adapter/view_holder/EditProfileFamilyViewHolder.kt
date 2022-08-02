@@ -62,15 +62,15 @@ class EditProfileFamilyViewHolder(
             setRelationStatus(uiModel = data)
         }
 
-        inputName.distinctTextChange(data.name) {
+        inputName.distinctTextChange {
             listener.onNameTextChanged(data.copy(name = inputName.text.toString()))
         }
 
-        inputNik.distinctTextChange(data.ktpNumber) {
+        inputNik.distinctTextChange {
             listener.onKTPChanged(data.copy(ktpNumber = inputNik.text.toString()))
         }
 
-        inputPlace.distinctTextChange(data.birthPlace) {
+        inputPlace.distinctTextChange {
             listener.onBirthPlace(data.copy(birthPlace = inputPlace.text.toString()))
         }
 
@@ -88,15 +88,15 @@ class EditProfileFamilyViewHolder(
         }
 
         with(containerAddress) {
-            inputAddress.distinctTextChange(data.address) {
+            inputAddress.distinctTextChange {
                 listener.onAddressChanged(data.copy(address = inputAddress.text.toString()))
             }
 
-            inputRt.distinctTextChange(data.rt) {
+            inputRt.distinctTextChange {
                 listener.onRTChanged(data.copy(rt = inputRt.text.toString()))
             }
 
-            inputRw.distinctTextChange(data.rw) {
+            inputRw.distinctTextChange {
                 listener.onRWChanged(data.copy(rw = inputRw.text.toString()))
             }
 
@@ -137,7 +137,7 @@ class EditProfileFamilyViewHolder(
             context.resources.getStringArray(R.array.status_applicant)
         )
         binding.inputStatus.setAdapter(relationStatus)
-        binding.inputStatus.distinctTextChange(uiModel.relationFamily.type) {
+        binding.inputStatus.distinctTextChange {
             listener.onRelationStatusChanged(
                 uiModel.copy(
                     relationFamily = RelationType.find(it)

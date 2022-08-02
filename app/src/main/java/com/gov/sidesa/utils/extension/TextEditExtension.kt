@@ -16,7 +16,7 @@ fun EditText.setTextDistinct(value: String) {
 }
 
 
-fun TextView.distinctTextChange(old: String = "", onTextChanged: (String) -> Unit = {}) {
+fun TextView.distinctTextChange(onTextChanged: (String) -> Unit = {}) {
     var prev = ""
 
     addTextChangedListener(onTextChanged = { _, _, _, _ ->
