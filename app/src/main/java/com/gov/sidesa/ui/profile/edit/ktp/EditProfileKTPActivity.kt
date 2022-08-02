@@ -1,12 +1,10 @@
 package com.gov.sidesa.ui.profile.edit.ktp
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
-import android.util.Base64
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.gov.sidesa.R
@@ -17,9 +15,13 @@ import com.gov.sidesa.databinding.ActivityEditKtpprofileBinding
 import com.gov.sidesa.domain.regions.models.Region
 import com.gov.sidesa.ui.profile.detail.kk.model.AccountUiModel
 import com.gov.sidesa.ui.regions.SelectRegionBottomSheet
+import com.gov.sidesa.utils.constants.LetterConstant
 import com.gov.sidesa.utils.constants.ProfileConstant
+import com.gov.sidesa.utils.constants.UserExtrasConstant
+import com.gov.sidesa.utils.enums.StatusResponseEnum
+import com.gov.sidesa.utils.extension.format
 import com.gov.sidesa.utils.extension.isNullOrZero
-import com.gov.sidesa.utils.gone
+import com.gov.sidesa.utils.extension.orZero
 import com.gov.sidesa.utils.picker.SelectImageBottomSheet
 import com.gov.sidesa.utils.visible
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -99,7 +101,7 @@ class EditProfileKTPActivity : BaseActivity() {
         }
 
         binding.buttonSave.setOnClickListener {
-//            viewModel.updateKTP(createRequest())
+            viewModel.updateKTP(createRequest())
         }
 
         binding.buttonEditKtp.setOnClickListener {
@@ -111,9 +113,25 @@ class EditProfileKTPActivity : BaseActivity() {
         }
     }
 
-//    private fun createRequest() = EditProfileKTPRequest(
-//        accountId =
-//    )
+    private fun createRequest() = EditProfileKTPRequest(
+        accountId = ktpDetail?.id.toString(),
+        nik = bindingBiodataKtp.inputKtpNik.text.toString(),
+        accountName = bindingBiodataKtp.inputKtpName.text.toString(),
+        birthPlace = bindingBiodataKtp.inputKtpPlace.text.toString(),
+        birthDate = viewModel.inputKtpDob.value,
+        gender = bindingBiodataKtp.inputKtpGender.text.toString(),
+        blood = bindingBiodataKtp.inputKtpBloodType.text.toString(),
+        address = bindingAddress.inputKtpAddress.text.toString(),
+        villageId = viewModel.inputKtpKelurahan.value?.id.toString(),
+        districtId = viewModel.inputKtpKecamatan.value?.id.toString(),
+        rt = bindingAddress.inputKtpRt.text.toString(),
+        rw = bindingAddress.inputKtpRw.text.toString(),
+        religion = bindingGeneralKtp.inputKtpReligion.text.toString(),
+        job = bindingGeneralKtp.inputKtpJob.text.toString(),
+        marriage = bindingGeneralKtp.inputKtpMarriage.text.toString(),
+        nationality = bindingGeneralKtp.inputKtpNationality.text.toString(),
+        imageKTP = viewModel.imageKTPBase64.value,
+    )
 
     private fun showVillageBottomSheet() {
         val tag = "select_village"
@@ -186,13 +204,26 @@ class EditProfileKTPActivity : BaseActivity() {
             inputKtpMarriage.observe(this@EditProfileKTPActivity, ::updateUIMarriage)
             inputKtpJob.observe(this@EditProfileKTPActivity, ::updateUIJob)
             inputKtpNationality.observe(this@EditProfileKTPActivity, ::updateUICitizenship)
+            statusUpdateData.observe(this@EditProfileKTPActivity, ::handleStatusUpdate)
+            loadingState.observe(this@EditProfileKTPActivity) {
+                handleLoadingWidget(isLoading = it)
+            }
+        }
+    }
+
+    private fun handleStatusUpdate(status: String?) {
+        if (status == StatusResponseEnum.SUCCESS.status) {
+            val intent = Intent()
+            intent.putExtra(UserExtrasConstant.EXTRA_KTP_UPDATED, true)
+            setResult(Activity.RESULT_OK, intent)
+            finish()
         }
     }
 
     private fun updateUIName(text: String) = bindingBiodataKtp.inputKtpName.setText(text)
     private fun updateUINik(text: String) = bindingBiodataKtp.inputKtpNik.setText(text)
     private fun updateUIBirthPlace(text: String) = bindingBiodataKtp.inputKtpPlace.setText(text)
-    private fun updateUIBirthDate(text: String) = bindingBiodataKtp.inputKtpDob.setText(text)
+    private fun updateUIBirthDate(date: Date) = bindingBiodataKtp.inputKtpDob.setText(date.format())
     private fun updateUIAddress(text: String) = bindingAddress.inputKtpAddress.setText(text)
     private fun updateUIRt(text: String) = bindingAddress.inputKtpRt.setText(text)
     private fun updateUIRw(text: String) = bindingAddress.inputKtpRw.setText(text)

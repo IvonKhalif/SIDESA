@@ -1,6 +1,7 @@
 package com.gov.sidesa.ui.profile.detail.kk.model
 
 import android.os.Parcelable
+import com.gov.sidesa.utils.extension.format
 import kotlinx.parcelize.Parcelize
 
 import java.util.*
@@ -23,9 +24,13 @@ data class AccountUiModel(
     val address: String = "",
     val rt: String = "",
     val rw: String = "",
+    val provinceId: String = "",
     val province: String = "",
+    val cityId: String = "",
     val city: String = "",
+    val districtId: String = "",
     val district: String = "",
+    val villageId: String = "",
     val village: String = "",
     val religion: String = "",
     val maritalStatus: String = "",
@@ -48,7 +53,7 @@ data class AccountUiModel(
 ): Parcelable {
 
     val birthPlaceAndDate
-        get() = "$birthPlace, $birthDate"
+        get() = "$birthPlace, ${birthDate.format()}"
 
     val fullAddress
         get() = "$formatAddress $formatRtRw $formatVillage $formatDistrict"

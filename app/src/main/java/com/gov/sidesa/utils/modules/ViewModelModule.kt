@@ -14,6 +14,8 @@ import com.gov.sidesa.ui.profile.detail.family.DetailProfileFamilyViewModel
 import com.gov.sidesa.ui.profile.detail.kk.DetailProfileKKViewModel
 import com.gov.sidesa.ui.profile.detail.ktp.DetailProfileKTPViewModel
 import com.gov.sidesa.ui.profile.edit.family.EditProfileFamilyViewModel
+import com.gov.sidesa.ui.profile.edit.kk.EditProfileKKViewModel
+import com.gov.sidesa.ui.profile.edit.ktp.EditProfileKTPViewModel
 import com.gov.sidesa.ui.regions.SelectRegionViewModel
 import kotlinx.coroutines.FlowPreview
 import org.koin.androidx.viewmodel.dsl.viewModel

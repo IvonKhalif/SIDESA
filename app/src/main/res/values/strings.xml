@@ -16,6 +16,7 @@
     <string name="general_action_account">Akun</string>
     <string name="general_action_see_all">Lihat Semua</string>
     <string name="general_captio_all">Semua</string>
+    <string name="general_success">Berhasil</string>
 
     <!--  Login  -->
     <string name="login_title">Login</string>

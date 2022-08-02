@@ -12,6 +12,7 @@ import com.gov.sidesa.ui.profile.edit.ktp.EditProfileKTPActivity
 import com.gov.sidesa.utils.constants.LetterConstant
 import com.gov.sidesa.utils.constants.ProfileConstant
 import com.gov.sidesa.utils.constants.ProfileConstant.EXTRA_KTP_DETAIL
+import com.gov.sidesa.utils.constants.UserExtrasConstant
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailProfileKTPActivity : BaseActivity() {
@@ -67,7 +68,7 @@ class DetailProfileKTPActivity : BaseActivity() {
 
     private fun assignDataToUi(data: AccountUiModel) = with(binding) {
         detailProfileModel = data
-        textNik.text = data.kk
+        textNik.text = data.nik
         textName.text = data.name
         textTtl.text = data.birthPlaceAndDate
         textGender.text = data.gender
@@ -80,5 +81,13 @@ class DetailProfileKTPActivity : BaseActivity() {
         Glide.with(this@DetailProfileKTPActivity)
             .load(data.imageKTP)
             .into(imageIdCard)
+    }
+
+    override fun onResultData(result: Intent?) {
+        super.onResultData(result)
+        if (result?.getBooleanExtra(UserExtrasConstant.EXTRA_KTP_UPDATED, false) == true) {
+            viewModel.onLoadKTP()
+            showSuccessMessage(getString(R.string.general_success))
+        }
     }
 }
