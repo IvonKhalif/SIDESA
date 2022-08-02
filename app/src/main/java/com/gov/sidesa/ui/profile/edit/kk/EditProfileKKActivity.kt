@@ -7,6 +7,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseActivity
 import com.gov.sidesa.base.showImmediately
@@ -14,9 +15,9 @@ import com.gov.sidesa.databinding.ActivityEditProfileKkactivityBinding
 import com.gov.sidesa.ui.profile.edit.kk.models.AccountKKUiModel
 import com.gov.sidesa.ui.profile.edit.kk.models.EditProfileKKUiEvent
 import com.gov.sidesa.ui.regions.SelectRegionBottomSheet
-import com.gov.sidesa.utils.NetworkUtil
 import com.gov.sidesa.utils.extension.setTextDistinct
 import com.gov.sidesa.utils.picker.SelectImageBottomSheet
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -206,6 +207,7 @@ class EditProfileKKActivity : BaseActivity() {
         }
     }
 
+    private var tempUrl = ""
     private fun updateUI(uiModel: AccountKKUiModel) = with(binding) {
         with(customKkBiodata) {
             inputKkNumber.setTextDistinct(uiModel.kk)
@@ -223,14 +225,29 @@ class EditProfileKKActivity : BaseActivity() {
             inputKelurahan.setTextDistinct(uiModel.village.name)
         }
 
-        val url = if (uiModel.kkImageUri.contains("upload")) {
-            NetworkUtil.SERVER_HOST + uiModel.kkImageUri
-        } else {
-            uiModel.kkImageUri
-        }
+        if (uiModel.kkImageUri != tempUrl) {
+            tempUrl = uiModel.kkImageUri
 
-        Glide.with(this@EditProfileKKActivity)
-            .load(url)
-            .into(imageKk)
+            Glide.with(this@EditProfileKKActivity)
+                .load(tempUrl)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .into(imageKk)
+
+            if (tempUrl.startsWith("http")) {
+                lifecycleScope.launch(Dispatchers.IO) {
+                    try {
+                        val file = Glide.with(this@EditProfileKKActivity)
+                            .downloadOnly()
+                            .load(tempUrl)
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .submit()
+                            .get()
+
+                        viewModel.onImageSelected(file)
+                    } catch (_ :Throwable) {
+                    }
+                }
+            }
+        }
     }
 }

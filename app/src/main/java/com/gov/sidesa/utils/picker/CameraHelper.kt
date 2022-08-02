@@ -5,7 +5,6 @@ import android.content.Context
 import android.net.Uri
 import android.os.Build
 import androidx.activity.result.ActivityResultLauncher
-import java.io.File
 
 
 class CameraHelper(private val context: Context) {
@@ -39,25 +38,13 @@ class CameraHelper(private val context: Context) {
     }
 
     private fun showCamera() {
-        getTmpFileUri()
+        context.createFileUri()
             .apply {
                 uri = this
             }
             .run {
                 cameraLauncher.launch(this)
             }
-    }
-
-    // create a buffer for photos to be taken
-    private fun getTmpFileUri(): Uri = File.createTempFile(
-        "IMG_${System.currentTimeMillis()}",
-        ".jpg",
-        context.cacheDir
-    ).apply {
-        createNewFile()
-        deleteOnExit()
-    }.run {
-        toUriProvider(context = context)
     }
 
     fun onPermissionForResult(permissions: Map<String, Boolean>) {

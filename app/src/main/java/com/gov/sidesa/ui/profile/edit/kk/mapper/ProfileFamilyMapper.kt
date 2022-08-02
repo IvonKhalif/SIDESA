@@ -3,6 +3,7 @@ package com.gov.sidesa.ui.profile.edit.kk.mapper
 import com.gov.sidesa.domain.profile.detail.family.models.ProfileFamily
 import com.gov.sidesa.domain.regions.models.Region
 import com.gov.sidesa.ui.profile.edit.kk.models.AccountKKUiModel
+import com.gov.sidesa.utils.NetworkUtil
 import com.gov.sidesa.utils.extension.orZero
 
 /**
@@ -32,5 +33,5 @@ fun ProfileFamily.asEditKK() = AccountKKUiModel(
         parentId = account.districtKK?.id.orZero(),
         name = account.villageKK?.name.orEmpty()
     ),
-    kkImageUri = account.imageKK.orEmpty()
+    kkImageUri = NetworkUtil.SERVER_HOST + account.imageKK.orEmpty()
 )

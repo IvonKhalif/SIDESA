@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseActivity
 import com.gov.sidesa.databinding.ActivityDetailProfileKkactivityBinding
@@ -78,6 +79,7 @@ class DetailProfileKKActivity : BaseActivity() {
 
         Glide.with(this@DetailProfileKKActivity)
             .load(NetworkUtil.SERVER_HOST + data.imageKK)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
             .into(imageIdCard)
     }
 }
