@@ -8,7 +8,6 @@ import com.gov.sidesa.domain.letter.input.usecases.SaveLetterUseCase
 import com.gov.sidesa.domain.letter.list.usecase.ApprovalLettersUseCase
 import com.gov.sidesa.domain.letter.list.usecase.SubmissionLetterUseCase
 import com.gov.sidesa.domain.letter.template.usecases.GetTemplateUseCase
-import com.gov.sidesa.domain.registration.RegistrationUseCase
 import com.gov.sidesa.domain.profile.detail.family.usecases.GetFamilyUseCase
 import com.gov.sidesa.domain.regions.usecases.city.GetCityUseCase
 import com.gov.sidesa.domain.regions.usecases.district.GetDistrictUseCase

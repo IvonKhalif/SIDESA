@@ -43,7 +43,7 @@
             android:theme="@style/Theme.ContainerTracker.NoActionBar" />
 
         <activity
-            android:name=".ui.registration.ktp.RegistrationKTPActivity"
+            android:name=".ui.profile.edit.kk.EditProfileKKActivity"
             android:exported="true"
             android:theme="@style/Theme.ContainerTracker.NoActionBar" />
 
@@ -73,7 +73,7 @@
             android:exported="false"
             android:theme="@style/Theme.ContainerTracker.NoActionBar" />
         <activity
-            android:name=".ui.profile.edit.kk.EditProfileKKActivity"
+            android:name=".ui.registration.ktp.RegistrationKTPActivity"
             android:exported="true"
             android:theme="@style/Theme.ContainerTracker.NoActionBar">
             <intent-filter>

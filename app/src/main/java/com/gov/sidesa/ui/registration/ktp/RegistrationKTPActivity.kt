@@ -3,6 +3,7 @@ package com.gov.sidesa.ui.registration.ktp
 import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -12,14 +13,6 @@ import com.gov.sidesa.ui.registration.RegistrationStackState
 import com.gov.sidesa.ui.registration.keluarga.*
 import com.gov.sidesa.ui.registration.kk.KkAddressFragment
 import com.gov.sidesa.ui.registration.kk.KkBiodataFragment
-import com.gov.sidesa.ui.registration.kk.ReviewKkFragment
-import com.gov.sidesa.ui.registration.kk.UploadKkFragment
-import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import com.gov.sidesa.ui.registration.keluarga.*
-import com.gov.sidesa.ui.registration.kk.KkAddressFragment
-import com.gov.sidesa.ui.registration.kk.KkBiodataFragment
-import com.gov.sidesa.ui.registration.kk.KkDetailFragment
 import com.gov.sidesa.ui.registration.kk.ReviewKkFragment
 import com.gov.sidesa.ui.registration.kk.UploadKkFragment
 import kotlinx.coroutines.launch
@@ -216,8 +209,23 @@ class RegistrationKTPActivity : AppCompatActivity() {
     }
 
     private fun initObserver() {
-        viewModel.registrationStatus.observe(this) {
-            it
+        viewModel.registrationStatus.observe(this) { state ->
+            when (state) {
+                "succes" -> {
+                    Toast.makeText(
+                        this,
+                        "Registrasi berhasil.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                else -> {
+                    Toast.makeText(
+                        this,
+                        "Registrasi gagal. Mohon periksa kembali data Anda.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         }
 
         viewModel.registrationStackState.observe(this) { state ->
