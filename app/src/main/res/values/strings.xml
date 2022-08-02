@@ -259,6 +259,7 @@
 
     <string name="profile_kk">Rincian Data Kartu Keluarga</string>
     <string name="profile_ktp">Rincian Data KTP</string>
+    <string name="profile_edit_ktp_title">Ubah Data Berdasarkan KTP</string>
 
     <string name="province">Provinsi</string>
     <string name="city">Kota</string>
@@ -270,6 +271,12 @@
     <string name="fullname_father">Nama Lengkap Ayah</string>
     <string name="fullname_mother">Nama Lengkap Ibu</string>
     <string name="fullname">Nama Lengkap</string>
+
+    <!--  KTP  -->
+    <string name="district_has_not_been_selected">Kecamatan belum dipilih</string>
+    <string name="city_has_not_been_selected">Kota belum dipilih</string>
+    <string name="province_has_not_been_selected">Provinsi belum dipilih</string>
+
 
     <!--EDIT KK-->
     <string name="profile_edit_kk">Ubah Data Kartu Keluarga</string>

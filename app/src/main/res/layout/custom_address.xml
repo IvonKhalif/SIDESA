@@ -8,7 +8,7 @@
 
     <ScrollView
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +56,7 @@
                     android:layout_height="wrap_content"
                     android:digits="1234567890"
                     android:inputType="number"
-                    android:maxLength="2" />
+                    android:maxLength="3" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -79,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:digits="1234567890"
                     android:inputType="number"
-                    android:maxLength="2" />
+                    android:maxLength="3" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

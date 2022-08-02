@@ -10,17 +10,30 @@ import java.util.*
 
 object DateUtil {
     const val LOCAL_DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm:ss"
+    const val LOCAL_DATE_PATTERN = "yyyy-MM-dd"
     val locale = Locale("id", "ID")
     fun formatStringToDateTime(
         date: String?,
         pattern: String = LOCAL_DATE_TIME_PATTERN,
-        def: LocalDateTime? = null
+        def: LocalDateTime? = LocalDateTime.now()
     ): LocalDateTime? {
         if (date == null) {
             return def
         }
         val formatter = DateTimeFormatter.ofPattern(pattern)
         return LocalDateTime.parse(date, formatter)
+    }
+
+    fun formatStringToLocalDate(
+        date: String?,
+        pattern: String = LOCAL_DATE_PATTERN,
+        def: LocalDate? = LocalDate.now()
+    ): LocalDate? {
+        if (date == null) {
+            return def
+        }
+        val formatter = DateTimeFormatter.ofPattern(pattern)
+        return LocalDate.parse(date, formatter)
     }
 
     fun expiredDateLeft(date: LocalDateTime): Long {
@@ -62,12 +75,15 @@ object DateUtil {
         return format.format(date)
     }
 
-    fun convertToDayAndDate(baseDate: String): String {
+    fun convertToDayAndDate(
+        baseDate: String,
+        pattern: String = LOCAL_DATE_TIME_PATTERN
+    ): String {
         val localDateTime =
             if (baseDate.isBlank())
                 LocalDateTime.now()
             else
-                formatStringToDateTime(baseDate) ?: LocalDateTime.now()
+                formatStringToDateTime(baseDate, pattern) ?: LocalDateTime.now()
 
         val date = convertLocalDateTimeToLocalDate(localDateTime)
 //        val dateFormat = if (isHistoryDetail) {
@@ -76,5 +92,18 @@ object DateUtil {
 //        } else {
         return formatLocalDateToString(date, "EEEE, dd MMMM yyyy")
 //        }
+    }
+
+    fun convertStringDate(
+        baseDate: String,
+        toPattern: String = LOCAL_DATE_TIME_PATTERN
+    ): String {
+        val localDate =
+            if (baseDate.isBlank())
+                LocalDate.now()
+            else
+                formatStringToLocalDate(baseDate) ?: LocalDate.now()
+
+        return formatLocalDateToString(localDate, toPattern)
     }
 }

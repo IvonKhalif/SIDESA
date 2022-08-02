@@ -30,7 +30,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun checkExpiredDate() {
-        val expiredDate = DateUtil.formatStringToDateTime(user?.expiredDate, pattern = "yyyy-MM-dd")
+        val expiredDate = DateUtil.formatStringToDateTime(user?.expiredDate)
         val expiredDateLeft = DateUtil.expiredDateLeft(expiredDate ?: LocalDateTime.now())
         if (expiredDateLeft >= 0) goToLogin() else goToMainActivity()
     }

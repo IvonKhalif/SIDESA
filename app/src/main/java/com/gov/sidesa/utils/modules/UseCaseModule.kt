@@ -10,6 +10,7 @@ import com.gov.sidesa.domain.letter.list.usecase.SubmissionLetterUseCase
 import com.gov.sidesa.domain.letter.template.usecases.GetTemplateUseCase
 import com.gov.sidesa.domain.profile.detail.family.usecases.GetFamilyUseCase
 import com.gov.sidesa.domain.profile.edit.family.usecases.UpdateProfileFamilyUseCase
+import com.gov.sidesa.domain.profile.detail.family.usecases.UpdateDataKTPUseCase
 import com.gov.sidesa.domain.regions.usecases.city.GetCityUseCase
 import com.gov.sidesa.domain.regions.usecases.district.GetDistrictUseCase
 import com.gov.sidesa.domain.regions.usecases.province.GetProvinceUseCase
@@ -40,5 +41,6 @@ val UseCaseModule = module {
     single { GetDistrictUseCase(get()) }
     single { GetVillageUseCase(get()) }
     single { RegistrationUseCase(get()) }
+    single { UpdateDataKTPUseCase(get()) }
     single { UpdateProfileFamilyUseCase(get()) }
 }
