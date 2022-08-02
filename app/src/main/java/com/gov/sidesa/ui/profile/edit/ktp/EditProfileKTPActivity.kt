@@ -15,15 +15,13 @@ import com.gov.sidesa.databinding.ActivityEditKtpprofileBinding
 import com.gov.sidesa.domain.regions.models.Region
 import com.gov.sidesa.ui.profile.detail.kk.model.AccountUiModel
 import com.gov.sidesa.ui.regions.SelectRegionBottomSheet
-import com.gov.sidesa.utils.constants.LetterConstant
 import com.gov.sidesa.utils.constants.ProfileConstant
 import com.gov.sidesa.utils.constants.UserExtrasConstant
 import com.gov.sidesa.utils.enums.StatusResponseEnum
-import com.gov.sidesa.utils.extension.*
+import com.gov.sidesa.utils.extension.format
+import com.gov.sidesa.utils.extension.isNullOrZero
 import com.gov.sidesa.utils.picker.SelectImageBottomSheet
-import com.gov.sidesa.utils.visible
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.io.ByteArrayOutputStream
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -120,8 +118,10 @@ class EditProfileKTPActivity : BaseActivity() {
         gender = bindingBiodataKtp.inputKtpGender.text.toString(),
         blood = bindingBiodataKtp.inputKtpBloodType.text.toString(),
         address = bindingAddress.inputKtpAddress.text.toString(),
-        villageId = viewModel.inputKtpKelurahan.value?.id.toEmptyString(),
-        districtId = viewModel.inputKtpKecamatan.value?.id.toEmptyString(),
+        villageId = viewModel.inputKtpKelurahan.value?.id,
+        districtId = viewModel.inputKtpKecamatan.value?.id,
+        cityId = viewModel.inputKtpCity.value?.id,
+        provinceId = viewModel.inputKtpProvince.value?.id,
         rt = bindingAddress.inputKtpRt.text.toString(),
         rw = bindingAddress.inputKtpRw.text.toString(),
         religion = bindingGeneralKtp.inputKtpReligion.text.toString(),
