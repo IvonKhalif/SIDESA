@@ -71,6 +71,7 @@ class FamilyReviewFragment : Fragment() {
         binding.customReviewMother.textFamilyAddress.text = motherModel.addressKtp?.address
 
         binding.customReviewApplicant.textFamilyName.text = applicantModel.name
+        binding.customReviewApplicant.textFamilyName.text = applicantModel.name
         binding.customReviewApplicant.textFamilyNik.text = applicantModel.nik
         binding.customReviewApplicant.textFamilyTtl.text =
             "${applicantModel.placeOfBirth}, ${applicantModel.dateOfBirth}"

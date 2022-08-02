@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.gson.Gson
-import com.gov.sidesa.data.registration.family.FamilyFatherModel
+import com.gov.sidesa.data.registration.family.FamilyMotherModel
 import com.gov.sidesa.data.registration.ktp.AddressKtpModel
 import com.gov.sidesa.databinding.FragmentFamilyMotherBinding
 import com.gov.sidesa.ui.registration.RegistrationStackState
@@ -42,8 +42,8 @@ class FamilyMotherFragment : Fragment() {
             binding.customFamilyAddress.inputKtpKelurahan.text.toString(),
         )
         val isSameAddress = binding.customFamilyMother.checkBoxAddress.isChecked
-        val familyFatherToJson = Gson().toJson(
-            FamilyFatherModel(
+        val familyMotherToJson = Gson().toJson(
+            FamilyMotherModel(
                 binding.customFamilyMother.inputFather.text.toString(),
                 binding.customFamilyMother.inputNik.text.toString(),
                 binding.customFamilyMother.inputPlace.text.toString(),
@@ -55,7 +55,7 @@ class FamilyMotherFragment : Fragment() {
         viewModel.setPref(
             requireContext(),
             RegistrationStackState.FamilyMother.toString(),
-            familyFatherToJson
+            familyMotherToJson
         )
     }
 

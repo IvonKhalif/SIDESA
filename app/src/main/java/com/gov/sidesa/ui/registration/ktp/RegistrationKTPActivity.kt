@@ -211,7 +211,7 @@ class RegistrationKTPActivity : AppCompatActivity() {
     private fun initObserver() {
         viewModel.registrationStatus.observe(this) { state ->
             when (state) {
-                "succes" -> {
+                "success" -> {
                     Toast.makeText(
                         this,
                         "Registrasi berhasil.",

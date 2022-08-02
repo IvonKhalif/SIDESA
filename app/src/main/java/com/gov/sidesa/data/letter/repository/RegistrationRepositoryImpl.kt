@@ -35,6 +35,7 @@ class RegistrationRepositoryImpl(
         familyMap: Map<String, String>
     ): NetworkResponse<String, GenericErrorResponse> {
         return registrationService.registerNewAccount(
+            idAccount = idAccount,
             nik = nik,
             noKk = noKk,
             fullName = fullName,
