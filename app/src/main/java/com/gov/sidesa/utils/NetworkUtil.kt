@@ -19,8 +19,8 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 object NetworkUtil {
-    const val BASE_URL = "https://desa.digidana.id/api/v1/"
-    const val REQUEST_NOT_FOUND = "not_found"
+    const val SERVER_HOST = "https://desa.digidana.id/"
+    const val BASE_URL = "${SERVER_HOST}api/v1/"
     fun buildClient(applicationContext: Context): OkHttpClient {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
         httpLoggingInterceptor.level =

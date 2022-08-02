@@ -3,19 +3,14 @@ package com.gov.sidesa.ui.profile.edit.ktp
 import android.util.Base64
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.gov.sidesa.base.BaseViewModel
-import com.gov.sidesa.data.letterdetail.request.DoApprovalRequest
 import com.gov.sidesa.data.profile.request.EditProfileKTPRequest
-import com.gov.sidesa.domain.profile.detail.family.models.ProfileFamily
+import com.gov.sidesa.domain.letter.input.models.resource.asRegion
 import com.gov.sidesa.domain.profile.detail.family.usecases.UpdateDataKTPUseCase
 import com.gov.sidesa.domain.regions.models.Region
-import com.gov.sidesa.ui.profile.detail.kk.mapper.asUiModel
 import com.gov.sidesa.ui.profile.detail.kk.model.AccountUiModel
 import com.gov.sidesa.utils.enums.StatusResponseEnum
-import com.gov.sidesa.utils.extension.format
-import com.gov.sidesa.utils.extension.orZero
 import com.haroldadmin.cnradapter.NetworkResponse
 import kotlinx.coroutines.launch
 import java.io.File
@@ -52,10 +47,10 @@ class EditProfileKTPViewModel(
         inputKtpAddress.value = detail.address
         inputKtpRt.value = detail.rt
         inputKtpRw.value = detail.rw
-        inputKtpProvince.value = Region(detail.provinceId.orZero(), null,detail.province)
-        inputKtpCity.value = Region(detail.cityId.orZero(), null,detail.city)
-        inputKtpKecamatan.value = Region(detail.districtId.orZero(), null,detail.district)
-        inputKtpKelurahan.value = Region(detail.villageId.orZero(), null,detail.village)
+        inputKtpProvince.value = detail.province.asRegion()
+        inputKtpCity.value = detail.city.asRegion(detail.province.id)
+        inputKtpKecamatan.value = detail.district.asRegion(detail.city.id)
+        inputKtpKelurahan.value = detail.village.asRegion(detail.district.id)
         inputKtpReligion.value = detail.religion
         inputKtpMarriage.value = detail.maritalStatus
         inputKtpJob.value = detail.job

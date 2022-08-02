@@ -7,6 +7,7 @@ import com.gov.sidesa.data.profile.service.ProfileService
 import com.gov.sidesa.domain.profile.ProfileRepository
 import com.gov.sidesa.domain.profile.detail.family.models.ProfileFamily
 import com.gov.sidesa.domain.profile.edit.family.models.SaveFamily
+import com.gov.sidesa.domain.profile.edit.kk.models.SaveKK
 import com.gov.sidesa.utils.extension.asDomain
 import com.gov.sidesa.utils.response.GenericErrorResponse
 import com.gov.sidesa.utils.response.RetrofitStatusResponse
@@ -33,6 +34,12 @@ class ProfileRepositoryImpl(
 
     override suspend fun updateProfileFamily(family: List<SaveFamily>): NetworkResponse<String, GenericErrorResponse> {
         return service.updateProfileFamily(family = family.asData()).asDomain {
+            desc
+        }
+    }
+
+    override suspend fun updateKK(kk: SaveKK): NetworkResponse<String, GenericErrorResponse> {
+        return service.updateKK(kk = kk.asData()).asDomain {
             desc
         }
     }

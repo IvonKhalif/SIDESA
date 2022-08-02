@@ -1,6 +1,7 @@
 package com.gov.sidesa.domain.profile.detail.family.models
 
 import android.os.Parcelable
+import com.gov.sidesa.domain.letter.input.models.resource.Resource
 import kotlinx.parcelize.Parcelize
 import java.util.*
 
@@ -22,14 +23,10 @@ data class Account(
     val address: String = "",
     val rt: String = "",
     val rw: String = "",
-    val provinceId: String = "",
-    val province: String = "",
-    val cityId: String = "",
-    val city: String = "",
-    val districtId: String = "",
-    val district: String = "",
-    val villageId: String = "",
-    val village: String = "",
+    val province: Resource = Resource(),
+    val city: Resource = Resource(),
+    val district: Resource = Resource(),
+    val village: Resource = Resource(),
     val religion: String = "",
     val maritalStatus: String = "",
     val job: String = "",
@@ -44,8 +41,8 @@ data class Account(
     val addressKK: String? = null,
     val rtKK: String? = null,
     val rwKK: String? = null,
-    val provinceIdKK: String? = null,
-    val cityIdKK: String? = null,
-    val districtIdKK: String? = null,
-    val villageIdKK: String? = null
+    val provinceKK: Resource? = null,
+    val cityKK: Resource? = null,
+    val districtKK: Resource? = null,
+    val villageKK: Resource? = null
 ) : Parcelable

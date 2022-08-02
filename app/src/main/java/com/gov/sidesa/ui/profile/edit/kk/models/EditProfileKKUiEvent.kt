@@ -16,4 +16,5 @@ sealed class EditProfileKKUiEvent {
     object OnDistrictClicked: EditProfileKKUiEvent()
     object OnVillageClicked: EditProfileKKUiEvent()
     object OnKKImageClicked: EditProfileKKUiEvent()
+    object OnSubmit : EditProfileKKUiEvent()
 }

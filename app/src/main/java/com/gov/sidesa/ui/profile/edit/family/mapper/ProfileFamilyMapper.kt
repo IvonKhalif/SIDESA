@@ -1,7 +1,10 @@
-package com.gov.sidesa.ui.profile.edit.family.models
+package com.gov.sidesa.ui.profile.edit.family.mapper
 
 import com.gov.sidesa.domain.profile.detail.family.models.Family
 import com.gov.sidesa.domain.profile.detail.family.models.ProfileFamily
+import com.gov.sidesa.ui.profile.edit.family.models.EditProfileFamilyUiModel
+import com.gov.sidesa.ui.profile.edit.family.models.EditProfileFamilyViewType
+import com.gov.sidesa.ui.profile.edit.family.models.RelationType
 
 /**
  * Created by yovi.putra on 01/08/22"

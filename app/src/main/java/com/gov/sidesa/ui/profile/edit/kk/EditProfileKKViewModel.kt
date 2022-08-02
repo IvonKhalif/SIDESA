@@ -3,11 +3,19 @@ package com.gov.sidesa.ui.profile.edit.kk
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseViewModel
+import com.gov.sidesa.domain.profile.detail.family.models.Account
+import com.gov.sidesa.domain.profile.detail.family.models.ProfileFamily
+import com.gov.sidesa.domain.profile.detail.family.usecases.GetFamilyUseCase
+import com.gov.sidesa.domain.profile.edit.kk.usecases.UpdateProfileKKUseCase
 import com.gov.sidesa.domain.regions.models.Region
+import com.gov.sidesa.ui.profile.edit.kk.mapper.asDomain
+import com.gov.sidesa.ui.profile.edit.kk.mapper.asEditKK
 import com.gov.sidesa.ui.profile.edit.kk.models.AccountKKUiModel
 import com.gov.sidesa.ui.profile.edit.kk.models.EditProfileKKUiEvent
 import com.gov.sidesa.utils.response.GenericErrorResponse
+import com.haroldadmin.cnradapter.NetworkResponse
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -20,7 +28,12 @@ import java.io.File
  **/
 
 
-class EditProfileKKViewModel : BaseViewModel() {
+class EditProfileKKViewModel(
+    private val getFamilyUseCase: GetFamilyUseCase,
+    private val updateProfileKKUseCase: UpdateProfileKKUseCase
+) : BaseViewModel() {
+
+    private val _profileFamily = MutableLiveData<ProfileFamily>()
 
     private val _closeScreenState = MutableLiveData<Unit>()
     val closeScreenState: LiveData<Unit> get() = _closeScreenState
@@ -42,6 +55,28 @@ class EditProfileKKViewModel : BaseViewModel() {
 
     private val _uiModel = MutableStateFlow(AccountKKUiModel())
     val uiModel get() = _uiModel.asStateFlow()
+
+    private val _submitSuccessState = MutableLiveData<Int>()
+    val submitSuccessState: LiveData<Int> get() = _submitSuccessState
+
+    init {
+        viewModelScope.launch {
+            showLoadingWidget()
+
+            when (val result = getFamilyUseCase.invoke()) {
+                is NetworkResponse.Success -> {
+                    _profileFamily.value = result.body
+                    _uiModel.value = result.body.asEditKK()
+                }
+                else -> {
+                    onResponseNotSuccess(response = result)
+                    _closeScreenState.value = Unit
+                }
+            }
+
+            hideLoadingWidget()
+        }
+    }
 
     /**
      * event handling
@@ -78,6 +113,9 @@ class EditProfileKKViewModel : BaseViewModel() {
             is EditProfileKKUiEvent.OnRWChanged -> {
                 _uiModel.update { it.copy(rw = event.text) }
             }
+            is EditProfileKKUiEvent.OnSubmit -> {
+                onSubmit()
+            }
         }
     }
 
@@ -105,10 +143,26 @@ class EditProfileKKViewModel : BaseViewModel() {
         }
     }
 
+    private fun onSubmit() = viewModelScope.launch {
+        showLoadingWidget()
+
+        val account = _profileFamily.value?.account ?: Account()
+        val accountKK = _uiModel.value
+
+        when (val result = updateProfileKKUseCase.invoke(accountKK.asDomain(account))) {
+            is NetworkResponse.Success -> {
+                _submitSuccessState.value = R.string.profile_kk_edit_success
+            }
+            else -> onResponseNotSuccess(response = result)
+        }
+
+        hideLoadingWidget()
+    }
+
     /**
      * Callback other view
      */
-    fun onProvinceSelected(region: Region) {
+    fun onProvinceSelected(region: Region) = viewModelScope.launch {
         if (region.id != _uiModel.value.province.id) {
             _uiModel.update {
                 it.copy(
@@ -121,7 +175,7 @@ class EditProfileKKViewModel : BaseViewModel() {
         }
     }
 
-    fun onCitySelected(region: Region) {
+    fun onCitySelected(region: Region) = viewModelScope.launch {
         if (region.id != _uiModel.value.city.id) {
             _uiModel.update {
                 it.copy(
@@ -133,7 +187,7 @@ class EditProfileKKViewModel : BaseViewModel() {
         }
     }
 
-    fun onDistrictSelected(region: Region) {
+    fun onDistrictSelected(region: Region) = viewModelScope.launch {
         if (region.id != _uiModel.value.district.id) {
             _uiModel.update {
                 it.copy(
@@ -144,7 +198,7 @@ class EditProfileKKViewModel : BaseViewModel() {
         }
     }
 
-    fun onVillageSelected(region: Region) {
+    fun onVillageSelected(region: Region) = viewModelScope.launch {
         if (region.id != _uiModel.value.village.id) {
             _uiModel.update {
                 it.copy(village = region)
@@ -152,7 +206,7 @@ class EditProfileKKViewModel : BaseViewModel() {
         }
     }
 
-    fun onImageSelected(file: File) {
+    fun onImageSelected(file: File) = viewModelScope.launch {
         _uiModel.update { it.copy(kkImageUri = file.absolutePath) }
     }
 }

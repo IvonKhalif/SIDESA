@@ -54,9 +54,9 @@
                 android:layout_height="240dp"
                 android:layout_margin="20dp"
                 android:adjustViewBounds="true"
-                android:background="@color/white_929292"
+                android:background="@color/gray_D1D1D1"
                 android:maxWidth="380dp"
-                android:scaleType="fitXY"
+                android:scaleType="fitCenter"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/container_address" />

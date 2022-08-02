@@ -205,7 +205,7 @@ class LetterInputViewModel(
     }
 
     fun onMenuSelected(uiModel: DropDownWidgetUiModel, selected: Resource) = viewModelScope.launch {
-        val model = uiModel.copy(value = selected.id, selectedText = selected.name)
+        val model = uiModel.copy(value = selected.id.toString(), selectedText = selected.name)
         updateWidget(uiModel = model)
     }
 }

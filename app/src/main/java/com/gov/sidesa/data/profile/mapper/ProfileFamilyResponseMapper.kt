@@ -1,5 +1,6 @@
 package com.gov.sidesa.data.profile.mapper
 
+import com.gov.sidesa.data.letter.mapper.asDomain
 import com.gov.sidesa.data.profile.models.FamilyResponse
 import com.gov.sidesa.data.profile.models.ProfileFamilyResponse
 import com.gov.sidesa.data.user.response.UserResponse
@@ -31,10 +32,10 @@ fun UserResponse.asDomain() = Account(
     address = address.orEmpty(),
     rt = rt.orEmpty(),
     rw = rw.orEmpty(),
-    province = province.orEmpty(),
-    city = city.orEmpty(),
-    district = district.orEmpty(),
-    village = village.orEmpty(),
+    province = province.asDomain(),
+    city = city.asDomain(),
+    district = district.asDomain(),
+    village = village.asDomain(),
     religion = religion.orEmpty(),
     maritalStatus = maritalStatus.orEmpty(),
     job = job.orEmpty(),
@@ -47,12 +48,12 @@ fun UserResponse.asDomain() = Account(
     familyHead = familyHead.orEmpty(),
     imageKK = imageKK.orEmpty(),
     addressKK = addressKK.orEmpty(),
-    cityIdKK = cityIdKK.orEmpty(),
-    districtIdKK = districtIdKK.orEmpty(),
-    provinceIdKK = provinceIdKK.orEmpty(),
+    cityKK = cityKK.asDomain(),
+    districtKK = districtKK.asDomain(),
+    provinceKK = provinceKK.asDomain(),
     rtKK = rtKK.orEmpty(),
     rwKK = rwKK.orEmpty(),
-    villageIdKK = villageIdKK.orEmpty()
+    villageKK = villageKK.asDomain()
 )
 
 fun FamilyResponse.asDomain() = Family(

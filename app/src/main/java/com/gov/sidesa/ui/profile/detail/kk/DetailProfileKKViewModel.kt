@@ -30,17 +30,23 @@ class DetailProfileKKViewModel(
         }
 
     init {
-        viewModelScope.launch {
-            showLoadingWidget()
+        onLoad()
+    }
 
-            when (val result = getFamilyUseCase.invoke()) {
-                is NetworkResponse.Success -> {
-                    _profileFamilyData.value = result.body
-                }
-                else -> onResponseNotSuccess(response = result)
+    private fun onLoad() = viewModelScope.launch {
+        showLoadingWidget()
+
+        when (val result = getFamilyUseCase.invoke()) {
+            is NetworkResponse.Success -> {
+                _profileFamilyData.value = result.body
             }
-
-            hideLoadingWidget()
+            else -> onResponseNotSuccess(response = result)
         }
+
+        hideLoadingWidget()
+    }
+
+    fun onEditResult() {
+        onLoad()
     }
 }

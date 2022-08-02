@@ -285,4 +285,5 @@
 
 
     <string name="profile_family_edit_success">Ubah Data Keluarga Berhasil</string>
+    <string name="profile_kk_edit_success">Ubah Data Kartu Keluarga Berhasil</string>
 </resources>

@@ -39,5 +39,5 @@ val ViewModelModule = module {
     viewModel { TabLetterListViewModel(get(), get()) }
     viewModel { DetailSubmissionLetterViewModel(get()) }
     viewModel { EditProfileKTPViewModel(get()) }
-    viewModel { EditProfileKKViewModel() }
+    viewModel { EditProfileKKViewModel(get(), get()) }
 }

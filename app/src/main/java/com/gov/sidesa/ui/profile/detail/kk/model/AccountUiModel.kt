@@ -1,6 +1,7 @@
 package com.gov.sidesa.ui.profile.detail.kk.model
 
 import android.os.Parcelable
+import com.gov.sidesa.domain.letter.input.models.resource.Resource
 import com.gov.sidesa.utils.extension.format
 import kotlinx.parcelize.Parcelize
 
@@ -24,14 +25,10 @@ data class AccountUiModel(
     val address: String = "",
     val rt: String = "",
     val rw: String = "",
-    val provinceId: String = "",
-    val province: String = "",
-    val cityId: String = "",
-    val city: String = "",
-    val districtId: String = "",
-    val district: String = "",
-    val villageId: String = "",
-    val village: String = "",
+    val province: Resource = Resource(),
+    val city: Resource = Resource(),
+    val district: Resource = Resource(),
+    val village: Resource = Resource(),
     val religion: String = "",
     val maritalStatus: String = "",
     val job: String = "",
@@ -46,10 +43,10 @@ data class AccountUiModel(
     val addressKK: String = "",
     val rtKK: String = "",
     val rwKK: String = "",
-    val provinceIdKK: String = "",
-    val cityIdKK: String = "",
-    val districtIdKK: String = "",
-    val villageIdKK: String = ""
+    val provinceKK: Resource = Resource(),
+    val cityKK: Resource = Resource(),
+    val districtKK: Resource = Resource(),
+    val villageKK: Resource = Resource()
 ): Parcelable {
 
     val birthPlaceAndDate
@@ -70,8 +67,8 @@ data class AccountUiModel(
         }
 
     private val formatVillage
-        get() = if (village.isNotBlank()) "$village," else ""
+        get() = if (village.name.isNotBlank()) "$village," else ""
 
     private val formatDistrict
-        get() = if (district.isNotBlank()) "$district," else ""
+        get() = if (district.name.isNotBlank()) "$district," else ""
 }
