@@ -3,15 +3,14 @@ package com.gov.sidesa.ui.profile.edit.family.adapter.view_holder
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.TextView
 import androidx.core.view.isVisible
-import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import com.gov.sidesa.R
 import com.gov.sidesa.databinding.ItemEditProfileFamilyBinding
 import com.gov.sidesa.ui.profile.edit.family.adapter.EditProfileFamilyListener
 import com.gov.sidesa.ui.profile.edit.family.models.EditProfileFamilyUiModel
 import com.gov.sidesa.ui.profile.edit.family.models.RelationType
+import com.gov.sidesa.utils.extension.distinctTextChange
 
 /**
  * Created by yovi.putra on 31/07/22"
@@ -158,13 +157,4 @@ class EditProfileFamilyViewHolder(
             return EditProfileFamilyViewHolder(binding = binding, listener = listener)
         }
     }
-}
-
-
-private fun TextView.distinctTextChange(prev: String, onTextChanged: (String) -> Unit = {}) {
-    addTextChangedListener(onTextChanged = { _, _, _, _ ->
-        if (prev != text.toString()) {
-            onTextChanged.invoke(this.text.toString())
-        }
-    })
 }

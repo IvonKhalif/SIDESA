@@ -12,6 +12,7 @@ import com.gov.sidesa.domain.regions.models.Region
 import com.gov.sidesa.ui.profile.detail.kk.model.AccountUiModel
 import com.gov.sidesa.utils.enums.StatusResponseEnum
 import com.haroldadmin.cnradapter.NetworkResponse
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import java.io.File
 import java.util.*
@@ -35,6 +36,8 @@ class EditProfileKTPViewModel(
     val inputKtpJob = MutableLiveData<String>()
     val inputKtpNationality = MutableLiveData<String>()
     val imageKTPBase64 = MutableLiveData<String>()
+    val inputKtpBlood = MutableStateFlow("")
+    val inputKtpGender = MutableStateFlow("")
 
     private val _statusUpdateData = MutableLiveData<String>()
     val statusUpdateData: LiveData<String> get() = _statusUpdateData
@@ -55,6 +58,8 @@ class EditProfileKTPViewModel(
         inputKtpMarriage.value = detail.maritalStatus
         inputKtpJob.value = detail.job
         inputKtpNationality.value = detail.citizenship
+        inputKtpBlood.value = detail.blood
+        inputKtpGender.value = detail.gender
     }
 
     fun updateKTP(request: EditProfileKTPRequest) = viewModelScope.launch {

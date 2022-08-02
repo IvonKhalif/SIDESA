@@ -5,6 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.bumptech.glide.Glide
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.gov.sidesa.R
@@ -18,9 +22,12 @@ import com.gov.sidesa.ui.regions.SelectRegionBottomSheet
 import com.gov.sidesa.utils.constants.ProfileConstant
 import com.gov.sidesa.utils.constants.UserExtrasConstant
 import com.gov.sidesa.utils.enums.StatusResponseEnum
+import com.gov.sidesa.utils.extension.distinctTextChange
 import com.gov.sidesa.utils.extension.format
 import com.gov.sidesa.utils.extension.isNullOrZero
 import com.gov.sidesa.utils.picker.SelectImageBottomSheet
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
 import java.text.SimpleDateFormat
@@ -107,6 +114,13 @@ class EditProfileKTPActivity : BaseActivity() {
         binding.imageKtp.setOnClickListener {
             showMediaDialog()
         }
+
+        bindingBiodataKtp.inputKtpBloodType.addTextChangedListener {
+            viewModel.inputKtpBlood.value = it.toString()
+        }
+        bindingBiodataKtp.inputKtpGender.distinctTextChange {
+            viewModel.inputKtpGender.value = it
+        }
     }
 
     private fun createRequest() = EditProfileKTPRequest(
@@ -115,8 +129,8 @@ class EditProfileKTPActivity : BaseActivity() {
         accountName = bindingBiodataKtp.inputKtpName.text.toString(),
         birthPlace = bindingBiodataKtp.inputKtpPlace.text.toString(),
         birthDate = viewModel.inputKtpDob.value,
-        gender = bindingBiodataKtp.inputKtpGender.text.toString(),
-        blood = bindingBiodataKtp.inputKtpBloodType.text.toString(),
+        gender = viewModel.inputKtpGender.value.orEmpty().uppercase(),
+        blood = viewModel.inputKtpBlood.value.orEmpty(),
         address = bindingAddress.inputKtpAddress.text.toString(),
         villageId = viewModel.inputKtpKelurahan.value?.id,
         districtId = viewModel.inputKtpKecamatan.value?.id,
@@ -206,6 +220,17 @@ class EditProfileKTPActivity : BaseActivity() {
             loadingState.observe(this@EditProfileKTPActivity) {
                 handleLoadingWidget(isLoading = it)
             }
+
+            lifecycleScope.launch {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    inputKtpBlood.collectLatest(::updateUIBlood)
+                }
+
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    inputKtpGender.collectLatest(::updateUIGender)
+                }
+            }
+
         }
     }
 
@@ -217,7 +242,8 @@ class EditProfileKTPActivity : BaseActivity() {
             finish()
         }
     }
-
+    private fun updateUIBlood(text: String) = bindingBiodataKtp.inputKtpBloodType.setText(text)
+    private fun updateUIGender(text: String) = bindingBiodataKtp.inputKtpGender.setText(text)
     private fun updateUIName(text: String) = bindingBiodataKtp.inputKtpName.setText(text)
     private fun updateUINik(text: String) = bindingBiodataKtp.inputKtpNik.setText(text)
     private fun updateUIBirthPlace(text: String) = bindingBiodataKtp.inputKtpPlace.setText(text)
