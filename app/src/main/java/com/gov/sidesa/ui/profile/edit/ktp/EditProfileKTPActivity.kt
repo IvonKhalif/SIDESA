@@ -19,9 +19,7 @@ import com.gov.sidesa.utils.constants.LetterConstant
 import com.gov.sidesa.utils.constants.ProfileConstant
 import com.gov.sidesa.utils.constants.UserExtrasConstant
 import com.gov.sidesa.utils.enums.StatusResponseEnum
-import com.gov.sidesa.utils.extension.format
-import com.gov.sidesa.utils.extension.isNullOrZero
-import com.gov.sidesa.utils.extension.orZero
+import com.gov.sidesa.utils.extension.*
 import com.gov.sidesa.utils.picker.SelectImageBottomSheet
 import com.gov.sidesa.utils.visible
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -122,8 +120,8 @@ class EditProfileKTPActivity : BaseActivity() {
         gender = bindingBiodataKtp.inputKtpGender.text.toString(),
         blood = bindingBiodataKtp.inputKtpBloodType.text.toString(),
         address = bindingAddress.inputKtpAddress.text.toString(),
-        villageId = viewModel.inputKtpKelurahan.value?.id.toString(),
-        districtId = viewModel.inputKtpKecamatan.value?.id.toString(),
+        villageId = viewModel.inputKtpKelurahan.value?.id.toEmptyString(),
+        districtId = viewModel.inputKtpKecamatan.value?.id.toEmptyString(),
         rt = bindingAddress.inputKtpRt.text.toString(),
         rw = bindingAddress.inputKtpRw.text.toString(),
         religion = bindingGeneralKtp.inputKtpReligion.text.toString(),

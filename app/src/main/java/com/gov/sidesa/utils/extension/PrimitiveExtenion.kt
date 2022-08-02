@@ -6,4 +6,5 @@ package com.gov.sidesa.utils.extension
  **/
  
 fun Long?.orZero() = this ?: 0L
+fun Long?.toEmptyString() = if (this.isNullOrZero()) "" else this.toString()
 fun Int?.orZero() = this ?: 0
