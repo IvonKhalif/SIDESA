@@ -17,8 +17,8 @@ data class ProfileFamily(
     fun sameAddress(family: Family): Boolean = account.address.trim() == family.address.trim()
             && account.rt == family.rt
             && account.rw == family.rw
-            && account.province == family.province.name
-            && account.city == family.city.name
-            && account.district == family.district.name
-            && account.village == family.village.name
+            && account.province == family.province.id.toString()
+            && account.city == family.city.id.toString()
+            && account.district == family.district.id.toString()
+            && account.village == family.village.id.toString()
 }

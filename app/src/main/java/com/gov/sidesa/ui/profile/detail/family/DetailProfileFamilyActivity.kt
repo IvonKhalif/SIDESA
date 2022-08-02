@@ -10,6 +10,7 @@ import com.gov.sidesa.base.BaseActivity
 import com.gov.sidesa.databinding.ActivityDetailProfileFamilyBinding
 import com.gov.sidesa.ui.profile.detail.family.adapter.DetailProfileFamilyAdapter
 import com.gov.sidesa.ui.profile.edit.family.EditProfileFamilyActivity
+import com.gov.sidesa.utils.dp
 import com.gov.sidesa.utils.picker.RecyclerViewItemDecoration
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -41,7 +42,9 @@ class DetailProfileFamilyActivity : BaseActivity() {
             LinearLayoutManager.VERTICAL,
             false
         )
-        recyclerFamily.addItemDecoration(RecyclerViewItemDecoration())
+        recyclerFamily.addItemDecoration(
+            RecyclerViewItemDecoration(height = 2.dp, color = R.color.gray_D1D1D1)
+        )
     }
 
     private fun initObserver() = with(viewModel) {

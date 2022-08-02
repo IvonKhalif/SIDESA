@@ -236,12 +236,13 @@ class EditProfileFamilyViewModel(
             }
         }
 
-        _componentData.value = components
+        _componentData.postValue(components)
     }
 
     /**
      * Get data up-to-date
      */
+    @Synchronized
     private fun getComponentUpToDate(id: Long): EditProfileFamilyUiModel {
         return _componentData.value.orEmpty().first { it.id == id }
     }
@@ -251,6 +252,7 @@ class EditProfileFamilyViewModel(
 
         val account = _profileFamily.value?.account ?: Account()
         val components = _componentData.value.orEmpty()
+            .filter { it.type == EditProfileFamilyViewType.Form }
 
         when (val result = updateFamilyUseCase.invoke(account = account, components = components)) {
             is NetworkResponse.Success -> {
