@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.gson.Gson
-import com.gov.sidesa.data.registration.family.FamilyFatherModel
+import com.gov.sidesa.data.registration.family.FamilyChildModel
 import com.gov.sidesa.data.registration.ktp.AddressKtpModel
 import com.gov.sidesa.databinding.FragmentFamilyChildBinding
 import com.gov.sidesa.ui.registration.RegistrationStackState
@@ -42,8 +42,8 @@ class FamilyChildFragment : Fragment() {
             binding.customFamilyAddress.inputKtpKelurahan.text.toString(),
         )
         val isSameAddress = binding.customFamilyChild.checkBoxAddress.isChecked
-        val familyFatherToJson = Gson().toJson(
-            FamilyFatherModel(
+        val familyChildToJson = Gson().toJson(
+            FamilyChildModel(
                 binding.customFamilyChild.inputFather.text.toString(),
                 binding.customFamilyChild.inputNik.text.toString(),
                 binding.customFamilyChild.inputPlace.text.toString(),
@@ -55,13 +55,14 @@ class FamilyChildFragment : Fragment() {
         viewModel.setPref(
             requireContext(),
             RegistrationStackState.FamilyChild.toString(),
-            familyFatherToJson
+            familyChildToJson
         )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.customFamilyChild.inputLayoutFather.hint = "Nama Anak"
         binding.customFamilyChild.inputLayoutStatus.gone()
         setupDateOfBirth()
         binding.buttonAddChildForm.setOnClickListener {
@@ -76,7 +77,7 @@ class FamilyChildFragment : Fragment() {
                 .build()
             picker.addOnPositiveButtonClickListener {
                 val date = Date(it)
-                val format = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+                val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                 binding.customFamilyChild.inputDob.setText(format.format(date))
             }
             picker.show(childFragmentManager, "DATE_PICKER")

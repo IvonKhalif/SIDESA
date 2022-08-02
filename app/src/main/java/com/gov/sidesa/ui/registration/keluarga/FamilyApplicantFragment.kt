@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.gson.Gson
 import com.gov.sidesa.R
-import com.gov.sidesa.data.registration.family.FamilyFatherModel
+import com.gov.sidesa.data.registration.family.FamilyApplicantModel
 import com.gov.sidesa.data.registration.ktp.AddressKtpModel
 import com.gov.sidesa.databinding.FragmentFamilyApplicantBinding
 import com.gov.sidesa.ui.registration.RegistrationStackState
@@ -44,8 +44,9 @@ class FamilyApplicantFragment : Fragment() {
             binding.customFamilyAddress.inputKtpKelurahan.text.toString(),
         )
         val isSameAddress = binding.customFamilyApplicant.checkBoxAddress.isChecked
-        val familyFatherToJson = Gson().toJson(
-            FamilyFatherModel(
+        val applicantModel = Gson().toJson(
+            FamilyApplicantModel(
+                binding.customFamilyApplicant.inputStatus.text.toString(),
                 binding.customFamilyApplicant.inputFather.text.toString(),
                 binding.customFamilyApplicant.inputNik.text.toString(),
                 binding.customFamilyApplicant.inputPlace.text.toString(),
@@ -57,7 +58,7 @@ class FamilyApplicantFragment : Fragment() {
         viewModel.setPref(
             requireContext(),
             RegistrationStackState.FamilyApplicant.toString(),
-            familyFatherToJson
+            applicantModel
         )
     }
 
@@ -81,7 +82,7 @@ class FamilyApplicantFragment : Fragment() {
                 .build()
             picker.addOnPositiveButtonClickListener {
                 val date = Date(it)
-                val format = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+                val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                 binding.customFamilyApplicant.inputDob.setText(format.format(date))
             }
             picker.show(childFragmentManager, "DATE_PICKER")

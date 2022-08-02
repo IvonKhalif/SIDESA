@@ -3,6 +3,7 @@ package com.gov.sidesa.ui.registration.ktp
 import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -208,8 +209,23 @@ class RegistrationKTPActivity : AppCompatActivity() {
     }
 
     private fun initObserver() {
-        viewModel.registrationStatus.observe(this) {
-            it
+        viewModel.registrationStatus.observe(this) { state ->
+            when (state) {
+                "success" -> {
+                    Toast.makeText(
+                        this,
+                        "Registrasi berhasil.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                else -> {
+                    Toast.makeText(
+                        this,
+                        "Registrasi gagal. Mohon periksa kembali data Anda.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         }
 
         viewModel.registrationStackState.observe(this) { state ->

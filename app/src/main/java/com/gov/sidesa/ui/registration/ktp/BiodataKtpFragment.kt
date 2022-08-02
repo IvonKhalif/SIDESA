@@ -69,7 +69,7 @@ class BiodataKtpFragment : Fragment() {
                 .build()
             picker.addOnPositiveButtonClickListener {
                 val date = Date(it)
-                val format = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+                val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                 customKtpBiodata.inputKtpDob.setText(format.format(date))
             }
             picker.show(childFragmentManager, "DATE_PICKER")
