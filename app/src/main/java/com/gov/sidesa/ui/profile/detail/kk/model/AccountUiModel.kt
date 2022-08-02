@@ -47,13 +47,17 @@ data class AccountUiModel(
     val cityKK: Resource = Resource(),
     val districtKK: Resource = Resource(),
     val villageKK: Resource = Resource()
-): Parcelable {
+) : Parcelable {
 
     val birthPlaceAndDate
         get() = "$birthPlace, ${birthDate.format()}"
 
+    /**
+     * KTP
+     */
     val fullAddress
-        get() = "$formatAddress $formatRtRw $formatVillage $formatDistrict"
+        get() = ("$formatAddress $formatRtRw $formatVillage $formatDistrict " +
+                "$formatCity $formatProvince").trim()
 
     private val formatAddress
         get() = if (address.isNotBlank()) "$address," else ""
@@ -67,8 +71,44 @@ data class AccountUiModel(
         }
 
     private val formatVillage
-        get() = if (village.name.isNotBlank()) "$village," else ""
+        get() = if (village.name.isNotBlank()) "${village.name}," else ""
 
     private val formatDistrict
-        get() = if (district.name.isNotBlank()) "$district," else ""
+        get() = if (district.name.isNotBlank()) "${district.name}," else ""
+
+    private val formatCity
+        get() = if (city.name.isNotBlank()) "${city.name}," else ""
+
+    private val formatProvince
+        get() = if (province.name.isNotBlank()) "${province.name}," else ""
+
+    /**
+     * KK
+     */
+    val fullAddressKK
+        get() = ("$formatAddressKK $formatRtRwKK $formatVillageKK " +
+                "$formatDistrictKK $formatCityKK $formatProvinceKK").trim()
+
+    private val formatAddressKK
+        get() = if (addressKK.isNotBlank()) "$addressKK," else ""
+
+    private val formatRtRwKK
+        get() = when {
+            rtKK.isNotBlank() && rwKK.isNotBlank() -> "RT $rtKK RW $rwKK,"
+            rtKK.isNotBlank() && rwKK.isBlank() -> "RT $rtKK,"
+            rtKK.isBlank() && rwKK.isNotBlank() -> "RW $rwKK,"
+            else -> ""
+        }
+
+    private val formatVillageKK
+        get() = if (villageKK.name.isNotBlank()) "${villageKK.name}," else ""
+
+    private val formatDistrictKK
+        get() = if (districtKK.name.isNotBlank()) "${districtKK.name}," else ""
+
+    private val formatCityKK
+        get() = if (cityKK.name.isNotBlank()) "${cityKK.name}," else ""
+
+    private val formatProvinceKK
+        get() = if (provinceKK.name.isNotBlank()) "${provinceKK.name}," else ""
 }

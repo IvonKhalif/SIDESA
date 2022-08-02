@@ -74,7 +74,7 @@ class DetailProfileKKActivity : BaseActivity() {
     private fun assignDataToUi(data: AccountUiModel) = with(binding) {
         textKk.text = data.kk
         textKepalaKeluarga.text = data.familyHead
-        textAddress.text = data.fullAddress
+        textAddress.text = data.fullAddressKK
 
         Glide.with(this@DetailProfileKKActivity)
             .load(NetworkUtil.SERVER_HOST + data.imageKK)
