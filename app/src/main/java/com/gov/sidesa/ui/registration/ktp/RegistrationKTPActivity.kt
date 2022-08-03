@@ -206,6 +206,10 @@ class RegistrationKTPActivity : BaseActivity() {
                 }
             }
         }
+
+        binding.customToolbar.toolbarDetailProfile.setNavigationOnClickListener {
+            finish()
+        }
     }
 
     private fun initObserver() = with(viewModel) {

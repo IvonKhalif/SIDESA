@@ -241,7 +241,7 @@
             android:layout_marginStart="@dimen/margin_component"
             android:layout_marginTop="@dimen/icon_default"
             android:fontFamily="@font/inter_medium"
-            android:text="@string/letter_detail_approval_rw_marker_caption"
+            android:text="@string/letter_detail_ready_to_pickup_marker_caption"
             android:textColor="@color/black_302C2C"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@id/icon_ready_to_pickup_marker"
