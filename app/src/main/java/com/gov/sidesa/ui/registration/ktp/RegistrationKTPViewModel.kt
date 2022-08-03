@@ -13,6 +13,7 @@ import com.gov.sidesa.data.registration.ktp.GeneralKtpModel
 import com.gov.sidesa.domain.registration.RegistrationUseCase
 import com.gov.sidesa.ui.registration.RegistrationStackState
 import com.gov.sidesa.utils.PreferenceUtils
+import com.gov.sidesa.utils.extension.orZero
 import com.haroldadmin.cnradapter.NetworkResponse
 import kotlinx.coroutines.launch
 
@@ -161,7 +162,7 @@ class RegistrationKTPViewModel(
         }
 
         when (val result = registrationUseCase.registrationNewAccount(
-            idAccount = idAccount.orEmpty(),
+            idAccount = idAccount.orZero().toString(),
             nik = biodataModel.nik,
             noKk = kkModel.kkNumber,
             fullName = biodataModel.fullName,

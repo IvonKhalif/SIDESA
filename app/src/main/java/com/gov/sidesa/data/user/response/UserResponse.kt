@@ -41,4 +41,65 @@ data class UserResponse(
     @SerializedName("kota_kk") val cityKK: ResourceResponse?,
     @SerializedName("kecamatan_kk") val districtKK: ResourceResponse?,
     @SerializedName("kelurahan_kk") val villageKK: ResourceResponse?,
-): Parcelable
+): Parcelable {
+
+    /**
+     * KTP
+     */
+    val fullAddress
+        get() = ("$formatAddress $formatRtRw $formatVillage $formatDistrict " +
+                "$formatCity $formatProvince").trim()
+
+    private val formatAddress
+        get() = if (!address.isNullOrBlank()) "$address," else ""
+
+    private val formatRtRw
+        get() = when {
+            !rt.isNullOrBlank() && !rw.isNullOrBlank() -> "RT $rt RW $rw,"
+            !rt.isNullOrBlank() && rw.isNullOrBlank() -> "RT $rt,"
+            rt.isNullOrBlank() && !rw.isNullOrBlank() -> "RW $rw,"
+            else -> ""
+        }
+
+    private val formatVillage
+        get() = if (!village?.name.isNullOrBlank()) "${village?.name}," else ""
+
+    private val formatDistrict
+        get() = if (!district?.name.isNullOrBlank()) "${district?.name}," else ""
+
+    private val formatCity
+        get() = if (!city?.name.isNullOrBlank()) "${city?.name}," else ""
+
+    private val formatProvince
+        get() = province?.name.orEmpty()
+
+    /**
+     * KK
+     */
+    val fullAddressKK
+        get() = ("$formatAddressKK $formatRtRwKK $formatVillageKK " +
+                "$formatDistrictKK $formatCityKK $formatProvinceKK").trim()
+
+    private val formatAddressKK
+        get() = if (!addressKK.isNullOrBlank()) "$addressKK," else ""
+
+    private val formatRtRwKK
+        get() = when {
+            !rtKK.isNullOrBlank() && !rwKK.isNullOrBlank() -> "RT $rtKK RW $rwKK,"
+            !rtKK.isNullOrBlank() && rwKK.isNullOrBlank() -> "RT $rtKK,"
+            rtKK.isNullOrBlank() && !rwKK.isNullOrBlank() -> "RW $rwKK,"
+            else -> ""
+        }
+
+    private val formatVillageKK
+        get() = if (!villageKK?.name.isNullOrBlank()) "${villageKK?.name.orEmpty()}," else ""
+
+    private val formatDistrictKK
+        get() = if (!districtKK?.name.isNullOrBlank()) "${districtKK?.name.orEmpty()}," else ""
+
+    private val formatCityKK
+        get() = if (!cityKK?.name.isNullOrBlank()) "${cityKK?.name.orEmpty()}," else ""
+
+    private val formatProvinceKK
+        get() = provinceKK?.name.orEmpty()
+}

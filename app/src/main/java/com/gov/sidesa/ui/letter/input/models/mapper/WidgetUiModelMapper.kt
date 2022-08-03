@@ -41,7 +41,7 @@ object WidgetUiModelMapper {
     private fun createDropDown(widget: Widget) = DropDownWidgetUiModel(
         name = widget.name,
         value = widget.value,
-        selectedText = null,
+        selectedText = widget.selectedText,
         inputType = widget.inputType.asInputType(),
         title = widget.title,
         api = widget.api.orEmpty(),

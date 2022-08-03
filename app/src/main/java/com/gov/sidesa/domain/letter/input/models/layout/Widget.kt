@@ -10,6 +10,7 @@ data class Widget(
     val inputType: String? = null,
     val title: String = "",
     val value: String = "",
+    val selectedText: String = "",
     val api: String? = null,
     val apiType: String? = null,
     val apiParam: String? = null

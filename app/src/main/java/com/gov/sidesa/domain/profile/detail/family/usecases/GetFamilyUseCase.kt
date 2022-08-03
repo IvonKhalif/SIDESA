@@ -20,5 +20,5 @@ class GetFamilyUseCase(
         PreferenceUtils.getUser()
     }
     suspend operator fun invoke(): NetworkResponse<ProfileFamily, GenericErrorResponse> =
-        repository.getProfileFamily(accountId = 3)
+        repository.getProfileFamily(accountId = user?.id.orZero())
 }
