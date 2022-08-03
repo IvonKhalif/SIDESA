@@ -27,7 +27,7 @@ val ViewModelModule = module {
     viewModel { PasswordViewModel(get(), get(), get()) }
     viewModel { LetterInputViewModel(get(), get(), get()) }
     viewModel { LetterTemplateViewModel(get()) }
-    viewModel { RegistrationKTPViewModel(get()) }
+    viewModel { RegistrationKTPViewModel(get(), get()) }
     viewModel { DetailApprovalSubmissionViewModel() }
     viewModel { DetailProfileFamilyViewModel(get()) }
     viewModel { DetailProfileKKViewModel(get()) }

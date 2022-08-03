@@ -35,4 +35,8 @@ object PreferenceUtils {
     }
 
     fun getUser() = get<UserResponse>(USER_PREFERENCE)
+
+    fun putUser(user: UserResponse) {
+        put(user, USER_PREFERENCE)
+    }
 }

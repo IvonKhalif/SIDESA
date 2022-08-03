@@ -8,6 +8,7 @@
         </trust-anchors>
     </base-config>
     <domain-config cleartextTrafficPermitted="true">
-        <domain includeSubdomains="false">localhost</domain>
+        <domain includeSubdomains="false">desa.digidana.id</domain>
+        <domain includeSubdomains="false">digipdesa.swadaya.net</domain>
     </domain-config>
 </network-security-config>

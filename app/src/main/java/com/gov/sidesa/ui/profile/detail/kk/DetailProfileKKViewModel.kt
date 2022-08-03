@@ -6,9 +6,11 @@ import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.gov.sidesa.base.BaseViewModel
 import com.gov.sidesa.domain.profile.detail.family.models.ProfileFamily
+import com.gov.sidesa.domain.profile.detail.family.models.asData
 import com.gov.sidesa.domain.profile.detail.family.usecases.GetFamilyUseCase
 import com.gov.sidesa.ui.profile.detail.kk.mapper.asUiModel
 import com.gov.sidesa.ui.profile.detail.kk.model.AccountUiModel
+import com.gov.sidesa.utils.PreferenceUtils
 import com.haroldadmin.cnradapter.NetworkResponse
 import kotlinx.coroutines.launch
 
@@ -39,6 +41,7 @@ class DetailProfileKKViewModel(
         when (val result = getFamilyUseCase.invoke()) {
             is NetworkResponse.Success -> {
                 _profileFamilyData.value = result.body
+                PreferenceUtils.putUser(result.body.account.asData())
             }
             else -> onResponseNotSuccess(response = result)
         }

@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.gov.sidesa.R
+import com.gov.sidesa.base.BaseActivity
 import com.gov.sidesa.databinding.ActivityRegistrationKtpactivityBinding
 import com.gov.sidesa.ui.registration.RegistrationStackState
 import com.gov.sidesa.ui.registration.keluarga.*
@@ -18,7 +18,7 @@ import com.gov.sidesa.ui.registration.kk.UploadKkFragment
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class RegistrationKTPActivity : AppCompatActivity() {
+class RegistrationKTPActivity : BaseActivity() {
 
     private lateinit var binding: ActivityRegistrationKtpactivityBinding
     private val viewModel: RegistrationKTPViewModel by viewModel()
@@ -208,19 +208,31 @@ class RegistrationKTPActivity : AppCompatActivity() {
         }
     }
 
-    private fun initObserver() {
-        viewModel.registrationStatus.observe(this) { state ->
+    private fun initObserver() = with(viewModel) {
+        loadingState.observe(this@RegistrationKTPActivity) {
+            handleLoadingWidget(isLoading = it)
+        }
+
+        networkErrorState.observe(this@RegistrationKTPActivity) {
+            showErrorMessage(throwable = it)
+        }
+
+        serverErrorState.observe(this@RegistrationKTPActivity) {
+            showErrorMessage(message = it.status.orEmpty())
+        }
+
+        viewModel.registrationStatus.observe(this@RegistrationKTPActivity) { state ->
             when (state) {
                 "success" -> {
                     Toast.makeText(
-                        this,
+                        this@RegistrationKTPActivity,
                         "Registrasi berhasil.",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
                 else -> {
                     Toast.makeText(
-                        this,
+                        this@RegistrationKTPActivity,
                         "Registrasi gagal. Mohon periksa kembali data Anda.",
                         Toast.LENGTH_SHORT
                     ).show()
@@ -228,7 +240,7 @@ class RegistrationKTPActivity : AppCompatActivity() {
             }
         }
 
-        viewModel.registrationStackState.observe(this) { state ->
+        viewModel.registrationStackState.observe(this@RegistrationKTPActivity) { state ->
             when (state) {
                 is RegistrationStackState.KtpBiodata -> {
                     binding.progressBar.progress = 10
@@ -288,6 +300,9 @@ class RegistrationKTPActivity : AppCompatActivity() {
                     binding.buttonPreviousKtp.visibility = VISIBLE
                 }
             }
+        }
+        viewModel.closeScreenView.observe(this@RegistrationKTPActivity) {
+            finish()
         }
     }
 

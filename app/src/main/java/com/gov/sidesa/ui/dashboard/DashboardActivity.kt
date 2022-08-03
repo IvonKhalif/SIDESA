@@ -40,9 +40,7 @@ class DashboardActivity : BaseActivity() {
 
     private val viewModel by viewModel<DashboardViewModel>()
     private var actor = ""
-    private val user by lazy {
-        PreferenceUtils.getUser()
-    }
+    private val user get() = PreferenceUtils.getUser()
 
     private val submissionAdapter by lazy {
         LetterSubmissionAdapter(

@@ -1,6 +1,7 @@
 package com.gov.sidesa.domain.letter.input.models.resource
 
 import android.os.Parcelable
+import com.gov.sidesa.data.letter.models.ResourceResponse
 import com.gov.sidesa.domain.regions.models.Region
 import kotlinx.parcelize.Parcelize
 
@@ -18,3 +19,7 @@ data class Resource(
 fun Resource?.default() = this ?: Resource()
 
 fun Resource.asRegion(parentId: Long? = null) = Region(id = id, name = name, parentId = parentId)
+
+fun Resource.asData() = ResourceResponse(
+    id, name
+)

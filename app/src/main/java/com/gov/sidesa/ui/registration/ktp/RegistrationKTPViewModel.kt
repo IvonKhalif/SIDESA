@@ -1,6 +1,7 @@
 package com.gov.sidesa.ui.registration.ktp
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
@@ -10,6 +11,8 @@ import com.gov.sidesa.data.registration.kk.KkBiodataModel
 import com.gov.sidesa.data.registration.ktp.AddressKtpModel
 import com.gov.sidesa.data.registration.ktp.BiodataKtpModel
 import com.gov.sidesa.data.registration.ktp.GeneralKtpModel
+import com.gov.sidesa.domain.profile.detail.family.models.asData
+import com.gov.sidesa.domain.profile.detail.family.usecases.GetFamilyUseCase
 import com.gov.sidesa.domain.registration.RegistrationUseCase
 import com.gov.sidesa.ui.registration.RegistrationStackState
 import com.gov.sidesa.utils.PreferenceUtils
@@ -18,7 +21,8 @@ import com.haroldadmin.cnradapter.NetworkResponse
 import kotlinx.coroutines.launch
 
 class RegistrationKTPViewModel(
-    private val registrationUseCase: RegistrationUseCase
+    private val registrationUseCase: RegistrationUseCase,
+    private val getFamilyUseCase: GetFamilyUseCase
 ) : BaseViewModel() {
 
     var registrationStackState =
@@ -27,6 +31,9 @@ class RegistrationKTPViewModel(
     var biodataUiModel = MutableLiveData<BiodataUiModel>()
 
     var registrationStatus = MutableLiveData<String>()
+    
+    private val _closeScreenView = MutableLiveData<Unit>()
+    val closeScreenView: LiveData<Unit> get() = _closeScreenView
 
     fun setPref(context: Context, key: String, value: String) {
         val sharedPref = context.getSharedPreferences(key, Context.MODE_PRIVATE)
@@ -42,6 +49,7 @@ class RegistrationKTPViewModel(
     }
 
     fun registrationNewAccount(context: Context) = viewModelScope.launch {
+        showLoadingWidget()
         val idAccount = PreferenceUtils.getUser()?.id
 
         val biodataPref = getPref(context, RegistrationStackState.KtpBiodata.toString())
@@ -187,11 +195,25 @@ class RegistrationKTPViewModel(
         )) {
             is NetworkResponse.Success -> {
                 registrationStatus.value = result.body
+                updateDataUserLocal()
             }
             else -> {
                 registrationStatus.value = ""
+                hideLoadingWidget()
             }
         }
+    }
+
+    private fun updateDataUserLocal() = viewModelScope.launch {
+        when (val result = getFamilyUseCase.invoke()) {
+            is NetworkResponse.Success -> {
+                PreferenceUtils.putUser(result.body.account.asData())
+                _closeScreenView.value = Unit
+            }
+            else -> onResponseNotSuccess(response = result)
+        }
+
+        hideLoadingWidget()
     }
 
     private fun familyMapper(
