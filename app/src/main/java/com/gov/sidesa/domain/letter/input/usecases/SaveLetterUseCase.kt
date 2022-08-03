@@ -24,14 +24,14 @@ class SaveLetterUseCase(
         letterTypeId: Long,
         widget: List<BaseWidgetUiModel>
     ): NetworkResponse<String, GenericErrorResponse> {
-        val haveEmptyField = widget.any {
+        val haveEmptyField = widget.filter {
             it.type == WidgetType.EditText && it.value.isNullOrBlank()
-        }
+        }.joinToString(",") { it.name }
 
-        if (haveEmptyField)
+        if (haveEmptyField.isNotBlank())
             return NetworkResponse.ServerError(
                 GenericErrorResponse(
-                status = "Mohon Lengkapi Data Sebelum Dikirim"
+                status = "Mohon Lengkapi Data Sebelum Dikirim\n$haveEmptyField"
             ), 0)
 
         val letter = SaveLetter(

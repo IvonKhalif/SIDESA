@@ -6,11 +6,9 @@ import com.bumptech.glide.Glide
 import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseActivity
 import com.gov.sidesa.databinding.ActivityDetailKtpprofileBinding
-import com.gov.sidesa.domain.letter.detail.models.DetailApprovalModel
 import com.gov.sidesa.ui.profile.detail.kk.model.AccountUiModel
 import com.gov.sidesa.ui.profile.edit.ktp.EditProfileKTPActivity
-import com.gov.sidesa.utils.constants.LetterConstant
-import com.gov.sidesa.utils.constants.ProfileConstant
+import com.gov.sidesa.utils.NetworkUtil
 import com.gov.sidesa.utils.constants.ProfileConstant.EXTRA_KTP_DETAIL
 import com.gov.sidesa.utils.constants.UserExtrasConstant
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -79,7 +77,7 @@ class DetailProfileKTPActivity : BaseActivity() {
         textNationality.text = data.citizenship
 
         Glide.with(this@DetailProfileKTPActivity)
-            .load(data.imageKTP)
+            .load(NetworkUtil.SERVER_HOST + data.imageKTP)
             .into(imageIdCard)
     }
 

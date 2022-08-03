@@ -19,7 +19,7 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 object NetworkUtil {
-    const val SERVER_HOST = "https://digipdesa.swadaya.net/"
+    const val SERVER_HOST = "http://digipdesa.swadaya.net/"
     const val BASE_URL = "${SERVER_HOST}api/v1/"
     fun buildClient(applicationContext: Context): OkHttpClient {
         val httpLoggingInterceptor = HttpLoggingInterceptor()

@@ -99,7 +99,7 @@ class LetterInputViewModel(
 
     private fun observerEvent() {
         viewModelScope.launch {
-            _editTextChanged.debounce(750).collectLatest {
+            _editTextChanged.debounce(500).collectLatest {
                 doEditTextChanged(uiModel = it)
             }
         }
