@@ -5,6 +5,7 @@ import com.gov.sidesa.domain.letter.input.models.layout.Widget
 import com.gov.sidesa.domain.letter.input.models.layout.WidgetType
 import com.gov.sidesa.domain.letter.input.models.layout.asInputType
 import com.gov.sidesa.ui.letter.input.models.base.InitialState
+import com.gov.sidesa.ui.letter.input.models.date_picker.DatePickerWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.divider.DividerWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.drop_down.DropDownWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.edit_text.EditTextWidgetUiModel
@@ -23,6 +24,7 @@ object WidgetUiModelMapper {
         WidgetType.TextView.type -> createTextView(widget = widget)
         WidgetType.DropDown.type -> createDropDown(widget = widget)
         WidgetType.Header.type -> createHeader(widget = widget)
+        WidgetType.DatePicker.type -> createDatePicker(widget = widget)
         else -> createDivider()
     }
 
@@ -50,6 +52,13 @@ object WidgetUiModelMapper {
         api = widget.api.orEmpty(),
         apiType = widget.apiType,
         apiParam = widget.apiParam
+    )
+
+    private fun createDatePicker(widget: Widget) = DatePickerWidgetUiModel(
+        name = widget.name,
+        value = widget.value,
+        initialState = InitialState(enable = widget.enable),
+        title = widget.title,
     )
 
     private fun createHeader(widget: Widget) = HeaderWidgetUiModel(

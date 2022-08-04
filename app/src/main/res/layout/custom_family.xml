@@ -89,7 +89,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:hint="Tanggal Lahir"
+        android:hint="@string/birth_date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/input_layout_place"
         app:layout_constraintTop_toBottomOf="@id/input_layout_nik">
@@ -100,7 +100,7 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:drawableEnd="@drawable/ic_calendar"
-            android:focusable="false" />
+            android:focusable="true" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

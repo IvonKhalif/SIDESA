@@ -3,6 +3,7 @@ package com.gov.sidesa.ui.profile.detail.kk.model
 import android.os.Parcelable
 import com.gov.sidesa.domain.letter.input.models.resource.Resource
 import com.gov.sidesa.utils.extension.format
+import com.gov.sidesa.utils.extension.formatFE
 import kotlinx.parcelize.Parcelize
 import java.util.*
 
@@ -49,7 +50,7 @@ data class AccountUiModel(
 ) : Parcelable {
 
     val birthPlaceAndDate
-        get() = "$birthPlace, ${birthDate.format()}"
+        get() = "$birthPlace, ${birthDate.formatFE()}"
 
     /**
      * KTP

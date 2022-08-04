@@ -1,5 +1,6 @@
 package com.gov.sidesa.utils
 
+import com.gov.sidesa.utils.constants.Constants
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
@@ -70,7 +71,7 @@ object DateUtil {
 
     }
 
-    fun format(date: Date, pattern: String = "dd-MM-yyyy"): String {
+    fun format(date: Date, pattern: String = Constants.DATE_FE_FORMAT): String {
         val format = SimpleDateFormat(pattern, Locale.getDefault())
         return format.format(date)
     }

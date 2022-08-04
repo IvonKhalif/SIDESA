@@ -10,10 +10,12 @@ import com.gov.sidesa.domain.letter.input.usecases.GetLetterLayoutUseCase
 import com.gov.sidesa.domain.letter.input.usecases.GetResourcesUseCase
 import com.gov.sidesa.domain.letter.input.usecases.SaveLetterUseCase
 import com.gov.sidesa.ui.letter.input.models.base.BaseWidgetUiModel
+import com.gov.sidesa.ui.letter.input.models.date_picker.DatePickerWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.drop_down.DropDownWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.edit_text.EditTextWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.mapper.asUiModel
 import com.gov.sidesa.ui.letter.input.view_holder_factory.LetterInputViewHolderListener
+import com.gov.sidesa.utils.extension.formatBE
 import com.gov.sidesa.utils.extension.orZero
 import com.gov.sidesa.utils.response.GenericErrorResponse
 import com.haroldadmin.cnradapter.NetworkResponse
@@ -23,6 +25,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
+import java.util.*
 
 /**
  * Created by yovi.putra on 26/07/22"
@@ -64,6 +67,10 @@ class LetterInputViewModel(
     private val _dropDownChanged = MutableSharedFlow<DropDownWidgetUiModel>(
         replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST
     )
+
+    // date-picker clicked
+    private val _datePickerClicked = MutableLiveData<DatePickerWidgetUiModel>()
+    val datePickerClicked: LiveData<DatePickerWidgetUiModel> get() = _datePickerClicked
 
     /**
      * supporting view
@@ -117,10 +124,10 @@ class LetterInputViewModel(
     private fun updateWidget(uiModel: BaseWidgetUiModel) {
         val components = _widgetList.value.orEmpty().toMutableList()
 
-        components.forEachIndexed { index, baseLetterInputModel ->
-            if (baseLetterInputModel.name == uiModel.name) {
+        for (index in 0 until components.size) {
+            if (components[index].name == uiModel.name) {
                 components[index] = uiModel
-                return@forEachIndexed
+                break
             }
         }
 
@@ -175,6 +182,19 @@ class LetterInputViewModel(
      */
     override fun onDropDownClick(model: DropDownWidgetUiModel) {
         _dropDownChanged.tryEmit(model)
+    }
+
+    override fun onDatePickerClicked(model: DatePickerWidgetUiModel) {
+        _datePickerClicked.value = model
+    }
+
+    /**
+     * date-picker callback from view
+     */
+    fun onDatePickerSelected(model: DatePickerWidgetUiModel, millis: Long) {
+        val date = Date(millis)
+        val beDateFormatted = date.formatBE()
+        updateWidget(uiModel = model.copy(value = beDateFormatted))
     }
 
     /**

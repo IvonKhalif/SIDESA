@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseActivity
 import com.gov.sidesa.base.findSheetByTag
@@ -13,9 +14,13 @@ import com.gov.sidesa.base.showImmediately
 import com.gov.sidesa.databinding.ActivityLetterInputBinding
 import com.gov.sidesa.domain.letter.input.models.resource.Resource
 import com.gov.sidesa.ui.letter.input.adapter.LetterInputAdapter
+import com.gov.sidesa.ui.letter.input.models.date_picker.DatePickerWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.drop_down.DropDownWidgetUiModel
 import com.gov.sidesa.ui.letter.input.view_holder_factory.LetterInputViewHolderFactory
 import com.gov.sidesa.ui.letter.input.view_holder_factory.LetterInputViewHolderFactoryImpl
+import com.gov.sidesa.utils.extension.orToday
+import com.gov.sidesa.utils.extension.toDate
+import com.gov.sidesa.utils.extension.utcToLocale
 import com.gov.sidesa.utils.picker.MenuIconWithHeadlineAdapter
 import com.gov.sidesa.utils.picker.MenuIconWithHeadlineBottomSheet
 import kotlinx.coroutines.FlowPreview
@@ -108,6 +113,10 @@ class LetterInputActivity : BaseActivity() {
         onSubmitSuccess.observe(this@LetterInputActivity) {
             finishWithSuccessState()
         }
+
+        datePickerClicked.observe(this@LetterInputActivity) {
+            showDatePicker(uiModel = it)
+        }
     }
 
     /**
@@ -166,6 +175,22 @@ class LetterInputActivity : BaseActivity() {
         }
         setResult(Activity.RESULT_OK, intent)
         finish()
+    }
+
+    /**
+     * date-picker dialog
+     */
+    private fun showDatePicker(uiModel: DatePickerWidgetUiModel) {
+        showImmediately(supportFragmentManager, "select_date_picker") {
+            val picker = MaterialDatePicker.Builder.datePicker()
+                .setTitleText(R.string.choose_birth_date)
+                .setSelection(uiModel.value?.toDate().orToday().utcToLocale())
+                .build()
+            picker.addOnPositiveButtonClickListener {
+                viewModel.onDatePickerSelected(model = uiModel, millis = it)
+            }
+            picker
+        }
     }
 
     override fun onDestroy() {

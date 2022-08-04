@@ -2,6 +2,7 @@ package com.gov.sidesa.ui.letter.input.view_holder_factory
 
 import android.view.ViewGroup
 import com.gov.sidesa.base.dynamic_adapter.AbstractViewHolder
+import com.gov.sidesa.ui.letter.input.models.date_picker.DatePickerWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.divider.DividerWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.drop_down.DropDownWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.edit_text.EditTextWidgetUiModel
@@ -24,6 +25,8 @@ interface LetterInputViewHolderFactory {
     fun type(editText: EditTextWidgetUiModel): Int
 
     fun type(dropDown: DropDownWidgetUiModel): Int
+
+    fun type(datePicker: DatePickerWidgetUiModel): Int
 
     fun createViewHolder(
         parent: ViewGroup,

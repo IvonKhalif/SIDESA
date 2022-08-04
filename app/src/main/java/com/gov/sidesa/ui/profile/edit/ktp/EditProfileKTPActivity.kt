@@ -23,14 +23,13 @@ import com.gov.sidesa.utils.constants.ProfileConstant
 import com.gov.sidesa.utils.constants.UserExtrasConstant
 import com.gov.sidesa.utils.enums.StatusResponseEnum
 import com.gov.sidesa.utils.extension.distinctTextChange
-import com.gov.sidesa.utils.extension.format
+import com.gov.sidesa.utils.extension.formatFE
 import com.gov.sidesa.utils.extension.isNullOrZero
 import com.gov.sidesa.utils.picker.SelectImageBottomSheet
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
-import java.text.SimpleDateFormat
 import java.util.*
 
 class EditProfileKTPActivity : BaseActivity() {
@@ -247,7 +246,7 @@ class EditProfileKTPActivity : BaseActivity() {
     private fun updateUIName(text: String) = bindingBiodataKtp.inputKtpName.setText(text)
     private fun updateUINik(text: String) = bindingBiodataKtp.inputKtpNik.setText(text)
     private fun updateUIBirthPlace(text: String) = bindingBiodataKtp.inputKtpPlace.setText(text)
-    private fun updateUIBirthDate(date: Date) = bindingBiodataKtp.inputKtpDob.setText(date.format())
+    private fun updateUIBirthDate(date: Date) = bindingBiodataKtp.inputKtpDob.setText(date.formatFE())
     private fun updateUIAddress(text: String) = bindingAddress.inputKtpAddress.setText(text)
     private fun updateUIRt(text: String) = bindingAddress.inputKtpRt.setText(text)
     private fun updateUIRw(text: String) = bindingAddress.inputKtpRw.setText(text)
@@ -274,8 +273,7 @@ class EditProfileKTPActivity : BaseActivity() {
                 .build()
             picker.addOnPositiveButtonClickListener {
                 val date = Date(it)
-                val format = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
-                bindingBiodataKtp.inputKtpDob.setText(format.format(date))
+                bindingBiodataKtp.inputKtpDob.setText(date.formatFE())
             }
             picker.show(supportFragmentManager, "DATE_PICKER")
         }

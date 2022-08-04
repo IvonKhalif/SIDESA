@@ -10,6 +10,8 @@ import com.gov.sidesa.base.showImmediately
 import com.gov.sidesa.databinding.ActivityEditProfileFamilyBinding
 import com.gov.sidesa.ui.profile.edit.family.adapter.EditProfileFamilyAdapter
 import com.gov.sidesa.ui.regions.SelectRegionBottomSheet
+import com.gov.sidesa.utils.extension.orToday
+import com.gov.sidesa.utils.extension.utcToLocale
 import com.gov.sidesa.utils.picker.RecyclerViewItemDecoration
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -111,6 +113,7 @@ class EditProfileFamilyActivity : BaseActivity() {
             showImmediately(supportFragmentManager, "select_birth_date") {
                 val picker = MaterialDatePicker.Builder.datePicker()
                     .setTitleText("Pilih Tanggal Lahir")
+                    .setSelection(uiModel.birthDate.orToday().utcToLocale())
                     .build()
                 picker.addOnPositiveButtonClickListener {
                     viewModel.onBirthDateSelected(uiModel = uiModel, millis = it)

@@ -229,7 +229,7 @@ class EditProfileFamilyViewModel(
     private fun updateWidget(uiModel: EditProfileFamilyUiModel) {
         val components = _componentData.value.orEmpty().toMutableList()
 
-        for (index in 0 until components.size - 1) {
+        for (index in 0 until components.size) {
             if (components[index].id == uiModel.id) {
                 components[index] = uiModel
                 break

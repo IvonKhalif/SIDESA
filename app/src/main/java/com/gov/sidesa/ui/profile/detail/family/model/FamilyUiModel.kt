@@ -4,7 +4,7 @@ import android.content.Context
 import com.gov.sidesa.R
 import com.gov.sidesa.domain.regions.models.Region
 import com.gov.sidesa.ui.profile.edit.family.models.RelationType
-import com.gov.sidesa.utils.extension.format
+import com.gov.sidesa.utils.extension.formatFE
 import java.util.*
 
 /**
@@ -44,5 +44,5 @@ data class FamilyUiModel(
     }
 
     val birthPlaceAndDate
-        get() = "$birthPlace, ${birthDate.format()}"
+        get() = "$birthPlace, ${birthDate.formatFE()}"
 }

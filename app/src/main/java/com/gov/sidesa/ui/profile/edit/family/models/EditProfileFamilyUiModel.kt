@@ -2,9 +2,9 @@ package com.gov.sidesa.ui.profile.edit.family.models
 
 import com.gov.sidesa.R
 import com.gov.sidesa.domain.regions.models.Region
+import com.gov.sidesa.utils.extension.formatFE
 import java.math.BigInteger
 import java.nio.ByteBuffer
-import java.text.SimpleDateFormat
 import java.util.*
 
 /**
@@ -71,16 +71,11 @@ data class EditProfileFamilyUiModel(
         get() = relationFamily == RelationType.Husband || relationFamily == RelationType.Wife
 
     val birtDateFormatted: String
-        get() = run {
-            val format = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
-            birthDate?.let {
-                format.format(it)
-            } ?: run { "" }
-        }
+        get() = birthDate?.formatFE().orEmpty()
 }
 
 private fun generateUniqueId(): Long {
-    var result: Long = -1
+    var result: Long
     do {
         val uid = UUID.randomUUID()
         val buffer: ByteBuffer = ByteBuffer.wrap(ByteArray(16))
@@ -89,5 +84,6 @@ private fun generateUniqueId(): Long {
         val bi = BigInteger(buffer.array())
         result = bi.toLong()
     } while (result < 0)
+
     return result
 }

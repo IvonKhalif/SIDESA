@@ -190,7 +190,7 @@ class EditProfileKKActivity : BaseActivity() {
         }
 
         selectPhotoState.observe(this@EditProfileKKActivity) {
-            showImmediately(supportFragmentManager, "select_birth_date") {
+            showImmediately(supportFragmentManager, "select_image") {
                 val picker = SelectImageBottomSheet.newInstance()
                 picker.onImageSelected = {
                     viewModel.onImageSelected(file = it)

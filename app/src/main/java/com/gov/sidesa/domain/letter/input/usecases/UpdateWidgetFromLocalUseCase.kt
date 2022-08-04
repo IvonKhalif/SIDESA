@@ -2,7 +2,7 @@ package com.gov.sidesa.domain.letter.input.usecases
 
 import com.gov.sidesa.data.user.response.UserResponse
 import com.gov.sidesa.domain.letter.input.models.layout.Widget
-import com.gov.sidesa.utils.extension.format
+import com.gov.sidesa.utils.extension.formatBE
 import com.gov.sidesa.utils.extension.orZero
 
 /**
@@ -43,8 +43,8 @@ class UpdateWidgetFromLocalUseCase {
             enable = user.nik.orEmpty().isBlank()
         )
         "tanggal_lahir_pelapor" -> widget.copy(
-            value = user.birthDate?.format().orEmpty(),
-            enable = user.birthDate?.format().orEmpty().isBlank()
+            value = user.birthDate?.formatBE().orEmpty(),
+            enable = user.birthDate?.formatBE().orEmpty().isBlank()
         )
         "pekerjaan_pelapor" -> widget.copy(
             value = user.job.orEmpty(),
