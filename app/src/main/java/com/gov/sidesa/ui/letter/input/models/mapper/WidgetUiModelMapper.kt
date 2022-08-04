@@ -4,6 +4,7 @@ import com.gov.sidesa.domain.letter.input.models.layout.LetterLayout
 import com.gov.sidesa.domain.letter.input.models.layout.Widget
 import com.gov.sidesa.domain.letter.input.models.layout.WidgetType
 import com.gov.sidesa.domain.letter.input.models.layout.asInputType
+import com.gov.sidesa.ui.letter.input.models.base.InitialState
 import com.gov.sidesa.ui.letter.input.models.divider.DividerWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.drop_down.DropDownWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.edit_text.EditTextWidgetUiModel
@@ -29,7 +30,8 @@ object WidgetUiModelMapper {
         name = widget.name,
         inputType = widget.inputType.asInputType(),
         title = widget.title,
-        value = widget.value
+        value = widget.value,
+        initialState = InitialState(enable = widget.enable)
     )
 
     private fun createTextView(widget: Widget) = TextViewWidgetUiModel(
@@ -41,6 +43,7 @@ object WidgetUiModelMapper {
     private fun createDropDown(widget: Widget) = DropDownWidgetUiModel(
         name = widget.name,
         value = widget.value,
+        initialState = InitialState(enable = widget.enable),
         selectedText = widget.selectedText,
         inputType = widget.inputType.asInputType(),
         title = widget.title,

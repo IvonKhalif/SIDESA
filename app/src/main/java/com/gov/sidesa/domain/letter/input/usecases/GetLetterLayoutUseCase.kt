@@ -1,13 +1,10 @@
 package com.gov.sidesa.domain.letter.input.usecases
 
-import com.gov.sidesa.data.user.response.UserResponse
 import com.gov.sidesa.domain.letter.input.models.layout.LetterLayout
 import com.gov.sidesa.domain.letter.input.models.layout.Widget
 import com.gov.sidesa.domain.letter.input.models.layout.WidgetType
 import com.gov.sidesa.domain.letter.repository.LetterRepository
 import com.gov.sidesa.utils.PreferenceUtils
-import com.gov.sidesa.utils.extension.format
-import com.gov.sidesa.utils.extension.orZero
 import com.gov.sidesa.utils.response.GenericErrorResponse
 import com.haroldadmin.cnradapter.NetworkResponse
 
@@ -18,8 +15,10 @@ import com.haroldadmin.cnradapter.NetworkResponse
 
 
 class GetLetterLayoutUseCase(
-    private val repository: LetterRepository
+    private val repository: LetterRepository,
+    private val updateWidgetFromLocalUseCase: UpdateWidgetFromLocalUseCase
 ) {
+
     suspend operator fun invoke(
         letterTypeId: String,
         letterName: String
@@ -48,8 +47,11 @@ class GetLetterLayoutUseCase(
         widgets.add(0, header)
 
         // assign value from local
-        widgets.forEachIndexed { index, widget ->
-            widgets[index] = assignValue(widget = widget)
+        val user = PreferenceUtils.getUser()
+        if (user != null) {
+            widgets.forEachIndexed { index, widget ->
+                widgets[index] = updateWidgetFromLocalUseCase.invoke(widget = widget, user = user)
+            }
         }
 
         return layout.copy(widgets = widgets)
@@ -59,36 +61,4 @@ class GetLetterLayoutUseCase(
         type = WidgetType.Header.type,
         title = letterName
     )
-
-    private fun assignValue(widget: Widget) = when (widget.name) {
-        "nama" -> widget.copy(value = userResponse?.name.orEmpty())
-        "alamat" -> widget.copy(value = userResponse?.address.orEmpty())
-        "pekerjaan" -> widget.copy(value = userResponse?.job.orEmpty())
-        "nik" -> widget.copy(value = userResponse?.nik.orEmpty())
-        "nama_kepala_keluarga" -> widget.copy(value = userResponse?.familyHead.orEmpty())
-        "nama_lengkap_pelapor" -> widget.copy(value = userResponse?.name.orEmpty())
-        "nik_pelapor" -> widget.copy(value = userResponse?.nik.orEmpty())
-        "tanggal_lahir_pelapor" -> widget.copy(value = userResponse?.birthDate?.format().orEmpty())
-        "pekerjaan_pelapor" -> widget.copy(value = userResponse?.job.orEmpty())
-        "alamat_pelapor" -> widget.copy(value = userResponse?.fullAddress.orEmpty())
-        "kecamatan" -> widget.copy(
-            value = userResponse?.district?.id.orZero().toString(),
-            selectedText = userResponse?.district?.name.orEmpty()
-        )
-        "kelurahan" -> widget.copy(
-            value = userResponse?.village?.id.orZero().toString(),
-            selectedText = userResponse?.village?.name.orEmpty()
-        )
-        "kabupaten_kota" -> widget.copy(
-            value = userResponse?.city?.id.orZero().toString(),
-            selectedText = userResponse?.city?.name.orEmpty()
-        )
-        "propinsi" -> widget.copy(
-            value = userResponse?.province?.id.orZero().toString(),
-            selectedText = userResponse?.province?.name.orEmpty()
-        )
-        else -> widget
-    }
-
-    private val userResponse = PreferenceUtils.get<UserResponse>(PreferenceUtils.USER_PREFERENCE)
 }

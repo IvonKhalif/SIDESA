@@ -6,7 +6,8 @@ import com.gov.sidesa.ui.letter.input.view_holder_factory.LetterInputViewHolderF
 abstract class BaseWidgetUiModel(
     open val type: WidgetType,
     open val name: String,
-    open val value: String? = null
+    open val value: String? = null,
+    open val initialState: InitialState = InitialState()
 ) {
 
     abstract fun type(typeFactory: LetterInputViewHolderFactory): Int

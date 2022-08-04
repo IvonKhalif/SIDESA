@@ -3,6 +3,7 @@ package com.gov.sidesa.ui.letter.input.models.drop_down
 import com.gov.sidesa.domain.letter.input.models.layout.InputType
 import com.gov.sidesa.domain.letter.input.models.layout.WidgetType
 import com.gov.sidesa.ui.letter.input.models.base.BaseWidgetUiModel
+import com.gov.sidesa.ui.letter.input.models.base.InitialState
 import com.gov.sidesa.ui.letter.input.view_holder_factory.LetterInputViewHolderFactory
 
 /**
@@ -13,13 +14,19 @@ import com.gov.sidesa.ui.letter.input.view_holder_factory.LetterInputViewHolderF
 data class DropDownWidgetUiModel(
     override val name: String,
     override val value: String?,
+    override val initialState: InitialState,
     val selectedText: String?,
     val inputType: InputType,
     val title: String?,
     val api: String,
     val apiType: String?,
     val apiParam: String?
-) : BaseWidgetUiModel(type = WidgetType.DropDown, name = name, value = value) {
+) : BaseWidgetUiModel(
+    type = WidgetType.DropDown,
+    name = name,
+    value = value,
+    initialState = initialState
+) {
 
     override fun type(typeFactory: LetterInputViewHolderFactory): Int {
         return typeFactory.type(this)
