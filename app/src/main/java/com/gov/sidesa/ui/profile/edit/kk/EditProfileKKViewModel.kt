@@ -59,6 +59,9 @@ class EditProfileKKViewModel(
     private val _submitSuccessState = MutableLiveData<Int>()
     val submitSuccessState: LiveData<Int> get() = _submitSuccessState
 
+    private val _imageLoaderState = MutableLiveData<Boolean>()
+    val imageLoaderState: LiveData<Boolean> get() = _imageLoaderState
+
     init {
         viewModelScope.launch {
             showLoadingWidget()
@@ -208,5 +211,16 @@ class EditProfileKKViewModel(
 
     fun onImageSelected(file: File) = viewModelScope.launch {
         _uiModel.update { it.copy(kkImageUri = file.absolutePath) }
+    }
+
+
+    fun onImageLoadState(isSuccess: Boolean) = viewModelScope.launch {
+        _imageLoaderState.value = isSuccess
+    }
+
+    fun onRetryLoadImage() = viewModelScope.launch {
+        if (_imageLoaderState.value == false) {
+            _profileFamily.value = _profileFamily.value
+        }
     }
 }

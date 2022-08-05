@@ -2,6 +2,7 @@ package com.gov.sidesa.ui.profile.detail.kk.model
 
 import android.os.Parcelable
 import com.gov.sidesa.domain.letter.input.models.resource.Resource
+import com.gov.sidesa.utils.NetworkUtil
 import com.gov.sidesa.utils.extension.format
 import com.gov.sidesa.utils.extension.formatFE
 import kotlinx.parcelize.Parcelize
@@ -52,6 +53,7 @@ data class AccountUiModel(
     val birthPlaceAndDate
         get() = "$birthPlace, ${birthDate.formatFE()}"
 
+    val imageKKRemote get() = NetworkUtil.SERVER_HOST + imageKK
     /**
      * KTP
      */

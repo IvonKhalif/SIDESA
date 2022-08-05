@@ -6,8 +6,6 @@ import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseActivity
 import com.gov.sidesa.base.showImmediately
@@ -15,6 +13,8 @@ import com.gov.sidesa.databinding.ActivityEditProfileKkactivityBinding
 import com.gov.sidesa.ui.profile.edit.kk.models.AccountKKUiModel
 import com.gov.sidesa.ui.profile.edit.kk.models.EditProfileKKUiEvent
 import com.gov.sidesa.ui.regions.SelectRegionBottomSheet
+import com.gov.sidesa.utils.extension.downloadImage
+import com.gov.sidesa.utils.extension.load
 import com.gov.sidesa.utils.extension.setTextDistinct
 import com.gov.sidesa.utils.picker.SelectImageBottomSheet
 import kotlinx.coroutines.Dispatchers
@@ -108,6 +108,10 @@ class EditProfileKKActivity : BaseActivity() {
 
             inputLayoutKelurahan.setEndIconOnClickListener {
                 viewModel.onEvent(EditProfileKKUiEvent.OnVillageClicked)
+            }
+
+            imageKk.setOnClickListener {
+                viewModel.onRetryLoadImage()
             }
         }
     }
@@ -205,6 +209,12 @@ class EditProfileKKActivity : BaseActivity() {
             setResult(Activity.RESULT_OK)
             finish()
         }
+
+        imageLoaderState.observe(this@EditProfileKKActivity) {
+            if (it == false) {
+                binding.imageKk.setImageResource(R.drawable.ic_baseline_sync_24)
+            }
+        }
     }
 
     private var tempUrl = ""
@@ -228,23 +238,24 @@ class EditProfileKKActivity : BaseActivity() {
         if (uiModel.kkImageUri != tempUrl) {
             tempUrl = uiModel.kkImageUri
 
-            Glide.with(this@EditProfileKKActivity)
-                .load(tempUrl)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .into(imageKk)
+            imageKk.load(
+                source = tempUrl,
+                onSuccess = {
+                    viewModel.onImageLoadState(isSuccess = true)
+                },
+                onFailed = {
+                    viewModel.onImageLoadState(isSuccess = false)
+                }
+            )
 
             if (tempUrl.startsWith("http")) {
                 lifecycleScope.launch(Dispatchers.IO) {
                     try {
-                        val file = Glide.with(this@EditProfileKKActivity)
-                            .downloadOnly()
-                            .load(tempUrl)
-                            .diskCacheStrategy(DiskCacheStrategy.NONE)
-                            .submit()
-                            .get()
-
+                        val file = tempUrl.downloadImage(this@EditProfileKKActivity)
                         viewModel.onImageSelected(file)
+                        viewModel.onImageLoadState(isSuccess = true)
                     } catch (_ :Throwable) {
+                        viewModel.onImageLoadState(isSuccess = false)
                     }
                 }
             }

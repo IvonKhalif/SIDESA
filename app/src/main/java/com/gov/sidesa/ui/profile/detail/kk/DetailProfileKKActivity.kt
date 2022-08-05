@@ -4,14 +4,12 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseActivity
 import com.gov.sidesa.databinding.ActivityDetailProfileKkactivityBinding
 import com.gov.sidesa.ui.profile.detail.kk.model.AccountUiModel
 import com.gov.sidesa.ui.profile.edit.kk.EditProfileKKActivity
-import com.gov.sidesa.utils.NetworkUtil
+import com.gov.sidesa.utils.extension.load
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailProfileKKActivity : BaseActivity() {
@@ -70,6 +68,10 @@ class DetailProfileKKActivity : BaseActivity() {
         customToolbar.toolbarDetailProfile.setNavigationOnClickListener {
             finish()
         }
+
+        imageIdCard.setOnClickListener {
+            viewModel.onRetryLoadImage()
+        }
     }
 
     private fun assignDataToUi(data: AccountUiModel) = with(binding) {
@@ -77,9 +79,14 @@ class DetailProfileKKActivity : BaseActivity() {
         textKepalaKeluarga.text = data.familyHead
         textAddress.text = data.fullAddressKK
 
-        Glide.with(this@DetailProfileKKActivity)
-            .load(NetworkUtil.SERVER_HOST + data.imageKK)
-            .diskCacheStrategy(DiskCacheStrategy.NONE)
-            .into(imageIdCard)
+        imageIdCard.load(
+            source = data.imageKKRemote,
+            onSuccess = {
+                viewModel.onImageLoadState(true)
+            },
+            onFailed = {
+                viewModel.onImageLoadState(false)
+            }
+        )
     }
 }

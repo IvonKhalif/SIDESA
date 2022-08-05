@@ -31,6 +31,8 @@ class DetailProfileKKViewModel(
             it.account.asUiModel()
         }
 
+    private val _imageLoaderState = MutableLiveData<Boolean>()
+
     init {
         onLoad()
     }
@@ -51,5 +53,15 @@ class DetailProfileKKViewModel(
 
     fun onEditResult() {
         onLoad()
+    }
+
+    fun onImageLoadState(isSuccess: Boolean) = viewModelScope.launch {
+        _imageLoaderState.value = isSuccess
+    }
+
+    fun onRetryLoadImage() = viewModelScope.launch {
+        if (_imageLoaderState.value == false) {
+            _profileFamilyData.value = _profileFamilyData.value
+        }
     }
 }
