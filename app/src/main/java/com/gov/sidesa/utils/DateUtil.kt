@@ -30,7 +30,7 @@ object DateUtil {
         pattern: String = LOCAL_DATE_PATTERN,
         def: LocalDate? = LocalDate.now()
     ): LocalDate? {
-        if (date == null) {
+        if (date.isNullOrBlank()) {
             return def
         }
         val formatter = DateTimeFormatter.ofPattern(pattern)
