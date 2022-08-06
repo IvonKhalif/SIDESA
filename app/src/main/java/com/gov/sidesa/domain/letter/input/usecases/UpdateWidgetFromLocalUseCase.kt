@@ -1,7 +1,7 @@
 package com.gov.sidesa.domain.letter.input.usecases
 
-import com.gov.sidesa.data.user.response.UserResponse
 import com.gov.sidesa.domain.letter.input.models.layout.Widget
+import com.gov.sidesa.domain.profile.detail.family.models.ProfileFamily
 import com.gov.sidesa.utils.extension.formatBE
 import com.gov.sidesa.utils.extension.orZero
 
@@ -13,63 +13,70 @@ import com.gov.sidesa.utils.extension.orZero
 
 class UpdateWidgetFromLocalUseCase {
 
-    operator fun invoke(widget: Widget, user: UserResponse) = when (widget.name) {
-        "nama" -> widget.copy(
-            value = user.name.orEmpty(),
-            enable = user.name.orEmpty().isBlank()
-        )
-        "alamat" -> widget.copy(
-            value = user.address.orEmpty(),
-            enable = user.address.orEmpty().isBlank()
-        )
-        "pekerjaan" -> widget.copy(
-            value = user.job.orEmpty(),
-            enable = user.job.orEmpty().isBlank()
-        )
-        "nik" -> widget.copy(
-            value = user.nik.orEmpty(),
-            enable = user.nik.orEmpty().isBlank()
-        )
-        "nama_kepala_keluarga" -> widget.copy(
-            value = user.familyHead.orEmpty(),
-            enable = user.familyHead.orEmpty().isBlank()
-        )
-        "nama_lengkap_pelapor" -> widget.copy(
-            value = user.name.orEmpty(),
-            enable = user.name.orEmpty().isBlank()
-        )
-        "nik_pelapor" -> widget.copy(
-            value = user.nik.orEmpty(),
-            enable = user.nik.orEmpty().isBlank()
-        )
-        "tanggal_lahir_pelapor" -> widget.copy(
-            value = user.birthDate?.formatBE().orEmpty(),
-            enable = user.birthDate?.formatBE().orEmpty().isBlank()
-        )
-        "pekerjaan_pelapor" -> widget.copy(
-            value = user.job.orEmpty(),
-            enable = user.job.orEmpty().isBlank()
-        )
-        "alamat_pelapor" -> widget.copy(
-            value = user.fullAddress,
-            enable = user.fullAddress.isBlank()
-        )
-        "kecamatan" -> widget.copy(
-            value = user.district?.id.orZero().toString(),
-            selectedText = user.district?.name.orEmpty()
-        )
-        "kelurahan" -> widget.copy(
-            value = user.village?.id.orZero().toString(),
-            selectedText = user.village?.name.orEmpty()
-        )
-        "kabupaten_kota" -> widget.copy(
-            value = user.city?.id.orZero().toString(),
-            selectedText = user.city?.name.orEmpty()
-        )
-        "propinsi" -> widget.copy(
-            value = user.province?.id.orZero().toString(),
-            selectedText = user.province?.name.orEmpty()
-        )
-        else -> widget
+    operator fun invoke(
+        widget: Widget,
+        profile: ProfileFamily
+    ): Widget {
+        val account = profile.account
+
+        return when (widget.name) {
+            "nama" -> widget.copy(
+                value = account.name,
+                enable = account.name.isBlank()
+            )
+            "alamat" -> widget.copy(
+                value = account.address,
+                enable = account.address.isBlank()
+            )
+            "pekerjaan" -> widget.copy(
+                value = account.job,
+                enable = account.job.isBlank()
+            )
+            "nik" -> widget.copy(
+                value = account.nik,
+                enable = account.nik.isBlank()
+            )
+            "nama_kepala_keluarga" -> widget.copy(
+                value = account.familyHead.orEmpty(),
+                enable = account.familyHead.orEmpty().isBlank()
+            )
+            "nama_lengkap_pelapor" -> widget.copy(
+                value = account.name,
+                enable = account.name.isBlank()
+            )
+            "nik_pelapor" -> widget.copy(
+                value = account.nik,
+                enable = account.nik.isBlank()
+            )
+            "tanggal_lahir_pelapor" -> widget.copy(
+                value = account.birthDate.formatBE(),
+                enable = account.birthDate.formatBE().isBlank()
+            )
+            "pekerjaan_pelapor" -> widget.copy(
+                value = account.job,
+                enable = account.job.isBlank()
+            )
+            "alamat_pelapor" -> widget.copy(
+                value = account.fullAddress,
+                enable = account.fullAddress.isBlank()
+            )
+            "kecamatan" -> widget.copy(
+                value = account.district.id.orZero().toString(),
+                selectedText = account.district.name
+            )
+            "kelurahan" -> widget.copy(
+                value = account.village.id.orZero().toString(),
+                selectedText = account.village.name
+            )
+            "kabupaten_kota" -> widget.copy(
+                value = account.city.id.orZero().toString(),
+                selectedText = account.city.name
+            )
+            "propinsi" -> widget.copy(
+                value = account.province.id.orZero().toString(),
+                selectedText = account.province.name
+            )
+            else -> widget
+        }
     }
 }

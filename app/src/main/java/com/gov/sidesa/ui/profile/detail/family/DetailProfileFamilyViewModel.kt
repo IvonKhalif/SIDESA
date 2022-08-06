@@ -6,7 +6,6 @@ import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.gov.sidesa.base.BaseViewModel
 import com.gov.sidesa.domain.profile.detail.family.models.ProfileFamily
-import com.gov.sidesa.domain.profile.detail.family.models.asData
 import com.gov.sidesa.domain.profile.detail.family.usecases.GetFamilyUseCase
 import com.gov.sidesa.ui.profile.detail.family.mapper.asUiModel
 import com.gov.sidesa.ui.profile.detail.family.model.FamilyUiModel
@@ -44,7 +43,7 @@ class DetailProfileFamilyViewModel(
         when (val result = getFamilyUseCase.invoke()) {
             is NetworkResponse.Success -> {
                 _profileFamilyData.value = result.body
-                PreferenceUtils.putUser(result.body.account.asData())
+                PreferenceUtils.putProfile(result.body)
             }
             else -> {
                 onResponseNotSuccess(response = result)

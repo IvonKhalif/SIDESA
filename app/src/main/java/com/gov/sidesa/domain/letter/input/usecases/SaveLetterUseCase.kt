@@ -35,7 +35,7 @@ class SaveLetterUseCase(
             ), 0)
 
         val letter = SaveLetter(
-            accountId = PreferenceUtils.getUser()?.id.orZero(),
+            accountId = PreferenceUtils.getAccount()?.id.orZero(),
             letterTypeId = letterTypeId,
             contents = widget.filterNot {
                 it.type == WidgetType.Header

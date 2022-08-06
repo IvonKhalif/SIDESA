@@ -15,6 +15,7 @@ import com.gov.sidesa.ui.registration.RegistrationStackState
 import com.gov.sidesa.ui.registration.ktp.RegistrationKTPViewModel
 import com.gov.sidesa.ui.registration.ktp.getDummyKecamatanList
 import com.gov.sidesa.ui.registration.ktp.getDummyKelurahanList
+import com.gov.sidesa.utils.PreferenceUtils
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class KkAddressFragment : Fragment() {
@@ -31,7 +32,7 @@ class KkAddressFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentKkAddressBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -59,11 +60,23 @@ class KkAddressFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        restoreUserData()
         setDropDownProvince()
         setDropDownCity()
         setDropDownKecamatan()
         setDropDownKelurahan()
+    }
+
+    private fun restoreUserData() = with(binding.customKkAddress) {
+        PreferenceUtils.getAccount()?.let {
+            inputKtpAddress.setText(it.addressKK)
+            inputKtpRw.setText(it.rwKK)
+            inputKtpRt.setText(it.rtKK)
+            inputKtpProvince.setText(it.provinceKK?.name)
+            inputKtpCity.setText(it.cityKK?.name)
+            inputKtpKecamatan.setText(it.districtKK?.name)
+            inputKtpKelurahan.setText(it.villageKK?.name)
+        }
     }
 
     private fun setDropDownProvince() {

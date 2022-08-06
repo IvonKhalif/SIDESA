@@ -17,7 +17,7 @@ class GetFamilyUseCase(
     private val repository: ProfileRepository
 ) {
     private val user by lazy {
-        PreferenceUtils.getUser()
+        PreferenceUtils.getAccount()
     }
     suspend operator fun invoke(): NetworkResponse<ProfileFamily, GenericErrorResponse> =
         repository.getProfileFamily(accountId = user?.id.orZero())

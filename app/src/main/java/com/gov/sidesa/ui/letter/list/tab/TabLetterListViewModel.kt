@@ -20,7 +20,7 @@ class TabLetterListViewModel(
     val approvalLettersLiveData = PostLiveData<LetterApprovalModel?>()
 
     fun getSubmissionLetters() = viewModelScope.launch {
-        val user = PreferenceUtils.getUser()
+        val user = PreferenceUtils.getAccount()
         showLoadingWidget()
 
         when (val result =
@@ -34,7 +34,7 @@ class TabLetterListViewModel(
     }
 
     fun getApprovalLetters() = viewModelScope.launch {
-        val user = PreferenceUtils.getUser()
+        val user = PreferenceUtils.getAccount()
         showLoadingWidget()
         when (val result =
             approvalLetterUseCase.invoke(accountId = user?.id.orZero())) {

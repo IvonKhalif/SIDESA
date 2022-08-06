@@ -17,7 +17,7 @@ class GetLetterDetailUseCase(
     suspend operator fun invoke(
         letterId: String
     ): NetworkResponse<DetailApprovalModel, GenericErrorResponse> {
-        val user = PreferenceUtils.getUser()
+        val user = PreferenceUtils.getAccount()
         return when (val result = repository.getDetail(letterId = letterId, accountId = user?.id.orZero())) {
             is NetworkResponse.Success -> {
                 val layout = result.body.letterType?.let { assignWidgetFromLocal(it, result.body) }

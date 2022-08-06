@@ -47,10 +47,10 @@ class GetLetterLayoutUseCase(
         widgets.add(0, header)
 
         // assign value from local
-        val user = PreferenceUtils.getUser()
-        if (user != null) {
+        val profile = PreferenceUtils.getProfile()
+        if (profile != null) {
             widgets.forEachIndexed { index, widget ->
-                widgets[index] = updateWidgetFromLocalUseCase.invoke(widget = widget, user = user)
+                widgets[index] = updateWidgetFromLocalUseCase.invoke(widget = widget, profile = profile)
             }
         }
 

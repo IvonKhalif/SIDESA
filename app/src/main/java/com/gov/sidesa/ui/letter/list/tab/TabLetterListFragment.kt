@@ -12,10 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseFragment
 import com.gov.sidesa.base.showImmediately
-import com.gov.sidesa.domain.letter.list.models.LetterSubmissionModel
 import com.gov.sidesa.databinding.TabLetterListBinding
 import com.gov.sidesa.domain.letter.list.models.LetterApprovalModel
 import com.gov.sidesa.domain.letter.list.models.LetterListApprovalModel
+import com.gov.sidesa.domain.letter.list.models.LetterSubmissionModel
 import com.gov.sidesa.ui.approval.DetailApprovalLetterActivity
 import com.gov.sidesa.ui.letter.detail.DetailSubmissionLetterActivity
 import com.gov.sidesa.ui.letter.list.needapproval.LetterNeedApprovalAdapter
@@ -85,17 +85,16 @@ class TabLetterListFragment : BaseFragment() {
     private fun initObserver() = viewModel.apply {
 
         submissionLettersLiveData.observeNonNull(
-            this@TabLetterListFragment,
+            viewLifecycleOwner,
             ::handleSubmissionLetters
         )
         approvalLettersLiveData.observeNonNull(
-            this@TabLetterListFragment,
+            viewLifecycleOwner,
             ::handleApprovalLetters
         )
-        loadingState.observe(this@TabLetterListFragment) {
+        loadingState.observe(viewLifecycleOwner) {
             handleLoadingWidget(childFragmentManager, isLoading = it)
         }
-
     }
 
     private fun mainView() {
@@ -169,7 +168,7 @@ class TabLetterListFragment : BaseFragment() {
 
     override fun onResultData(result: Intent?) {
         super.onResultData(result)
-        val user = PreferenceUtils.getUser()
+        val user = PreferenceUtils.getAccount()
         val letterType = result?.getStringExtra(LetterConstant.EXTRA_LETTER_TYPE).orEmpty()
         if (result?.getBooleanExtra(LetterConstant.EXTRA_SUBMISSION_HAS_APPROVED, false) == true) {
             viewModel.getSubmissionLetters()

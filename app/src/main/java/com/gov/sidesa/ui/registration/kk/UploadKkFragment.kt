@@ -12,6 +12,8 @@ import com.bumptech.glide.Glide
 import com.gov.sidesa.databinding.FragmentUploadKkBinding
 import com.gov.sidesa.ui.registration.RegistrationStackState
 import com.gov.sidesa.ui.registration.ktp.RegistrationKTPViewModel
+import com.gov.sidesa.utils.PreferenceUtils
+import com.gov.sidesa.utils.extension.load
 import com.gov.sidesa.utils.gone
 import com.gov.sidesa.utils.picker.SelectImageBottomSheet
 import com.gov.sidesa.utils.visible
@@ -27,7 +29,7 @@ class UploadKkFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentUploadKkBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -57,6 +59,10 @@ class UploadKkFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        PreferenceUtils.getAccount()?.imageKK?.let {
+            binding.imageKtp.load(it)
+        }
 
         binding.buttonPickKk.setOnClickListener {
             showMediaDialog()

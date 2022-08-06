@@ -12,6 +12,7 @@ import com.gov.sidesa.R
 import com.gov.sidesa.data.registration.ktp.GeneralKtpModel
 import com.gov.sidesa.databinding.FragmentGeneralKtpBinding
 import com.gov.sidesa.ui.registration.RegistrationStackState
+import com.gov.sidesa.utils.PreferenceUtils
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GeneralKtpFragment : Fragment() {
@@ -54,11 +55,20 @@ class GeneralKtpFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        restoreUserData()
         setDropDownReligion()
         setDropDownMarriageStatus()
         setDropDownJob()
         setDropDownNationality()
+    }
+
+    private fun restoreUserData() = with(binding.customKtpGeneral) {
+        PreferenceUtils.getAccount()?.let {
+            inputKtpReligion.setText(it.religion)
+            inputKtpMarriage.setText(it.maritalStatus)
+            inputKtpJob.setText(it.job)
+            inputKtpNationality.setText(it.citizenship)
+        }
     }
 
     private fun setDropDownReligion() {

@@ -1,7 +1,6 @@
 package com.gov.sidesa.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -9,15 +8,13 @@ import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseActivity
 import com.gov.sidesa.ui.dashboard.DashboardActivity
 import com.gov.sidesa.ui.login.LoginActivity
-import com.gov.sidesa.ui.profile.ProfileActivity
 import com.gov.sidesa.utils.DateUtil
 import com.gov.sidesa.utils.PreferenceUtils
 import org.threeten.bp.LocalDate
-import org.threeten.bp.LocalDateTime
 
 class SplashActivity : BaseActivity() {
     private val user by lazy {
-        PreferenceUtils.getUser()
+        PreferenceUtils.getAccount()
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

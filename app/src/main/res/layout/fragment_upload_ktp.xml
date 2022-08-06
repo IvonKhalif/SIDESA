@@ -42,45 +42,39 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_description" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.Group
         android:id="@+id/container_ktp"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
         android:visibility="gone"
+        app:constraint_referenced_ids="image_ktp, button_edit_ktp"
+        tools:visibility="visible" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/image_ktp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        android:adjustViewBounds="true"
+        android:background="@color/white_929292"
+        android:scaleType="fitCenter"
+        app:layout_constraintDimensionRatio="H, 2:1.5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_pick_ktp">
+        app:layout_constraintTop_toBottomOf="@+id/button_pick_ktp" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/image_ktp"
-            android:layout_width="match_parent"
-            android:layout_height="240dp"
-            android:layout_margin="20dp"
-            android:adjustViewBounds="true"
-            android:background="@color/white_929292"
-            android:maxWidth="380dp"
-            android:scaleType="fitXY"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/custom_address" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_edit_ktp"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ubah Foto"
-            android:textAllCaps="false"
-            android:textColor="@color/white_929292"
-            app:icon="@drawable/ic_edit"
-            app:iconGravity="start"
-            app:iconTint="@color/white_929292"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/image_kk" />
-
-    </LinearLayout>
-
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_edit_ktp"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ubah Foto"
+        android:textAllCaps="false"
+        android:textColor="@color/white_929292"
+        app:icon="@drawable/ic_edit"
+        app:iconGravity="start"
+        app:iconTint="@color/white_929292"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_ktp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

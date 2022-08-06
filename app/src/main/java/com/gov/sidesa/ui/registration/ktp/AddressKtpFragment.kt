@@ -12,6 +12,7 @@ import com.gov.sidesa.R
 import com.gov.sidesa.data.registration.ktp.AddressKtpModel
 import com.gov.sidesa.databinding.FragmentAddressKtpBinding
 import com.gov.sidesa.ui.registration.RegistrationStackState
+import com.gov.sidesa.utils.PreferenceUtils
 import com.gov.sidesa.utils.gone
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -55,12 +56,26 @@ class AddressKtpFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initView()
+    }
 
+    private fun initView() = with(binding) {
         binding.customKtpAddress.inputLayoutKtpCity.gone()
         binding.customKtpAddress.inputLayoutKtpProvince.gone()
 
+        restoreUserData()
         setDropDownKecamatan()
         setDropDownKelurahan()
+    }
+
+    private fun  restoreUserData() = with(binding.customKtpAddress) {
+        PreferenceUtils.getAccount()?.let {
+            inputKtpAddress.setText(it.address)
+            inputKtpRt.setText(it.rt)
+            inputKtpRw.setText(it.rw)
+            inputKtpKecamatan.setText(it.district.name)
+            inputKtpKelurahan.setText(it.village.name)
+        }
     }
 
     private fun setDropDownKecamatan() {

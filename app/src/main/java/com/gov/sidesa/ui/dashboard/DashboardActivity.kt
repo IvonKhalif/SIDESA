@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseActivity
 import com.gov.sidesa.base.showImmediately
-import com.gov.sidesa.domain.letter.list.models.LetterSubmissionModel
 import com.gov.sidesa.databinding.ActivityDashboardBinding
 import com.gov.sidesa.domain.letter.list.models.LetterApprovalModel
 import com.gov.sidesa.domain.letter.list.models.LetterListApprovalModel
+import com.gov.sidesa.domain.letter.list.models.LetterSubmissionModel
 import com.gov.sidesa.ui.approval.DetailApprovalLetterActivity
 import com.gov.sidesa.ui.letter.detail.DetailSubmissionLetterActivity
 import com.gov.sidesa.ui.letter.list.LetterListActivity
@@ -40,7 +40,7 @@ class DashboardActivity : BaseActivity() {
 
     private val viewModel by viewModel<DashboardViewModel>()
     private var actor = ""
-    private val user get() = PreferenceUtils.getUser()
+    private val user get() = PreferenceUtils.getAccount()
 
     private val submissionAdapter by lazy {
         LetterSubmissionAdapter(
@@ -191,7 +191,7 @@ class DashboardActivity : BaseActivity() {
 
     override fun onResultData(result: Intent?) {
         super.onResultData(result)
-        val user = PreferenceUtils.getUser()
+        val user = PreferenceUtils.getProfile()?.account
         val letterType = result?.getStringExtra(EXTRA_LETTER_TYPE).orEmpty()
         if (result?.getBooleanExtra(EXTRA_SUBMISSION_HAS_APPROVED, false) == true) {
             viewModel.getSubmissionLetters()

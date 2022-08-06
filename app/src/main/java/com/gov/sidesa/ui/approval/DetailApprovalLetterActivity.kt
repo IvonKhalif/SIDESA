@@ -237,7 +237,7 @@ class DetailApprovalLetterActivity : BaseActivity() {
     private fun createRequestDoApprovalParam(statusApproval: Int, reason: String?) =
         DoApprovalRequest(
             letterId = letterId,
-            accountId = PreferenceUtils.getUser()?.id.orZero(),
+            accountId = PreferenceUtils.getAccount()?.id.orZero(),
             status = statusApproval.toString(),
             actor = actor,
             description = reason

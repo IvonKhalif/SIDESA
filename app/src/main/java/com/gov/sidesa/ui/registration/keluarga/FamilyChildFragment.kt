@@ -11,8 +11,11 @@ import com.google.gson.Gson
 import com.gov.sidesa.data.registration.family.FamilyChildModel
 import com.gov.sidesa.data.registration.ktp.AddressKtpModel
 import com.gov.sidesa.databinding.FragmentFamilyChildBinding
+import com.gov.sidesa.ui.profile.edit.family.models.RelationType
 import com.gov.sidesa.ui.registration.RegistrationStackState
 import com.gov.sidesa.ui.registration.ktp.RegistrationKTPViewModel
+import com.gov.sidesa.utils.PreferenceUtils
+import com.gov.sidesa.utils.extension.formatFE
 import com.gov.sidesa.utils.gone
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
@@ -62,12 +65,35 @@ class FamilyChildFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        restoreUserData()
         binding.customFamilyChild.inputLayoutFather.hint = "Nama Anak"
         binding.customFamilyChild.inputLayoutStatus.gone()
         setupDateOfBirth()
         binding.buttonAddChildForm.setOnClickListener {
             Toast.makeText(requireContext(), "Sedang tahap Pengembangan", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun restoreUserData() = with(binding.customFamilyChild) {
+        val childType = RelationType.Child(0).type
+        PreferenceUtils.getFamily()
+            ?.firstOrNull { it.relationType == childType }
+            ?.let {
+                inputFather.setText(it.name)
+                inputNik.setText(it.ktpNumber)
+                inputPlace.setText(it.address)
+                inputDob.setText(it.birthDate.formatFE())
+
+                binding.customFamilyAddress.apply {
+                    inputKtpAddress.setText(it.address)
+                    inputKtpRt.setText(it.rt)
+                    inputKtpRw.setText(it.rw)
+                    inputKtpProvince.setText(it.province.name)
+                    inputKtpCity.setText(it.city.name)
+                    inputKtpKecamatan.setText(it.district.name)
+                    inputKtpKelurahan.setText(it.village.name)
+                }
+            }
     }
 
     private fun setupDateOfBirth() {

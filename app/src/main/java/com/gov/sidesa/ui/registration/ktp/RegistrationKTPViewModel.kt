@@ -11,7 +11,6 @@ import com.gov.sidesa.data.registration.kk.KkBiodataModel
 import com.gov.sidesa.data.registration.ktp.AddressKtpModel
 import com.gov.sidesa.data.registration.ktp.BiodataKtpModel
 import com.gov.sidesa.data.registration.ktp.GeneralKtpModel
-import com.gov.sidesa.domain.profile.detail.family.models.asData
 import com.gov.sidesa.domain.profile.detail.family.usecases.GetFamilyUseCase
 import com.gov.sidesa.domain.registration.RegistrationUseCase
 import com.gov.sidesa.ui.registration.RegistrationStackState
@@ -50,7 +49,7 @@ class RegistrationKTPViewModel(
 
     fun registrationNewAccount(context: Context) = viewModelScope.launch {
         showLoadingWidget()
-        val idAccount = PreferenceUtils.getUser()?.id
+        val idAccount = PreferenceUtils.getAccount()?.id
 
         val biodataPref = getPref(context, RegistrationStackState.KtpBiodata.toString())
         val biodataModel = Gson().fromJson(biodataPref, BiodataKtpModel::class.java)
@@ -207,7 +206,7 @@ class RegistrationKTPViewModel(
     private fun updateDataUserLocal() = viewModelScope.launch {
         when (val result = getFamilyUseCase.invoke()) {
             is NetworkResponse.Success -> {
-                PreferenceUtils.putUser(result.body.account.asData())
+                PreferenceUtils.putProfile(result.body)
                 _closeScreenView.value = Unit
             }
             else -> onResponseNotSuccess(response = result)
