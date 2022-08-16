@@ -50,7 +50,7 @@ class DashboardViewModel(
     }
 
     fun getSubmissionLetters() = viewModelScope.launch {
-        val user = PreferenceUtils.getAccount()
+        val user = PreferenceUtils.getAccountUserResponse()
         showLoadingWidget()
 
         when (val result =
