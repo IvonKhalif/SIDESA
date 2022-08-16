@@ -8,6 +8,6 @@ import kotlinx.parcelize.Parcelize
 data class LetterSubmissionResponse(
     @SerializedName("id_pengajuan_surat") var letterId: String,
     @SerializedName("type_surat") var letterType: String,
-    @SerializedName("status") var letterStatus: String,
+    @SerializedName("status") var letterStatus: String?,
     @SerializedName("no_surat") var letterNumber: String?
 ): Parcelable

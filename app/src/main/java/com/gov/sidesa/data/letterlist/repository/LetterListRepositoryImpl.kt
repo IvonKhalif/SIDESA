@@ -16,9 +16,9 @@ class LetterListRepositoryImpl(
         account_id: Long
     ): NetworkResponse<List<LetterSubmissionModel>, GenericErrorResponse> {
         return service.getSubmissionLetters(account_id).asDomain {
-            data!!.map {
+            data.takeIf { it != null }?.map {
                 it.asDomain()
-            }
+            } ?: emptyList()
         }
     }
 

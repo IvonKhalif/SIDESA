@@ -14,7 +14,6 @@ import com.gov.sidesa.data.registration.ktp.BiodataKtpModel
 import com.gov.sidesa.databinding.FragmentBiodataKtpBinding
 import com.gov.sidesa.ui.registration.RegistrationStackState
 import com.gov.sidesa.utils.PreferenceUtils
-import com.gov.sidesa.utils.extension.formatFE
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
@@ -67,13 +66,8 @@ class BiodataKtpFragment : Fragment() {
 
     private fun initView() = with(binding) {
         with(customKtpBiodata) {
-            PreferenceUtils.getAccount()?.let {
+            PreferenceUtils.getAccountUserResponse()?.let {
                 inputKtpNik.setText(it.nik)
-                inputKtpName.setText(it.name)
-                inputKtpPlace.setText(it.birthPlace)
-                inputKtpDob.setText(it.birthDate.formatFE())
-                inputKtpGender.setText(it.gender)
-                inputKtpBloodType.setText(it.blood)
             }
         }
     }

@@ -3,6 +3,7 @@ package com.gov.sidesa.utils
 import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.GsonBuilder
+import com.gov.sidesa.data.user.response.UserResponse
 import com.gov.sidesa.domain.profile.detail.family.models.ProfileFamily
 
 object PreferenceUtils {
@@ -41,6 +42,8 @@ object PreferenceUtils {
     }
 
     fun getAccount() = getProfile()?.account
+
+    fun getAccountUserResponse() = get<UserResponse>(USER_PREFERENCE)
 
     fun getFamily() = getProfile()?.family
 }
