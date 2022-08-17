@@ -183,7 +183,8 @@ class DetailApprovalLetterActivity : BaseActivity() {
         TypeSubmissionEnum.RW_WAITING_Submission.type -> getString(R.string.letter_detail_approval_rw_marker_caption)
         TypeSubmissionEnum.RW_Submission.type -> getString(R.string.letter_detail_has_approval_rw_marker_caption)
         TypeSubmissionEnum.RW_REJECTED.type -> getString(R.string.letter_detail_approval_rw_marker_caption)
-        else -> getString(R.string.letter_detail_approval_rw_marker_caption)
+        TypeSubmissionEnum.LETTER_PRINT_OUT.type -> getString(R.string.letter_detail_already_printed_caption)
+        else -> getString(R.string.letter_detail_ready_to_pickup_marker_caption)
     }
 
     private fun hasApproved(historylist: List<HistoryApprovalModel>): Boolean {

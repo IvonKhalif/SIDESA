@@ -40,7 +40,7 @@ class DashboardActivity : BaseActivity() {
 
     private val viewModel by viewModel<DashboardViewModel>()
     private var actor = ""
-    private val user get() = PreferenceUtils.getAccount()
+    private val user get() = PreferenceUtils.getAccountUserResponse()
 
     private val submissionAdapter by lazy {
         LetterSubmissionAdapter(
@@ -64,6 +64,7 @@ class DashboardActivity : BaseActivity() {
 
     private fun mainView() {
         with(binding) {
+            buttonRegisterNow.isVisible = user?.statusUser == PROFILE_NOT_COMPLETE
             recyclerNeedApproval.adapter = needApprovalAdapter
             recyclerNeedApproval.layoutManager = LinearLayoutManager(
                 this@DashboardActivity,
