@@ -133,6 +133,7 @@
     <string name="letter_detail_approval_rw_marker_caption">Menunggu Disetujui RW</string>
     <string name="letter_detail_has_approval_rw_marker_caption">Sudah Disetujui RW</string>
     <string name="letter_detail_ready_to_pickup_marker_caption">Surat Siap Diambil Di Kelurahan</string>
+    <string name="letter_detail_already_printed_caption">Surat Sudah Dicetak</string>
     <string name="letter_detail_rejected_caption">Surat Ditolak</string>
     <string name="letter_detail_approved_caption">Surat Sudah Disetujui</string>
     <string name="letter_detail_reason_approval_caption">Alasan</string>

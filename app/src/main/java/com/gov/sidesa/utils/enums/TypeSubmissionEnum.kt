@@ -9,4 +9,5 @@ enum class TypeSubmissionEnum(val type: String?) {
     RW_Submission("RW APPROVAL"),
     RW_REJECTED("RW REJECTED"),
     FINISH("SELESAI"),
+    LETTER_PRINT_OUT("letter_print_out"),
 }
