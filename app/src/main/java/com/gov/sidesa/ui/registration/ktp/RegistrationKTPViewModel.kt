@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.gov.sidesa.base.BaseViewModel
-import com.gov.sidesa.data.registration.family.*
 import com.gov.sidesa.data.registration.kk.KkBiodataModel
 import com.gov.sidesa.data.registration.ktp.AddressKtpModel
 import com.gov.sidesa.data.registration.ktp.BiodataKtpModel
@@ -49,7 +48,7 @@ class RegistrationKTPViewModel(
 
     fun registrationNewAccount(context: Context) = viewModelScope.launch {
         showLoadingWidget()
-        val idAccount = PreferenceUtils.getAccount()?.id
+        val idAccount = PreferenceUtils.getAccountUserResponse()?.id
 
         val biodataPref = getPref(context, RegistrationStackState.KtpBiodata.toString())
         val biodataModel = Gson().fromJson(biodataPref, BiodataKtpModel::class.java)
@@ -66,107 +65,107 @@ class RegistrationKTPViewModel(
         val ktpBase64 = getPref(context, RegistrationStackState.KtpUpload.toString())
         val kkBase64 = getPref(context, RegistrationStackState.KkUpload.toString())
 
-        val fatherPref = getPref(context, RegistrationStackState.FamilyFather.toString())
-        val fatherModel = Gson().fromJson(fatherPref, FamilyFatherModel::class.java)
+//        val fatherPref = getPref(context, RegistrationStackState.FamilyFather.toString())
+//        val fatherModel = Gson().fromJson(fatherPref, FamilyFatherModel::class.java)
 
-        val motherPref = getPref(context, RegistrationStackState.FamilyMother.toString())
-        val motherModel = Gson().fromJson(motherPref, FamilyMotherModel::class.java)
+//        val motherPref = getPref(context, RegistrationStackState.FamilyMother.toString())
+//        val motherModel = Gson().fromJson(motherPref, FamilyMotherModel::class.java)
 
-        val applicantPref = getPref(context, RegistrationStackState.FamilyApplicant.toString())
-        val applicantModel = Gson().fromJson(applicantPref, FamilyApplicantModel::class.java)
+//        val applicantPref = getPref(context, RegistrationStackState.FamilyApplicant.toString())
+//        val applicantModel = Gson().fromJson(applicantPref, FamilyApplicantModel::class.java)
 
-        val childPref = getPref(context, RegistrationStackState.FamilyChild.toString())
-        val childModel = Gson().fromJson(childPref, FamilyChildModel::class.java)
+//        val childPref = getPref(context, RegistrationStackState.FamilyChild.toString())
+//        val childModel = Gson().fromJson(childPref, FamilyChildModel::class.java)
 
-        val familyList = mutableListOf<FamilyListModel>()
+//        val familyList = mutableListOf<FamilyListModel>()
 
-        familyList.add(FamilyListModel.FatherModel(fatherModel))
-        familyList.add(FamilyListModel.MotherModel(motherModel))
-        familyList.add(FamilyListModel.ApplicantModel(applicantModel))
-        familyList.add(FamilyListModel.ChildModel(childModel))
+//        familyList.add(FamilyListModel.FatherModel(fatherModel))
+//        familyList.add(FamilyListModel.MotherModel(motherModel))
+//        familyList.add(FamilyListModel.ApplicantModel(applicantModel))
+//        familyList.add(FamilyListModel.ChildModel(childModel))
 
-        val familyMap = mutableMapOf<String, String>()
+//        val familyMap = mutableMapOf<String, String>()
 
-        familyList.forEachIndexed { index, familyListModel ->
-            when (familyListModel) {
-                is FamilyListModel.FatherModel -> {
-                    familyMap.putAll(
-                        familyMapper(
-                            index,
-                            familyListModel.familyFatherModel.name,
-                            familyListModel.familyFatherModel.nik,
-                            familyListModel.familyFatherModel.placeOfBirth,
-                            familyListModel.familyFatherModel.dateOfBirth,
-                            "Ayah",
-                            AddressKtpModel(
-                                familyListModel.familyFatherModel.addressKtp?.address.orEmpty(),
-                                familyListModel.familyFatherModel.addressKtp?.rt.orEmpty(),
-                                familyListModel.familyFatherModel.addressKtp?.rw.orEmpty(),
-                                familyListModel.familyFatherModel.addressKtp?.kecamatan.orEmpty(),
-                                familyListModel.familyFatherModel.addressKtp?.kelurahan.orEmpty(),
-                            )
-                        )
-                    )
-                }
-                is FamilyListModel.MotherModel -> {
-                    familyMap.putAll(
-                        familyMapper(
-                            index,
-                            familyListModel.familyMotherModel.name,
-                            familyListModel.familyMotherModel.nik,
-                            familyListModel.familyMotherModel.placeOfBirth,
-                            familyListModel.familyMotherModel.dateOfBirth,
-                            "Ibu",
-                            AddressKtpModel(
-                                familyListModel.familyMotherModel.addressKtp?.address.orEmpty(),
-                                familyListModel.familyMotherModel.addressKtp?.rt.orEmpty(),
-                                familyListModel.familyMotherModel.addressKtp?.rw.orEmpty(),
-                                familyListModel.familyMotherModel.addressKtp?.kecamatan.orEmpty(),
-                                familyListModel.familyMotherModel.addressKtp?.kelurahan.orEmpty(),
-                            )
-                        )
-                    )
-                }
-                is FamilyListModel.ApplicantModel -> {
-                    familyMap.putAll(
-                        familyMapper(
-                            index,
-                            familyListModel.familyApplicantModel.name,
-                            familyListModel.familyApplicantModel.nik,
-                            familyListModel.familyApplicantModel.placeOfBirth,
-                            familyListModel.familyApplicantModel.dateOfBirth,
-                            familyListModel.familyApplicantModel.status,
-                            AddressKtpModel(
-                                familyListModel.familyApplicantModel.addressKtp?.address.orEmpty(),
-                                familyListModel.familyApplicantModel.addressKtp?.rt.orEmpty(),
-                                familyListModel.familyApplicantModel.addressKtp?.rw.orEmpty(),
-                                familyListModel.familyApplicantModel.addressKtp?.kecamatan.orEmpty(),
-                                familyListModel.familyApplicantModel.addressKtp?.kelurahan.orEmpty(),
-                            )
-                        )
-                    )
-                }
-                is FamilyListModel.ChildModel -> {
-                    familyMap.putAll(
-                        familyMapper(
-                            index,
-                            familyListModel.familyChildModel.name,
-                            familyListModel.familyChildModel.nik,
-                            familyListModel.familyChildModel.placeOfBirth,
-                            familyListModel.familyChildModel.dateOfBirth,
-                            "Child",
-                            AddressKtpModel(
-                                familyListModel.familyChildModel.addressKtp?.address.orEmpty(),
-                                familyListModel.familyChildModel.addressKtp?.rt.orEmpty(),
-                                familyListModel.familyChildModel.addressKtp?.rw.orEmpty(),
-                                familyListModel.familyChildModel.addressKtp?.kecamatan.orEmpty(),
-                                familyListModel.familyChildModel.addressKtp?.kelurahan.orEmpty(),
-                            )
-                        )
-                    )
-                }
-            }
-        }
+//        familyList.forEachIndexed { index, familyListModel ->
+//            when (familyListModel) {
+//                is FamilyListModel.FatherModel -> {
+//                    familyMap.putAll(
+//                        familyMapper(
+//                            index,
+//                            familyListModel.familyFatherModel.name,
+//                            familyListModel.familyFatherModel.nik,
+//                            familyListModel.familyFatherModel.placeOfBirth,
+//                            familyListModel.familyFatherModel.dateOfBirth,
+//                            "Ayah",
+//                            AddressKtpModel(
+//                                familyListModel.familyFatherModel.addressKtp?.address.orEmpty(),
+//                                familyListModel.familyFatherModel.addressKtp?.rt.orEmpty(),
+//                                familyListModel.familyFatherModel.addressKtp?.rw.orEmpty(),
+//                                familyListModel.familyFatherModel.addressKtp?.kecamatan.orEmpty(),
+//                                familyListModel.familyFatherModel.addressKtp?.kelurahan.orEmpty(),
+//                            )
+//                        )
+//                    )
+//                }
+//                is FamilyListModel.MotherModel -> {
+//                    familyMap.putAll(
+//                        familyMapper(
+//                            index,
+//                            familyListModel.familyMotherModel.name,
+//                            familyListModel.familyMotherModel.nik,
+//                            familyListModel.familyMotherModel.placeOfBirth,
+//                            familyListModel.familyMotherModel.dateOfBirth,
+//                            "Ibu",
+//                            AddressKtpModel(
+//                                familyListModel.familyMotherModel.addressKtp?.address.orEmpty(),
+//                                familyListModel.familyMotherModel.addressKtp?.rt.orEmpty(),
+//                                familyListModel.familyMotherModel.addressKtp?.rw.orEmpty(),
+//                                familyListModel.familyMotherModel.addressKtp?.kecamatan.orEmpty(),
+//                                familyListModel.familyMotherModel.addressKtp?.kelurahan.orEmpty(),
+//                            )
+//                        )
+//                    )
+//                }
+//                is FamilyListModel.ApplicantModel -> {
+//                    familyMap.putAll(
+//                        familyMapper(
+//                            index,
+//                            familyListModel.familyApplicantModel.name,
+//                            familyListModel.familyApplicantModel.nik,
+//                            familyListModel.familyApplicantModel.placeOfBirth,
+//                            familyListModel.familyApplicantModel.dateOfBirth,
+//                            familyListModel.familyApplicantModel.status,
+//                            AddressKtpModel(
+//                                familyListModel.familyApplicantModel.addressKtp?.address.orEmpty(),
+//                                familyListModel.familyApplicantModel.addressKtp?.rt.orEmpty(),
+//                                familyListModel.familyApplicantModel.addressKtp?.rw.orEmpty(),
+//                                familyListModel.familyApplicantModel.addressKtp?.kecamatan.orEmpty(),
+//                                familyListModel.familyApplicantModel.addressKtp?.kelurahan.orEmpty(),
+//                            )
+//                        )
+//                    )
+//                }
+//                is FamilyListModel.ChildModel -> {
+//                    familyMap.putAll(
+//                        familyMapper(
+//                            index,
+//                            familyListModel.familyChildModel.name,
+//                            familyListModel.familyChildModel.nik,
+//                            familyListModel.familyChildModel.placeOfBirth,
+//                            familyListModel.familyChildModel.dateOfBirth,
+//                            "Child",
+//                            AddressKtpModel(
+//                                familyListModel.familyChildModel.addressKtp?.address.orEmpty(),
+//                                familyListModel.familyChildModel.addressKtp?.rt.orEmpty(),
+//                                familyListModel.familyChildModel.addressKtp?.rw.orEmpty(),
+//                                familyListModel.familyChildModel.addressKtp?.kecamatan.orEmpty(),
+//                                familyListModel.familyChildModel.addressKtp?.kelurahan.orEmpty(),
+//                            )
+//                        )
+//                    )
+//                }
+//            }
+//        }
 
         when (val result = registrationUseCase.registrationNewAccount(
             idAccount = idAccount.orZero().toString(),
@@ -181,16 +180,15 @@ class RegistrationKTPViewModel(
             marriageStatus = generalModel.marriageStatus,
             job = generalModel.job,
             address = addressModel.address,
-            provinceId = "provinceId",
-            cityId = "cityId",
-            kecamatanId = "kecamatanId",
-            kelurahanId = "kelurahanId",
+            provinceId = "36",
+            cityId = "3603",
+            kecamatanId = "3603120",
+            kelurahanId = "3603120010",
             rt = addressModel.rt,
             rw = addressModel.rw,
             nationality = generalModel.nationality,
             ktpBase64 = ktpBase64,
-            kkBase64 = kkBase64,
-            familyMap = familyMap
+            kkBase64 = kkBase64
         )) {
             is NetworkResponse.Success -> {
                 registrationStatus.value = result.body

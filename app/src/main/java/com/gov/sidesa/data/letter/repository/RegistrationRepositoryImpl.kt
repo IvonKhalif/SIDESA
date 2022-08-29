@@ -31,8 +31,7 @@ class RegistrationRepositoryImpl(
         rw: String,
         nationality: String,
         ktpBase64: String,
-        kkBase64: String,
-        familyMap: Map<String, String>
+        kkBase64: String
     ): NetworkResponse<String, GenericErrorResponse> {
         return registrationService.registerNewAccount(
             idAccount = idAccount,
@@ -55,8 +54,7 @@ class RegistrationRepositoryImpl(
             job = job,
             nationality = nationality,
             ktpBase64 = ktpBase64,
-            kkBase64 = kkBase64,
-            familyMap = familyMap
+            kkBase64 = kkBase64
         ).asDomain {
             status
         }

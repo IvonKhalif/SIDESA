@@ -27,8 +27,7 @@ class RegistrationUseCase(
         rw: String,
         nationality: String,
         ktpBase64: String,
-        kkBase64: String,
-        familyMap: Map<String, String>
+        kkBase64: String
     ): NetworkResponse<String, GenericErrorResponse> {
         return registrationRepo.registerNewAccount(
             idAccount = idAccount,
@@ -51,8 +50,7 @@ class RegistrationUseCase(
             job = job,
             nationality = nationality,
             ktpBase64 = ktpBase64,
-            kkBase64 = kkBase64,
-            familyMap = familyMap
+            kkBase64 = kkBase64
         )
     }
 

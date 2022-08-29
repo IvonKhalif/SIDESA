@@ -3,7 +3,9 @@ package com.gov.sidesa.data.service
 import com.gov.sidesa.utils.response.GenericErrorResponse
 import com.gov.sidesa.utils.response.RetrofitStatusResponse
 import com.haroldadmin.cnradapter.NetworkResponse
-import retrofit2.http.*
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.POST
 
 interface RegistrationService {
 
@@ -30,8 +32,7 @@ interface RegistrationService {
         @Field("pekerjaan") job: String,
         @Field("kewarganegaraan") nationality: String,
         @Field("foto_ktp") ktpBase64: String,
-        @Field("foto_kk") kkBase64: String,
-        @FieldMap familyMap: Map<String, String>
+        @Field("foto_kk") kkBase64: String
     ): NetworkResponse<RetrofitStatusResponse, GenericErrorResponse>
 
 }

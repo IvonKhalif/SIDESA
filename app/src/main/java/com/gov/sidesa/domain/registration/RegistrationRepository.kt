@@ -25,7 +25,6 @@ interface RegistrationRepository {
         rw: String,
         nationality: String,
         ktpBase64: String,
-        kkBase64: String,
-        familyMap: Map<String, String>
+        kkBase64: String
     ): NetworkResponse<String, GenericErrorResponse>
 }
