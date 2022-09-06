@@ -11,6 +11,7 @@ import com.gov.sidesa.data.registration.ktp.AddressKtpModel
 import com.gov.sidesa.data.registration.ktp.BiodataKtpModel
 import com.gov.sidesa.data.registration.ktp.GeneralKtpModel
 import com.gov.sidesa.domain.profile.detail.family.usecases.GetFamilyUseCase
+import com.gov.sidesa.domain.regions.models.Region
 import com.gov.sidesa.domain.registration.RegistrationUseCase
 import com.gov.sidesa.ui.registration.RegistrationStackState
 import com.gov.sidesa.utils.PreferenceUtils
@@ -29,7 +30,11 @@ class RegistrationKTPViewModel(
     var biodataUiModel = MutableLiveData<BiodataUiModel>()
 
     var registrationStatus = MutableLiveData<String>()
-    
+    val inputKtpProvince = MutableLiveData<Region>()
+    val inputKtpCity = MutableLiveData<Region>()
+    val inputKtpKecamatan = MutableLiveData<Region>()
+    val inputKtpKelurahan = MutableLiveData<Region>()
+
     private val _closeScreenView = MutableLiveData<Unit>()
     val closeScreenView: LiveData<Unit> get() = _closeScreenView
 

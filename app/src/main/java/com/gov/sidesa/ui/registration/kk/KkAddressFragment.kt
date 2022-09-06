@@ -4,21 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import com.gov.sidesa.R
+import com.gov.sidesa.base.BaseFragment
+import com.gov.sidesa.base.showImmediately
 import com.gov.sidesa.data.registration.kk.KkAddressModel
 import com.gov.sidesa.data.registration.ktp.AddressKtpModel
+import com.gov.sidesa.databinding.CustomAddressBinding
 import com.gov.sidesa.databinding.FragmentKkAddressBinding
+import com.gov.sidesa.ui.regions.SelectRegionBottomSheet
 import com.gov.sidesa.ui.registration.RegistrationStackState
 import com.gov.sidesa.ui.registration.ktp.RegistrationKTPViewModel
-import com.gov.sidesa.ui.registration.ktp.getDummyKecamatanList
-import com.gov.sidesa.ui.registration.ktp.getDummyKelurahanList
+import com.gov.sidesa.utils.extension.isNullOrZero
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class KkAddressFragment : Fragment() {
+class KkAddressFragment : BaseFragment() {
 
     companion object {
         fun newInstance(): KkAddressFragment {
@@ -61,10 +61,6 @@ class KkAddressFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         restoreUserData()
-        setDropDownProvince()
-        setDropDownCity()
-        setDropDownKecamatan()
-        setDropDownKelurahan()
     }
 
     private fun restoreUserData() = with(binding.customKkAddress) {
@@ -75,39 +71,97 @@ class KkAddressFragment : Fragment() {
                 inputKtpRw.setText(addressModel.rw)
                 inputKtpRt.setText(addressModel.rt)
             }
+
+        setDropDownProvince(this)
+        setDropDownCity(this)
+        setDropDownKecamatan(this)
+        setDropDownKelurahan(this)
     }
 
-    private fun setDropDownProvince() {
-        val provinceList = resources.getStringArray(R.array.province)
-        val provinceAdapter =
-            ArrayAdapter(requireContext(), R.layout.item_dropdown, provinceList)
-        val provinceAutoComplete =
-            binding.root.findViewById<AutoCompleteTextView>(R.id.input_ktp_province)
-        provinceAutoComplete.setAdapter(provinceAdapter)
+    private fun setDropDownProvince(customAddressBinding: CustomAddressBinding) {
+        customAddressBinding.inputKtpProvince.setOnClickListener {
+            showProvinceBottomSheet()
+        }
     }
 
-    private fun setDropDownCity() {
-        val provinceList = resources.getStringArray(R.array.city)
-        val provinceAdapter =
-            ArrayAdapter(requireContext(), R.layout.item_dropdown, provinceList)
-        val provinceAutoComplete =
-            binding.root.findViewById<AutoCompleteTextView>(R.id.input_ktp_city)
-        provinceAutoComplete.setAdapter(provinceAdapter)
+    private fun setDropDownCity(customAddressBinding: CustomAddressBinding) {
+        customAddressBinding.inputKtpCity.setOnClickListener {
+            if (viewModel.inputKtpProvince.value == null || viewModel.inputKtpProvince.value?.id.isNullOrZero())
+                showErrorMessage(getString(R.string.province_has_not_been_selected))
+            else
+                showCityBottomSheet()
+        }
     }
 
-    private fun setDropDownKecamatan() {
-        val provinceAdapter =
-            ArrayAdapter(requireContext(), R.layout.item_dropdown, getDummyKecamatanList())
-        val provinceAutoComplete =
-            binding.root.findViewById<AutoCompleteTextView>(R.id.input_ktp_kecamatan)
-        provinceAutoComplete.setAdapter(provinceAdapter)
+    private fun setDropDownKecamatan(customAddressBinding: CustomAddressBinding) {
+        customAddressBinding.inputKtpKecamatan.setOnClickListener {
+            if (viewModel.inputKtpCity.value == null || viewModel.inputKtpCity.value?.id.isNullOrZero())
+                showErrorMessage(getString(R.string.city_has_not_been_selected))
+            else
+                showDistrictBottomSheet()
+        }
     }
 
-    private fun setDropDownKelurahan() {
-        val provinceAdapter =
-            ArrayAdapter(requireContext(), R.layout.item_dropdown, getDummyKelurahanList())
-        val provinceAutoComplete =
-            binding.root.findViewById<AutoCompleteTextView>(R.id.input_ktp_kelurahan)
-        provinceAutoComplete.setAdapter(provinceAdapter)
+    private fun setDropDownKelurahan(customAddressBinding: CustomAddressBinding) {
+        customAddressBinding.inputKtpKelurahan.setOnClickListener {
+            if (viewModel.inputKtpKecamatan.value == null || viewModel.inputKtpKecamatan.value?.id.isNullOrZero())
+                showErrorMessage(getString(R.string.district_has_not_been_selected))
+            else
+                showVillageBottomSheet()
+        }
+    }
+
+    private fun showVillageBottomSheet() {
+        val tag = "select_village"
+        showImmediately(parentFragmentManager, tag) {
+            val sheet = SelectRegionBottomSheet.createVillage(
+                districtId = viewModel.inputKtpKecamatan.value?.id ?: 0
+            )
+            sheet.onSelected = {
+                viewModel.inputKtpKelurahan.value = it
+                sheet.dismissAllowingStateLoss()
+            }
+            sheet
+        }
+    }
+
+    private fun showDistrictBottomSheet() {
+        val tag = "select_district"
+        showImmediately(parentFragmentManager, tag) {
+            val sheet = SelectRegionBottomSheet.createDistrict(
+                cityId = viewModel.inputKtpCity.value?.id ?: 0
+            )
+            sheet.onSelected = {
+                viewModel.inputKtpKecamatan.value = it
+                sheet.dismissAllowingStateLoss()
+            }
+            sheet
+        }
+    }
+
+    private fun showCityBottomSheet() {
+        val tag = "select_city"
+        showImmediately(parentFragmentManager, tag) {
+            val sheet = SelectRegionBottomSheet.createCity(
+                provinceId = viewModel.inputKtpProvince.value?.id ?: 0
+            )
+            sheet.onSelected = {
+                viewModel.inputKtpCity.value = it
+                sheet.dismissAllowingStateLoss()
+            }
+            sheet
+        }
+    }
+
+    private fun showProvinceBottomSheet() {
+        val tag = "select_province"
+        showImmediately(parentFragmentManager, tag) {
+            val sheet = SelectRegionBottomSheet.createProvince()
+            sheet.onSelected = {
+                viewModel.inputKtpProvince.value = it
+                sheet.dismissAllowingStateLoss()
+            }
+            sheet
+        }
     }
 }

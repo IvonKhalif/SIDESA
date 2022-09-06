@@ -249,35 +249,35 @@ class RegistrationKTPActivity : BaseActivity() {
         viewModel.registrationStackState.observe(this@RegistrationKTPActivity) { state ->
             when (state) {
                 is RegistrationStackState.KtpBiodata -> {
-                    binding.progressBar.progress = 10
+                    binding.progressBar.progress = 11
                     binding.buttonPreviousKtp.visibility = GONE
                 }
                 is RegistrationStackState.KtpAddress -> {
-                    binding.progressBar.progress = 20
+                    binding.progressBar.progress = 22
                     binding.buttonPreviousKtp.visibility = VISIBLE
                 }
                 is RegistrationStackState.KtpGeneral -> {
-                    binding.progressBar.progress = 30
+                    binding.progressBar.progress = 33
                     binding.buttonPreviousKtp.visibility = VISIBLE
                 }
                 is RegistrationStackState.KtpUpload -> {
-                    binding.progressBar.progress = 40
+                    binding.progressBar.progress = 44
                     binding.buttonPreviousKtp.visibility = VISIBLE
                 }
                 is RegistrationStackState.KtpReviewKtp -> {
-                    binding.progressBar.progress = 50
-                    binding.buttonPreviousKtp.visibility = VISIBLE
-                }
-                is RegistrationStackState.KkBiodata -> {
                     binding.progressBar.progress = 55
                     binding.buttonPreviousKtp.visibility = VISIBLE
                 }
+                is RegistrationStackState.KkBiodata -> {
+                    binding.progressBar.progress = 66
+                    binding.buttonPreviousKtp.visibility = VISIBLE
+                }
                 is RegistrationStackState.KkAddress -> {
-                    binding.progressBar.progress = 60
+                    binding.progressBar.progress = 77
                     binding.buttonPreviousKtp.visibility = VISIBLE
                 }
                 is RegistrationStackState.KkUpload -> {
-                    binding.progressBar.progress = 65
+                    binding.progressBar.progress = 89
                     binding.buttonPreviousKtp.visibility = VISIBLE
                 }
                 is RegistrationStackState.KkReview -> {

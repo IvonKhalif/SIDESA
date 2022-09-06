@@ -36,26 +36,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/progress_bar" />
 
-    <com.google.android.material.button.MaterialButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_previous_ktp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:text="Sebelumnya"
         android:textAllCaps="false"
-        android:textColor="@color/white"
+        android:background="@drawable/background_approved"
         android:visibility="gone"
+        android:textColor="@color/primary_4FBD1C"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/button_next_ktp"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <com.google.android.material.button.MaterialButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_next_ktp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
+        android:background="@drawable/selector_button_corner_radius_6dp"
         android:text="Selanjutnya"
-        android:textAllCaps="false"
+        android:textAppearance="@style/Button"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

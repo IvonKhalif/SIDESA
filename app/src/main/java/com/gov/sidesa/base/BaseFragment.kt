@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.gov.sidesa.utils.constants.ToastConstant
 
 abstract class BaseFragment: Fragment() {
 
@@ -38,5 +39,8 @@ abstract class BaseFragment: Fragment() {
     private fun hideLoadingWidget() {
         loadingDialog?.dismissAllowingStateLoss()
     }
+
+    fun showErrorMessage(message: String) =
+        baseActivity.customToast(baseActivity, message, ToastConstant.CUSTOM_TOAST_ERROR)
 
 }
