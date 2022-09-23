@@ -25,6 +25,7 @@ import com.gov.sidesa.utils.enums.StatusResponseEnum
 import com.gov.sidesa.utils.extension.distinctTextChange
 import com.gov.sidesa.utils.extension.formatFE
 import com.gov.sidesa.utils.extension.isNullOrZero
+import com.gov.sidesa.utils.extension.orZero
 import com.gov.sidesa.utils.picker.SelectImageBottomSheet
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -77,6 +78,20 @@ class EditProfileKTPActivity : BaseActivity() {
     }
 
     private fun initEvent() {
+        bindingAddress.inputKtpRw.setOnClickListener {
+            if (viewModel.inputKtpKelurahan.value == null || viewModel.inputKtpKelurahan.value?.id.isNullOrZero())
+                showErrorMessage(getString(R.string.village_has_not_been_selected))
+            else
+                showRwBottomSheet()
+        }
+
+        bindingAddress.inputKtpRt.setOnClickListener {
+            if (viewModel.inputKtpRw.value == null || viewModel.inputKtpRw.value?.id.isNullOrZero())
+                showErrorMessage(getString(R.string.rw_has_not_been_selected))
+            else
+                showRtBottomSheet()
+        }
+
         bindingAddress.inputKtpKelurahan.setOnClickListener {
             if (viewModel.inputKtpKecamatan.value == null || viewModel.inputKtpKecamatan.value?.id.isNullOrZero())
                 showErrorMessage(getString(R.string.district_has_not_been_selected))
@@ -143,6 +158,35 @@ class EditProfileKTPActivity : BaseActivity() {
         nationality = bindingGeneralKtp.inputKtpNationality.text.toString(),
         imageKTP = viewModel.imageKTPBase64.value,
     )
+
+    private fun showRwBottomSheet() {
+        val tag = "select_rw"
+        showImmediately(supportFragmentManager, tag) {
+            val sheet = SelectRegionBottomSheet.createRW(
+                villageId = viewModel.inputKtpKelurahan.value?.id ?: 0
+            )
+            sheet.onSelected = {
+                viewModel.inputKtpRw.value = it
+                sheet.dismissAllowingStateLoss()
+            }
+            sheet
+        }
+    }
+
+    private fun showRtBottomSheet() {
+        val tag = "select_rt"
+        showImmediately(supportFragmentManager, tag) {
+            val sheet = SelectRegionBottomSheet.createRT(
+                villageId = viewModel.inputKtpKelurahan.value?.id.orZero(),
+                rw = viewModel.inputKtpRw.value?.name ?: ""
+            )
+            sheet.onSelected = {
+                viewModel.inputKtpRt.value = it
+                sheet.dismissAllowingStateLoss()
+            }
+            sheet
+        }
+    }
 
     private fun showVillageBottomSheet() {
         val tag = "select_village"
@@ -248,8 +292,8 @@ class EditProfileKTPActivity : BaseActivity() {
     private fun updateUIBirthPlace(text: String) = bindingBiodataKtp.inputKtpPlace.setText(text)
     private fun updateUIBirthDate(date: Date) = bindingBiodataKtp.inputKtpDob.setText(date.formatFE())
     private fun updateUIAddress(text: String) = bindingAddress.inputKtpAddress.setText(text)
-    private fun updateUIRt(text: String) = bindingAddress.inputKtpRt.setText(text)
-    private fun updateUIRw(text: String) = bindingAddress.inputKtpRw.setText(text)
+    private fun updateUIRt(region: Region) = bindingAddress.inputKtpRt.setText(region.name)
+    private fun updateUIRw(region: Region) = bindingAddress.inputKtpRw.setText(region.name)
     private fun updateUIProvince(region: Region) =
         bindingAddress.inputKtpProvince.setText(region.name)
 

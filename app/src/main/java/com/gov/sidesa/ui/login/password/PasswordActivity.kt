@@ -12,6 +12,7 @@ import com.gov.sidesa.databinding.ActivityPasswordBinding
 import com.gov.sidesa.ui.login.forgotpassword.ForgotPasswordActivity
 import com.gov.sidesa.utils.PreferenceUtils
 import com.gov.sidesa.utils.PreferenceUtils.USER_PREFERENCE
+import com.gov.sidesa.utils.PreferenceUtils.USER_RESPONSE_PREFERENCE
 import com.gov.sidesa.utils.constants.UserExtrasConstant
 import com.gov.sidesa.utils.enums.StatusResponseEnum
 import com.gov.sidesa.utils.extension.observeNonNull
@@ -25,7 +26,7 @@ class PasswordActivity : BaseActivity() {
         intent.getStringExtra(UserExtrasConstant.EXTRA_USER_NIK).orEmpty()
     }
     private val userId by lazy {
-        intent.getStringExtra(UserExtrasConstant.EXTRA_USER_ID).orEmpty()
+        intent.getLongExtra(UserExtrasConstant.EXTRA_USER_ID, 0)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -98,7 +99,7 @@ class PasswordActivity : BaseActivity() {
             buttonLogin.setOnClickListener {
                 when {
                     accountHasRegistered() -> viewModel.login(userNik, inputPassword.text())
-                    accountHasReset() -> viewModel.resetPassword(userId, inputPassword.text())
+                    accountHasReset() -> viewModel.resetPassword(userId.toString(), inputPassword.text())
                     else -> viewModel.createPassword(userNik, inputPassword.text())
                 }
             }
@@ -121,20 +122,25 @@ class PasswordActivity : BaseActivity() {
 
     private fun initObserver() {
         viewModel.apply {
-            userResponseLiveData.observeNonNull(this@PasswordActivity, ::handleUpdateUser)
+//            userResponseLiveData.observeNonNull(this@PasswordActivity, ::handleUpdateUser)
             statusCreatePassword.observeNonNull(this@PasswordActivity, ::handleStatusCreated)
             loadingWidgetLiveData.observeNonNull(this@PasswordActivity, ::handleLoadingWidget)
+            viewModel.closeScreenView.observe(this@PasswordActivity) {
+                doOnSuccessLogin()
+            }
+            serverErrorState.observe(this@PasswordActivity) {
+                showErrorMessage(message = it.message.orEmpty())
+            }
         }
     }
 
     private fun handleStatusCreated(status: String) {
-        if (status == StatusResponseEnum.SUCCESS.status || status == StatusResponseEnum.RESET_PASSWORD.status)
+        if (status == StatusResponseEnum.SUCCESS.status || status == StatusResponseEnum.RESET_PASSWORD_SUCCESS.status)
             viewModel.login(userNik, binding.inputPassword.text())
     }
 
     private fun handleUpdateUser(userResponse: UserResponse) {
-        PreferenceUtils.put(userResponse, USER_PREFERENCE)
-        doOnSuccessLogin()
+        PreferenceUtils.put(userResponse, USER_RESPONSE_PREFERENCE)
     }
 
     private fun doOnSuccessLogin() {

@@ -25,8 +25,8 @@ class EditProfileKTPViewModel(
     val inputKtpPlace = MutableLiveData<String>()
     val inputKtpDob = MutableLiveData<Date>()
     val inputKtpAddress = MutableLiveData<String>()
-    val inputKtpRt = MutableLiveData<String>()
-    val inputKtpRw = MutableLiveData<String>()
+    val inputKtpRt = MutableLiveData<Region>()
+    val inputKtpRw = MutableLiveData<Region>()
     val inputKtpProvince = MutableLiveData<Region>()
     val inputKtpCity = MutableLiveData<Region>()
     val inputKtpKecamatan = MutableLiveData<Region>()
@@ -48,8 +48,8 @@ class EditProfileKTPViewModel(
         inputKtpPlace.value = detail.birthPlace
         inputKtpDob.value = detail.birthDate
         inputKtpAddress.value = detail.address
-        inputKtpRt.value = detail.rt
-        inputKtpRw.value = detail.rw
+        inputKtpRt.value = Region(name = detail.rt)
+        inputKtpRw.value = Region(name = detail.rw)
         inputKtpProvince.value = detail.province.asRegion()
         inputKtpCity.value = detail.city.asRegion(detail.province.id)
         inputKtpKecamatan.value = detail.district.asRegion(detail.city.id)

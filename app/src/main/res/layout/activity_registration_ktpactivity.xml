@@ -43,9 +43,9 @@
         android:layout_margin="20dp"
         android:text="Sebelumnya"
         android:textAllCaps="false"
-        android:background="@drawable/background_approved"
-        android:visibility="gone"
         android:textColor="@color/primary_4FBD1C"
+        android:visibility="gone"
+        android:background="@drawable/background_approved"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/button_next_ktp"
         app:layout_constraintStart_toStartOf="parent" />

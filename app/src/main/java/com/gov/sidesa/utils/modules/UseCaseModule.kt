@@ -16,6 +16,8 @@ import com.gov.sidesa.domain.profile.edit.kk.usecases.UpdateProfileKKUseCase
 import com.gov.sidesa.domain.regions.usecases.city.GetCityUseCase
 import com.gov.sidesa.domain.regions.usecases.district.GetDistrictUseCase
 import com.gov.sidesa.domain.regions.usecases.province.GetProvinceUseCase
+import com.gov.sidesa.domain.regions.usecases.rt.GetRtUseCase
+import com.gov.sidesa.domain.regions.usecases.rw.GetRwUseCase
 import com.gov.sidesa.domain.regions.usecases.village.GetVillageUseCase
 import com.gov.sidesa.domain.registration.RegistrationUseCase
 import com.gov.sidesa.domain.user.usecase.CreatePasswordUseCase
@@ -42,6 +44,8 @@ val UseCaseModule = module {
     single { GetCityUseCase(get()) }
     single { GetDistrictUseCase(get()) }
     single { GetVillageUseCase(get()) }
+    single { GetRwUseCase(get()) }
+    single { GetRtUseCase(get()) }
     single { RegistrationUseCase(get()) }
     single { UpdateDataKTPUseCase(get()) }
     single { UpdateProfileFamilyUseCase(get()) }

@@ -83,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="20dp"
                 android:hint="Desa/Kelurahan"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -117,7 +117,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_layout_ktp_rt"
-                style="@style/InputLayoutStyleOutline"
+                style="@style/InputLayoutStyleDropDown"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -128,19 +128,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/input_layout_address">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
                     android:id="@+id/input_ktp_rt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:digits="1234567890"
-                    android:inputType="number"
-                    android:maxLength="3" />
+                    android:inputType="none"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_layout_ktp_rw"
-                style="@style/InputLayoutStyleOutline"
+                style="@style/InputLayoutStyleDropDown"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -151,13 +149,11 @@
                 app:layout_constraintStart_toEndOf="@id/input_layout_ktp_rt"
                 app:layout_constraintTop_toBottomOf="@id/input_layout_address">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
                     android:id="@+id/input_ktp_rw"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:digits="1234567890"
-                    android:inputType="number"
-                    android:maxLength="3" />
+                    android:inputType="none" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

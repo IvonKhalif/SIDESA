@@ -1,5 +1,6 @@
 package com.gov.sidesa.ui.registration.ktp
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -14,6 +15,7 @@ import com.gov.sidesa.ui.registration.kk.KkAddressFragment
 import com.gov.sidesa.ui.registration.kk.KkBiodataFragment
 import com.gov.sidesa.ui.registration.kk.ReviewKkFragment
 import com.gov.sidesa.ui.registration.kk.UploadKkFragment
+import com.gov.sidesa.utils.constants.LetterConstant
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -309,7 +311,32 @@ class RegistrationKTPActivity : BaseActivity() {
             }
         }
         viewModel.closeScreenView.observe(this@RegistrationKTPActivity) {
+            val intent = Intent()
+            intent.putExtra(LetterConstant.EXTRA_SUCCESS_REGISTRATION, true)
+            setResult(RESULT_OK, intent)
             finish()
+        }
+
+        isBiodataKTPFilled.observe(this@RegistrationKTPActivity) {
+            setEnableNextButton(RegistrationStackState.KtpBiodata, it)
+        }
+        isAddressKTPFilled.observe(this@RegistrationKTPActivity) {
+            setEnableNextButton(RegistrationStackState.KtpAddress, it)
+        }
+        isGeneralKTPFilled.observe(this@RegistrationKTPActivity) {
+            setEnableNextButton(RegistrationStackState.KtpGeneral, it)
+        }
+        isUploadKTPFilled.observe(this@RegistrationKTPActivity) {
+            setEnableNextButton(RegistrationStackState.KtpUpload, it)
+        }
+        isBiodataKKFilled.observe(this@RegistrationKTPActivity) {
+            setEnableNextButton(RegistrationStackState.KkBiodata, it)
+        }
+        isAddressKKFilled.observe(this@RegistrationKTPActivity) {
+            setEnableNextButton(RegistrationStackState.KkAddress, it)
+        }
+        isUploadKKFilled.observe(this@RegistrationKTPActivity) {
+            setEnableNextButton(RegistrationStackState.KkUpload, it)
         }
     }
 
@@ -323,4 +350,7 @@ class RegistrationKTPActivity : BaseActivity() {
             .commit()
     }
 
+    private fun setEnableNextButton(state: RegistrationStackState, isEnable: Boolean) {
+        binding.buttonNextKtp.isEnabled = viewModel.registrationStackState.value == state && isEnable
+    }
 }

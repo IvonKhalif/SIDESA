@@ -56,8 +56,13 @@ class DetailSubmissionLetterActivity : BaseActivity() {
         TypeSubmissionEnum.SUBMISSION.type -> getString(R.string.letter_detail_submission_marker_caption)
         TypeSubmissionEnum.RT_WAITING_Submission.type -> getString(R.string.letter_detail_approval_rt_marker_caption)
         TypeSubmissionEnum.RT_Submission.type -> getString(R.string.letter_detail_has_approval_rt_marker_caption)
+        TypeSubmissionEnum.RT_REJECTED.type -> getString(R.string.letter_detail_has_rejected_rt_marker_caption)
         TypeSubmissionEnum.RW_WAITING_Submission.type -> getString(R.string.letter_detail_approval_rw_marker_caption)
         TypeSubmissionEnum.RW_Submission.type -> getString(R.string.letter_detail_has_approval_rw_marker_caption)
+        TypeSubmissionEnum.RW_REJECTED.type -> getString(R.string.letter_detail_has_rejected_rw_marker_caption)
+        TypeSubmissionEnum.VILLAGE_WAITING_Submission.type -> getString(R.string.letter_detail_approval_village_marker_caption)
+        TypeSubmissionEnum.VILLAGE_Submission.type -> getString(R.string.letter_detail_has_approval_village_marker_caption)
+        TypeSubmissionEnum.VILLAGE_REJECTED.type -> getString(R.string.letter_detail_has_rejected_village_marker_caption)
         TypeSubmissionEnum.LETTER_PRINT_OUT.type -> getString(R.string.letter_detail_already_printed_caption)
         else -> getString(R.string.letter_detail_ready_to_pickup_marker_caption)
     }

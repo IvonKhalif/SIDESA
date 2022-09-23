@@ -1,0 +1,65 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="285dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_component"
+        android:layout_marginEnd="@dimen/margin_component"
+        android:elevation="4dp"
+        app:cardBackgroundColor="@color/background_color_F8FFF5"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_approved">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_coming_soon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_container"
+                android:fontFamily="@font/inter_regular"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/dashboard_coming_soon_headline"
+                android:textColor="@color/green_2B7608"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_feature_coming_soon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_container"
+                android:layout_marginTop="@dimen/margin_component"
+                android:layout_marginEnd="@dimen/margin_container"
+                android:layout_marginBottom="@dimen/margin_container"
+                android:fontFamily="@font/inter_medium"
+                android:lineSpacingExtra="2sp"
+                tools:text="@string/dashboard_welcome_label"
+                android:textColor="@color/green_2B7608"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/image_feature"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_coming_soon" />
+
+            <ImageView
+                android:id="@+id/image_feature"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="@dimen/margin_container"
+                android:contentDescription="@string/general_image_content_description"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_round_app_registration" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

@@ -26,8 +26,13 @@ class LetterSubmissionViewHolder(
 
     fun drawableStatus(status: String) = when (status) {
         TypeSubmissionEnum.RT_WAITING_Submission.type -> R.drawable.background_waiting_approval_rt
+        TypeSubmissionEnum.RT_REJECTED.type -> R.drawable.background_rejected_letter
         TypeSubmissionEnum.RW_WAITING_Submission.type -> R.drawable.background_waiting_approval_rw
+        TypeSubmissionEnum.RW_REJECTED.type -> R.drawable.background_rejected_letter
+        TypeSubmissionEnum.VILLAGE_WAITING_Submission.type -> R.drawable.ic_waiting_approval_village
+        TypeSubmissionEnum.VILLAGE_Submission.type -> R.drawable.background_ready_to_pickup
         TypeSubmissionEnum.FINISH.type -> R.drawable.background_ready_to_pickup
+        TypeSubmissionEnum.LETTER_PRINT_OUT.type -> R.drawable.background_ready_to_pickup
         else -> R.drawable.background_waiting_approval_rt
     }
 

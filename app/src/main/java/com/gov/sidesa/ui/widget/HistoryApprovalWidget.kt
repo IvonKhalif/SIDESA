@@ -37,7 +37,13 @@ class HistoryApprovalWidget @JvmOverloads constructor(
                         it.descriptionType == LetterConstant.TYPE_APPROVAL_WAITING_APPROVE -> setWaitingApproveRw(it)
                 it.typeApproval == LetterConstant.TYPE_APPROVAL_RW &&
                         it.descriptionType == LetterConstant.TYPE_APPROVAL_APPROVE -> setApprovedRw(it)
-                else -> setFinished(it)
+                it.typeApproval == LetterConstant.TYPE_APPROVAL_VILLAGE &&
+                        it.descriptionType == LetterConstant.TYPE_APPROVAL_WAITING_APPROVE -> setWaitingApproveVillage(it)
+                it.typeApproval == LetterConstant.TYPE_APPROVAL_VILLAGE &&
+                        it.descriptionType == LetterConstant.TYPE_APPROVAL_APPROVE -> setApprovedVillage(it)
+                it.typeApproval == TypeSubmissionEnum.FINISH.type &&
+                        it.descriptionType == LetterConstant.TYPE_APPROVAL_APPROVE -> setFinished(it)
+                else -> {}
 
             }
         }
@@ -50,7 +56,7 @@ class HistoryApprovalWidget @JvmOverloads constructor(
     }
 
     private fun setWaitingApproveRt(approvalModel: HistoryApprovalModel) {
-        binding.iconHasApprovalRtMarker.setImageResource(drawableStatus(approvalModel.statusApproval))
+        binding.iconWaitingApprovalRtMarker.setImageResource(drawableStatus(approvalModel.statusApproval))
     }
 
     private fun setApprovedRt(approvalModel: HistoryApprovalModel) {
@@ -73,7 +79,7 @@ class HistoryApprovalWidget @JvmOverloads constructor(
     }
 
     private fun setWaitingApproveRw(approvalModel: HistoryApprovalModel) {
-        binding.iconHasApprovalRwMarker.setImageResource(drawableStatus(approvalModel.statusApproval))
+        binding.iconWaitingApprovalRwMarker.setImageResource(drawableStatus(approvalModel.statusApproval))
     }
 
     private fun setApprovedRw(approvalModel: HistoryApprovalModel) {
@@ -95,8 +101,34 @@ class HistoryApprovalWidget @JvmOverloads constructor(
         }
     }
 
+    private fun setWaitingApproveVillage(approvalModel: HistoryApprovalModel) {
+        binding.iconWaitingApprovalKelurahanMarker.setImageResource(drawableStatus(approvalModel.statusApproval))
+    }
+
+    private fun setApprovedVillage(approvalModel: HistoryApprovalModel) {
+        binding.textHasApprovalKelurahanDate.text = approvalModel.createdDate
+        binding.iconHasApprovalKelurahanMarker.setImageResource(drawableStatus(approvalModel.statusApproval))
+        when {
+            approvalModel.statusApproval.toInt() == REJECTED_STATUS -> {
+                binding.textHasApprovalKelurahanRejected.isVisible = true
+                binding.textHasApprovalKelurahanDate.isVisible = false
+            }
+            approvalModel.statusApproval.toInt() == APPROVED_STATUS -> {
+                binding.textHasApprovalRwRejected.isVisible = false
+                binding.textHasApprovalKelurahanDate.isVisible = true
+            }
+            else -> {
+                binding.textHasApprovalKelurahanRejected.isVisible = false
+                binding.textHasApprovalKelurahanDate.isVisible = true
+            }
+        }
+    }
+
     private fun setFinished(approvalModel: HistoryApprovalModel) {
-        binding.iconReadyToPickupMarker.setImageResource(drawableStatus(approvalModel.statusApproval))
+        binding.iconReadyToPickupMarker.setImageResource(
+//            R.drawable.ic_history_green
+            drawableStatus(approvalModel.statusApproval)
+        )
     }
 
     private fun drawableStatus(status: String) = when (status.toInt()) {

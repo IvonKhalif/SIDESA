@@ -9,6 +9,8 @@ import com.gov.sidesa.domain.regions.models.Region
 import com.gov.sidesa.domain.regions.usecases.city.GetCityUseCase
 import com.gov.sidesa.domain.regions.usecases.district.GetDistrictUseCase
 import com.gov.sidesa.domain.regions.usecases.province.GetProvinceUseCase
+import com.gov.sidesa.domain.regions.usecases.rt.GetRtUseCase
+import com.gov.sidesa.domain.regions.usecases.rw.GetRwUseCase
 import com.gov.sidesa.domain.regions.usecases.village.GetVillageUseCase
 import com.haroldadmin.cnradapter.NetworkResponse
 import kotlinx.coroutines.launch
@@ -23,7 +25,9 @@ class SelectRegionViewModel(
     private val getProvinceUseCase: GetProvinceUseCase,
     private val getCityUseCase: GetCityUseCase,
     private val getDistrictUseCase: GetDistrictUseCase,
-    private val getVillageUseCase: GetVillageUseCase
+    private val getVillageUseCase: GetVillageUseCase,
+    private val getRwUseCase: GetRwUseCase,
+    private val getRtUseCase: GetRtUseCase
 ) : BaseViewModel() {
 
     private val _titleText = MutableLiveData<Int>()
@@ -39,14 +43,18 @@ class SelectRegionViewModel(
         regionType: Int,
         provinceId: Long,
         cityId: Long,
-        districtId: Long
+        districtId: Long,
+        villageId: Long,
+        rw: String
     ) = viewModelScope.launch {
         setTitle(regionType = regionType)
         getRegions(
             regionType = regionType,
             provinceId = provinceId,
             cityId = cityId,
-            districtId = districtId
+            districtId = districtId,
+            villageId = villageId,
+            rw = rw
         )
     }
 
@@ -63,13 +71,17 @@ class SelectRegionViewModel(
         regionType: Int,
         provinceId: Long,
         cityId: Long,
-        districtId: Long
+        districtId: Long,
+        villageId: Long,
+        rw: String
     ) {
         when (regionType) {
             RegionType.Province.type -> getProvince()
             RegionType.City.type -> getCity(provinceId = provinceId)
             RegionType.District.type -> getDistrict(cityId = cityId)
-            else -> getVillage(districtId = districtId)
+            RegionType.Village.type -> getVillage(districtId = districtId)
+            RegionType.Rw.type -> getRw(villageId = villageId)
+            else -> getRt(villageId = villageId, rw = rw)
         }
     }
 
@@ -125,6 +137,38 @@ class SelectRegionViewModel(
         showLoadingWidget()
 
         when (val result = getVillageUseCase.invoke(districtId = districtId)) {
+            is NetworkResponse.Success -> {
+                _regionData.value = result.body
+            }
+            else -> {
+                onResponseNotSuccess(response = result)
+                _closeViewState.value = Unit
+            }
+        }
+
+        hideLoadingWidget()
+    }
+
+    private fun getRw(villageId: Long) = viewModelScope.launch {
+        showLoadingWidget()
+
+        when (val result = getRwUseCase.invoke(villageId = villageId)) {
+            is NetworkResponse.Success -> {
+                _regionData.value = result.body
+            }
+            else -> {
+                onResponseNotSuccess(response = result)
+                _closeViewState.value = Unit
+            }
+        }
+
+        hideLoadingWidget()
+    }
+
+    private fun getRt(villageId: Long, rw: String) = viewModelScope.launch {
+        showLoadingWidget()
+
+        when (val result = getRtUseCase.invoke(villageId = villageId, rw = rw)) {
             is NetworkResponse.Success -> {
                 _regionData.value = result.body
             }

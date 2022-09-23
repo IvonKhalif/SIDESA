@@ -10,4 +10,6 @@ sealed class RegionType(val type: Int) {
     object City : RegionType(type = 2)
     object District : RegionType(type = 3)
     object Village : RegionType(type = 4)
+    object Rw : RegionType(type = 5)
+    object Rt : RegionType(type = 6)
 }

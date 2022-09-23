@@ -1,9 +1,6 @@
 package com.gov.sidesa.data.region.service
 
-import com.gov.sidesa.data.region.models.CityResponse
-import com.gov.sidesa.data.region.models.DistrictResponse
-import com.gov.sidesa.data.region.models.ProvinceResponse
-import com.gov.sidesa.data.region.models.VillageResponse
+import com.gov.sidesa.data.region.models.*
 import com.gov.sidesa.utils.constants.ContentTypeConstant
 import com.gov.sidesa.utils.response.GenericErrorResponse
 import com.gov.sidesa.utils.response.RetrofitListResponse
@@ -40,4 +37,17 @@ interface RegionService {
     suspend fun getVillage(
         @Query("id_kecamatan") districtId: Long
     ): NetworkResponse<RetrofitListResponse<VillageResponse>, GenericErrorResponse>
+
+    @GET("master/kelurahan/rw")
+    @Headers(ContentTypeConstant.CONTENT_TYPE_JSON)
+    suspend fun getRW(
+        @Query("id_kelurahan") villageId: Long
+    ): NetworkResponse<RetrofitListResponse<RtRwResponse>, GenericErrorResponse>
+
+    @GET("master/kelurahan/rt")
+    @Headers(ContentTypeConstant.CONTENT_TYPE_JSON)
+    suspend fun getRT(
+        @Query("id_kelurahan") villageId: Long,
+        @Query("rw") rw: String
+    ): NetworkResponse<RetrofitListResponse<RtRwResponse>, GenericErrorResponse>
 }

@@ -46,6 +46,12 @@ open class SelectRegionBottomSheet private constructor(): BaseBottomSheet() {
     private val argsDistrictId by lazy {
         arguments?.getLong(ARGS_DISTRICT_ID) ?: -1
     }
+    private val argsVillageId by lazy {
+        arguments?.getLong(ARGS_VILLAGE_ID) ?: -1
+    }
+    private val argsRwId by lazy {
+        arguments?.getString(ARGS_RW) ?: ""
+    }
 
     var onSelected: (Region) -> Unit = {}
 
@@ -64,7 +70,9 @@ open class SelectRegionBottomSheet private constructor(): BaseBottomSheet() {
             regionType = argsRegionType,
             provinceId = argsProvinceId,
             cityId = argsCityId,
-            districtId = argsDistrictId
+            districtId = argsDistrictId,
+            villageId = argsVillageId,
+            rw = argsRwId
         )
         initObserver()
         initView()
@@ -123,6 +131,8 @@ open class SelectRegionBottomSheet private constructor(): BaseBottomSheet() {
         private const val ARGS_PROVINCE_ID = "args_province_id"
         private const val ARGS_CITY_ID = "args_city_id"
         private const val ARGS_DISTRICT_ID = "args_district_id"
+        private const val ARGS_VILLAGE_ID = "args_village_id"
+        private const val ARGS_RW = "args_rw"
 
         fun createProvince(): SelectRegionBottomSheet {
             val dialog = SelectRegionBottomSheet()
@@ -155,6 +165,25 @@ open class SelectRegionBottomSheet private constructor(): BaseBottomSheet() {
             dialog.arguments = Bundle().apply {
                 putInt(ARGS_REGION_TYPE, RegionType.Village.type)
                 putLong(ARGS_DISTRICT_ID, districtId)
+            }
+            return dialog
+        }
+
+        fun createRW(villageId: Long): SelectRegionBottomSheet {
+            val dialog = SelectRegionBottomSheet()
+            dialog.arguments = Bundle().apply {
+                putInt(ARGS_REGION_TYPE, RegionType.Rw.type)
+                putLong(ARGS_VILLAGE_ID, villageId)
+            }
+            return dialog
+        }
+
+        fun createRT(villageId: Long, rw: String): SelectRegionBottomSheet {
+            val dialog = SelectRegionBottomSheet()
+            dialog.arguments = Bundle().apply {
+                putInt(ARGS_REGION_TYPE, RegionType.Rt.type)
+                putString(ARGS_RW, rw)
+                putLong(ARGS_VILLAGE_ID, villageId)
             }
             return dialog
         }

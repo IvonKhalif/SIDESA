@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.google.gson.Gson
 import com.gov.sidesa.R
 import com.gov.sidesa.data.registration.ktp.GeneralKtpModel
@@ -24,7 +25,7 @@ class GeneralKtpFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentGeneralKtpBinding
-    private val viewModel: RegistrationKTPViewModel by viewModel()
+    private val viewModel: RegistrationKTPViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,12 +61,13 @@ class GeneralKtpFragment : Fragment() {
         setDropDownMarriageStatus()
         setDropDownJob()
         setDropDownNationality()
+        checkGeneralDataFilled()
     }
 
     private fun restoreUserData() = with(binding.customKtpGeneral) {
         PreferenceUtils.getAccount()?.let {
             inputKtpReligion.setText(it.religion)
-            inputKtpMarriage.setText(it.maritalStatus)
+//            inputKtpMarriage.setText(it.maritalStatus)
             inputKtpJob.setText(it.job)
             inputKtpNationality.setText(it.citizenship)
         }
@@ -77,6 +79,9 @@ class GeneralKtpFragment : Fragment() {
         val religionAutoComplete =
             binding.root.findViewById<AutoCompleteTextView>(R.id.input_ktp_religion)
         religionAutoComplete.setAdapter(religionAdapter)
+        religionAutoComplete.setOnItemClickListener { _, _, _, _ ->
+            checkGeneralDataFilled()
+        }
     }
 
     private fun setDropDownMarriageStatus() {
@@ -86,6 +91,9 @@ class GeneralKtpFragment : Fragment() {
         val marriageStatusAutoComplete =
             binding.root.findViewById<AutoCompleteTextView>(R.id.input_ktp_marriage)
         marriageStatusAutoComplete.setAdapter(marriageStatusAdapter)
+        marriageStatusAutoComplete.setOnItemClickListener { _, _, _, _ ->
+            checkGeneralDataFilled()
+        }
     }
 
     private fun setDropDownJob() {
@@ -93,6 +101,9 @@ class GeneralKtpFragment : Fragment() {
         val jobAdapter = ArrayAdapter(requireContext(), R.layout.item_dropdown, jobList)
         val jobAutoComplete = binding.root.findViewById<AutoCompleteTextView>(R.id.input_ktp_job)
         jobAutoComplete.setAdapter(jobAdapter)
+        jobAutoComplete.setOnItemClickListener { _, _, _, _ ->
+            checkGeneralDataFilled()
+        }
     }
 
     private fun setDropDownNationality() {
@@ -102,5 +113,21 @@ class GeneralKtpFragment : Fragment() {
         val nationalityAutoComplete =
             binding.root.findViewById<AutoCompleteTextView>(R.id.input_ktp_nationality)
         nationalityAutoComplete.setAdapter(nationalityAdapter)
+        nationalityAutoComplete.setOnItemClickListener { _, _, _, _ ->
+            checkGeneralDataFilled()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        checkGeneralDataFilled()
+    }
+
+    private fun checkGeneralDataFilled() {
+        viewModel.isGeneralKTPFilled.value =
+            binding.customKtpGeneral.inputKtpReligion.text.toString().isNotBlank() &&
+                    binding.customKtpGeneral.inputKtpMarriage.text.toString().isNotBlank() &&
+                    binding.customKtpGeneral.inputKtpJob.text.toString().isNotBlank() &&
+                    binding.customKtpGeneral.inputKtpNationality.text.toString().isNotBlank()
     }
 }

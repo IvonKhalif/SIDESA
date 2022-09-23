@@ -17,6 +17,7 @@
     <string name="general_action_see_all">Lihat Semua</string>
     <string name="general_captio_all">Semua</string>
     <string name="general_success">Berhasil</string>
+    <string name="general_name">Nama</string>
 
     <!--  Login  -->
     <string name="login_title">Login</string>
@@ -106,11 +107,15 @@
     <string name="dashboard_submission_list_caption">Daftar Pengajuan</string>
     <string name="dashboard_must_regist_first_headline">Kamu Harus Registrasi Terlebih Dahulu</string>
     <string name="dashboard_must_regist_first_subheadline">Kamu tidak bisa akses ke menu ini, karena harus mengisi registrasi data terlebih dahulu.</string>
+    <string name="dashboard_coming_soon_headline">Akan Segera Hadir</string>
+    <string name="dashboard_coming_soon_complaint_service">Layanan Pengaduan Desa</string>
+    <string name="dashboard_coming_soon_village_news">Berita Desa</string>
 
     <!--  Letter List  -->
     <string name="letter_list_empty_state_caption">Belum ada daftar pengajuan</string>
     <string name="letter_list_waiting_approval_rt_caption">Menunggu Disetujui RT</string>
     <string name="letter_list_waiting_approval_rw_caption">Menunggu Disetujui RW</string>
+    <string name="letter_list_waiting_approval_village_caption">Menunggu Disetujui Desa/Kelurahan</string>
     <string name="letter_list_ready_for_pickup_caption">Surat Siap Diambil Di Kelurahan</string>
     <string name="letter_list_need_approval_title">Daftar Surat Persetujuan</string>
     <string name="letter_list_submission_title">Daftar Surat Yang Diajukan</string>
@@ -118,6 +123,7 @@
     <string name="letter_list_signed_title">Sudah Disetujui</string>
 
     <!--  Letter Detail  -->
+    <string name="letter_detail_approval_ktp_number_title">Nomor KTP</string>
     <string name="letter_detail_submission_title">Rincian Surat Pengajuan</string>
     <string name="letter_detail_id_letter_caption">ID Surat</string>
     <string name="letter_detail_letter_type_caption">Jenis Surat</string>
@@ -130,8 +136,13 @@
     <string name="letter_detail_history_submission_caption">Riwayat Pengajuan</string>
     <string name="letter_detail_approval_rt_marker_caption">Menunggu Disetujui RT</string>
     <string name="letter_detail_has_approval_rt_marker_caption">Sudah Disetujui RT</string>
+    <string name="letter_detail_has_rejected_rt_marker_caption">Surat Ditolak RT</string>
     <string name="letter_detail_approval_rw_marker_caption">Menunggu Disetujui RW</string>
     <string name="letter_detail_has_approval_rw_marker_caption">Sudah Disetujui RW</string>
+    <string name="letter_detail_has_rejected_rw_marker_caption">Surat Ditolak RW</string>
+    <string name="letter_detail_approval_village_marker_caption">Menunggu Disetujui Desa/Kelurahan</string>
+    <string name="letter_detail_has_approval_village_marker_caption">Sudah Disetujui Desa/Kelurahan</string>
+    <string name="letter_detail_has_rejected_village_marker_caption">Surat Ditolak Desa/Kelurahan</string>
     <string name="letter_detail_ready_to_pickup_marker_caption">Surat Siap Diambil Di Kelurahan</string>
     <string name="letter_detail_already_printed_caption">Surat Sudah Dicetak</string>
     <string name="letter_detail_rejected_caption">Surat Ditolak</string>
@@ -275,6 +286,8 @@
     <string name="fullname">Nama Lengkap</string>
 
     <!--  KTP  -->
+    <string name="rw_has_not_been_selected">RW belum dipilih</string>
+    <string name="village_has_not_been_selected">Kelurahan belum dipilih</string>
     <string name="district_has_not_been_selected">Kecamatan belum dipilih</string>
     <string name="city_has_not_been_selected">Kota belum dipilih</string>
     <string name="province_has_not_been_selected">Provinsi belum dipilih</string>

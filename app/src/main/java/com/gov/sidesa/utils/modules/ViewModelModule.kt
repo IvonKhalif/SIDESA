@@ -24,7 +24,7 @@ import org.koin.dsl.module
 @FlowPreview
 val ViewModelModule = module {
     viewModel { LoginViewModel(get()) }
-    viewModel { PasswordViewModel(get(), get(), get()) }
+    viewModel { PasswordViewModel(get(), get(), get(), ) }
     viewModel { LetterInputViewModel(get(), get(), get()) }
     viewModel { LetterTemplateViewModel(get()) }
     viewModel { RegistrationKTPViewModel(get(), get()) }
@@ -32,10 +32,10 @@ val ViewModelModule = module {
     viewModel { DetailProfileFamilyViewModel(get()) }
     viewModel { DetailProfileKKViewModel(get()) }
     viewModel { DetailProfileKTPViewModel(get()) }
-    viewModel { SelectRegionViewModel(get(), get(), get(), get()) }
+    viewModel { SelectRegionViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { EditProfileFamilyViewModel(get(), get()) }
     viewModel { DetailApprovalViewModel(get(), get()) }
-    viewModel { DashboardViewModel(get(), get()) }
+    viewModel { DashboardViewModel(get(), get(), get()) }
     viewModel { TabLetterListViewModel(get(), get()) }
     viewModel { DetailSubmissionLetterViewModel(get()) }
     viewModel { EditProfileKTPViewModel(get()) }

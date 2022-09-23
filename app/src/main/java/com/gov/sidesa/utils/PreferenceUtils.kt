@@ -9,6 +9,7 @@ import com.gov.sidesa.domain.profile.detail.family.models.ProfileFamily
 object PreferenceUtils {
     private const val EDITOR_NAME = "ContainerPreferences"
     const val USER_PREFERENCE = "USER_PREFERENCE"
+    const val USER_RESPONSE_PREFERENCE = "USER_RESPONSE_PREFERENCE"
     const val LOCATION_LIST_PREFERENCE = "LOCATION_LIST_PREFERENCE"
 
     lateinit var preferences: SharedPreferences
@@ -43,7 +44,7 @@ object PreferenceUtils {
 
     fun getAccount() = getProfile()?.account
 
-    fun getAccountUserResponse() = get<UserResponse>(USER_PREFERENCE)
+    fun getAccountUserResponse() = get<UserResponse>(USER_RESPONSE_PREFERENCE)
 
     fun getFamily() = getProfile()?.family
 }

@@ -34,6 +34,24 @@ class RegistrationKTPViewModel(
     val inputKtpCity = MutableLiveData<Region>()
     val inputKtpKecamatan = MutableLiveData<Region>()
     val inputKtpKelurahan = MutableLiveData<Region>()
+    val inputKtpRw = MutableLiveData<Region>()
+    val inputKtpRt = MutableLiveData<Region>()
+
+    val inputKKProvince = MutableLiveData<Region>()
+    val inputKKCity = MutableLiveData<Region>()
+    val inputKKKecamatan = MutableLiveData<Region>()
+    val inputKKKelurahan = MutableLiveData<Region>()
+    val inputKKRw = MutableLiveData<Region>()
+    val inputKKRt = MutableLiveData<Region>()
+
+    val isBiodataKTPFilled = MutableLiveData<Boolean>()
+    val isAddressKTPFilled = MutableLiveData<Boolean>()
+    val isGeneralKTPFilled = MutableLiveData<Boolean>()
+    val isUploadKTPFilled = MutableLiveData<Boolean>()
+
+    val isBiodataKKFilled = MutableLiveData<Boolean>()
+    val isAddressKKFilled = MutableLiveData<Boolean>()
+    val isUploadKKFilled = MutableLiveData<Boolean>()
 
     private val _closeScreenView = MutableLiveData<Unit>()
     val closeScreenView: LiveData<Unit> get() = _closeScreenView
@@ -185,10 +203,10 @@ class RegistrationKTPViewModel(
             marriageStatus = generalModel.marriageStatus,
             job = generalModel.job,
             address = addressModel.address,
-            provinceId = "36",
-            cityId = "3603",
-            kecamatanId = "3603120",
-            kelurahanId = "3603120010",
+            provinceId = inputKtpProvince.value?.id.orZero().toString(),
+            cityId = inputKtpCity.value?.id.orZero().toString(),
+            kecamatanId = inputKtpKecamatan.value?.id.orZero().toString(),
+            kelurahanId = inputKtpKelurahan.value?.id.orZero().toString(),
             rt = addressModel.rt,
             rw = addressModel.rw,
             nationality = generalModel.nationality,
@@ -238,8 +256,8 @@ class RegistrationKTPViewModel(
             put("alamat_family[${index}]", addressKtpModel?.address.orEmpty())
             put("rt_family[${index}]", addressKtpModel?.rt.orEmpty())
             put("rw_family[${index}]", addressKtpModel?.rw.orEmpty())
-            put("id_kelurahan_family[${index}]", addressKtpModel?.kelurahan.orEmpty())
-            put("id_kecamatan_family[${index}]", addressKtpModel?.kecamatan.orEmpty())
+//            put("id_kelurahan_family[${index}]", addressKtpModel?.kelurahan.orEmpty())
+//            put("id_kecamatan_family[${index}]", addressKtpModel?.kecamatan.orEmpty())
         }
 
         return familyMap

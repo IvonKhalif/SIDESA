@@ -9,10 +9,12 @@ import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseActivity
 import com.gov.sidesa.base.showImmediately
 import com.gov.sidesa.databinding.ActivityDashboardBinding
+import com.gov.sidesa.domain.comingsoon.models.ComingSoonModel
 import com.gov.sidesa.domain.letter.list.models.LetterApprovalModel
 import com.gov.sidesa.domain.letter.list.models.LetterListApprovalModel
 import com.gov.sidesa.domain.letter.list.models.LetterSubmissionModel
 import com.gov.sidesa.ui.approval.DetailApprovalLetterActivity
+import com.gov.sidesa.ui.dashboard.comingsoon.ComingSoonAdapter
 import com.gov.sidesa.ui.letter.detail.DetailSubmissionLetterActivity
 import com.gov.sidesa.ui.letter.list.LetterListActivity
 import com.gov.sidesa.ui.letter.list.needapproval.LetterNeedApprovalAdapter
@@ -28,8 +30,10 @@ import com.gov.sidesa.utils.constants.LetterConstant.EXTRA_LETTER_TYPE
 import com.gov.sidesa.utils.constants.LetterConstant.EXTRA_SUBMISSION_HAS_APPROVED
 import com.gov.sidesa.utils.constants.LetterConstant.EXTRA_SUBMISSION_HAS_REJECTED
 import com.gov.sidesa.utils.constants.LetterConstant.EXTRA_SUBMISSION_LETTER_ID
+import com.gov.sidesa.utils.constants.LetterConstant.EXTRA_SUCCESS_REGISTRATION
 import com.gov.sidesa.utils.constants.UserExtrasConstant.PROFILE_NOT_COMPLETE
 import com.gov.sidesa.utils.enums.CategoryLetterEnum
+import com.gov.sidesa.utils.enums.TypeApprovalEnum
 import com.gov.sidesa.utils.extension.observeNonNull
 import kotlinx.coroutines.FlowPreview
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -40,7 +44,6 @@ class DashboardActivity : BaseActivity() {
 
     private val viewModel by viewModel<DashboardViewModel>()
     private var actor = ""
-    private val user get() = PreferenceUtils.getAccountUserResponse()
 
     private val submissionAdapter by lazy {
         LetterSubmissionAdapter(
@@ -50,6 +53,15 @@ class DashboardActivity : BaseActivity() {
     private val needApprovalAdapter by lazy {
         LetterNeedApprovalAdapter(
             emptyList(), ::onItemNeedApprovalClick
+        )
+    }
+
+    private val comingSoonAdapter by lazy {
+        ComingSoonAdapter(
+            listOf(
+                ComingSoonModel(R.drawable.ic_call, getString(R.string.dashboard_coming_soon_complaint_service)),
+                ComingSoonModel(R.drawable.ic_news, getString(R.string.dashboard_coming_soon_village_news))
+            )
         )
     }
 
@@ -64,7 +76,6 @@ class DashboardActivity : BaseActivity() {
 
     private fun mainView() {
         with(binding) {
-            buttonRegisterNow.isVisible = user?.statusUser == PROFILE_NOT_COMPLETE
             recyclerNeedApproval.adapter = needApprovalAdapter
             recyclerNeedApproval.layoutManager = LinearLayoutManager(
                 this@DashboardActivity,
@@ -77,8 +88,15 @@ class DashboardActivity : BaseActivity() {
                 LinearLayoutManager.VERTICAL,
                 false
             )
+            recyclerComingSoonFeature.adapter = comingSoonAdapter
+            recyclerComingSoonFeature.layoutManager = LinearLayoutManager(
+                this@DashboardActivity,
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
 
             buttonAccount.setOnClickListener {
+
                 doClickOtherThanRegister {
                     startActivity(Intent(this@DashboardActivity, ProfileActivity::class.java))
                 }
@@ -97,7 +115,8 @@ class DashboardActivity : BaseActivity() {
                 doClickOtherThanRegister(::goToLetterTemplate)
             }
             buttonRegisterNow.setOnClickListener {
-                startActivity(Intent(this@DashboardActivity, RegistrationKTPActivity::class.java))
+                val intent = Intent(this@DashboardActivity, RegistrationKTPActivity::class.java)
+                resultLauncher.launch(intent)
             }
         }
     }
@@ -106,7 +125,9 @@ class DashboardActivity : BaseActivity() {
         notificationState.observe(this@DashboardActivity) {
             showNotification(title = it.first, description = it.second)
         }
-
+        userProfileLiveData.observe(this@DashboardActivity) {
+            binding.buttonRegisterNow.isVisible = it.account.statusUser == PROFILE_NOT_COMPLETE
+        }
         submissionLettersLiveData.observeNonNull(this@DashboardActivity, ::handleSubmissionLetters)
         approvalLettersLiveData.observeNonNull(this@DashboardActivity, ::handleApprovalLetters)
         loadingState.observe(this@DashboardActivity) {
@@ -125,7 +146,9 @@ class DashboardActivity : BaseActivity() {
             else -> ""
         }
         if (letterApprovalModel.profile.isRt || letterApprovalModel.profile.isRw) {
-            needApprovalAdapter.items = letterApprovalModel.letters
+            needApprovalAdapter.items = letterApprovalModel.letters.filter {
+                it.letterDetail == TypeApprovalEnum.NOT_APPROVED_YET.type
+            }
             if (letterApprovalModel.letters.isNotEmpty())
                 binding.containerNeedApproval.isVisible = true
         }
@@ -181,7 +204,7 @@ class DashboardActivity : BaseActivity() {
      */
     private fun showNotification(title: String, description: String) {
         val tag = "notification_tag"
-        viewModel.getSubmissionLetters()
+        viewModel.updateDataUserLocal()
         showImmediately(supportFragmentManager, tag) {
             NotificationBottomSheet.newInstance(
                 title = title,
@@ -195,7 +218,6 @@ class DashboardActivity : BaseActivity() {
         val user = PreferenceUtils.getProfile()?.account
         val letterType = result?.getStringExtra(EXTRA_LETTER_TYPE).orEmpty()
         if (result?.getBooleanExtra(EXTRA_SUBMISSION_HAS_APPROVED, false) == true) {
-            viewModel.getSubmissionLetters()
             showNotification(
                 getString(R.string.letter_detail_success_approve_submission_headline),
                 getString(
@@ -205,7 +227,6 @@ class DashboardActivity : BaseActivity() {
                 )
             )
         } else if (result?.getBooleanExtra(EXTRA_SUBMISSION_HAS_REJECTED, false) == true) {
-            viewModel.getSubmissionLetters()
             showNotification(
                 getString(R.string.letter_detail_success_reject_submission_headline),
                 getString(
@@ -214,10 +235,13 @@ class DashboardActivity : BaseActivity() {
                     user?.name.orEmpty()
                 )
             )
+        } else if (result?.getBooleanExtra(EXTRA_SUCCESS_REGISTRATION, false) == true) {
+            viewModel.updateDataUserLocal()
         }
     }
 
     private fun doClickOtherThanRegister(onHasRegister: () -> Unit) {
+        val user = viewModel.userProfileLiveData.value?.account
         if (user?.statusUser == PROFILE_NOT_COMPLETE)
             showNotification(
                 getString(R.string.dashboard_must_regist_first_headline),

@@ -1,5 +1,7 @@
 package com.gov.sidesa.data.registration.ktp
 
+import com.gov.sidesa.domain.regions.models.Region
+
 data class BiodataKtpModel(
     val nik: String,
     val fullName: String,
@@ -13,8 +15,10 @@ data class AddressKtpModel(
     val address: String,
     val rt: String,
     val rw: String,
-    val kecamatan: String,
-    val kelurahan: String
+    val province: Region? = null,
+    val city: Region? = null,
+    val kecamatan: Region? = null,
+    val kelurahan: Region? = null
 )
 
 data class GeneralKtpModel(

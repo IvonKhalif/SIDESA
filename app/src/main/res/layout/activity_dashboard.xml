@@ -172,15 +172,38 @@
                     app:layout_constraintStart_toEndOf="@id/text_create_letter_caption"
                     app:layout_constraintTop_toBottomOf="@id/button_register_now" />
 
+                <View
+                    android:id="@+id/divider_1"
+                    android:layout_width="0dp"
+                    android:layout_height="3dp"
+                    android:background="@color/grey_ECECEC"
+                    android:layout_marginTop="@dimen/icon_default"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/button_choose_letter" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_coming_soon_feature"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_container"
+                    android:layout_marginStart="@dimen/margin_component"
+                    android:layout_marginEnd="@dimen/margin_component"
+                    android:overScrollMode="never"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider_1"
+                    tools:listitem="@layout/item_coming_soon_feature" />
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/container_need_approval"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/icon_default"
+                    android:layout_marginTop="@dimen/margin_container"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/button_choose_letter">
+                    app:layout_constraintTop_toBottomOf="@id/recycler_coming_soon_feature">
 
                     <View
                         android:id="@+id/divider_need_approval"

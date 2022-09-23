@@ -2,12 +2,16 @@ package com.gov.sidesa.ui.registration.ktp
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import com.gov.sidesa.databinding.FragmentUploadKtpBinding
 import com.gov.sidesa.ui.registration.RegistrationStackState
@@ -20,6 +24,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.ByteArrayOutputStream
 import java.io.File
 
+
 class UploadKtpFragment : Fragment() {
 
     companion object {
@@ -29,7 +34,7 @@ class UploadKtpFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentUploadKtpBinding
-    private val viewModel: RegistrationKTPViewModel by viewModel()
+    private val viewModel: RegistrationKTPViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,6 +56,8 @@ class UploadKtpFragment : Fragment() {
                 .load(pref)
                 .into(binding.imageKtp)
         }
+
+        checkKTPUploaded()
     }
 
     override fun onPause() {
@@ -68,6 +75,7 @@ class UploadKtpFragment : Fragment() {
 
         PreferenceUtils.getAccount()?.imageKTP?.let {
             binding.imageKtp.load(it)
+            checkKTPUploaded()
         }
 
         binding.buttonPickKtp.setOnClickListener {
@@ -77,6 +85,8 @@ class UploadKtpFragment : Fragment() {
         binding.buttonEditKtp.setOnClickListener {
             showMediaDialog()
         }
+
+        checkKTPUploaded()
     }
 
     private fun showMediaDialog() {
@@ -86,6 +96,7 @@ class UploadKtpFragment : Fragment() {
             setImageKtp(it)
             binding.buttonPickKtp.gone()
             media.dismissAllowingStateLoss()
+            checkKTPUploaded()
         }
 
         media.showNow(childFragmentManager, media.javaClass.canonicalName)
@@ -112,4 +123,17 @@ class UploadKtpFragment : Fragment() {
         return base64
     }
 
+    private fun checkKTPUploaded() {
+        viewModel.isUploadKTPFilled.value =
+            hasImage(binding.imageKtp)
+    }
+
+    private fun hasImage(view: ImageView?): Boolean {
+        val drawable: Drawable? = view?.drawable
+        var hasImage = drawable == null
+        if (hasImage && drawable is BitmapDrawable) {
+            hasImage = drawable.bitmap != null
+        }
+        return hasImage
+    }
 }

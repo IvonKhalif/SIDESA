@@ -11,8 +11,8 @@ abstract class BaseFragment: Fragment() {
 
     var loadingDialog: LoadingDialogWidget? = null
 
-    protected val baseActivity: com.gov.sidesa.base.BaseActivity
-        get() = requireActivity() as com.gov.sidesa.base.BaseActivity
+    protected val baseActivity: BaseActivity
+        get() = requireActivity() as BaseActivity
 
     var resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -24,6 +24,15 @@ abstract class BaseFragment: Fragment() {
         }
 
     open fun onResultData(result: Intent?) {}
+
+    fun showSuccessMessage(message: String) =
+        activity?.let { (activity as? BaseActivity)?.customToast(it, message, ToastConstant.CUSTOM_TOAST_SUCCESS) }
+
+    fun showErrorMessage(message: String) =
+        activity?.let { (activity as? BaseActivity)?.customToast(it, message, ToastConstant.CUSTOM_TOAST_ERROR) }
+
+    fun showErrorMessage(throwable: Throwable) =
+        activity?.let { (activity as? BaseActivity)?.customToast(it, throwable.message.orEmpty(), ToastConstant.CUSTOM_TOAST_ERROR) }
 
     fun handleLoadingWidget(fragmentManager: FragmentManager, isLoading: Boolean) {
         if (isLoading) showLoadingWidget(fragmentManager) else hideLoadingWidget()
@@ -39,8 +48,5 @@ abstract class BaseFragment: Fragment() {
     private fun hideLoadingWidget() {
         loadingDialog?.dismissAllowingStateLoss()
     }
-
-    fun showErrorMessage(message: String) =
-        baseActivity.customToast(baseActivity, message, ToastConstant.CUSTOM_TOAST_ERROR)
 
 }

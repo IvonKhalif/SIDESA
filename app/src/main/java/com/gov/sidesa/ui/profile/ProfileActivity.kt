@@ -12,6 +12,7 @@ import com.gov.sidesa.ui.profile.detail.kk.DetailProfileKKActivity
 import com.gov.sidesa.ui.profile.detail.ktp.DetailProfileKTPActivity
 import com.gov.sidesa.utils.PreferenceUtils
 import com.gov.sidesa.utils.PreferenceUtils.USER_PREFERENCE
+import com.gov.sidesa.utils.PreferenceUtils.USER_RESPONSE_PREFERENCE
 
 class ProfileActivity : BaseActivity() {
 
@@ -75,6 +76,7 @@ class ProfileActivity : BaseActivity() {
 
         binding.buttonLogout.setOnClickListener {
             PreferenceUtils.put(null, USER_PREFERENCE)
+            PreferenceUtils.put(null, USER_RESPONSE_PREFERENCE)
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()

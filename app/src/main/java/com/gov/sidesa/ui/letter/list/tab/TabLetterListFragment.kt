@@ -25,6 +25,7 @@ import com.gov.sidesa.utils.PreferenceUtils
 import com.gov.sidesa.utils.constants.LetterConstant
 import com.gov.sidesa.utils.constants.LetterConstant.ARG_IS_SUBMISSION_PAGE
 import com.gov.sidesa.utils.constants.LetterConstant.ARG_TAB_CATEGORY
+import com.gov.sidesa.utils.enums.TypeSubmissionEnum
 import com.gov.sidesa.utils.extension.observeNonNull
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -161,9 +162,14 @@ class TabLetterListFragment : BaseFragment() {
         if (category.isNullOrBlank())
             submissionAdapter.items = list
         else
-            submissionAdapter.items = list.filter {
-                it.letterStatus == category
-            }
+            if (category == TypeSubmissionEnum.FINISH.type)
+                submissionAdapter.items = list.filter {
+                    it.letterStatus == category || it.letterStatus == TypeSubmissionEnum.LETTER_PRINT_OUT.type
+                }
+            else
+                submissionAdapter.items = list.filter {
+                    it.letterStatus == category
+                }
     }
 
     override fun onResultData(result: Intent?) {
@@ -180,7 +186,11 @@ class TabLetterListFragment : BaseFragment() {
                     user?.name.orEmpty()
                 )
             )
-        } else if (result?.getBooleanExtra(LetterConstant.EXTRA_SUBMISSION_HAS_REJECTED, false) == true) {
+        } else if (result?.getBooleanExtra(
+                LetterConstant.EXTRA_SUBMISSION_HAS_REJECTED,
+                false
+            ) == true
+        ) {
             viewModel.getSubmissionLetters()
             showNotification(
                 getString(R.string.letter_detail_success_reject_submission_headline),

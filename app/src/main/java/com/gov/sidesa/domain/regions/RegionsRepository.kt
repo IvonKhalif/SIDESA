@@ -18,4 +18,8 @@ interface RegionsRepository {
     suspend fun getDistrict(cityId: Long): NetworkResponse<List<Region>, GenericErrorResponse>
 
     suspend fun getVillage(districtId: Long): NetworkResponse<List<Region>, GenericErrorResponse>
+
+    suspend fun getRW(villageId: Long): NetworkResponse<List<Region>, GenericErrorResponse>
+
+    suspend fun getRT(villageId: Long, rw: String): NetworkResponse<List<Region>, GenericErrorResponse>
 }

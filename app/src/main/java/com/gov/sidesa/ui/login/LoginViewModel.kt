@@ -17,13 +17,13 @@ class LoginViewModel(private val validateNIKUseCase: ValidateNIKUseCase): BaseVi
         viewModelScope.launch {
             when (val response = validateNIKUseCase(nik)) {
                 is NetworkResponse.Success -> {
-                    response.body.status?.let {
-                        hideLoadingWidget()
-                        statusNIKLiveData.post(it)
-                    }
                     response.body.data?.let {
                         hideLoadingWidget()
                         userResponseLiveData.value = it
+                    }
+                    response.body.status?.let {
+                        hideLoadingWidget()
+                        statusNIKLiveData.post(it)
                     }
                 }
                 is NetworkResponse.ServerError -> {

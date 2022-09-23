@@ -41,8 +41,8 @@ class FamilyChildFragment : Fragment() {
             binding.customFamilyAddress.inputKtpAddress.text.toString(),
             binding.customFamilyAddress.inputKtpRt.text.toString(),
             binding.customFamilyAddress.inputKtpRw.text.toString(),
-            binding.customFamilyAddress.inputKtpKecamatan.text.toString(),
-            binding.customFamilyAddress.inputKtpKelurahan.text.toString(),
+//            binding.customFamilyAddress.inputKtpKecamatan.text.toString(),
+//            binding.customFamilyAddress.inputKtpKelurahan.text.toString(),
         )
         val isSameAddress = binding.customFamilyChild.checkBoxAddress.isChecked
         val familyChildToJson = Gson().toJson(

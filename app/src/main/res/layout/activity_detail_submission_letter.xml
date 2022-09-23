@@ -27,176 +27,194 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/custom_toolbar" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/container_detail_submission"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_container"
-            android:layout_marginTop="@dimen/margin_container"
-            android:layout_marginEnd="@dimen/margin_container"
-            android:layout_marginBottom="@dimen/margin_component"
-            android:background="@color/white"
-            android:elevation="4dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
+
+        <ScrollView
+            android:id="@+id/container_detail_ktp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/divider_1">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp">
 
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.4" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/text_id_letter_caption"
-                    android:layout_width="wrap_content"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/container_detail_submission"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_container"
-                    android:fontFamily="@font/inter_medium"
-                    android:lineSpacingExtra="2sp"
-                    android:text="@string/letter_detail_id_letter_caption"
-                    android:textColor="@color/white_929292"
-                    android:textSize="12sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/text_id_letter" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/text_id_letter"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_container"
                     android:layout_marginEnd="@dimen/margin_container"
-                    android:fontFamily="@font/inter_medium"
+                    android:layout_marginBottom="@dimen/margin_component"
+                    android:background="@color/white"
+                    android:elevation="4dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.4" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/text_id_letter_caption"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_container"
+                            android:fontFamily="@font/inter_medium"
+                            android:lineSpacingExtra="2sp"
+                            android:text="@string/letter_detail_id_letter_caption"
+                            android:textColor="@color/white_929292"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/text_id_letter" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/text_id_letter"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_container"
+                            android:layout_marginEnd="@dimen/margin_container"
+                            android:fontFamily="@font/inter_medium"
+                            android:lineSpacingExtra="2sp"
+                            android:textColor="@color/black_302C2C"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@id/guideline"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="@string/dashboard_register_button_label" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/text_letter_type_caption"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_container"
+                            android:fontFamily="@font/inter_medium"
+                            android:lineSpacingExtra="2sp"
+                            android:text="@string/letter_detail_letter_type_caption"
+                            android:textColor="@color/white_929292"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/text_letter_type" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/text_letter_type"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_container"
+                            android:layout_marginEnd="@dimen/margin_container"
+                            android:fontFamily="@font/inter_medium"
+                            android:lineSpacingExtra="2sp"
+                            android:textColor="@color/black_302C2C"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@id/guideline"
+                            app:layout_constraintTop_toBottomOf="@id/text_id_letter"
+                            tools:text="@string/dashboard_register_button_label" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/text_letter_date_submission_caption"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_container"
+                            android:fontFamily="@font/inter_medium"
+                            android:lineSpacingExtra="2sp"
+                            android:text="@string/letter_detail_letter_date_submission_caption"
+                            android:textColor="@color/white_929292"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@id/text_letter_date_submission"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/text_letter_date_submission" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/text_letter_date_submission"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_container"
+                            android:layout_marginEnd="@dimen/margin_container"
+                            android:fontFamily="@font/inter_medium"
+                            android:lineSpacingExtra="2sp"
+                            android:textColor="@color/black_302C2C"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@id/guideline"
+                            app:layout_constraintTop_toBottomOf="@id/text_letter_type"
+                            tools:text="@string/dashboard_register_button_label" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/text_letter_status_caption"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_container"
+                            android:fontFamily="@font/inter_medium"
+                            android:lineSpacingExtra="2sp"
+                            android:text="@string/letter_detail_letter_status_caption"
+                            android:textColor="@color/white_929292"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@id/text_letter_status"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/text_letter_status" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/text_letter_status"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_container"
+                            android:layout_marginEnd="@dimen/margin_container"
+                            android:layout_marginBottom="@dimen/margin_container"
+                            android:fontFamily="@font/inter_medium"
+                            android:lineSpacingExtra="2sp"
+                            android:textColor="@color/black_302C2C"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@id/guideline"
+                            app:layout_constraintTop_toBottomOf="@id/text_letter_date_submission"
+                            tools:text="@string/dashboard_register_button_label" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_history_approval_caption"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_container"
+                    android:layout_marginTop="@dimen/icon_default"
+                    android:fontFamily="@font/inter_bold"
                     android:lineSpacingExtra="2sp"
+                    android:text="@string/letter_detail_history_approval_caption"
                     android:textColor="@color/black_302C2C"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/guideline"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="@string/dashboard_register_button_label" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/text_letter_type_caption"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_container"
-                    android:fontFamily="@font/inter_medium"
-                    android:lineSpacingExtra="2sp"
-                    android:text="@string/letter_detail_letter_type_caption"
-                    android:textColor="@color/white_929292"
-                    android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/text_letter_type" />
+                    app:layout_constraintTop_toBottomOf="@id/container_detail_submission" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/text_letter_type"
+                <com.gov.sidesa.ui.widget.HistoryApprovalWidget
+                    android:id="@+id/history_approval"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_container"
-                    android:layout_marginEnd="@dimen/margin_container"
-                    android:fontFamily="@font/inter_medium"
-                    android:lineSpacingExtra="2sp"
-                    android:textColor="@color/black_302C2C"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/guideline"
-                    app:layout_constraintTop_toBottomOf="@id/text_id_letter"
-                    tools:text="@string/dashboard_register_button_label" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/text_letter_date_submission_caption"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_container"
-                    android:fontFamily="@font/inter_medium"
-                    android:lineSpacingExtra="2sp"
-                    android:text="@string/letter_detail_letter_date_submission_caption"
-                    android:textColor="@color/white_929292"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@id/text_letter_date_submission"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/text_letter_date_submission" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/text_letter_date_submission"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_container"
-                    android:layout_marginEnd="@dimen/margin_container"
-                    android:fontFamily="@font/inter_medium"
-                    android:lineSpacingExtra="2sp"
-                    android:textColor="@color/black_302C2C"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/guideline"
-                    app:layout_constraintTop_toBottomOf="@id/text_letter_type"
-                    tools:text="@string/dashboard_register_button_label" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/text_letter_status_caption"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_container"
-                    android:fontFamily="@font/inter_medium"
-                    android:lineSpacingExtra="2sp"
-                    android:text="@string/letter_detail_letter_status_caption"
-                    android:textColor="@color/white_929292"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@id/text_letter_status"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/text_letter_status" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/text_letter_status"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_container"
-                    android:layout_marginEnd="@dimen/margin_container"
-                    android:layout_marginBottom="@dimen/margin_container"
-                    android:fontFamily="@font/inter_medium"
-                    android:lineSpacingExtra="2sp"
-                    android:textColor="@color/black_302C2C"
-                    android:textSize="14sp"
+                    android:layout_marginTop="@dimen/margin_component"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/guideline"
-                    app:layout_constraintTop_toBottomOf="@id/text_letter_date_submission"
-                    tools:text="@string/dashboard_register_button_label" />
-
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_history_approval_caption" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/text_history_approval_caption"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_container"
-            android:layout_marginTop="@dimen/icon_default"
-            android:fontFamily="@font/inter_bold"
-            android:lineSpacingExtra="2sp"
-            android:text="@string/letter_detail_history_approval_caption"
-            android:textColor="@color/black_302C2C"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/container_detail_submission" />
-
-        <com.gov.sidesa.ui.widget.HistoryApprovalWidget
-            android:id="@+id/history_approval"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/margin_component"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_history_approval_caption" />
-
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

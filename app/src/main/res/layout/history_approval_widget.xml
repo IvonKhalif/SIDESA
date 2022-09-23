@@ -11,10 +11,19 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:background="@drawable/background_dashed"
-            app:layout_constraintBottom_toTopOf="@id/icon_ready_to_pickup_marker"
+            app:layout_constraintBottom_toTopOf="@id/icon_has_approval_kelurahan_marker"
             app:layout_constraintEnd_toEndOf="@id/icon_submission_marker"
             app:layout_constraintStart_toStartOf="@id/icon_submission_marker"
             app:layout_constraintTop_toBottomOf="@id/icon_submission_marker" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:background="@drawable/background_dashed"
+            app:layout_constraintBottom_toTopOf="@id/icon_ready_to_pickup_marker"
+            app:layout_constraintEnd_toEndOf="@id/icon_submission_marker"
+            app:layout_constraintStart_toStartOf="@id/icon_submission_marker"
+            app:layout_constraintTop_toBottomOf="@id/icon_has_approval_kelurahan_marker" />
 
         <ImageView
             android:id="@+id/icon_submission_marker"
@@ -223,6 +232,92 @@
             app:layout_constraintStart_toStartOf="@id/text_has_approval_rw_caption"
             app:layout_constraintTop_toBottomOf="@id/text_has_approval_rw_date" />
 
+
+        <ImageView
+            android:id="@+id/icon_waiting_approval_kelurahan_marker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:contentDescription="@string/general_image_content_description"
+            android:src="@drawable/ic_history_grey"
+            app:layout_constraintBottom_toBottomOf="@id/text_waiting_approval_kelurahan_caption"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/text_waiting_approval_kelurahan_caption" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_waiting_approval_kelurahan_caption"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_component"
+            android:layout_marginTop="@dimen/icon_default"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/letter_detail_approval_village_marker_caption"
+            android:textColor="@color/black_302C2C"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/icon_waiting_approval_kelurahan_marker"
+            app:layout_constraintTop_toBottomOf="@id/text_has_approval_rw_date" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_waiting_approval_kelurahan_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/inter_medium"
+            android:textColor="@color/grey_AAAAAA"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@id/text_waiting_approval_kelurahan_caption"
+            app:layout_constraintTop_toBottomOf="@id/text_waiting_approval_kelurahan_caption"
+            tools:text="@string/dashboard_register_button_label" />
+
+        <ImageView
+            android:id="@+id/icon_has_approval_kelurahan_marker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:contentDescription="@string/general_image_content_description"
+            android:src="@drawable/ic_history_grey"
+            app:layout_constraintBottom_toBottomOf="@id/text_has_approval_kelurahan_caption"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/text_has_approval_kelurahan_caption" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_has_approval_kelurahan_caption"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_component"
+            android:layout_marginTop="@dimen/icon_default"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/letter_detail_has_approval_village_marker_caption"
+            android:textColor="@color/black_302C2C"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/icon_has_approval_kelurahan_marker"
+            app:layout_constraintTop_toBottomOf="@id/text_waiting_approval_kelurahan_date" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_has_approval_kelurahan_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/inter_medium"
+            android:textColor="@color/grey_AAAAAA"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@id/text_has_approval_kelurahan_caption"
+            app:layout_constraintTop_toBottomOf="@id/text_has_approval_kelurahan_caption"
+            tools:text="@string/dashboard_register_button_label" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_has_approval_kelurahan_rejected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/letter_detail_letter_rejected_caption"
+            android:textColor="@color/red_EE3636"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@id/text_has_approval_kelurahan_caption"
+            app:layout_constraintTop_toBottomOf="@id/text_has_approval_kelurahan_date" />
+
         <ImageView
             android:id="@+id/icon_ready_to_pickup_marker"
             android:layout_width="wrap_content"
@@ -245,7 +340,7 @@
             android:textColor="@color/black_302C2C"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@id/icon_ready_to_pickup_marker"
-            app:layout_constraintTop_toBottomOf="@id/text_has_approval_rw_date" />
+            app:layout_constraintTop_toBottomOf="@id/text_has_approval_kelurahan_date" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

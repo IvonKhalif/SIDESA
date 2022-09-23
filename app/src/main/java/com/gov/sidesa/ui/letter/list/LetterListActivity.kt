@@ -62,6 +62,7 @@ class LetterListActivity : BaseActivity() {
                     0 -> getString(R.string.general_captio_all)
                     1 -> getString(R.string.letter_list_waiting_approval_rt_caption)
                     2 -> getString(R.string.letter_list_waiting_approval_rw_caption)
+                    3 -> getString(R.string.letter_list_waiting_approval_village_caption)
                     else -> getString(R.string.letter_list_ready_for_pickup_caption)
                 }
         }.attach()

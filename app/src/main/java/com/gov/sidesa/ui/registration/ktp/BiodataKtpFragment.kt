@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.gson.Gson
 import com.gov.sidesa.R
@@ -27,7 +29,7 @@ class BiodataKtpFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentBiodataKtpBinding
-    private val viewModel: RegistrationKTPViewModel by viewModel()
+    private val viewModel: RegistrationKTPViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,6 +71,7 @@ class BiodataKtpFragment : Fragment() {
             PreferenceUtils.getAccountUserResponse()?.let {
                 inputKtpNik.setText(it.nik)
             }
+            checkBiodataFilled()
         }
     }
 
@@ -81,8 +84,18 @@ class BiodataKtpFragment : Fragment() {
                 val date = Date(it)
                 val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                 customKtpBiodata.inputKtpDob.setText(format.format(date))
+                checkBiodataFilled()
             }
             picker.show(childFragmentManager, "DATE_PICKER")
+        }
+        customKtpBiodata.inputKtpNik.doOnTextChanged { _, _, _, _ ->
+            checkBiodataFilled()
+        }
+        customKtpBiodata.inputKtpName.doOnTextChanged { _, _, _, _ ->
+            checkBiodataFilled()
+        }
+        customKtpBiodata.inputKtpPlace.doOnTextChanged { _, _, _, _ ->
+            checkBiodataFilled()
         }
         setDropDownGender()
         setDropDownBloodType()
@@ -94,6 +107,9 @@ class BiodataKtpFragment : Fragment() {
         val inputBloodTypeAutoComplete =
             binding.root.findViewById<AutoCompleteTextView>(R.id.input_ktp_blood_type)
         inputBloodTypeAutoComplete.setAdapter(bloodTypeAdapter)
+        inputBloodTypeAutoComplete.setOnItemClickListener { _, _, _, _ ->
+            checkBiodataFilled()
+        }
     }
 
     private fun setDropDownGender() {
@@ -102,5 +118,23 @@ class BiodataKtpFragment : Fragment() {
         val inputGenderAutoComplete =
             binding.root.findViewById<AutoCompleteTextView>(R.id.input_ktp_gender)
         inputGenderAutoComplete.setAdapter(genderAdapter)
+        inputGenderAutoComplete.setOnItemClickListener { _, _, _, _ ->
+            checkBiodataFilled()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        checkBiodataFilled()
+    }
+
+    private fun checkBiodataFilled() {
+        viewModel.isBiodataKTPFilled.value =
+            binding.customKtpBiodata.inputKtpNik.text.toString().isNotBlank() &&
+                    binding.customKtpBiodata.inputKtpName.text.toString().isNotBlank() &&
+                    binding.customKtpBiodata.inputKtpPlace.text.toString().isNotBlank() &&
+                    binding.customKtpBiodata.inputKtpDob.text.toString().isNotBlank() &&
+                    binding.customKtpBiodata.inputKtpGender.text.toString().isNotBlank() &&
+                    binding.customKtpBiodata.inputKtpBloodType.text.toString().isNotBlank()
     }
 }

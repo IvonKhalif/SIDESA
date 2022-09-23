@@ -1,9 +1,6 @@
 package com.gov.sidesa.data.region.repository
 
-import com.gov.sidesa.data.region.mapper.asCityDomain
-import com.gov.sidesa.data.region.mapper.asDistrictDomain
-import com.gov.sidesa.data.region.mapper.asProvinceDomain
-import com.gov.sidesa.data.region.mapper.asVillageDomain
+import com.gov.sidesa.data.region.mapper.*
 import com.gov.sidesa.data.region.service.RegionService
 import com.gov.sidesa.domain.regions.RegionsRepository
 import com.gov.sidesa.domain.regions.models.Region
@@ -42,6 +39,18 @@ class RegionsRepositoryImpl(
     override suspend fun getVillage(districtId: Long): NetworkResponse<List<Region>, GenericErrorResponse> {
         return service.getVillage(districtId = districtId).asDomain {
             data.asVillageDomain()
+        }
+    }
+
+    override suspend fun getRW(villageId: Long): NetworkResponse<List<Region>, GenericErrorResponse> {
+        return service.getRW(villageId = villageId).asDomain {
+            data.asRwDomain()
+        }
+    }
+
+    override suspend fun getRT(villageId: Long, rw: String): NetworkResponse<List<Region>, GenericErrorResponse> {
+        return service.getRT(villageId = villageId, rw = rw).asDomain {
+            data.asRtDomain()
         }
     }
 }

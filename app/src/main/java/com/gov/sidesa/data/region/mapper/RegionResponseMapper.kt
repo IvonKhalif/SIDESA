@@ -1,9 +1,6 @@
 package com.gov.sidesa.data.region.mapper
 
-import com.gov.sidesa.data.region.models.CityResponse
-import com.gov.sidesa.data.region.models.DistrictResponse
-import com.gov.sidesa.data.region.models.ProvinceResponse
-import com.gov.sidesa.data.region.models.VillageResponse
+import com.gov.sidesa.data.region.models.*
 import com.gov.sidesa.domain.regions.models.Region
 
 /**
@@ -35,7 +32,15 @@ fun VillageResponse.asDomain() = Region(
     name = name
 )
 
+fun RtRwResponse.asDomain() = Region(
+    id = id,
+    parentId = null,
+    name = name
+)
+
 fun List<ProvinceResponse>.asProvinceDomain() = map { it.asDomain() }
 fun List<CityResponse>.asCityDomain() = map { it.asDomain() }
 fun List<DistrictResponse>.asDistrictDomain() = map { it.asDomain() }
 fun List<VillageResponse>.asVillageDomain() = map { it.asDomain() }
+fun List<RtRwResponse>.asRwDomain() = map { it.asDomain() }
+fun List<RtRwResponse>.asRtDomain() = map { it.asDomain() }

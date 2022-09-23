@@ -6,10 +6,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.gov.sidesa.base.BaseViewModel
+import com.gov.sidesa.data.user.response.UserResponse
 import com.gov.sidesa.domain.letter.list.models.LetterApprovalModel
 import com.gov.sidesa.domain.letter.list.models.LetterSubmissionModel
 import com.gov.sidesa.domain.letter.list.usecase.ApprovalLettersUseCase
 import com.gov.sidesa.domain.letter.list.usecase.SubmissionLetterUseCase
+import com.gov.sidesa.domain.profile.detail.family.models.ProfileFamily
+import com.gov.sidesa.domain.profile.detail.family.usecases.GetFamilyUseCase
 import com.gov.sidesa.ui.letter.input.LetterInputActivity
 import com.gov.sidesa.utils.PostLiveData
 import com.gov.sidesa.utils.PreferenceUtils
@@ -27,17 +30,19 @@ import kotlinx.coroutines.launch
 @FlowPreview
 class DashboardViewModel(
     private val submissionLetterUseCase: SubmissionLetterUseCase,
-    private val approvalLetterUseCase: ApprovalLettersUseCase
+    private val approvalLetterUseCase: ApprovalLettersUseCase,
+    private val getFamilyUseCase: GetFamilyUseCase
 ) : BaseViewModel() {
 
     private val _notificationState = MutableLiveData<Pair<String, String>>()
     val notificationState: LiveData<Pair<String, String>> get() = _notificationState
 
+    val userProfileLiveData = MutableLiveData<ProfileFamily>()
     val submissionLettersLiveData = PostLiveData<List<LetterSubmissionModel>?>()
     val approvalLettersLiveData = PostLiveData<LetterApprovalModel?>()
 
     init {
-        getSubmissionLetters()
+        updateDataUserLocal()
     }
 
     fun onLetterTemplateResult(resultCode: Int, intent: Intent?) = viewModelScope.launch {
@@ -51,7 +56,6 @@ class DashboardViewModel(
 
     fun getSubmissionLetters() = viewModelScope.launch {
         val user = PreferenceUtils.getAccountUserResponse()
-        showLoadingWidget()
 
         when (val result =
             submissionLetterUseCase.invoke(accountId = user?.id.orZero())) {
@@ -65,7 +69,7 @@ class DashboardViewModel(
     }
 
     private fun getApprovalLetters() = viewModelScope.launch {
-        val user = PreferenceUtils.getAccount()
+        val user = PreferenceUtils.getAccountUserResponse()
 
         when (val result =
             approvalLetterUseCase.invoke(accountId = user?.id.orZero())) {
@@ -75,5 +79,18 @@ class DashboardViewModel(
             else -> onResponseNotSuccess(response = result)
         }
         hideLoadingWidget()
+    }
+
+    fun updateDataUserLocal() = viewModelScope.launch {
+        val user = PreferenceUtils.getAccountUserResponse()
+        showLoadingWidget()
+        when (val result = getFamilyUseCase.invoke(user?.id)) {
+            is NetworkResponse.Success -> {
+                userProfileLiveData.value = result.body
+                PreferenceUtils.putProfile(result.body)
+                getSubmissionLetters()
+            }
+            else -> onResponseNotSuccess(response = result)
+        }
     }
 }

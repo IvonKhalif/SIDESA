@@ -2,12 +2,16 @@ package com.gov.sidesa.ui.registration.kk
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import com.gov.sidesa.databinding.FragmentUploadKkBinding
 import com.gov.sidesa.ui.registration.RegistrationStackState
@@ -24,7 +28,7 @@ import java.io.File
 class UploadKkFragment : Fragment() {
 
     private lateinit var binding: FragmentUploadKkBinding
-    private val viewModel: RegistrationKTPViewModel by viewModel()
+    private val viewModel: RegistrationKTPViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +49,8 @@ class UploadKkFragment : Fragment() {
                 .load(pref)
                 .into(binding.imageKtp)
         }
+
+        checkKKUploaded()
     }
 
     override fun onPause() {
@@ -62,6 +68,7 @@ class UploadKkFragment : Fragment() {
 
         PreferenceUtils.getAccount()?.imageKK?.let {
             binding.imageKtp.load(it)
+            checkKKUploaded()
         }
 
         binding.buttonPickKk.setOnClickListener {
@@ -71,6 +78,7 @@ class UploadKkFragment : Fragment() {
         binding.buttonEditKk.setOnClickListener {
             showMediaDialog()
         }
+        checkKKUploaded()
     }
 
     private fun showMediaDialog() {
@@ -81,6 +89,7 @@ class UploadKkFragment : Fragment() {
             setImageKtp(it)
             binding.buttonPickKk.gone()
             media.dismissAllowingStateLoss()
+            checkKKUploaded()
         }
 
         media.showNow(childFragmentManager, media.javaClass.canonicalName)
@@ -104,5 +113,19 @@ class UploadKkFragment : Fragment() {
         }
 
         return base64
+    }
+
+    private fun checkKKUploaded() {
+        viewModel.isUploadKKFilled.value =
+            hasImage(binding.imageKtp)
+    }
+
+    private fun hasImage(view: ImageView?): Boolean {
+        val drawable: Drawable? = view?.drawable
+        var hasImage = drawable == null
+        if (hasImage && drawable is BitmapDrawable) {
+            hasImage = drawable.bitmap != null
+        }
+        return hasImage
     }
 }

@@ -30,6 +30,10 @@ class LetterListPagerAdapter(
                 TypeSubmissionEnum.RW_WAITING_Submission.type,
                 isSubmissionPage
             ),
+            TabLetterListFragment.newInstance(
+                TypeSubmissionEnum.VILLAGE_WAITING_Submission.type,
+                isSubmissionPage
+            ),
             TabLetterListFragment.newInstance(TypeSubmissionEnum.FINISH.type, isSubmissionPage)
         )
     else

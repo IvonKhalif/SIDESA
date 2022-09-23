@@ -1,12 +1,16 @@
 package com.gov.sidesa.ui.login.password
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.gov.sidesa.base.BaseViewModel
 import com.gov.sidesa.data.user.response.UserResponse
+import com.gov.sidesa.domain.profile.detail.family.usecases.GetFamilyUseCase
 import com.gov.sidesa.domain.user.usecase.CreatePasswordUseCase
 import com.gov.sidesa.domain.user.usecase.LoginUseCase
 import com.gov.sidesa.domain.user.usecase.ResetPasswordUseCase
 import com.gov.sidesa.utils.PostLiveData
+import com.gov.sidesa.utils.PreferenceUtils
 import com.gov.sidesa.utils.response.GenericErrorResponse
 import com.haroldadmin.cnradapter.NetworkResponse
 import kotlinx.coroutines.launch
@@ -17,8 +21,9 @@ class PasswordViewModel(
     private val resetPasswordUseCase: ResetPasswordUseCase
 ) : BaseViewModel() {
 
-    val userResponseLiveData = PostLiveData<UserResponse?>()
     val statusCreatePassword = PostLiveData<String?>()
+    private val _closeScreenView = MutableLiveData<Unit>()
+    val closeScreenView: LiveData<Unit> get() = _closeScreenView
 
     fun login(username: String, password: String) {
         viewModelScope.launch {
@@ -26,20 +31,16 @@ class PasswordViewModel(
             when (val response = loginUseCase(username, password)) {
                 is NetworkResponse.Success -> {
                     if (response.body.data == null) {
-                        genericErrorLiveData.value =
+                        mServerErrorState.value =
                             GenericErrorResponse(message = response.body.desc)
                     }
                     response.body.data?.let {
-                        userResponseLiveData.post(it)
+                        PreferenceUtils.put(it, PreferenceUtils.USER_RESPONSE_PREFERENCE)
+                        _closeScreenView.value = Unit
                     }
                     hideLoadingWidget()
                 }
-                is NetworkResponse.ServerError -> {
-                    genericErrorLiveData.value = response.body
-                }
-                is NetworkResponse.NetworkError -> {
-                    networkErrorLiveData.value = response.error
-                }
+                else -> onResponseNotSuccess(response = response)
             }
             hideLoadingWidget()
         }
@@ -55,12 +56,7 @@ class PasswordViewModel(
                         statusCreatePassword.post(it)
                     }
                 }
-                is NetworkResponse.ServerError -> {
-                    genericErrorLiveData.value = response.body
-                }
-                is NetworkResponse.NetworkError -> {
-                    networkErrorLiveData.value = response.error
-                }
+                else -> onResponseNotSuccess(response = response)
             }
             hideLoadingWidget()
         }
