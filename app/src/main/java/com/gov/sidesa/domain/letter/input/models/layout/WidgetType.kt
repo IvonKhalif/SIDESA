@@ -12,4 +12,5 @@ sealed class WidgetType(val type: String) {
     object DatePicker: WidgetType("datepicker")
     object Header: WidgetType("header") // internal android
     object Divider: WidgetType("divider")
+    object Attachment: WidgetType("attachment")
 }
