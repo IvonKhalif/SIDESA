@@ -1,6 +1,7 @@
 package com.gov.sidesa.ui.approval.submissiondetail
 
 import com.gov.sidesa.base.BaseViewModel
+import com.gov.sidesa.ui.letter.input.models.attachment.AttachmentWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.date_picker.DatePickerWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.drop_down.DropDownWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.edit_text.EditTextWidgetUiModel
@@ -16,5 +17,8 @@ class DetailApprovalSubmissionViewModel : BaseViewModel(), LetterInputViewHolder
     }
 
     override fun onDatePickerClicked(model: DatePickerWidgetUiModel) {
+    }
+
+    override fun onAttachmentClicked(model: AttachmentWidgetUiModel) {
     }
 }

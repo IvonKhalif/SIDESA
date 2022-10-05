@@ -9,6 +9,7 @@ import com.gov.sidesa.domain.letter.input.models.resource.Resource
 import com.gov.sidesa.domain.letter.input.usecases.GetLetterLayoutUseCase
 import com.gov.sidesa.domain.letter.input.usecases.GetResourcesUseCase
 import com.gov.sidesa.domain.letter.input.usecases.SaveLetterUseCase
+import com.gov.sidesa.ui.letter.input.models.attachment.AttachmentWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.base.BaseWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.date_picker.DatePickerWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.drop_down.DropDownWidgetUiModel
@@ -25,6 +26,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
+import java.io.File
 import java.util.*
 
 /**
@@ -70,7 +72,11 @@ class LetterInputViewModel(
 
     // date-picker clicked
     private val _datePickerClicked = MutableLiveData<DatePickerWidgetUiModel>()
-    val datePickerClicked: LiveData<DatePickerWidgetUiModel> get() = _datePickerClicked
+    val datePickerClicked: LiveData<DatePickerWidgetUiModel> get() = _datePickerClicked// date-picker clicked
+
+    // attachment clicked
+    private val _attachmentClicked = MutableLiveData<AttachmentWidgetUiModel>()
+    val attachmentClicked: LiveData<AttachmentWidgetUiModel> get() = _attachmentClicked
 
     /**
      * supporting view
@@ -188,6 +194,10 @@ class LetterInputViewModel(
         _datePickerClicked.value = model
     }
 
+    override fun onAttachmentClicked(model: AttachmentWidgetUiModel) {
+        _attachmentClicked.value = model
+    }
+
     /**
      * date-picker callback from view
      */
@@ -195,6 +205,13 @@ class LetterInputViewModel(
         val date = Date(millis)
         val beDateFormatted = date.formatBE()
         updateWidget(uiModel = model.copy(value = beDateFormatted))
+    }
+
+    fun onAttachmentSelected(file: File) {
+        val widget = _attachmentClicked.value ?: return
+        val files = widget.files.toMutableList()
+        files.add(file)
+        updateWidget(uiModel = widget.copy(files = files))
     }
 
     /**

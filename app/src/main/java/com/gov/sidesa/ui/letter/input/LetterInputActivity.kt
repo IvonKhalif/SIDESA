@@ -3,8 +3,11 @@ package com.gov.sidesa.ui.letter.input
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.gov.sidesa.R
@@ -21,9 +24,15 @@ import com.gov.sidesa.ui.letter.input.view_holder_factory.LetterInputViewHolderF
 import com.gov.sidesa.utils.extension.orToday
 import com.gov.sidesa.utils.extension.toDate
 import com.gov.sidesa.utils.extension.utcToLocale
+import com.gov.sidesa.utils.picker.FileUtil
 import com.gov.sidesa.utils.picker.MenuIconWithHeadlineAdapter
 import com.gov.sidesa.utils.picker.MenuIconWithHeadlineBottomSheet
+import id.zelory.compressor.Compressor
+import id.zelory.compressor.constraint.quality
+import id.zelory.compressor.constraint.resolution
+import id.zelory.compressor.constraint.size
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @FlowPreview
@@ -41,6 +50,10 @@ class LetterInputActivity : BaseActivity() {
     private val adapter by lazy {
         LetterInputAdapter(viewHolderFactory = viewHolderFactory, listener = viewModel)
     }
+
+    private val attachmentLauncher = registerForActivityResult(
+        ActivityResultContracts.OpenDocument()
+    ) { onAttachmentSelected(uri = it) }
 
     private val argsLayoutId by lazy {
         intent.getStringExtra(ARGS_LAYOUT_ID).orEmpty()
@@ -117,6 +130,10 @@ class LetterInputActivity : BaseActivity() {
         datePickerClicked.observe(this@LetterInputActivity) {
             showDatePicker(uiModel = it)
         }
+
+        attachmentClicked.observe(this@LetterInputActivity) {
+            attachmentLauncher.launch(arrayOf("application/pdf", "image/*"))
+        }
     }
 
     /**
@@ -190,6 +207,46 @@ class LetterInputActivity : BaseActivity() {
                 viewModel.onDatePickerSelected(model = uiModel, millis = it)
             }
             picker
+        }
+    }
+
+    /**
+     * onAttachmentSelected process
+     */
+    private fun onAttachmentSelected(uri: Uri?) {
+        if (uri == null) return
+
+        handleLoadingWidget(isLoading = true)
+
+        lifecycleScope.launch {
+            val file = try {
+                FileUtil.from(this@LetterInputActivity, uri)
+            } catch (e: Exception) {
+                null
+            }
+
+            if (file != null) {
+                val result = if (file.extension.contains("pdf")) {
+                    file
+                } else {
+                    Compressor.compress(
+                        context = this@LetterInputActivity,
+                        imageFile = file
+                    ) {
+                        resolution(1280, 720)
+                        quality(80)
+                        size(1_048_576) // 1 MB
+                    }
+                }
+
+                handleLoadingWidget(isLoading = false)
+                // result can bigger from original
+                if (file.length() < result.length()) {
+                    viewModel.onAttachmentSelected(file = file)
+                } else {
+                    viewModel.onAttachmentSelected(file = result)
+                }
+            }
         }
     }
 
