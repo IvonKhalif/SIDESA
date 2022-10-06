@@ -91,7 +91,7 @@ class LetterRepositoryImpl(
             MultipartBody.Part.createFormData(
                 name = "attachment_$count",
                 filename = file.name,
-                body = file.asRequestBody(contentType = "image/jpg".toMediaType())
+                body = file.asRequestBody(contentType = "image/png".toMediaType())
             )
         }
 }

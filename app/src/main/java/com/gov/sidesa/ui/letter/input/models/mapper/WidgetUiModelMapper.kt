@@ -73,8 +73,9 @@ object WidgetUiModelMapper {
         name = widget.name,
         value = null,
         initialState = InitialState(enable = true),
+        title = widget.title,
         files = emptyList(),
-        limit = widget.attachmentCount,
+        limit = widget.attachmentMax,
         fileType = widget.attachmentFileType.split(";")
     )
 }

@@ -25,6 +25,9 @@ class AttachmentViewHolder(
     private var attachmentAdapter: AttachmentAdapter? = null
 
     override fun bind(model: AttachmentWidgetUiModel): Unit = with(binding) {
+        tvTitle.text = model.title.orEmpty().ifBlank {
+            root.context.getString(R.string.letter_input_attachment_needed)
+        }
         initRecyclerView(model = model)
         attachmentAdapter?.submitList(model.asItemAttachment())
     }

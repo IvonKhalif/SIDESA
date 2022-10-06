@@ -41,7 +41,7 @@ class SaveLetterUseCase(
             accountId = PreferenceUtils.getAccount()?.id.orZero(),
             letterTypeId = letterTypeId,
             contents = widget.filterNot {
-                it.type == WidgetType.Header && it.type == WidgetType.Attachment
+                it.type == WidgetType.Header || it.type == WidgetType.Attachment
             }.map {
                 LetterContent(field = it.name, value = it.value.orEmpty())
             },

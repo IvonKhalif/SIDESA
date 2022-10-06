@@ -15,9 +15,9 @@ data class DropDownWidgetUiModel(
     override val name: String,
     override val value: String?,
     override val initialState: InitialState,
+    override val title: String?,
     val selectedText: String?,
     val inputType: InputType,
-    val title: String?,
     val api: String,
     val apiType: String?,
     val apiParam: String?
@@ -25,7 +25,8 @@ data class DropDownWidgetUiModel(
     type = WidgetType.DropDown,
     name = name,
     value = value,
-    initialState = initialState
+    initialState = initialState,
+    title = title
 ) {
 
     override fun type(typeFactory: LetterInputViewHolderFactory): Int {

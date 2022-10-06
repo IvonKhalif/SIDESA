@@ -15,13 +15,14 @@ data class EditTextWidgetUiModel(
     override val name: String,
     override val value: String = "",
     override val initialState: InitialState,
+    override val title: String?,
     val inputType: InputType,
-    val title: String?,
 ) : BaseWidgetUiModel(
     type = WidgetType.EditText,
     name = name,
     value = value,
-    initialState = initialState
+    initialState = initialState,
+    title = title
 ) {
 
     override fun type(typeFactory: LetterInputViewHolderFactory): Int {

@@ -11,7 +11,6 @@ import com.gov.sidesa.domain.letter.input.usecases.GetResourcesUseCase
 import com.gov.sidesa.domain.letter.input.usecases.SaveLetterUseCase
 import com.gov.sidesa.ui.letter.input.models.attachment.AttachmentWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.base.BaseWidgetUiModel
-import com.gov.sidesa.ui.letter.input.models.base.InitialState
 import com.gov.sidesa.ui.letter.input.models.date_picker.DatePickerWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.drop_down.DropDownWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.edit_text.EditTextWidgetUiModel
@@ -100,16 +99,7 @@ class LetterInputViewModel(
         when (val response = getLayout.invoke(letterTypeId = layoutId, letterName = letterName)) {
             is NetworkResponse.Success -> {
                 _layoutData.value = response.body
-                val test = response.body.asUiModel().toMutableList()
-                test.add(AttachmentWidgetUiModel(
-                    name = "attachment",
-                    value = "null",
-                    initialState = InitialState(enable = true),
-                    files = emptyList(),
-                    limit = 5,
-                    fileType = arrayListOf("application/pdf", "image/*")
-                ))
-                _widgetList.value = test
+                _widgetList.value = response.body.asUiModel()
             }
             else -> {
                 onResponseNotSuccess(response = response)

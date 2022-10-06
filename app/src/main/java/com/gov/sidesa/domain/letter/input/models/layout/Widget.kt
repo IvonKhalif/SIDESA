@@ -26,5 +26,5 @@ data class Widget(
     // end-region dropdown
 
     val attachmentFileType: String = "",
-    val attachmentCount: Int = 0
+    val attachmentMax: Int = 0
 ): Parcelable
