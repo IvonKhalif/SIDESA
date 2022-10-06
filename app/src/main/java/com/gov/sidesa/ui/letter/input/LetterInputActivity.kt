@@ -132,7 +132,7 @@ class LetterInputActivity : BaseActivity() {
         }
 
         attachmentClicked.observe(this@LetterInputActivity) {
-            attachmentLauncher.launch(arrayOf("application/pdf", "image/*"))
+            attachmentLauncher.launch(it.fileType.toTypedArray())
         }
     }
 

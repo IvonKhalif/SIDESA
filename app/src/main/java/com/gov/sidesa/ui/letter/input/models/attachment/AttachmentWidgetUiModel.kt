@@ -15,7 +15,9 @@ data class AttachmentWidgetUiModel(
     override val name: String,
     override val value: String?,
     override val initialState: InitialState,
-    val files: List<File>
+    val files: List<File>,
+    val limit: Int,
+    val fileType: List<String>
 ) : BaseWidgetUiModel(
     type = WidgetType.Attachment,
     name = name,

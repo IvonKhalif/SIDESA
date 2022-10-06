@@ -4,6 +4,7 @@ import com.gov.sidesa.domain.letter.input.models.layout.LetterLayout
 import com.gov.sidesa.domain.letter.input.models.layout.Widget
 import com.gov.sidesa.domain.letter.input.models.layout.WidgetType
 import com.gov.sidesa.domain.letter.input.models.layout.asInputType
+import com.gov.sidesa.ui.letter.input.models.attachment.AttachmentWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.base.InitialState
 import com.gov.sidesa.ui.letter.input.models.date_picker.DatePickerWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.divider.DividerWidgetUiModel
@@ -25,6 +26,7 @@ object WidgetUiModelMapper {
         WidgetType.DropDown.type -> createDropDown(widget = widget)
         WidgetType.Header.type -> createHeader(widget = widget)
         WidgetType.DatePicker.type -> createDatePicker(widget = widget)
+        WidgetType.Attachment.type -> createAttachment(widget = widget)
         else -> createDivider()
     }
 
@@ -66,6 +68,15 @@ object WidgetUiModelMapper {
     )
 
     private fun createDivider() = DividerWidgetUiModel()
+
+    private fun createAttachment(widget: Widget) = AttachmentWidgetUiModel(
+        name = widget.name,
+        value = null,
+        initialState = InitialState(enable = true),
+        files = emptyList(),
+        limit = widget.attachmentCount,
+        fileType = widget.attachmentFileType.split(";")
+    )
 }
 
 fun LetterLayout.asUiModel() = widgets.map {

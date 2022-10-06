@@ -11,6 +11,7 @@ import com.gov.sidesa.domain.letter.input.usecases.GetResourcesUseCase
 import com.gov.sidesa.domain.letter.input.usecases.SaveLetterUseCase
 import com.gov.sidesa.ui.letter.input.models.attachment.AttachmentWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.base.BaseWidgetUiModel
+import com.gov.sidesa.ui.letter.input.models.base.InitialState
 import com.gov.sidesa.ui.letter.input.models.date_picker.DatePickerWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.drop_down.DropDownWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.edit_text.EditTextWidgetUiModel
@@ -99,7 +100,16 @@ class LetterInputViewModel(
         when (val response = getLayout.invoke(letterTypeId = layoutId, letterName = letterName)) {
             is NetworkResponse.Success -> {
                 _layoutData.value = response.body
-                _widgetList.value = response.body.asUiModel()
+                val test = response.body.asUiModel().toMutableList()
+                test.add(AttachmentWidgetUiModel(
+                    name = "attachment",
+                    value = "null",
+                    initialState = InitialState(enable = true),
+                    files = emptyList(),
+                    limit = 5,
+                    fileType = arrayListOf("application/pdf", "image/*")
+                ))
+                _widgetList.value = test
             }
             else -> {
                 onResponseNotSuccess(response = response)
@@ -198,6 +208,12 @@ class LetterInputViewModel(
         _attachmentClicked.value = model
     }
 
+    override fun onAttachmentRemove(model: AttachmentWidgetUiModel, file: File) {
+        val newAttachment = model.files.toMutableList()
+        newAttachment.remove(file)
+        updateWidget(uiModel = model.copy(files = newAttachment))
+    }
+
     /**
      * date-picker callback from view
      */
@@ -207,10 +223,10 @@ class LetterInputViewModel(
         updateWidget(uiModel = model.copy(value = beDateFormatted))
     }
 
-    fun onAttachmentSelected(file: File) {
-        val widget = _attachmentClicked.value ?: return
+    fun onAttachmentSelected(file: File) = viewModelScope.launch {
+        val widget = _attachmentClicked.value ?: return@launch
         val files = widget.files.toMutableList()
-        files.add(file)
+        files.add(0, file)
         updateWidget(uiModel = widget.copy(files = files))
     }
 

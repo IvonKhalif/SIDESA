@@ -19,6 +19,8 @@ fun File.toUriProvider(context: Context): Uri {
     )
 }
 
+fun File.isPdf(): Boolean = extension.contains("pdf")
+
 fun Context.createFile() = File.createTempFile(
     "IMG_${System.currentTimeMillis()}",
     ".jpg",
