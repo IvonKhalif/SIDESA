@@ -11,9 +11,9 @@ import com.gov.sidesa.ui.letter.input.view_holder_factory.LetterInputViewHolderF
 
 data class TextViewWidgetUiModel(
     override val name: String,
-    val title: String,
+    override val title: String,
     override val value: String
-) : BaseWidgetUiModel(type = WidgetType.TextView, name = name, value = value) {
+) : BaseWidgetUiModel(type = WidgetType.TextView, name = name, value = value, title = title) {
 
     override fun type(typeFactory: LetterInputViewHolderFactory): Int {
         return typeFactory.type(this)

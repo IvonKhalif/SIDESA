@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
@@ -18,7 +19,8 @@ import com.gov.sidesa.R
  **/
 
 fun ImageView.load(
-    source: String,
+    source: Any?,
+    builder: RequestBuilder<Drawable>.() -> Unit = {},
     onSuccess: () -> Unit = {},
     onFailed: (GlideException?) -> Unit = {},
 ) {
@@ -35,6 +37,9 @@ fun ImageView.load(
         .error(R.drawable.ic_baseline_sync_24)
         .diskCacheStrategy(DiskCacheStrategy.NONE)
         .skipMemoryCache(true)
+        .apply {
+            builder.invoke(this)
+        }
         .addListener(object : RequestListener<Drawable> {
             override fun onLoadFailed(
                 e: GlideException?,

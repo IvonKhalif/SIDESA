@@ -8,6 +8,7 @@ import com.gov.sidesa.utils.response.GenericErrorResponse
 import com.gov.sidesa.utils.response.RetrofitResponse
 import com.gov.sidesa.utils.response.RetrofitStatusResponse
 import com.haroldadmin.cnradapter.NetworkResponse
+import okhttp3.MultipartBody
 import retrofit2.http.*
 
 interface LetterService {
@@ -29,9 +30,11 @@ interface LetterService {
     suspend fun getTemplates()
             : NetworkResponse<RetrofitResponse<List<LetterTemplateResponse>>, GenericErrorResponse>
 
+    @Multipart
     @POST("pengajuan-surat/save")
-    @FormUrlEncoded
     suspend fun save(
-        @FieldMap letter: Map<String, String>
+        @PartMap letter: Map<String, String>,
+        @Part files: List<MultipartBody.Part>,
+        @Part filesCount: MultipartBody.Part
     ): NetworkResponse<RetrofitStatusResponse, GenericErrorResponse>
 }

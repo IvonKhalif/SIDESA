@@ -16,12 +16,13 @@ data class DatePickerWidgetUiModel(
     override val name: String,
     override val value: String?,
     override val initialState: InitialState,
-    val title: String?
+    override val title: String?
 ) : BaseWidgetUiModel(
     type = WidgetType.DropDown,
     name = name,
     value = value, // yyyy-MM-dd, adjust like BE format
-    initialState = initialState
+    initialState = initialState,
+    title = title
 ) {
 
     override fun type(typeFactory: LetterInputViewHolderFactory): Int {

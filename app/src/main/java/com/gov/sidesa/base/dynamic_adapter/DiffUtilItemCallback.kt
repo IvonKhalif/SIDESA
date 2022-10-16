@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
  **/
 
 
-class DiffUtilItemCallback<T>(
+class DiffUtilItemCallback<T : Any>(
     private val isItemsTheSame: (oldItem: T, newItem: T) -> Boolean,
     private val isContentTheSame: (oldItem: T, newItem: T) -> Boolean
 ) : DiffUtil.ItemCallback<T>() {

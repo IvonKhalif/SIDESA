@@ -4,6 +4,7 @@ import com.gov.sidesa.domain.letter.input.models.layout.WidgetType
 import com.gov.sidesa.domain.letter.input.models.save.LetterContent
 import com.gov.sidesa.domain.letter.input.models.save.SaveLetter
 import com.gov.sidesa.domain.letter.repository.LetterRepository
+import com.gov.sidesa.ui.letter.input.models.attachment.AttachmentWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.base.BaseWidgetUiModel
 import com.gov.sidesa.utils.PreferenceUtils
 import com.gov.sidesa.utils.extension.orZero
@@ -30,18 +31,24 @@ class SaveLetterUseCase(
 
         if (haveEmptyField.isNotBlank())
             return NetworkResponse.ServerError(
-                GenericErrorResponse(
-                status = "Mohon Lengkapi Data Sebelum Dikirim\n$haveEmptyField"
-            ), 0)
+                body = GenericErrorResponse(
+                    status = "Mohon Lengkapi Data Sebelum Dikirim\n$haveEmptyField"
+                ),
+                code = 0
+            )
 
         val letter = SaveLetter(
             accountId = PreferenceUtils.getAccount()?.id.orZero(),
             letterTypeId = letterTypeId,
             contents = widget.filterNot {
-                it.type == WidgetType.Header
+                it.type == WidgetType.Header || it.type == WidgetType.Attachment
             }.map {
                 LetterContent(field = it.name, value = it.value.orEmpty())
-            }
+            },
+            attachments = widget.filter { it.type == WidgetType.Attachment }
+                .map { it as AttachmentWidgetUiModel }
+                .map { it.files }
+                .reduce { acc, files -> acc + files }
         )
 
         return repository.save(letter = letter)

@@ -2,12 +2,14 @@ package com.gov.sidesa.ui.letter.input.view_holder_factory
 
 import android.view.ViewGroup
 import com.gov.sidesa.base.dynamic_adapter.AbstractViewHolder
+import com.gov.sidesa.ui.letter.input.models.attachment.AttachmentWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.date_picker.DatePickerWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.divider.DividerWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.drop_down.DropDownWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.edit_text.EditTextWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.header.HeaderWidgetUiModel
 import com.gov.sidesa.ui.letter.input.models.text_view.TextViewWidgetUiModel
+import com.gov.sidesa.ui.letter.input.view_holder.attachment.AttachmentViewHolder
 import com.gov.sidesa.ui.letter.input.view_holder.date_picker.DatePickerViewHolder
 import com.gov.sidesa.ui.letter.input.view_holder.divider.DividerViewHolder
 import com.gov.sidesa.ui.letter.input.view_holder.drop_down.DropDownViewHolder
@@ -47,6 +49,10 @@ class LetterInputViewHolderFactoryImpl : LetterInputViewHolderFactory {
         return DatePickerViewHolder.LAYOUT
     }
 
+    override fun type(attachment: AttachmentWidgetUiModel): Int {
+        return AttachmentViewHolder.LAYOUT
+    }
+
     override fun createViewHolder(
         parent: ViewGroup,
         type: Int,
@@ -59,6 +65,7 @@ class LetterInputViewHolderFactoryImpl : LetterInputViewHolderFactory {
             EditTextViewHolder.LAYOUT -> EditTextViewHolder.create(parent, listener)
             DropDownViewHolder.LAYOUT -> DropDownViewHolder.create(parent, listener)
             DatePickerViewHolder.LAYOUT -> DatePickerViewHolder.create(parent, listener)
+            AttachmentViewHolder.LAYOUT -> AttachmentViewHolder.create(parent, listener)
             else -> throw IllegalAccessException("view holder not found...")
         }
     }

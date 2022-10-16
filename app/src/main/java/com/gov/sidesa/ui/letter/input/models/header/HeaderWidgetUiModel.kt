@@ -10,8 +10,8 @@ import com.gov.sidesa.ui.letter.input.view_holder_factory.LetterInputViewHolderF
  **/
 
 data class HeaderWidgetUiModel(
-    val title: String,
-) : BaseWidgetUiModel(type = WidgetType.Header, name = "header", value = "header") {
+    override val title: String,
+) : BaseWidgetUiModel(type = WidgetType.Header, name = "header", value = "header", title = title) {
 
     override fun type(typeFactory: LetterInputViewHolderFactory): Int {
         return typeFactory.type(this)

@@ -16,10 +16,15 @@ data class Widget(
 
     // edit text
     val inputType: String? = null,
+    // end-region edit-text
 
     // dropdown field
     val selectedText: String = "",
     val api: String? = null,
     val apiType: String? = null,
-    val apiParam: String? = null
+    val apiParam: String? = null,
+    // end-region dropdown
+
+    val attachmentFileType: String = "",
+    val attachmentMax: Int = 0
 ): Parcelable
