@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.gov.sidesa.base.BaseViewModel
+import com.gov.sidesa.data.registration.kk.KkAddressModel
 import com.gov.sidesa.data.registration.kk.KkBiodataModel
 import com.gov.sidesa.data.registration.ktp.AddressKtpModel
 import com.gov.sidesa.data.registration.ktp.BiodataKtpModel
@@ -77,7 +78,10 @@ class RegistrationKTPViewModel(
         val biodataModel = Gson().fromJson(biodataPref, BiodataKtpModel::class.java)
 
         val kkPref = getPref(context, RegistrationStackState.KkBiodata.toString())
+        val addressKKPref =
+            getPref(context, RegistrationStackState.KkAddress.toString())
         val kkModel = Gson().fromJson(kkPref, KkBiodataModel::class.java)
+        val addressKKModel = Gson().fromJson(addressKKPref, KkAddressModel::class.java)
 
         val generalPref = getPref(context, RegistrationStackState.KtpGeneral.toString())
         val generalModel = Gson().fromJson(generalPref, GeneralKtpModel::class.java)
@@ -211,7 +215,15 @@ class RegistrationKTPViewModel(
             rw = addressModel.rw,
             nationality = generalModel.nationality,
             ktpBase64 = ktpBase64,
-            kkBase64 = kkBase64
+            kkBase64 = kkBase64,
+            familyHead = kkModel.kepalaKeluargaName,
+            addressKk = addressKKModel.address,
+            cityIdKk = inputKKCity.value?.id.orZero().toString(),
+            kelurahanIdKk = inputKKKelurahan.value?.id.orZero().toString(),
+            kecamatanIdKk = inputKKKecamatan.value?.id.orZero().toString(),
+            provinceIdKk = inputKKProvince.value?.id.orZero().toString(),
+            rtKk = inputKKRt.value?.name.orEmpty(),
+            rwKk = inputKKRw.value?.name.orEmpty()
         )) {
             is NetworkResponse.Success -> {
                 registrationStatus.value = result.body

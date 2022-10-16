@@ -1,8 +1,6 @@
 package com.gov.sidesa.domain.letter.detail.models
 
 import android.os.Parcelable
-import com.google.gson.annotations.Expose
-import com.google.gson.annotations.SerializedName
 import com.gov.sidesa.domain.letter.input.models.layout.Widget
 import kotlinx.parcelize.Parcelize
 

@@ -260,6 +260,7 @@ class EditProfileKTPActivity : BaseActivity() {
             inputKtpJob.observe(this@EditProfileKTPActivity, ::updateUIJob)
             inputKtpNationality.observe(this@EditProfileKTPActivity, ::updateUICitizenship)
             statusUpdateData.observe(this@EditProfileKTPActivity, ::handleStatusUpdate)
+            inputKtpGender.observe(this@EditProfileKTPActivity, ::updateUIGender)
             loadingState.observe(this@EditProfileKTPActivity) {
                 handleLoadingWidget(isLoading = it)
             }
@@ -269,9 +270,9 @@ class EditProfileKTPActivity : BaseActivity() {
                     inputKtpBlood.collectLatest(::updateUIBlood)
                 }
 
-                repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    inputKtpGender.collectLatest(::updateUIGender)
-                }
+//                repeatOnLifecycle(Lifecycle.State.STARTED) {
+//                    inputKtpGender.collectLatest(::updateUIGender)
+//                }
             }
 
         }

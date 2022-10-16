@@ -32,7 +32,15 @@ interface RegistrationService {
         @Field("pekerjaan") job: String,
         @Field("kewarganegaraan") nationality: String,
         @Field("foto_ktp") ktpBase64: String,
-        @Field("foto_kk") kkBase64: String
+        @Field("foto_kk") kkBase64: String,
+        @Field("kepala_keluarga") familyHead: String,
+        @Field("alamat_kk") addressKk: String,
+        @Field("id_kota_kk") cityIdKk: String,
+        @Field("id_kelurahan_kk") kelurahanIdKk: String,
+        @Field("id_kecamatan_kk") kecamatanIdKk: String,
+        @Field("id_provinsi_kk") provinceIdKk: String,
+        @Field("rt_kk") rtKk: String,
+        @Field("rw_kk") rwKk: String,
     ): NetworkResponse<RetrofitStatusResponse, GenericErrorResponse>
 
 }

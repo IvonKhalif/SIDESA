@@ -11,10 +11,10 @@ import com.gov.sidesa.domain.profile.detail.family.usecases.GetFamilyUseCase
 import com.gov.sidesa.domain.profile.edit.family.usecases.UpdateProfileFamilyUseCase
 import com.gov.sidesa.domain.regions.models.Region
 import com.gov.sidesa.ui.profile.edit.family.adapter.EditProfileFamilyListener
+import com.gov.sidesa.ui.profile.edit.family.mapper.asEditFamily
 import com.gov.sidesa.ui.profile.edit.family.models.EditProfileFamilyUiModel
 import com.gov.sidesa.ui.profile.edit.family.models.EditProfileFamilyViewType
 import com.gov.sidesa.ui.profile.edit.family.models.RelationType
-import com.gov.sidesa.ui.profile.edit.family.mapper.asEditFamily
 import com.gov.sidesa.utils.response.GenericErrorResponse
 import com.haroldadmin.cnradapter.NetworkResponse
 import kotlinx.coroutines.launch

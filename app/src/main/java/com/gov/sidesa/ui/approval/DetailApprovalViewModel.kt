@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.gov.sidesa.base.BaseViewModel
-import com.gov.sidesa.data.letterdetail.models.DetailApprovalResponse
 import com.gov.sidesa.data.letterdetail.request.DoApprovalRequest
 import com.gov.sidesa.domain.letter.detail.DoApprovalUseCase
 import com.gov.sidesa.domain.letter.detail.GetLetterDetailUseCase

@@ -25,6 +25,14 @@ interface RegistrationRepository {
         rw: String,
         nationality: String,
         ktpBase64: String,
-        kkBase64: String
+        kkBase64: String,
+        familyHead: String,
+        addressKk: String,
+        cityIdKk: String,
+        kelurahanIdKk: String,
+        kecamatanIdKk: String,
+        provinceIdKk: String,
+        rtKk: String,
+        rwKk: String
     ): NetworkResponse<String, GenericErrorResponse>
 }

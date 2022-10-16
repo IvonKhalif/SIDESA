@@ -11,7 +11,6 @@ import com.gov.sidesa.data.user.response.UserResponse
 import com.gov.sidesa.databinding.ActivityPasswordBinding
 import com.gov.sidesa.ui.login.forgotpassword.ForgotPasswordActivity
 import com.gov.sidesa.utils.PreferenceUtils
-import com.gov.sidesa.utils.PreferenceUtils.USER_PREFERENCE
 import com.gov.sidesa.utils.PreferenceUtils.USER_RESPONSE_PREFERENCE
 import com.gov.sidesa.utils.constants.UserExtrasConstant
 import com.gov.sidesa.utils.enums.StatusResponseEnum

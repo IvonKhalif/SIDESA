@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseActivity
-import com.gov.sidesa.data.letterdetail.models.DetailApprovalResponse
 import com.gov.sidesa.databinding.ActivityDetailApprovalSubmissionBinding
 import com.gov.sidesa.domain.letter.detail.models.DetailApprovalModel
 import com.gov.sidesa.ui.letter.input.adapter.LetterInputAdapter

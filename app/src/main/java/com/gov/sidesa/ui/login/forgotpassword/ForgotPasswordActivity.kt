@@ -5,7 +5,6 @@ import androidx.core.widget.doOnTextChanged
 import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseActivity
 import com.gov.sidesa.databinding.ActivityForgotPasswordBinding
-import com.gov.sidesa.utils.enums.CategoryLetterEnum
 import com.gov.sidesa.utils.extension.isEmailPattern
 
 class ForgotPasswordActivity : BaseActivity() {

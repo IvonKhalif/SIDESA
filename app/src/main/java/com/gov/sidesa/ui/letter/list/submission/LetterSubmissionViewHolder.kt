@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.gov.sidesa.R
-import com.gov.sidesa.domain.letter.list.models.LetterSubmissionModel
 import com.gov.sidesa.databinding.ItemSubmissionBinding
+import com.gov.sidesa.domain.letter.list.models.LetterSubmissionModel
 import com.gov.sidesa.utils.enums.TypeSubmissionEnum
 
 class LetterSubmissionViewHolder(

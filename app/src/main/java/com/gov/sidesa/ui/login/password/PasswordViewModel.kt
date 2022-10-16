@@ -4,8 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.gov.sidesa.base.BaseViewModel
-import com.gov.sidesa.data.user.response.UserResponse
-import com.gov.sidesa.domain.profile.detail.family.usecases.GetFamilyUseCase
 import com.gov.sidesa.domain.user.usecase.CreatePasswordUseCase
 import com.gov.sidesa.domain.user.usecase.LoginUseCase
 import com.gov.sidesa.domain.user.usecase.ResetPasswordUseCase

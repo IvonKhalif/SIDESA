@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.gov.sidesa.base.BaseViewModel
-import com.gov.sidesa.data.user.response.UserResponse
 import com.gov.sidesa.domain.letter.list.models.LetterApprovalModel
 import com.gov.sidesa.domain.letter.list.models.LetterSubmissionModel
 import com.gov.sidesa.domain.letter.list.usecase.ApprovalLettersUseCase

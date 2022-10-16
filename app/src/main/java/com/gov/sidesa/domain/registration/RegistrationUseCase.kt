@@ -27,7 +27,15 @@ class RegistrationUseCase(
         rw: String,
         nationality: String,
         ktpBase64: String,
-        kkBase64: String
+        kkBase64: String,
+        familyHead: String,
+        addressKk: String,
+        cityIdKk: String,
+        kelurahanIdKk: String,
+        kecamatanIdKk: String,
+        provinceIdKk: String,
+        rtKk: String,
+        rwKk: String
     ): NetworkResponse<String, GenericErrorResponse> {
         return registrationRepo.registerNewAccount(
             idAccount = idAccount,
@@ -50,7 +58,15 @@ class RegistrationUseCase(
             job = job,
             nationality = nationality,
             ktpBase64 = ktpBase64,
-            kkBase64 = kkBase64
+            kkBase64 = kkBase64,
+            familyHead = familyHead,
+            addressKk = addressKk,
+            cityIdKk = cityIdKk,
+            kelurahanIdKk = kelurahanIdKk,
+            kecamatanIdKk = kecamatanIdKk,
+            provinceIdKk = provinceIdKk,
+            rtKk = rtKk,
+            rwKk = rwKk
         )
     }
 

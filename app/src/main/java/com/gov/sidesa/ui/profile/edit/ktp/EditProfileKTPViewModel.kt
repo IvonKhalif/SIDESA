@@ -37,7 +37,7 @@ class EditProfileKTPViewModel(
     val inputKtpNationality = MutableLiveData<String>()
     val imageKTPBase64 = MutableLiveData<String>()
     val inputKtpBlood = MutableStateFlow("")
-    val inputKtpGender = MutableStateFlow("")
+    val inputKtpGender = MutableLiveData("")
 
     private val _statusUpdateData = MutableLiveData<String>()
     val statusUpdateData: LiveData<String> get() = _statusUpdateData
@@ -59,7 +59,7 @@ class EditProfileKTPViewModel(
         inputKtpJob.value = detail.job
         inputKtpNationality.value = detail.citizenship
         inputKtpBlood.value = detail.blood
-        inputKtpGender.value = detail.gender
+        inputKtpGender.value = detail.gender.lowercase().replaceFirstChar(Char::uppercase)
     }
 
     fun updateKTP(request: EditProfileKTPRequest) = viewModelScope.launch {

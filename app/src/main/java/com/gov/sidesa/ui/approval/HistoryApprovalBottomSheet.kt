@@ -4,14 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import com.gov.sidesa.R
 import com.gov.sidesa.base.BaseBottomSheet
 import com.gov.sidesa.databinding.BottomSheetHistoryApprovalBinding
 import com.gov.sidesa.domain.letter.detail.models.DetailApprovalModel
-import com.gov.sidesa.ui.letter.list.tab.TabLetterListFragment
-import com.gov.sidesa.utils.constants.LetterConstant
 
 class HistoryApprovalBottomSheet : BaseBottomSheet() {
     companion object {

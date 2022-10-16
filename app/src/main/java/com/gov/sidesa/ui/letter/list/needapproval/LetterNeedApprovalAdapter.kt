@@ -3,7 +3,6 @@ package com.gov.sidesa.ui.letter.list.needapproval
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.gov.sidesa.domain.letter.list.models.LetterListApprovalModel
-import com.gov.sidesa.domain.letter.list.models.LetterSubmissionModel
 
 class LetterNeedApprovalAdapter(
     _items: List<LetterListApprovalModel>,

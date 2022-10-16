@@ -1,7 +1,6 @@
 package com.gov.sidesa.domain.letter.input.models.layout
 
 import android.os.Parcelable
-import com.gov.sidesa.ui.letter.input.models.base.InitialState
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
